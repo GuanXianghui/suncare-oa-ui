@@ -1,0 +1,2 @@
+此项目为suncare-oa带ui设计版本，以后功能开发在suncare-oa中进行，然后在suncare-oa-ui中套页面稍微修改
+所以在suncare-oa-ui中不放sql文件夹，找sql到suncare-oa中查找

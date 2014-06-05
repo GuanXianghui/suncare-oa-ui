@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.action.extension" value="do"/>
+    <!-- 搞了半天原来上传图片过大struts2(默认2M封顶)自动跳到input的结果集去，一般是不需要input的结果集的 -->
+    <!-- 修改struts2配置上传文件最大Size 10M -->
+    <constant name="struts.multipart.maxSize" value="10000000"/>
+    <package name="default" namespace="/" extends="struts-default">
+        <!-- 捕获异常并处理 -->
+        <global-results>
+            <result name="ajaxException" type="chain">ajaxException</result>
+            <result name="exception" type="chain">exception</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping result="ajaxException" exception="com.gxx.oa.exceptions.AjaxException"></exception-mapping>
+            <exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+        </global-exception-mappings>
+        <action name="ajaxException" class="com.gxx.oa.ProcessAjaxExceptionAction"/>
+        <action name="exception" class="com.gxx.oa.ProcessExceptionAction">
+            <result>
+                /error.jsp
+            </result>
+        </action>
+        <!-- 各种Action -->
+        <action name="updatePassword" class="com.gxx.oa.UpdatePasswordAction"/>
+        <action name="manageOrgStructure" class="com.gxx.oa.ManageOrgStructureAction"/>
+        <action name="updatePosition" class="com.gxx.oa.UpdatePositionAction"/>
+        <action name="uploadHeadPhoto" class="com.gxx.oa.UploadHeadPhotoAction">
+            <result>
+                /userManage.jsp
+            </result>
+            <result name="error">
+                /userManage.jsp
+            </result>
+        </action>
+        <action name="updateInfo" class="com.gxx.oa.UpdateInfoAction"/>
+        <action name="configNotice" class="com.gxx.oa.ConfigNoticeAction">
+            <result>
+                /configNotice.jsp
+            </result>
+            <result name="error">
+                /configNotice.jsp
+            </result>
+        </action>
+        <action name="showNextPageNotices" class="com.gxx.oa.ShowNextPageNoticesAction"/>
+        <action name="operateUserNotice" class="com.gxx.oa.OperateUserNoticeAction"/>
+        <action name="testMessage" class="com.gxx.oa.TestMessageAction">
+            <result>
+                /testMessage.jsp
+            </result>
+            <result name="error">
+                /testMessage.jsp
+            </result>
+        </action>
+        <action name="operateMessage" class="com.gxx.oa.OperateMessageAction"/>
+        <action name="writeLetter" class="com.gxx.oa.WriteLetterAction">
+            <result>
+                /letter.jsp?box=sent
+            </result>
+            <result name="error">
+                /writeLetter.jsp
+            </result>
+        </action>
+        <action name="operateLetter" class="com.gxx.oa.OperateLetterAction"/>
+        <action name="operateDiary" class="com.gxx.oa.OperateDiaryAction"/>
+        <action name="writeDiary" class="com.gxx.oa.WriteDiaryAction">
+            <result>
+                /diary.jsp
+            </result>
+            <result name="error">
+                /writeDiary.jsp
+            </result>
+        </action>
+        <action name="updateDiary" class="com.gxx.oa.UpdateDiaryAction">
+            <result>
+                /showDiary.jsp?id=${diaryId}
+            </result>
+            <result name="error">
+                /showDiary.jsp?id=${diaryId}
+            </result>
+        </action>
+        <action name="operateRemind" class="com.gxx.oa.OperateRemindAction"/>
+        <action name="operateTask" class="com.gxx.oa.OperateTaskAction"/>
+        <action name="writeTask" class="com.gxx.oa.WriteTaskAction">
+            <result>
+                /task.jsp
+            </result>
+            <result name="error">
+                /writeTask.jsp
+            </result>
+        </action>
+        <action name="updateTask" class="com.gxx.oa.UpdateTaskAction">
+            <result>
+                /showTask.jsp?id=${taskId}
+            </result>
+            <result name="error">
+                /showTask.jsp?id=${taskId}
+            </result>
+        </action>
+        <action name="operateSMS" class="com.gxx.oa.OperateSMSAction"/>
+        <action name="createUser" class="com.gxx.oa.CreateUserAction"/>
+        <action name="queryUser" class="com.gxx.oa.QueryUserAction"/>
+        <action name="updateUser" class="com.gxx.oa.UpdateUserAction"/>
+        <action name="updateDefaultRight" class="com.gxx.oa.UpdateDefaultRightAction"/>
+        <action name="readUserRight" class="com.gxx.oa.ReadUserRightAction"/>
+        <action name="updateUserRight" class="com.gxx.oa.UpdateUserRightAction"/>
+        <action name="cloudUpload" class="com.gxx.oa.CloudUploadAction">
+            <result>
+                /cloud.jsp
+            </result>
+            <result name="error">
+                /cloud.jsp
+            </result>
+        </action>
+        <action name="cloudLoadDir" class="com.gxx.oa.CloudLoadDirAction"/>
+        <action name="cloudNewDir" class="com.gxx.oa.CloudNewDirDirAction"/>
+        <action name="cloudDeleteFile" class="com.gxx.oa.CloudDeleteFileAction"/>
+        <action name="cloudRename" class="com.gxx.oa.CloudRenameAction"/>
+        <action name="cloudRecover" class="com.gxx.oa.CloudRecoverAction"/>
+        <action name="cloudCtrlDelete" class="com.gxx.oa.CloudCtrlDeleteAction"/>
+        <action name="cloudClearRecycle" class="com.gxx.oa.CloudClearRecycleAction"/>
+        <action name="cloudUploadDoc" class="com.gxx.oa.CloudUploadDocAction">
+            <result>
+                /cloudMyDoc.jsp
+            </result>
+            <result name="error">
+                /cloudUploadDoc.jsp
+            </result>
+        </action>
+        <action name="cloudUpdateDoc" class="com.gxx.oa.CloudUpdateDocAction">
+            <result>
+                /cloudMyDoc.jsp
+            </result>
+            <result name="error">
+                /cloudUpdateDoc.jsp
+            </result>
+        </action>
+        <action name="cloudDeleteDoc" class="com.gxx.oa.CloudDeleteDocAction">
+            <result>
+                /cloudMyDoc.jsp
+            </result>
+            <result name="error">
+                /cloudMyDoc.jsp
+            </result>
+        </action>
+        <action name="cloudKnowAsk" class="com.gxx.oa.CloudKnowAskAction">
+            <result>
+                /cloudKnowAsk.jsp
+            </result>
+            <result name="error">
+                /cloudKnowAsk.jsp
+            </result>
+        </action>
+        <action name="cloudKnowAnswer" class="com.gxx.oa.CloudKnowAnswerAction">
+            <result>
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+            <result name="error">
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+        </action>
+        <action name="cloudKnowUpdateAsk" class="com.gxx.oa.CloudKnowUpdateAskAction">
+            <result>
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+            <result name="error">
+                /cloudKnowUpdateAsk.jsp
+            </result>
+        </action>
+        <action name="cloudKnowDeleteAsk" class="com.gxx.oa.CloudKnowDeleteAskAction">
+            <result>
+                /cloudKnowMyAsk.jsp
+            </result>
+            <result name="error">
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+        </action>
+        <action name="cloudKnowDeleteAnswer" class="com.gxx.oa.CloudKnowDeleteAnswerAction">
+            <result>
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+            <result name="error">
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+        </action>
+        <action name="cloudKnowZanAnswer" class="com.gxx.oa.CloudKnowZanAnswerAction">
+            <result>
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+            <result name="error">
+                /cloudViewKnow.jsp?id=${askId}
+            </result>
+        </action>
+    </package>
+
+    <!--
+     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+     <constant name="struts.devMode" value="false" />
+
+     <include file="example.xml"/>
+
+
+
+     <package name="default" namespace="/" extends="struts-default">
+         <default-action-ref name="index" />
+         <action name="index">
+             <result type="redirectAction">
+                 <param name="actionName">HelloWorld</param>
+                 <param name="namespace">/example</param>
+             </result>
+         </action>
+     </package>
+      -->
+</struts>
+
+
+
