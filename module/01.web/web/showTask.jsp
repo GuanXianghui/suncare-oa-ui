@@ -1,44 +1,44 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.gxx.oa.dao.*" %>
-<%@ page import="com.gxx.oa.entities.*" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.gxx.oa.interfaces.TaskReviewInterface" %>
-<%@ page import="com.gxx.oa.interfaces.TaskInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0012_TASK)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "工作模块";
-    //内层
-    inLayer = "任务";
-    //判入参id合法性
-    int id;
-    try{
-        id = Integer.parseInt(request.getParameter("id"));
-    } catch (Exception e){
-        response.sendRedirect(baseUrl + "task.jsp");
-        return;
-    }
-    Task task = TaskDao.getTaskById(id);
-    if(null == task){
-        response.sendRedirect(baseUrl + "task.jsp");
-        return;
-    }
-    //任务来源和接受用户
-    User fromUser = UserDao.getUserById(task.getFromUserId());
-    User toUser = UserDao.getUserById(task.getToUserId());
-    //根据任务id查 被催和非被催 任务评论
-    List<TaskReview> cuiTaskReviews = TaskReviewDao.queryCuiTaskReviews(task.getId());
-    List<TaskReview> notCuiTaskReviews = TaskReviewDao.queryNotCuiTaskReviews(task.getId());
-%>
 <html>
 <head>
+    <%@ page import="java.util.List" %>
+    <%@ page import="com.gxx.oa.dao.*" %>
+    <%@ page import="com.gxx.oa.entities.*" %>
+    <%@ page import="java.util.ArrayList" %>
+    <%@ page import="com.gxx.oa.interfaces.TaskReviewInterface" %>
+    <%@ page import="com.gxx.oa.interfaces.TaskInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0012_TASK)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "工作模块";
+        //内层
+        inLayer = "任务";
+        //判入参id合法性
+        int id;
+        try{
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (Exception e){
+            response.sendRedirect(baseUrl + "task.jsp");
+            return;
+        }
+        Task task = TaskDao.getTaskById(id);
+        if(null == task){
+            response.sendRedirect(baseUrl + "task.jsp");
+            return;
+        }
+        //任务来源和接受用户
+        User fromUser = UserDao.getUserById(task.getFromUserId());
+        User toUser = UserDao.getUserById(task.getToUserId());
+        //根据任务id查 被催和非被催 任务评论
+        List<TaskReview> cuiTaskReviews = TaskReviewDao.queryCuiTaskReviews(task.getId());
+        List<TaskReview> notCuiTaskReviews = TaskReviewDao.queryNotCuiTaskReviews(task.getId());
+    %>
     <title>查看任务</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

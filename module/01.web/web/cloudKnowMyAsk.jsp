@@ -1,19 +1,19 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
-<%@ page import="com.gxx.oa.dao.CloudKnowAskDao" %>
-<%@ page import="com.gxx.oa.dao.CloudKnowAnswerDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成知道";
-    //根据 用户id 查 申成知道提问
-    List<CloudKnowAsk> cloudKnowAsks = CloudKnowAskDao.queryCloudKnowAsksByUserId(user.getId());
-%>
 <html>
 <head>
+    <%@ page import="java.util.List" %>
+    <%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
+    <%@ page import="com.gxx.oa.dao.CloudKnowAskDao" %>
+    <%@ page import="com.gxx.oa.dao.CloudKnowAnswerDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成知道";
+        //根据 用户id 查 申成知道提问
+        List<CloudKnowAsk> cloudKnowAsks = CloudKnowAskDao.queryCloudKnowAsksByUserId(user.getId());
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

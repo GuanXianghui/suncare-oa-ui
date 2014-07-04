@@ -1,62 +1,62 @@
-<%@ page import="com.gxx.oa.interfaces.LetterInterface" %>
-<%@ page import="com.gxx.oa.entities.Letter" %>
-<%@ page import="com.gxx.oa.dao.LetterDao" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0009_LETTER)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "消息模块";
-    //内层
-    inLayer = "站内信";
-    String toUserIds = StringUtils.EMPTY;//收件人
-    String ccUserIds = StringUtils.EMPTY;//抄送人
-    String title = StringUtils.EMPTY;//标题
-    String content = StringUtils.EMPTY;//内容
-
-    String type = request.getParameter("type");//写信类型type
-    if(StringUtils.isNotBlank(type) && !StringUtils.equals(type, LetterInterface.WRITE_TYPE_WRITE)){//写信类型type不为空而且不是写信
-        //判入参id合法性
-        int id = 0;
-        try{
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch (Exception e){
-            response.sendRedirect(baseUrl + "letter.jsp");
-            return;
-        }
-        //判站内信是否属于该登陆用户
-        Letter letter = LetterDao.getLetterById(id);
-        if(letter.getUserId() != user.getId()){
-            response.sendRedirect(baseUrl + "letter.jsp");
-            return;
-        }
-        if(StringUtils.equals(type, LetterInterface.WRITE_TYPE_REPLY)){//回复
-            toUserIds = StringUtils.EMPTY + letter.getFromUserId();
-            ccUserIds = StringUtils.EMPTY;
-            title = "回复：" + letter.getTitle();
-        } else if(StringUtils.equals(type, LetterInterface.WRITE_TYPE_REPLY_ALL)){//回复全部
-            toUserIds = letter.getToUserIds();
-            ccUserIds = letter.getCcUserIds();
-            title = "回复：" + letter.getTitle();
-        } else if(StringUtils.equals(type, LetterInterface.WRITE_TYPE_TRANSMIT)){//转发
-            toUserIds = StringUtils.EMPTY;
-            ccUserIds = StringUtils.EMPTY;
-            title = "转发：" + letter.getTitle();
-        }
-        if(!StringUtils.EMPTY.equals(letter.getContent())){
-            content = "<div class='quote'><blockquote>" + letter.getContent() + "</blockquote></div><p></p>";
-        }
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.LetterInterface" %>
+    <%@ page import="com.gxx.oa.entities.Letter" %>
+    <%@ page import="com.gxx.oa.dao.LetterDao" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0009_LETTER)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "消息模块";
+        //内层
+        inLayer = "站内信";
+        String toUserIds = StringUtils.EMPTY;//收件人
+        String ccUserIds = StringUtils.EMPTY;//抄送人
+        String title = StringUtils.EMPTY;//标题
+        String content = StringUtils.EMPTY;//内容
+
+        String type = request.getParameter("type");//写信类型type
+        if(StringUtils.isNotBlank(type) && !StringUtils.equals(type, LetterInterface.WRITE_TYPE_WRITE)){//写信类型type不为空而且不是写信
+            //判入参id合法性
+            int id = 0;
+            try{
+                id = Integer.parseInt(request.getParameter("id"));
+            } catch (Exception e){
+                response.sendRedirect(baseUrl + "letter.jsp");
+                return;
+            }
+            //判站内信是否属于该登陆用户
+            Letter letter = LetterDao.getLetterById(id);
+            if(letter.getUserId() != user.getId()){
+                response.sendRedirect(baseUrl + "letter.jsp");
+                return;
+            }
+            if(StringUtils.equals(type, LetterInterface.WRITE_TYPE_REPLY)){//回复
+                toUserIds = StringUtils.EMPTY + letter.getFromUserId();
+                ccUserIds = StringUtils.EMPTY;
+                title = "回复：" + letter.getTitle();
+            } else if(StringUtils.equals(type, LetterInterface.WRITE_TYPE_REPLY_ALL)){//回复全部
+                toUserIds = letter.getToUserIds();
+                ccUserIds = letter.getCcUserIds();
+                title = "回复：" + letter.getTitle();
+            } else if(StringUtils.equals(type, LetterInterface.WRITE_TYPE_TRANSMIT)){//转发
+                toUserIds = StringUtils.EMPTY;
+                ccUserIds = StringUtils.EMPTY;
+                title = "转发：" + letter.getTitle();
+            }
+            if(!StringUtils.EMPTY.equals(letter.getContent())){
+                content = "<div class='quote'><blockquote>" + letter.getContent() + "</blockquote></div><p></p>";
+            }
+        }
+    %>
     <title>写信</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

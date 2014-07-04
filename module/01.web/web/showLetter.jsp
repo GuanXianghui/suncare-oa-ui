@@ -1,47 +1,47 @@
-<%@ page import="com.gxx.oa.interfaces.LetterInterface" %>
-<%@ page import="com.gxx.oa.dao.LetterDao" %>
-<%@ page import="com.gxx.oa.entities.Letter" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.utils.*" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0009_LETTER)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "消息模块";
-    //内层
-    inLayer = "站内信";
-    //判入参id合法性
-    int id = 0;
-    try{
-        id = Integer.parseInt(request.getParameter("id"));
-    } catch (Exception e){
-        response.sendRedirect(baseUrl + "letter.jsp");
-        return;
-    }
-    //判站内信是否属于该登陆用户
-    Letter letter = LetterDao.getLetterById(id);
-    if(null == letter || letter.getUserId() != user.getId()){
-        response.sendRedirect(baseUrl + "letter.jsp");
-        return;
-    }
-    //如果未读，置成已读
-    if(letter.getReadState() == LetterInterface.READ_STATE_NOT_READED){
-        letter.setReadState(LetterInterface.READ_STATE_READED);
-        letter.setOperateDate(DateUtil.getNowDate());
-        letter.setOperateTime(DateUtil.getNowTime());
-        letter.setOperateIp(IPAddressUtil.getIPAddress(request));
-        LetterDao.updateLetter(letter);
-    }
-    User fromUser = UserDao.getUserById(letter.getFromUserId());
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.LetterInterface" %>
+    <%@ page import="com.gxx.oa.dao.LetterDao" %>
+    <%@ page import="com.gxx.oa.entities.Letter" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.utils.*" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0009_LETTER)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "消息模块";
+        //内层
+        inLayer = "站内信";
+        //判入参id合法性
+        int id = 0;
+        try{
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (Exception e){
+            response.sendRedirect(baseUrl + "letter.jsp");
+            return;
+        }
+        //判站内信是否属于该登陆用户
+        Letter letter = LetterDao.getLetterById(id);
+        if(null == letter || letter.getUserId() != user.getId()){
+            response.sendRedirect(baseUrl + "letter.jsp");
+            return;
+        }
+        //如果未读，置成已读
+        if(letter.getReadState() == LetterInterface.READ_STATE_NOT_READED){
+            letter.setReadState(LetterInterface.READ_STATE_READED);
+            letter.setOperateDate(DateUtil.getNowDate());
+            letter.setOperateTime(DateUtil.getNowTime());
+            letter.setOperateIp(IPAddressUtil.getIPAddress(request));
+            LetterDao.updateLetter(letter);
+        }
+        User fromUser = UserDao.getUserById(letter.getFromUserId());
+    %>
     <title>查看站内信</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

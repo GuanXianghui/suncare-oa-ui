@@ -1,23 +1,23 @@
-<%@ page import="com.gxx.oa.dao.NoticeDao" %>
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page import="com.gxx.oa.dao.UserNoticeDao" %>
-<%@ page import="com.gxx.oa.interfaces.UserNoticeInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0006_NOTICE)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "消息模块";
-    //内层
-    inLayer = "公告";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.NoticeDao" %>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page import="com.gxx.oa.dao.UserNoticeDao" %>
+    <%@ page import="com.gxx.oa.interfaces.UserNoticeInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0006_NOTICE)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "消息模块";
+        //内层
+        inLayer = "公告";
+    %>
     <title>公告</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

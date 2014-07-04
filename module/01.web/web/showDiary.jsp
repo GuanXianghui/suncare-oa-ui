@@ -1,43 +1,43 @@
-<%@ page import="com.gxx.oa.entities.Diary" %>
-<%@ page import="com.gxx.oa.dao.DiaryDao" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.entities.DiaryReview" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.gxx.oa.interfaces.DiaryReviewInterface" %>
-<%@ page import="com.gxx.oa.dao.DiaryReviewDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0010_DIARY)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "工作模块";
-    //内层
-    inLayer = "工作日志";
-    //判入参id合法性
-    int id;
-    try{
-        id = Integer.parseInt(request.getParameter("id"));
-    } catch (Exception e){
-        response.sendRedirect(baseUrl + "diary.jsp");
-        return;
-    }
-    Diary diary = DiaryDao.getDiaryById(id);
-    if(null == diary){
-        response.sendRedirect(baseUrl + "diary.jsp");
-        return;
-    }
-    //工作日志所属用户
-    User diaryUser = UserDao.getUserById(diary.getUserId());
-    //工作日志回复 包括点赞和留言
-    List<DiaryReview> diaryReviews = DiaryReviewDao.queryDiaryReviews(diary.getId());
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.entities.Diary" %>
+    <%@ page import="com.gxx.oa.dao.DiaryDao" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.entities.DiaryReview" %>
+    <%@ page import="java.util.List" %>
+    <%@ page import="com.gxx.oa.interfaces.DiaryReviewInterface" %>
+    <%@ page import="com.gxx.oa.dao.DiaryReviewDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0010_DIARY)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "工作模块";
+        //内层
+        inLayer = "工作日志";
+        //判入参id合法性
+        int id;
+        try{
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (Exception e){
+            response.sendRedirect(baseUrl + "diary.jsp");
+            return;
+        }
+        Diary diary = DiaryDao.getDiaryById(id);
+        if(null == diary){
+            response.sendRedirect(baseUrl + "diary.jsp");
+            return;
+        }
+        //工作日志所属用户
+        User diaryUser = UserDao.getUserById(diary.getUserId());
+        //工作日志回复 包括点赞和留言
+        List<DiaryReview> diaryReviews = DiaryReviewDao.queryDiaryReviews(diary.getId());
+    %>
     <title>查看站内信</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

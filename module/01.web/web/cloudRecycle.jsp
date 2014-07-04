@@ -1,14 +1,14 @@
-<%@ page import="com.gxx.oa.dao.CloudDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成网盘";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.CloudDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成网盘";
+    %>
     <title>申成云</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

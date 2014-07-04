@@ -1,28 +1,28 @@
-<%@ page import="com.gxx.oa.interfaces.CloudKnowAskInterface" %>
-<%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
-<%@ page import="com.gxx.oa.dao.CloudKnowAskDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成知道";
-    int id;
-    CloudKnowAsk cloudKnowAsk;
-    try{
-        id = Integer.parseInt(request.getParameter("id"));
-        cloudKnowAsk = CloudKnowAskDao.getCloudKnowAskById(id);
-        if(cloudKnowAsk == null || cloudKnowAsk.getUserId() != user.getId() || cloudKnowAsk.getState() != CloudKnowAskInterface.STATE_NORMAL){
-            throw new RuntimeException("提问不存在 或者 提问不是你的！");
-        }
-    } catch (Exception e){
-        response.sendRedirect("cloudKnow.jsp");
-        return;
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.CloudKnowAskInterface" %>
+    <%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
+    <%@ page import="com.gxx.oa.dao.CloudKnowAskDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成知道";
+        int id;
+        CloudKnowAsk cloudKnowAsk;
+        try{
+            id = Integer.parseInt(request.getParameter("id"));
+            cloudKnowAsk = CloudKnowAskDao.getCloudKnowAskById(id);
+            if(cloudKnowAsk == null || cloudKnowAsk.getUserId() != user.getId() || cloudKnowAsk.getState() != CloudKnowAskInterface.STATE_NORMAL){
+                throw new RuntimeException("提问不存在 或者 提问不是你的！");
+            }
+        } catch (Exception e){
+            response.sendRedirect("cloudKnow.jsp");
+            return;
+        }
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

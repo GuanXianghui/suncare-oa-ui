@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Suncare-OA 登陆系统</title>
+<link href="css/login.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	$("#i_username").focus();
+	$("#i_password").hide();
+	$("#i_username").focus(function(){
+			$('#login_codeImg').hide();
+			if($(this).val()=='用户名')
+			{
+				$(this).val('');
+			}
+		});
+	$("#i_username").blur(function(){
+		if($(this).val()=='')
+		{
+			$(this).val('用户名');
+		}
+	});
+	$("#i_password_text").focus(function(){		
+		$(this).hide();
+		$('#i_password').show();
+		$('#i_password').focus();
+	});
+	$("#i_password").focus(function(){
+			$('#login_codeImg').hide();
+			$("#i_password_text").hide();
+		});
+	$("#i_password").blur(function(){
+		if($(this).val()=='')
+		{
+			$("#i_password").hide();
+			$("#i_password_text").show();
+		}
+	});	
+});
+</script>
+</head>
+
+<body>
+<div class="login_panel">
+	<div class="login_logo"></div>
+    <div class="login_inputArea"><input id="i_username" name="username" type="text" value="用户名" /></div>
+    <div class="login_inputArea">
+        <input id="i_password_text" type="text" value="密码" />
+        <input id="i_password" name="password" type="password" value="" />
+    </div>
+    <div class="login_loginBtn"><input name="dosubmit" value="登 陆" type="submit" style="width:210px;" /></div>
+</div>
+</body>
+</html>

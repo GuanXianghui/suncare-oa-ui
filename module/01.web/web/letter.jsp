@@ -1,35 +1,35 @@
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page import="com.gxx.oa.dao.LetterDao" %>
-<%@ page import="com.gxx.oa.interfaces.UserInterface" %>
-<%@ page import="com.gxx.oa.interfaces.LetterInterface" %>
-<%@ page import="com.gxx.oa.utils.BaseUtil" %>
-<%@ page import="com.gxx.oa.utils.PropertyUtil" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0009_LETTER)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "消息模块";
-    //内层
-    inLayer = "站内信";
-    String box = request.getParameter("box");
-    int type;
-    if(StringUtils.equals(box, LetterInterface.BOX_SENT)){
-        type = LetterInterface.TYPE_SENT;
-    } else if(StringUtils.equals(box, LetterInterface.BOX_DELETED)){
-        type = LetterInterface.TYPE_DELETED;
-    } else {
-        type = LetterInterface.TYPE_RECEIVED;
-        box = LetterInterface.BOX_RECEIVED;
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page import="com.gxx.oa.dao.LetterDao" %>
+    <%@ page import="com.gxx.oa.interfaces.UserInterface" %>
+    <%@ page import="com.gxx.oa.interfaces.LetterInterface" %>
+    <%@ page import="com.gxx.oa.utils.BaseUtil" %>
+    <%@ page import="com.gxx.oa.utils.PropertyUtil" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0009_LETTER)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "消息模块";
+        //内层
+        inLayer = "站内信";
+        String box = request.getParameter("box");
+        int type;
+        if(StringUtils.equals(box, LetterInterface.BOX_SENT)){
+            type = LetterInterface.TYPE_SENT;
+        } else if(StringUtils.equals(box, LetterInterface.BOX_DELETED)){
+            type = LetterInterface.TYPE_DELETED;
+        } else {
+            type = LetterInterface.TYPE_RECEIVED;
+            box = LetterInterface.BOX_RECEIVED;
+        }
+    %>
     <title>站内信</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

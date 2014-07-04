@@ -1,19 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0010_DIARY)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "工作模块";
-    //内层
-    inLayer = "工作日志";
-%>
 <html>
 <head>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0010_DIARY)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "工作模块";
+        //内层
+        inLayer = "工作日志";
+    %>
     <title>写工作日志</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
+    <!--日期控件-->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="scripts/jquery-1.10.2.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
 </head>
 <body onclick="cc()">
 <div id="body-wrapper">

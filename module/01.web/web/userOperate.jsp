@@ -1,20 +1,20 @@
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0003_USER_OPERATE)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "用户模块";
-    //内层
-    inLayer = "后台用户管理";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0003_USER_OPERATE)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "用户模块";
+        //内层
+        inLayer = "后台用户管理";
+    %>
     <title>后台管理用户</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/md5.js"></script>

@@ -1,21 +1,21 @@
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page import="com.gxx.oa.dao.MessageDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0008_MESSAGE)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "消息模块";
-    //内层
-    inLayer = "消息";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page import="com.gxx.oa.dao.MessageDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0008_MESSAGE)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "消息模块";
+        //内层
+        inLayer = "消息";
+    %>
     <title>消息</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

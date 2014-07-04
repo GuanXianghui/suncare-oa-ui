@@ -1,14 +1,14 @@
-<%@ page import="com.gxx.oa.interfaces.CloudKnowAskInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成知道";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.CloudKnowAskInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成知道";
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

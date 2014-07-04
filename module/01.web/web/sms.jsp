@@ -1,37 +1,38 @@
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page import="com.gxx.oa.dao.SMSDao" %>
-<%@ page import="com.gxx.oa.utils.DateUtil" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0013_SMS)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "工具模块";
-    //内层
-    inLayer = "短信";
-    String date = request.getParameter("date");
-    date = StringUtils.trimToEmpty(date);
-    if(StringUtils.isBlank(date)){
-        date = DateUtil.getNowDate();
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page import="com.gxx.oa.dao.SMSDao" %>
+    <%@ page import="com.gxx.oa.utils.DateUtil" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0013_SMS)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "工具模块";
+        //内层
+        inLayer = "短信";
+        String date = request.getParameter("date");
+        date = StringUtils.trimToEmpty(date);
+        if(StringUtils.isBlank(date)){
+            date = DateUtil.getNowDate();
+        }
+    %>
     <title>短信</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/sms.js"></script>
     <link rel="stylesheet" href="css/sms.css" type="text/css" media="screen"/>
     <!--日期控件-->
-    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="scripts/jquery-1.10.2.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
     <!-- 页面样式 -->
     <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>

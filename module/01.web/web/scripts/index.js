@@ -1,3 +1,37 @@
+$(document).ready(function(){
+    $("#i_username").focus();
+    $("#i_password").hide();
+    $("#i_username").focus(function(){
+        $('#login_codeImg').hide();
+        if($(this).val()=='用户名')
+        {
+            $(this).val('');
+        }
+    });
+    $("#i_username").blur(function(){
+        if($(this).val()=='')
+        {
+            $(this).val('用户名');
+        }
+    });
+    $("#i_password_text").focus(function(){
+        $(this).hide();
+        $('#i_password').show();
+        $('#i_password').focus();
+    });
+    $("#i_password").focus(function(){
+        $('#login_codeImg').hide();
+        $("#i_password_text").hide();
+    });
+    $("#i_password").blur(function(){
+        if($(this).val()=='')
+        {
+            $("#i_password").hide();
+            $("#i_password_text").show();
+        }
+    });
+});
+
 /**
  * 按钮监听
  */
@@ -9,8 +43,8 @@ function keyPress(e){
 
 //登陆
 function login() {
-    var name = document.getElementById("name").value;
-    var password = document.getElementById("password").value;
+    var name = $("#i_username").val();
+    var password = $("#i_password").val();
     //判非空
     if (name == EMPTY) {
         showAttention("请输入用户名!");
@@ -34,7 +68,7 @@ function login() {
 
     //md5签名
     var md5Pwd = MD5(password + md5Key);
-    document.getElementById("password").value = md5Pwd;
+    $("#i_password").val(md5Pwd)
 
     //ajax登陆
     var SUCCESS_STR = "success";//成功编码
@@ -48,8 +82,8 @@ function login() {
                 data = eval("(" + data + ")");
                 //判登陆是否成功
                 if (false == data["isSuccess"]) {
-                    showAttention(data["message"]);
-                    document.getElementById("password").value = EMPTY;
+                    showError(data["message"]);
+                    $("#i_password").val('')
                     //判是否有新token
                     if (data["hasNewToken"]) {
                         token = data["token"];
@@ -57,7 +91,7 @@ function login() {
                     return;
                 } else {
                     //登陆成功
-                    showAttention(data["message"]);
+                    showSuccess(data["message"]);
                 }
                 //是否跳转页面
                 if (data["isRedirect"]) {
@@ -65,11 +99,11 @@ function login() {
                     location.href = redirectUrl;
                 }
             } else {
-                showAttention("服务器连接异常，请稍后再试！");
+                showError("服务器连接异常，请稍后再试！");
             }
         },
         error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
+            showError("服务器连接异常，请稍后再试！");
         }
     });
 }

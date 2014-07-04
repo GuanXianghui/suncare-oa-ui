@@ -226,11 +226,11 @@ function logOut(){
                 data = eval("(" + data + ")");
                 //判退出是否成功
                 if (false == data["isSuccess"]) {
-                    alert(data["message"]);
+                    showError(data["message"]);
                     return;
                 } else {
                     //退出成功
-                    //alert(data["message"]);
+                    //showSuccess(data["message"]);
                 }
                 //是否跳转页面
                 if (data["isRedirect"]) {
@@ -336,7 +336,8 @@ function showMessage(messageId, message){
  * @param message
  */
 function showAttention(message){
-    showAttentionMessage(DEFAULT_MESSAGE_ID, message);
+    alert(message);
+//    showAttentionMessage(DEFAULT_MESSAGE_ID, message);
 }
 
 /**
@@ -354,7 +355,8 @@ function showAttentionMessage(messageId, message){
  * @param message
  */
 function showInformation(message){
-    showInformationMessage(DEFAULT_MESSAGE_ID, message);
+    alert(message);
+//    showInformationMessage(DEFAULT_MESSAGE_ID, message);
 }
 
 /**
@@ -372,7 +374,8 @@ function showInformationMessage(messageId, message){
  * @param message
  */
 function showSuccess(message){
-    showSuccessMessage(DEFAULT_MESSAGE_ID, message);
+    alert(message);
+//    showSuccessMessage(DEFAULT_MESSAGE_ID, message);
 }
 
 /**
@@ -390,7 +393,8 @@ function showSuccessMessage(messageId, message){
  * @param message
  */
 function showError(message){
-    showErrorMessage(DEFAULT_MESSAGE_ID, message);
+    alert(message);
+//    showErrorMessage(DEFAULT_MESSAGE_ID, message);
 }
 
 /**
@@ -544,4 +548,20 @@ function trimRight(s){
         str = str.substring(0, i+1);
     }
     return str;
+}
+
+/**
+ * 替换字符串
+ * @param initStr
+ * @param beforeStr
+ * @param afterStr
+ */
+function replaceAll(initStr, beforeStr, afterStr){
+    if(initStr == null || initStr == undefined){
+        return initStr;
+    }
+    while(initStr.indexOf(beforeStr) > -1){
+        initStr = initStr.replace(beforeStr, afterStr);
+    }
+    return initStr;
 }

@@ -8,6 +8,12 @@ $(document).ready(function() {
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     editor = UE.getEditor('editor');
+
+    $("#date").datepicker();
+    $( "#date" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#date" ).datepicker( "option", "showAnim", "drop" );
+    $( "#date" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
 });
 
 /**
@@ -24,6 +30,10 @@ function writeDiary(){
         return;
     }
     var content = editor.getContent();
+    if(content==EMPTY){
+        showAttention("请输入日志内容");
+        return;
+    }
     if(content.length > DIARY_CONTENT_LENGTH) {
         showAttention("工作日志内容大于" + DIARY_CONTENT_LENGTH + "个字符");
         return false;

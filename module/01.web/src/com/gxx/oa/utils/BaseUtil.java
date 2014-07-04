@@ -260,10 +260,10 @@ public class BaseUtil implements SymbolInterface {
             }
             User user = UserDao.getUserById(diary.getUserId());
             result += "{id:" + diary.getId() + ",userId:" + diary.getUserId() + ",date:'" + diary.getDate() +
-                    "',createDate:'" + diary.getCreateDate() + "',createTime:'" + diary.getCreateTime() +
-                    "',createIp:'" + diary.getCreateIp() + "',updateDate:'" + diary.getUpdateDate() +
-                    "',updateTime:'" + diary.getUpdateTime() + "',updateIp:'" + diary.getUpdateIp() +
-                    "',userName:'" + user.getName() + "'}";
+                    "',content:'" + diary.getContent() + "',createDate:'" + diary.getCreateDate() +
+                    "',createTime:'" + diary.getCreateTime() + "',createIp:'" + diary.getCreateIp() +
+                    "',updateDate:'" + diary.getUpdateDate() + "',updateTime:'" + diary.getUpdateTime() +
+                    "',updateIp:'" + diary.getUpdateIp() + "',userName:'" + user.getName() + "'}";
         }
         return result;
     }
@@ -889,8 +889,8 @@ public class BaseUtil implements SymbolInterface {
         if(StringUtils.isBlank(question)){
             return StringUtils.EMPTY;
         }
-        if(question.length() > 100){
-            question = question.substring(0, 100) + "...";
+        if(question.length() > 18){
+            question = question.substring(0, 18) + "...";
         }
         question = question.replaceAll(ask, "<span style=\"color: red\">" + ask + "</span>");
         question = "<span style=\"color: blue\">" + question + "</span>";

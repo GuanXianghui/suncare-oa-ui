@@ -1,9 +1,11 @@
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page import="com.gxx.oa.entities.Structure" %>
-<%@ page import="com.gxx.oa.utils.DateUtil" %>
-<%@ page import="com.gxx.oa.interfaces.UserInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
+<html>
+<head>
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page import="com.gxx.oa.entities.Structure" %>
+    <%@ page import="com.gxx.oa.utils.DateUtil" %>
+    <%@ page import="com.gxx.oa.interfaces.UserInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
     <%
         //权限校验
         if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0001_USER_MANAGE)){
@@ -19,8 +21,6 @@
         Structure dept = StructureDao.getStructureById(user.getDept());
         Structure position = StructureDao.getStructureById(user.getPosition());
     %>
-<html>
-<head>
     <title>用户管理</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/md5.js"></script>

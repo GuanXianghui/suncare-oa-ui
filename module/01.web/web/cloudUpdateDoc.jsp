@@ -1,28 +1,28 @@
-<%@ page import="com.gxx.oa.entities.CloudDoc" %>
-<%@ page import="com.gxx.oa.dao.CloudDocDao" %>
-<%@ page import="com.gxx.oa.interfaces.CloudDocInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成文库";
-    int id;
-    CloudDoc cloudDoc;
-    try{
-        id = Integer.parseInt(request.getParameter("id"));
-        cloudDoc = CloudDocDao.getCloudDocById(id);
-        if(cloudDoc == null || cloudDoc.getUserId() != user.getId() || cloudDoc.getState() != CloudDocInterface.STATE_NORMAL){
-            throw new RuntimeException("文档不存在 或者 文档不是你的！");
-        }
-    } catch (Exception e){
-        response.sendRedirect("cloudDoc.jsp");
-        return;
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.entities.CloudDoc" %>
+    <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
+    <%@ page import="com.gxx.oa.interfaces.CloudDocInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成文库";
+        int id;
+        CloudDoc cloudDoc;
+        try{
+            id = Integer.parseInt(request.getParameter("id"));
+            cloudDoc = CloudDocDao.getCloudDocById(id);
+            if(cloudDoc == null || cloudDoc.getUserId() != user.getId() || cloudDoc.getState() != CloudDocInterface.STATE_NORMAL){
+                throw new RuntimeException("文档不存在 或者 文档不是你的！");
+            }
+        } catch (Exception e){
+            response.sendRedirect("cloudDoc.jsp");
+            return;
+        }
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

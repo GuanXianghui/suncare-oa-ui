@@ -1,0 +1,141 @@
+@charset "gb2312";
+/* 
+	CSS Document 
+	Designed by Duanliquan
+	2014-5-23
+*/
+#menu{ height:100px; background:#1E1E1E; position: fixed;_position: absolute;top: 0;left: 0;z-index: 9999; width:100%}
+.logo{float:left; padding:20px; }
+.menu_info{ height:100px; width:100px; position:absolute; top:0px; right:0px; background:url(../images/header_bg.png) no-repeat center;}
+.menu_info img{ width:80px; height:80px; margin:10px; border-radius:5em;}
+
+#menu ul{}
+#menu ul li{float:left; width:100px; height:100px; font-size:14px; position:relative}
+#menu ul li a{ width:100px; text-align: center; padding-top:60px; display:block; color:#FFF; text-decoration:none;}
+#menu ul li a:hover{color:#1E1E1E;}
+
+#menu ul li#m_home{ background:url(../images/icon_home.png) no-repeat 0px 0px;}
+#menu ul li#m_home:hover{ background:#87A912 url(../images/icon_home.png) no-repeat -100px 0px;}
+#menu ul li#m_message{ background:url(../images/icon_message.png) no-repeat 0px 0px;}
+#menu ul li#m_message:hover{ background:#87A912 url(../images/icon_message.png) no-repeat -100px 0px;}
+#menu ul li#m_work{ background:url(../images/icon_work.png) no-repeat 0px 0px;}
+#menu ul li#m_work:hover{ background:#87A912 url(../images/icon_work.png) no-repeat -100px 0px;}
+#menu ul li#m_tool{ background:url(../images/icon_tool.png) no-repeat 0px 0px;}
+#menu ul li#m_tool:hover{ background:#87A912 url(../images/icon_tool.png) no-repeat -100px 0px;}
+#menu ul li#m_set{ background:url(../images/icon_set.png) no-repeat 0px 0px;}
+#menu ul li#m_set:hover{ background:#87A912 url(../images/icon_set.png) no-repeat -100px 0px;}
+
+#menu ul li ul.menu_sub {position:absolute; top:100px; left:0px; z-index:9000; display:none;}
+#menu ul li ul.menu_sub li{float:none; height:48px; width:190px; font-size:14px;  background:#C2E19F;}
+#menu ul li ul.menu_sub li:hover{background:#9ECF66;}
+#menu ul li ul.menu_sub li img{ float:left; margin:8px;}
+#menu ul li ul.menu_sub li a{ float:left; text-align: left; display:block; color:#1E1E1E; padding-top:0px; padding-left:10px; text-decoration:none; line-height:48px;}
+
+#mainArea{ margin-top:100px; margin-right:101px;}
+#left_Box{ float:left; border-right:1px solid #DDD;background:#FCFCFC;}
+#right_Box{ float:right;}
+
+.normalTitle{ height:76px; line-height:76px; color:#666666; font-size:20px; padding-left:30px; border-bottom:1px solid #DDD; position:relative;}
+.normalTitle span.titleSelect{ float:right;font-size: 14px;margin-right: 18px;}
+.normalTitle span select.selectArea{ padding:5px;padding-right:16px;font-size:14px;  color:#666; margin-top:20px; margin-right:20px;}
+.normalTitle .searchArea{ position:absolute; top:16px; left:130px;}
+.normalTitle .diskArea{ position:absolute; top:0px; left:130px;}
+.normalTitle input{ margin-left:10px;}
+.msgBox{ }
+.msgBox ul{}
+.msgBox ul li { padding:10px;border-bottom:1px solid #DDD; color:#999;}
+.msgBox ul li:hover{background: #f0efef;border-bottom: solid 1px #e5e5e5;}
+.msgBox ul li img{ float:left; width:48px; height:48px; margin:10px;margin-left:5px;border-radius:5em;}
+.msgBox ul li a{ line-height:32px; font-size:16px; font-weight:bold;}
+.msgBox ul li span{ float:right;line-height:32px; margin-right:10px;}
+
+.task_status{ float:left; border-radius:5em; width:54px; height:54px; line-height:54px; margin:10px; margin-right:20px;margin-bottom:20px; text-align:center; font-size:12px; border:3px solid #EFD159;}
+.task_finished{border:3px solid #00FF00;}
+.task_emergency{border:3px solid #FF0000;}
+.task_status span{  font-size:20px;}
+.task{ padding:5px;}
+.task_title{ font-size:16px; line-height:20px; padding:5px; font-weight:bold;}
+.task_from{ font-size:14px; padding:5px;}
+.task_from a{ font-size:14px; font-weight:bold;}
+.task_time{ color:#929292;}
+
+.notice{ background:url(../images/card_logo.png) no-repeat 10px 20px; font-size:15px; border-bottom:1px solid #DDD;}
+.notice_box{ margin-left:50px;}
+.notice_time{ padding:10px; padding-bottom:5px;}
+.notice_info{ padding:10px; padding-top:5px;}
+
+input.subBtn{background:#86A916; width:128px; font-size:14px;  padding:8px;margin-top:5px; margin-bottom:5px; text-align:center; color:#FFF;cursor:hand;cursor: pointer; border-radius:3px; border:none;}
+input.subBtn:hover{background:#BB4021;color:#FFC;}
+
+input.minBtn{background:#86A916; font-size:14px;  padding:8px;margin-left:5px;margin-top:5px; margin-bottom:5px; text-align:center; color:#FFF;cursor:hand;cursor: pointer; border-radius:3px; border:none;}
+input.minBtn:hover{background:#BB4021;color:#FFC;}
+
+.create_task{ padding:20px; font-size:14px;}
+table.information{ line-height:38px;font-size:14px;}
+.table_title{ vertical-align:top; text-align:left;  padding-left:10px; padding-right:10px; width:80px;}
+input.inputArea,select.inputArea,textarea.inputArea{font-size:14px;padding:5px; margin-top:5px; margin-bottom:5px; }
+textarea.inputArea{height:200px !important;}
+
+.inputWidthShort{ width:100px;}
+.inputWidthLong{ width:450px;}
+
+#user_head{ float:left; padding:20px;}
+#head_thumb{ margin:10px; }
+#head_thumb img{ width:128px; height:128px; }
+#head_modify{margin:10px; }
+#user_info{ float:left; padding:20px;}
+
+#mail_Box{ position:fixed; z-index:9000;border-right:1px solid #DDD;}
+#mail_Box ul{ overflow-y:scroll;}
+#mailDetail{ float:right;}
+#mailFrom{ height:76px; line-height:76px; color:#666666; font-size:16px; padding-left:30px; border-bottom:1px solid #DDD;}
+#mailFrom img{ width:32px; height:32px; border-radius:5em; margin:10px;}
+#mailFrom span{ float:right; font-size:12px; padding-right:20px;}
+#mailTo{ height:76px; line-height:76px; color:#666666; font-size:16px; padding-left:30px; border-bottom:1px solid #DDD;}
+#mailTo img{ width:32px; height:32px; border-radius:5em; margin:10px;}
+#mailTo span{ float:right; font-size:12px; padding-right:20px;}
+#mailCc{ height:76px; line-height:76px; color:#666666; font-size:16px; padding-left:30px; border-bottom:1px solid #DDD;}
+#mailCc img{ width:32px; height:32px; border-radius:5em; margin:10px;}
+#mailCc span{ float:right; font-size:12px; padding-right:20px;}
+#mailTxt{ padding:20px;}
+
+#wikiArea{ position:relative;}
+.wikiList{ float:left; width:680px;color: #888; border-left:1px solid #DDD; font-size:14px; color:#2B66B4;}
+.wikiList a{ color:#2B66B4;}
+.wikiList span a{ padding:5px;}
+.wikiList dl{border-bottom: 1px dashed #ebebeb;height: 35px;margin: 10px 0 0 10px;width:600px;}
+.wikiList dl dt{height: 25px;}
+.wikiList dl dt span.answer-num {float: right;font-size: 12px;color: #999;}
+.wikiMenu{ float:left; color:#06C;}
+.wikiMenu ul li{ margin:10px; padding:10px; border:1px solid #d9dcd7;}
+
+.d-detail{float:left; padding:15px;}
+.d-detail h2{padding-left:9px}
+.d-detail h2 .d-detail-title{font:24px "Microsoft Yahei";color:#000}.d-detail .d-qtner-wrapper{margin:10px 0;padding-left:9px}.d-detail .d-abst{padding-left:9px}.d-detail .qt-wrapper{font-size:12px;color:#A8A7A7}.d-detail .qt-wrapper .qt-name{color:#2D64B3}.d-detail .browser-times{margin-left:35px;font-size:12px;color:#A7A7A7}.d-detail .d-detail-date{font-size:12px;color:#A7A7A7; padding:5px;}.d-detail p{line-height:28px;text-indent:2em;font-size:14px;color:#3C3C3C}.d-detail .reply-wrapper{position:relative;margin-top:22px;border:1px solid #F2F2F2;background-color:#FCFCFC}.d-detail .reply-wrapper .triangle{position:absolute;top:-14px;left:44px;width:17px;height:14px;overflow:hidden;background-repeat: no-repeat;}.d-detail .reply-wrapper .d-reply-wrapper{height:44px;padding:0 9px;line-height:44px;border-bottom:1px dashed #E6E6E6}.d-detail .reply-wrapper .d-detail-txt{padding:5px 9px;text-align:center}.d-detail .reply-wrapper .d-detail-txt p{text-align:left;padding:13px 0;color:#6F6F6F}.d-detail .reply-wrapper .d-detail-txt .detail-img-wp{text-align:center}.d-detail .reply-wrapper .d-detail-txt .detail-img-in{display:inline-block;padding:5px;border:1px solid #F3F3F3;background-color:#FFF;overflow:hidden}.d-detail .reply-wrapper .d-detail-txt .detail-img-in img{display:block}.d-detail .reply-wrapper .d-detail-txt .detail-img-in span{display:block;padding:5px 0;line-height:1.5;text-align:center;text-indent:0;font-size:12px;color:#6F6F6F}.d-detail .reply-wrapper .d-detail-opt{padding:10px}.d-detail .reply-wrapper .d-detail-opt .d-detail-share{width:200px;font-size:12px;color:#333}.d-detail .reply-wrapper .d-detail-opt .d-detail-share .grid{margin-top:2px}.d-detail .reply-wrapper .d-detail-opt .d-detail-spt{margin-top:8px}.d-detail .reply-wrapper .d-detail-opt .add-collect{padding-right:16px;border-right:1px solid #CCC;line-height:1;font-size:12px;color:#2D64B3}.d-detail .reply-wrapper .d-detail-opt .spt-wp{position:relative;display:block;width:92px;height:30px;margin:-10px 0 0 16px;line-height:30px;border:1px solid #CCC;border-radius:2px;font-size:12px;color:#B50005;background-color:#FFF}.d-detail .reply-wrapper .d-detail-opt .spt-wp:hover{text-decoration:none}.d-detail .reply-wrapper .d-detail-opt .spt-wp .spt-icon{float:left;width:11px;height:12px;margin:8px 12px 0 25px;background-repeat: no-repeat;}.d-detail .reply-wrapper .d-detail-opt .spt-wp .spt-plus{display:none;position:absolute;top:0;left:50%;font-size:16px;font-weight:700;color:#B50005;z-index:10000}.d-detail .reply-wrapper .d-detail-opt .bds_more{display:none}
+
+.diskPath{ padding:10px; border-bottom:1px dashed #DDD;}
+.diskPath span{ cursor:pointer; padding:5px;}
+.diskList ul li{ padding:5px;}
+
+ul#diaryList li{ padding:10px;border-bottom: 1px dashed #E6E6E6; color:#6E6E6E}
+ul#diaryList li img{ padding:10px; float:left;}
+ul#diaryList li a{ font-size:15px; font-weight:bold;}
+ul#diaryList li span{padding:10px;}
+
+.filter{ padding-left:35px;}
+
+#task_table { line-height:36px;font-size:14px; margin:10px;}
+#task_table tr{border-bottom: 1px dashed #E6E6E6; background:none;padding:10px;}
+#task_table tr:hover{background:#F2F2F2}
+#task_table tr td{ padding:5px;}
+
+#userListArea{ padding:10px;}
+#userListArea ul{}
+#userListArea ul li{ line-height:30px; padding:10px; border-bottom: 1px dashed #E6E6E6;}
+#userListArea ul li p{ display:block; font-size:18px; font-weight:bold;}
+#userListArea ul li a{ font-size:14px; padding:5px; color:#333; background:none; text-decoration:none;border-radius:5px; }
+#userListArea ul li  a.userSelected{color:#FFF; background:#9C6 url(../images/del.png) right no-repeat; padding-right:20px;}
+#userListArea ul li  a.userSelected:hover{color:#FFF; background:#9C6 url(../images/del.png) right no-repeat; padding-right:20px; }
+#userListArea ul li a:hover{color:#FFF; background:#9C6; }
+#userListArea ul li a span{ color:#CCC; padding-left:5px;}
+

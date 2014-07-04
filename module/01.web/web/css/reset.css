@@ -1,49 +1,32 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
+@charset "gb2312";
+/* 
+	CSS Document 
+	Designed by Duanliquan
+	2014-5-23
+*/
 
-/* Eric Meyer's Reset Stylesheet: http://www.865171.cn/ */
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;word-wrap:break-word}
+body,html,input{font:12px/1.5 Microsoft YaHei,arial,\5b8b\4f53,sans-serif;}
+input{background-color:#FFF;}
+table{border-collapse:collapse;border-spacing:0;}img{border:none}
+pre {white-space: pre-wrap; /* css-3 */white-space: -moz-pre-wrap; /* Mozilla, since 1999 */white-space: -pre-wrap; /* Opera 4-6 */white-space: -o-pre-wrap; /* Opera 7 */	word-wrap: break-word; /* Internet Explorer 5.5+ */}
+h1,h2,h3,h4,h5,h6{font-size:100%;}input.dialog{height:0; height:0; font-size:0; line-height:0; border:none}
+h1{font-size:34px;}h2{font-size:26px;}h3{font-size:18px; }h4{font-size:16px;}h5{font-size:14px;}h6{font-size:12px;}
+input,label,img,th{vertical-align:middle;}.font-fixh{font-family: Georgia,Arial; color: #f00; font-size: 16px; font-weight: 700;}address,cite,dfn,em,var{font-style:normal;}
+code,kbd,pre,samp{font-family:courier new,courier,monospace;}
+input.button ,input.btn{padding:0.25em;width: auto;_width:0;overflow:visible !ie;}
+ul,ol,li{list-style:none;}
+a{text-decoration:none; color:#333;}
+a:hover{text-decoration:underline;}
+.white,.white a{color:#fff}.blue,.blue a{color:#004499}.gray4,a.gray4{color:#999}
+.red, .red a, a.red{color:red;}.green{color:#0E774A}
+select optgroup{color:#CAC8BB;}
+header{ display:block}
+.text-c{text-align: center}.text-l{text-align: left}.text-r{text-align: right}
+.cu,.cu-li li,.cu-span span {cursor: hand;!important;cursor: pointer}
+.hidden{display:none;}.invisible{visibility:hidden;}
+.ib,.ib-a a{display:inline-block;zoom:1;*display:inline;}
+.clear:after,.main:after{content:".";display:block;height:0;clear:both;visibility:hidden;}.clear,.main{display:inline-block;}/* Hides from IE-mac \*/* html .clear,* html .main{height:1%;}.clear,.main{display:block;}
+.clearBoth{clear:both;}
 
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-weight: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	font-family: inherit;
-	vertical-align: baseline;
-}
-/* remember to define focus styles! */
-:focus {
-	outline: 0;
-}
-body {
-	line-height: 1;
-	color: black;
-	background: white;
-}
-ol, ul {
-	list-style: none;
-}
-/* tables still need 'cellspacing="0"' in the markup */
-table {
-	border-collapse: separate;
-	border-spacing: 0;
-}
-caption, th, td {
-	text-align: left;
-	font-weight: normal;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: "";
-}
-blockquote, q {
-	quotes: "" "";
-}
+

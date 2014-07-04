@@ -1,28 +1,28 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
-<%@ page import="com.gxx.oa.dao.CloudKnowAnswerDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成知道";
-    //搜索申成知道
-    String ask = StringUtils.trimToEmpty(request.getParameter("ask"));
-    //是否执行了查询
-    boolean isQuery = false;
-    //搜索结果
-    List<CloudKnowAsk> cloudKnowAsks = new ArrayList<CloudKnowAsk>();
+<html>
+<head>
+    <%@ page import="java.util.List" %>
+    <%@ page import="java.util.ArrayList" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
+    <%@ page import="com.gxx.oa.dao.CloudKnowAnswerDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成知道";
+        //搜索申成知道
+        String ask = StringUtils.trimToEmpty(request.getParameter("ask"));
+        //是否执行了查询
+        boolean isQuery = false;
+        //搜索结果
+        List<CloudKnowAsk> cloudKnowAsks = new ArrayList<CloudKnowAsk>();
 //    if(StringUtils.isNotBlank(ask)){
         isQuery = true;
         cloudKnowAsks = BaseUtil.queryCloudKnowAsks(ask);
 //    }
-%>
-<html>
-<head>
+    %>
     <title>申成知道</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

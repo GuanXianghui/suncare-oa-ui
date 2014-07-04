@@ -1,58 +1,58 @@
-<%@ page import="com.gxx.oa.dao.TaskDao" %>
-<%@ page import="com.gxx.oa.interfaces.TaskInterface" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0012_TASK)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "工作模块";
-    //内层
-    inLayer = "任务";
-    //类型
-    int type;
-    try{
-        type = Integer.parseInt(StringUtils.trimToEmpty(request.getParameter("type")));
-    } catch (Exception e){
-        type = TaskInterface.TYPE_TO_ME;//分配给我的
-    }
-
-    //用户id
-    int userId;
-    try{
-        userId = Integer.parseInt(StringUtils.trimToEmpty(request.getParameter("userId")));
-    } catch (Exception e){
-        userId = 0;
-    }
-
-    int fromUserId;
-    int toUserId;
-    if(type == TaskInterface.TYPE_TO_ME){
-        fromUserId = userId;
-        toUserId = user.getId();
-    } else if(type == TaskInterface.TYPE_FROM_ME){
-        fromUserId = user.getId();
-        toUserId = userId;
-    } else {
-        response.sendRedirect(baseUrl + "task.jsp");
-        return;
-    }
-
-    //如果state大于0带上该条件
-    int state;//状态
-    try{
-        state = Integer.parseInt(StringUtils.trimToEmpty(request.getParameter("state")));
-    } catch (Exception e){
-        state = 0;
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.TaskDao" %>
+    <%@ page import="com.gxx.oa.interfaces.TaskInterface" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0012_TASK)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "工作模块";
+        //内层
+        inLayer = "任务";
+        //类型
+        int type;
+        try{
+            type = Integer.parseInt(StringUtils.trimToEmpty(request.getParameter("type")));
+        } catch (Exception e){
+            type = TaskInterface.TYPE_TO_ME;//分配给我的
+        }
+
+        //用户id
+        int userId;
+        try{
+            userId = Integer.parseInt(StringUtils.trimToEmpty(request.getParameter("userId")));
+        } catch (Exception e){
+            userId = 0;
+        }
+
+        int fromUserId;
+        int toUserId;
+        if(type == TaskInterface.TYPE_TO_ME){
+            fromUserId = userId;
+            toUserId = user.getId();
+        } else if(type == TaskInterface.TYPE_FROM_ME){
+            fromUserId = user.getId();
+            toUserId = userId;
+        } else {
+            response.sendRedirect(baseUrl + "task.jsp");
+            return;
+        }
+
+        //如果state大于0带上该条件
+        int state;//状态
+        try{
+            state = Integer.parseInt(StringUtils.trimToEmpty(request.getParameter("state")));
+        } catch (Exception e){
+            state = 0;
+        }
+    %>
     <title>任务</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

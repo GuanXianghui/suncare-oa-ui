@@ -1,16 +1,16 @@
-<%@ page import="com.gxx.oa.entities.CloudDoc" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.gxx.oa.dao.CloudDocDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成文库";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.entities.CloudDoc" %>
+    <%@ page import="java.util.List" %>
+    <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成文库";
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

@@ -1,21 +1,21 @@
-<%@ page import="com.gxx.oa.dao.NoticeDao" %>
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0007_CONFIG_NOTICE)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "消息模块";
-    //内层
-    inLayer = "公告管理";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.NoticeDao" %>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0007_CONFIG_NOTICE)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "消息模块";
+        //内层
+        inLayer = "公告管理";
+    %>
     <title>公告管理</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
@@ -73,7 +73,7 @@
             </a>
             <div id="message_id_content"> 提示信息！</div>
         </div>
-        <div id="content-box1" class="content-box column-left">
+        <div id="content-box1" class="content-box">
             <div class="content-box-header">
                 <h3>公告</h3>
                 <div class="clear"></div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div id="content-box2" class="content-box column-right">
+        <div id="content-box2" class="content-box">
             <div class="content-box-header">
                 <h3>详细</h3>
                 <div class="clear"></div>

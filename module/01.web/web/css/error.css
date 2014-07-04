@@ -1,0 +1,14 @@
+@charset "gb2312";
+/* 
+	CSS Document 
+	Designed by Duanliquan
+	2014-5-23
+*/
+
+body{ font-size:12px; font-family:"Î¢ÈíÑÅºÚ"; background:#1e1e1e;}
+input{ border:none;}
+.error_panel{ position:absolute;  width:400px; height:290px;top:50%; left:50%;margin:-145px 0 0 -200px;}
+.error_panel{ zoom:1; z-index:2;}
+
+.errorInfo{ background:url(../images/x_x.png) no-repeat; height:290px; color:#9C0; line-height:64px; font-size:32px; padding-left:140px;}
+.errorTxt{ color:#9C0; line-height:32px; font-size:18px;}

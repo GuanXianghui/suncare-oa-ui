@@ -1,0 +1,21 @@
+@charset "gb2312";
+/* 
+	CSS Document 
+	Designed by Duanliquan
+	2014-5-23
+*/
+
+body{ font-size:12px; font-family:"Î¢ÈíÑÅºÚ"; background:#1e1e1e;}
+input{ border:none;}
+.login_panel{ position:absolute;  width:220px; height:290px;top:50%; left:50%;margin:-145px 0 0 -110px;}
+.login_panel{ zoom:1; z-index:2;}
+.login_logo{ background:url(../images/logo.jpg) center no-repeat; width:220px; height:60px;}
+.login_inputArea{ width:210px;  margin:5px; margin-bottom:15px; border-radius:5px; background:#FFF;}
+.login_inputArea input{height:28px; line-height:28px; width:198px; margin:2px; padding-left:3px; color:#666;}
+.login_inputArea input:focus{ color:#222;}
+.login_check_login{ }
+.login_loginBtn{width:210px; height:32px; margin:5px;}
+.login_loginBtn input{background:#86A916; height:32px; color:#FFF;cursor: hand;!important;cursor: pointer; border-radius:3px;}
+.login_loginBtn input:hover{background:#BB4021;color:#FFC;}
+
+.errorInfo{ background:url(../images/x_x.png) no-repeat; height:180px; color:#9C0; line-height:32px;}

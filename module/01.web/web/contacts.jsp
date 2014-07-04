@@ -1,21 +1,21 @@
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0004_CONTACTS)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "用户模块";
-    //内层
-    inLayer = "通讯录";
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0004_CONTACTS)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "用户模块";
+        //内层
+        inLayer = "通讯录";
+    %>
     <title>通讯录</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

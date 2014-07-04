@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Suncare-OA</title>
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/imessage.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"></script>
+<script language="javascript" type="text/javascript" src="js/homeLayout.js"></script>
+</head>
+
+<body>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <ul>
+    	<li id="m_home"><a href="#">主页</a></li>
+        <li id="m_message"><a href="#">消息</a>
+        	<ul id="sub_message" class="menu_sub">
+            	<li><img src="images/icon_notice.png" /><a href="#">公告</a></li>
+                <li><img src="images/icon_myMsg.png" /><a href="#">我的消息</a></li>
+                <li><img src="images/icon_mail.png" /><a href="#">站内信</a></li>
+            </ul>
+        </li>
+        <li id="m_work"><a href="#">工作</a>
+        	<ul id="sub_work" class="menu_sub">
+            	<li><img src="images/icon_task.png" /><a href="#">我的任务</a></li>
+                <li><img src="images/icon_daily.png" /><a href="#">我的日志</a></li>
+                <li><img src="images/icon_calendar.png" /><a href="#">我的日历</a></li>
+            </ul>
+        </li>
+        <li id="m_tool"><a href="#">工具</a>
+        	<ul id="sub_work" class="menu_sub">
+            	<li><img src="images/icon_disk.png" /><a href="#">申成网盘</a></li>
+                <li><img src="images/icon_doc.png" /><a href="#">申成文库</a></li>
+                <li><img src="images/icon_wiki.png" /><a href="#">申成知道</a></li>
+            </ul>
+        </li>
+        <li id="m_set"><a href="#">设置</a></li>
+    </ul>
+    <div class="menu_info">
+    	<a href="#"><img src="images/header.jpg" /></a>
+    </div>
+</div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+	<div class="normalTitle">申成文库
+    	<div class="searchArea"><input class="inputArea inputWidthLong" type="text" id="ask" value=""><input value="搜索文库"  type="button" class="minBtn"></div>
+    </div>
+    <div id="wikiArea">
+    	<table cellpadding="0" cellspacing="0" width="100%" class="information">
+                	<tr>
+                    	<td class="table_title">标题：</td>
+                        <td><input id="title" type="text" name="title" value="" class="inputArea inputWidthLong"></td>
+                    </tr>
+                    <tr>
+                    	<td class="table_title">简介：</td>
+                        <td><textarea id="title" type="text" name="title" value="" class="inputArea inputWidthLong"></textarea></td>
+                    </tr>
+                    <tr>
+                    	<td class="table_title">分类：</td>
+                        <td><select id="T" onchange="changeCloudDocType('show_type','type',this.value)"><option value="1" selected="">公司制度</option><option value="2">专业资料</option><option value="3">工具介绍</option></select><select id="T" onchange="changeCloudDocType('show_type','type',this.value)"><option value="1" selected="">公司制度</option><option value="2">专业资料</option><option value="3">工具介绍</option></select></td>
+                    </tr>
+                    <tr>
+                    	<td class="table_title">标签：</td>
+                        <td><input id="endDate" type="text" name="endDate" value="" class="inputArea inputWidthLong"></td>
+                    </tr>
+                    <tr>
+                    	<td class="table_title">文档：</td>
+                        <td><input type="file" name="doc" id="doc" onchange="changeDoc()"></td>
+                    </tr>
+                    <tr>
+                    	<td class="table_title"></td>
+                        <td><input name="dosubmit" value="上传文档" type="submit" class="subBtn" /></td>
+                    </tr>                    
+                </table>
+    </div>
+    <div class="clearBoth"></div>    
+</div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+	<div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+    	<ul>
+        	<li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
+</body>
+</html>

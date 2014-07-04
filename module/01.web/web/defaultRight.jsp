@@ -1,26 +1,26 @@
-<%@ page import="com.gxx.oa.utils.ParamUtil" %>
-<%@ page import="com.gxx.oa.interfaces.ParamInterface" %>
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0014_DEFAULT_RIGHT)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "权限模块";
-    //内层
-    inLayer = "默认权限";
-    //所有权限 权限代码1=权限名称1,权限代码2=权限名称2,权限代码3=权限名称3,...
-    String[] rightList = PropertyUtil.getInstance().getProperty(BaseInterface.RIGHT_LIST).split(SymbolInterface.SYMBOL_COMMA);
-    //默认权限 用户创建时赋予的默认权限
-    String defaultRight = ParamUtil.getInstance().getValueByName(ParamInterface.DEFAULT_RIGHT);
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.utils.ParamUtil" %>
+    <%@ page import="com.gxx.oa.interfaces.ParamInterface" %>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0014_DEFAULT_RIGHT)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "权限模块";
+        //内层
+        inLayer = "默认权限";
+        //所有权限 权限代码1=权限名称1,权限代码2=权限名称2,权限代码3=权限名称3,...
+        String[] rightList = PropertyUtil.getInstance().getProperty(BaseInterface.RIGHT_LIST).split(SymbolInterface.SYMBOL_COMMA);
+        //默认权限 用户创建时赋予的默认权限
+        String defaultRight = ParamUtil.getInstance().getValueByName(ParamInterface.DEFAULT_RIGHT);
+    %>
     <title>默认权限</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

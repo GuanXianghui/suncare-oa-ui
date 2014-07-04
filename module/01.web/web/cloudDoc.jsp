@@ -1,28 +1,28 @@
-<%@ page import="com.gxx.oa.dao.CloudDocDao" %>
-<%@ page import="com.gxx.oa.entities.CloudDoc" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成文库";
-    //搜索文档
-    String doc = StringUtils.trimToEmpty(request.getParameter("doc"));
-    //是否执行了查询
-    boolean isQuery = false;
-    //搜索结果
-    List<CloudDoc> cloudDocs = new ArrayList<CloudDoc>();
-    if(StringUtils.isNotBlank(doc)){
-        isQuery = true;
-        cloudDocs = BaseUtil.queryCloudDocs(doc);
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
+    <%@ page import="com.gxx.oa.entities.CloudDoc" %>
+    <%@ page import="java.util.List" %>
+    <%@ page import="java.util.ArrayList" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成文库";
+        //搜索文档
+        String doc = StringUtils.trimToEmpty(request.getParameter("doc"));
+        //是否执行了查询
+        boolean isQuery = false;
+        //搜索结果
+        List<CloudDoc> cloudDocs = new ArrayList<CloudDoc>();
+        if(StringUtils.isNotBlank(doc)){
+            isQuery = true;
+            cloudDocs = BaseUtil.queryCloudDocs(doc);
+        }
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

@@ -1,20 +1,15 @@
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page import="com.gxx.oa.entities.Structure" %>
-<%@ page import="com.gxx.oa.utils.DateUtil" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page import="com.gxx.oa.entities.Structure" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.interfaces.UserInterface" %>
+    <%@ page import="com.gxx.oa.interfaces.UserRightInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
     <%
-        //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0002_USER)){
-            //域名链接
-            response.sendRedirect(baseUrl + "index.jsp");
-            return;
-        }
-        //外层
-        outLayer = "用户模块";
-        //内层
-        inLayer = "个人展示";
         int id;
         try{
             id = Integer.parseInt(request.getParameter("id"));
@@ -31,204 +26,128 @@
         Structure dept = StructureDao.getStructureById(user2.getDept());
         Structure position = StructureDao.getStructureById(user2.getPosition());
     %>
-<html>
-<head>
-    <title>用户管理</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <link rel="stylesheet" type="text/css" href="<%=baseUrl%>css/userManage.css"/>
-    <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
+    <title>Suncare-OA</title>
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <link href="css/imessage.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="scripts/jquery-1.10.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="scripts/menu.js"></script>
+    <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
+    <script type="text/javascript" src="scripts/base.js"></script>
 </head>
 <body>
-<div id="body-wrapper">
-<div id="sidebar">
-    <div id="sidebar-wrapper">
-        <h1 id="sidebar-title"><a href="#">申成-OA系统</a></h1>
-        <img id="logo" src="images/suncare-files-logo.png" alt="Simpla Admin logo"/>
-        <div id="profile-links">
-            Hello, [<%=user.getName()%>],
-            <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
-            <br/>
-            <br/>
-            <a href="javascript: logOut()" title="Sign Out">退出</a>
-        </div>
-        <%@ include file="layers.jsp" %>
-    </div>
-</div>
-<div id="main-content">
-<div id="message_id" class="notification information png_bg" style="display: none;">
-    <a href="#" class="close">
-        <img src="images/icons/cross_grey_small.png" title="关闭" alt="关闭"/>
-    </a>
 
-    <div id="message_id_content"> 提示信息！</div>
-</div>
-<div class="column-left">
-    <div class="content-box">
-        <div class="content-box-header">
-            <h3>头像信息</h3>
-        </div>
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <table>
-                    <tr style="border: 1px solid white;">
-                        <td id="before_upload_head_photo_td" style="text-align: center;">
-                            <img src="<%=baseUrl + user2.getHeadPhoto()%>" width="108px"/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="content-box">
-        <div class="content-box-header">
-            <h3>个人信息</h3>
-        </div>
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <form onsubmit="return false;">
-                    <table>
-                        <tr>
-                            <td>姓名</td>
-                            <td><%=user2.getName()%></td>
-                        </tr>
-                        <tr>
-                            <td>拼音缩写</td>
-                            <td><%=user2.getLetter()%></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="content-box">
-        <div class="content-box-header">
-            <h3>工作信息</h3>
-        </div>
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <form onsubmit="return false;">
-                    <table>
-                        <tr>
-                            <td>公司</td>
-                            <td id="company_td"><%=null==company?"无":company.getName()%></td>
-                        </tr>
-                        <tr>
-                            <td>部门</td>
-                            <td id="dept_td"><%=null==dept?"无":dept.getName()%></td>
-                        </tr>
-                        <tr>
-                            <td>职位</td>
-                            <td id="position_td"><%=null==position?"无":position.getName()%></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <%@ include file="menu.jsp" %>
+    <div class="menu_info">
+        <a href="#"><img src="images/header.jpg" /></a>
     </div>
 </div>
-<div class="column-right">
-    <div class="content-box">
-        <div class="content-box-header">
-            <h3>用户信息</h3>
-        </div>
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <form onsubmit="return false;">
-                    <table>
-                        <tr>
-                            <td>性别</td>
-                            <td id="sex_td_1">
-                                <%=BaseUtil.translateUserSex(user2.getSex())%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>生日</td>
-                            <td id="birthday_td_1">
-                                <%=DateUtil.getCNDate(DateUtil.getDate(user2.getBirthday()))%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                办公电话：
-                            </td>
-                            <td id="office_tel_td_1">
-                                <%=user2.getOfficeTel()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                移动电话：
-                            </td>
-                            <td id="mobile_tel_td_1">
-                                <%=user2.getMobileTel()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                工位：
-                            </td>
-                            <td id="desk_td_1">
-                                <%=user2.getDesk()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                邮件：
-                            </td>
-                            <td id="email_td_1">
-                                <%=user2.getEmail()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                qq：
-                            </td>
-                            <td id="qq_td_1">
-                                <%=user2.getQq()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                msn：
-                            </td>
-                            <td id="msn_td_1">
-                                <%=user2.getMsn()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                地址：
-                            </td>
-                            <td id="address_td_1">
-                                <%=user2.getAddress()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                个人网站：
-                            </td>
-                            <td id="website_td_1">
-                                <a href="<%=user2.getWebsite()%>" target="_blank"><%=user2.getWebsite()%></a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+    <div class="normalTitle">个人信息</div>
+    <div id="user_head">
+        <div id="head_thumb"><img src="<%=baseUrl + user2.getHeadPhoto()%>" /></div>
     </div>
+    <div id="user_info">
+        <table  cellpadding="0" cellspacing="0" width="100%" class="information">
+            <tr>
+                <td class="table_title">姓名：</td>
+                <td><%=user2.getName()%></td>
+                <td class="table_title">性别：</td>
+                <td id="sex_td_2">
+                    <%=UserInterface.SEX_X==user2.getSex()?"男":"女"%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">职位：</td>
+                <td><%=null==position?"无":position.getName()%></td>
+                <td class="table_title">部门：</td>
+                <td><%=null==dept?"无":dept.getName()%></td>
+            </tr>
+            <tr>
+                <td class="table_title">生日：</td>
+                <td id="birthday_td_2" colspan="3">
+                    <%=user2.getBirthday()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">办公电话：</td>
+                <td id="office_tel_td_2" colspan="3">
+                    <%=user2.getOfficeTel()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">移动电话：</td>
+                <td id="mobile_tel_td_2" colspan="3">
+                    <%=user2.getMobileTel()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">工位：</td>
+                <td id="desk_td_2" colspan="3">
+                    <%=user2.getDesk()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">邮件：</td>
+                <td id="email_td_2" colspan="3">
+                    <%=user2.getEmail()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">qq：</td>
+                <td id="qq_td_2" colspan="3">
+                    <%=user2.getQq()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">msn：</td>
+                <td id="msn_td_2" colspan="3">
+                    <%=user2.getMsn()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">地址：</td>
+                <td id="address_td_2" colspan="3">
+                    <%=user2.getAddress()%>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_title">个人网站：</td>
+                <td id="website_td_2" colspan="3">
+                    <%
+                        if(StringUtils.isNotBlank(user2.getWebsite())){
+                    %>
+                    <a href="<%=user2.getWebsite()%>" target="_blank"><%=user2.getWebsite()%></a>
+                    <%
+                        }
+                    %>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="clearBoth"></div>
 </div>
-<div class="clear"></div>
-<div id="footer">
-    <small>
-        &#169; Copyright 2014 Suncare | Powered by 关向辉
-    </small>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+    <div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+        <ul>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
 </div>
-</div>
-</div>
+<!--右侧IM 结束-->
 </body>
 </html>

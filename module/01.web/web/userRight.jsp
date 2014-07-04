@@ -1,24 +1,24 @@
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.dao.StructureDao" %>
-<%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //权限校验
-    if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0015_USER_RIGHT)){
-        //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
-        return;
-    }
-    //外层
-    outLayer = "权限模块";
-    //内层
-    inLayer = "权限管理";
-    //所有权限 权限代码1=权限名称1,权限代码2=权限名称2,权限代码3=权限名称3,...
-    String[] rightList = PropertyUtil.getInstance().getProperty(BaseInterface.RIGHT_LIST).split(SymbolInterface.SYMBOL_COMMA);
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.dao.StructureDao" %>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //权限校验
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0015_USER_RIGHT)){
+            //域名链接
+            response.sendRedirect(baseUrl + "index.jsp");
+            return;
+        }
+        //外层
+        outLayer = "权限模块";
+        //内层
+        inLayer = "权限管理";
+        //所有权限 权限代码1=权限名称1,权限代码2=权限名称2,权限代码3=权限名称3,...
+        String[] rightList = PropertyUtil.getInstance().getProperty(BaseInterface.RIGHT_LIST).split(SymbolInterface.SYMBOL_COMMA);
+    %>
     <title>权限管理</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>

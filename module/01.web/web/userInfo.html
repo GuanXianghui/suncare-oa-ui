@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Suncare-OA</title>
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/imessage.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"></script>
+<script language="javascript" type="text/javascript" src="js/homeLayout.js"></script>
+</head>
+
+<body>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <ul>
+    	<li id="m_home"><a href="#">主页</a></li>
+        <li id="m_message"><a href="#">消息</a>
+        	<ul id="sub_message" class="menu_sub">
+            	<li><img src="images/icon_notice.png" /><a href="#">公告</a></li>
+                <li><img src="images/icon_myMsg.png" /><a href="#">我的消息</a></li>
+                <li><img src="images/icon_mail.png" /><a href="#">站内信</a></li>
+            </ul>
+        </li>
+        <li id="m_work"><a href="#">工作</a>
+        	<ul id="sub_work" class="menu_sub">
+            	<li><img src="images/icon_task.png" /><a href="#">我的任务</a></li>
+                <li><img src="images/icon_daily.png" /><a href="#">我的日志</a></li>
+                <li><img src="images/icon_calendar.png" /><a href="#">我的日历</a></li>
+            </ul>
+        </li>
+        <li id="m_tool"><a href="#">工具</a>
+        	<ul id="sub_work" class="menu_sub">
+            	<li><img src="images/icon_disk.png" /><a href="#">申成网盘</a></li>
+                <li><img src="images/icon_doc.png" /><a href="#">申成文库</a></li>
+                <li><img src="images/icon_wiki.png" /><a href="#">申成知道</a></li>
+            </ul>
+        </li>
+        <li id="m_set"><a href="#">设置</a></li>
+    </ul>
+    <div class="menu_info">
+    	<a href="#"><img src="images/header.jpg" /></a>
+    </div>
+</div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+	<div class="normalTitle">个人信息</div>
+  <div id="user_head">
+    	<div id="head_thumb"><img src="images/header.jpg" /></div>
+        <div id="head_modify"><input value="修改头像"  class="subBtn" /></div>
+        <div id="head_modify"><input value="修改密码"  class="subBtn" /></div>
+    </div>
+    <div id="user_info">
+    	<table  cellpadding="0" cellspacing="0" width="100%" class="information">
+          <tr>
+            <td class="table_title">姓名：</td>
+            <td><input value="关向辉" class="inputArea inputWidthShort"></td>
+            <td class="table_title">性别：</td>
+            <td>
+            	<select id="sex_select" tabindex="1" class="inputArea inputWidthShort">
+                    <option value="1" selected="">男</option>
+                    <option value="0">女</option>
+                </select>
+           </td>
+          </tr>
+          <tr>
+            <td class="table_title">职位：</td>
+            <td>副总经理</td>
+            <td class="table_title">部门：</td>
+            <td>无</td>
+          </tr>
+          <tr>
+            <td class="table_title">办公电话：</td>
+            <td colspan="3"><input value="61596500-8233" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title">移动电话：</td>
+            <td colspan="3"><input value="13764603603" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title">工位：</td>
+            <td colspan="3"><input value="新厂一楼销售部会议室" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title">工作邮箱：</td>
+            <td colspan="3"><input value="" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title">QQ/MSN：</td>
+            <td colspan="3"><input value="419066357@163.com" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title">地址：</td>
+            <td colspan="3"><input value="上海市广衍路18弄申云小区5号楼501室
+" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title">个人网站：</td>
+            <td colspan="3"><input value="http://go.jhost.cn/gxx/" class="inputArea inputWidthLong"></td>
+          </tr>
+          <tr>
+            <td class="table_title"></td>
+            <td colspan="3"><input name="dosubmit" value="提交" type="submit" class="subBtn" /></td>
+          </tr>
+        </table>
+
+    </div>
+    <div class="clearBoth"></div>    
+</div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+	<div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+    	<ul>
+        	<li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
+</body>
+</html>

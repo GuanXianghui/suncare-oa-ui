@@ -1,41 +1,41 @@
-<%@ page import="com.gxx.oa.interfaces.CloudKnowAskInterface" %>
-<%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
-<%@ page import="com.gxx.oa.dao.CloudKnowAskDao" %>
-<%@ page import="com.gxx.oa.dao.UserDao" %>
-<%@ page import="com.gxx.oa.entities.CloudKnowAnswer" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.gxx.oa.dao.CloudKnowAnswerDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-<%
-    //外层
-    outLayer = "申成云";
-    //内层
-    inLayer = "申成知道";
-    //申成知道提问
-    CloudKnowAsk cloudKnowAsk;
-    //提问人
-    User cloudUser;
-    //是否自己的问题
-    boolean isMine;
-    //回答集合
-    List<CloudKnowAnswer> cloudKnowAnswers;
-    try{
-        int id = Integer.parseInt(request.getParameter("id"));
-        cloudKnowAsk = CloudKnowAskDao.getCloudKnowAskById(id);
-        if(cloudKnowAsk == null || cloudKnowAsk.getState() != CloudKnowAskInterface.STATE_NORMAL){
-            throw new RuntimeException("找不到该申成知道提问！");
-        }
-        isMine = cloudKnowAsk.getUserId() == user.getId();
-        cloudUser = UserDao.getUserById(cloudKnowAsk.getUserId());
-        cloudKnowAnswers = CloudKnowAnswerDao.queryCloudKnowAnswersByAskId(cloudKnowAsk.getId());
-    } catch (Exception e){
-        response.sendRedirect("cloudKnow.jsp");
-        return;
-    }
-%>
 <html>
 <head>
+    <%@ page import="com.gxx.oa.interfaces.CloudKnowAskInterface" %>
+    <%@ page import="com.gxx.oa.entities.CloudKnowAsk" %>
+    <%@ page import="com.gxx.oa.dao.CloudKnowAskDao" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.entities.CloudKnowAnswer" %>
+    <%@ page import="java.util.List" %>
+    <%@ page import="com.gxx.oa.dao.CloudKnowAnswerDao" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ include file="header.jsp" %>
+    <%
+        //外层
+        outLayer = "申成云";
+        //内层
+        inLayer = "申成知道";
+        //申成知道提问
+        CloudKnowAsk cloudKnowAsk;
+        //提问人
+        User cloudUser;
+        //是否自己的问题
+        boolean isMine;
+        //回答集合
+        List<CloudKnowAnswer> cloudKnowAnswers;
+        try{
+            int id = Integer.parseInt(request.getParameter("id"));
+            cloudKnowAsk = CloudKnowAskDao.getCloudKnowAskById(id);
+            if(cloudKnowAsk == null || cloudKnowAsk.getState() != CloudKnowAskInterface.STATE_NORMAL){
+                throw new RuntimeException("找不到该申成知道提问！");
+            }
+            isMine = cloudKnowAsk.getUserId() == user.getId();
+            cloudUser = UserDao.getUserById(cloudKnowAsk.getUserId());
+            cloudKnowAnswers = CloudKnowAnswerDao.queryCloudKnowAnswersByAskId(cloudKnowAsk.getId());
+        } catch (Exception e){
+            response.sendRedirect("cloudKnow.jsp");
+            return;
+        }
+    %>
     <title>申成文库</title>
     <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
