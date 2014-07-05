@@ -52,7 +52,7 @@
 <!-- 主显示区 开始-->
 <div id="mainArea">
 
-    <form name="cloudQueryDocForm" action="cloudDoc.jsp" method="post">
+    <form name="cloudQueryDocForm" action="cloudDoc2.jsp" method="post">
         <input type="hidden" name="doc" id="cloudQueryDocName">
     </form>
 

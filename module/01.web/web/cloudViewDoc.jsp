@@ -5,6 +5,7 @@
     <%@ page import="com.gxx.oa.entities.CloudDoc" %>
     <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
     <%@ page import="com.gxx.oa.interfaces.CloudDocInterface" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
@@ -20,6 +21,7 @@
             response.sendRedirect("cloudDoc.jsp");
             return;
         }
+        User cloudUser = UserDao.getUserById(cloudDoc.getUserId());
     %>
     <title>Suncare-OA</title>
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
@@ -74,6 +76,18 @@
                 <tr>
                     <td class="table_title">标题：</td>
                     <td><span id="title"></span></td>
+                </tr>
+                <tr>
+                    <td class="table_title">作者：</td>
+                    <td>
+                        <a href="user.jsp?id=<%=cloudUser.getId()%>" target="_blank"><%=cloudUser.getName()%></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table_title">日期：</td>
+                    <td>
+                        <%=cloudDoc.getCreateDate()%>
+                    </td>
                 </tr>
                 <%
                     if(StringUtils.isNotBlank(cloudDoc.getDescription())){

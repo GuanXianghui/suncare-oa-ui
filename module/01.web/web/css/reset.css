@@ -6,7 +6,7 @@
 */
 
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;word-wrap:break-word}
-body,html,input{font:12px/1.5 Microsoft YaHei,arial,\5b8b\4f53,sans-serif;}
+body,html,input{font:12px/1.5 "Microsoft Yahei",arial,\5b8b\4f53,sans-serif; font-family:"Microsoft Yahei";}
 input{background-color:#FFF;}
 table{border-collapse:collapse;border-spacing:0;}img{border:none}
 pre {white-space: pre-wrap; /* css-3 */white-space: -moz-pre-wrap; /* Mozilla, since 1999 */white-space: -pre-wrap; /* Opera 4-6 */white-space: -o-pre-wrap; /* Opera 7 */	word-wrap: break-word; /* Internet Explorer 5.5+ */}

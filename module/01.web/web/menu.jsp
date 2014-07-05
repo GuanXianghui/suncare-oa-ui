@@ -19,7 +19,7 @@
     <li id="m_tool"><a href="#">工具</a>
         <ul id="sub_tool" class="menu_sub">
             <li><img src="images/icon_disk.png"/><a href="cloud2.jsp">申成网盘</a></li>
-            <li><img src="images/icon_doc.png"/><a href="cloudMyDoc2.jsp">申成文库</a></li>
+            <li><img src="images/icon_doc.png"/><a href="cloudDoc2.jsp">申成文库</a></li>
             <li><img src="images/icon_wiki.png"/><a href="cloudKnow2.jsp">申成知道</a></li>
             <li><img src="images/icon_mail.png"/><a href="sms2.jsp">短信工具</a></li>
         </ul>

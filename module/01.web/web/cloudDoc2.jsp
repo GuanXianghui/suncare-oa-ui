@@ -2,11 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
     <%@ page import="com.gxx.oa.entities.CloudDoc" %>
     <%@ page import="java.util.List" %>
-    <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
+    <%@ page import="java.util.ArrayList" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
+    <%
+        //搜索文档
+        String doc = StringUtils.trimToEmpty(request.getParameter("doc"));
+        //是否执行了查询
+        boolean isQuery = false;
+        //搜索结果
+        List<CloudDoc> cloudDocs = new ArrayList<CloudDoc>();
+        if(StringUtils.isNotBlank(doc)){
+            isQuery = true;
+            cloudDocs = BaseUtil.queryCloudDocs(doc);
+        }
+    %>
     <title>Suncare-OA</title>
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/main.css" rel="stylesheet" type="text/css" />
@@ -15,7 +29,7 @@
     <script language="javascript" type="text/javascript" src="scripts/menu.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
     <script type="text/javascript" src="scripts/base.js"></script>
-    <script type="text/javascript" src="scripts/cloudMyDoc.js"></script>
+    <script type="text/javascript" src="scripts/cloudDoc2.js"></script>
 </head>
 
 <body>
@@ -54,33 +68,36 @@
         </div>
         <div class="wikiList">
             <%
-                List<CloudDoc> cloudDocs = CloudDocDao.queryCloudDocsByUserId(user.getId());
-                if(cloudDocs.size() == 0){
+                if(isQuery && cloudDocs.size() == 0){
             %>
             <dl>
                 <dt>
-                    暂无文档ToT
+                    没有符合条件[<%=doc%>]的文档！
                 </dt>
             </dl>
             <%
-            } else {
+                }
                 for(CloudDoc cloudDoc : cloudDocs){
+                    User cloudUser = UserDao.getUserById(cloudDoc.getUserId());
             %>
             <dl>
                 <dt>
-                    <img src="images/ext/txt.gif" width="24" height="20" />
-                    <a class="title" href="javascript:window.open('cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>')"><%=cloudDoc.getTitle()%></a>
-                    <span class="answer-num">
-                        <a class="title" href="#"><%=cloudDoc.getCreateDate()%></a>
-                        <a href="javascript:window.open('cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>')" class="minBtn">查看</a>
-                        <a href="javascript:window.open('<%=cloudDoc.getRoute()%>')" class="minBtn">下载</a>
-                        <a href="javascript:location.href='cloudUpdateDoc2.jsp?id=<%=cloudDoc.getId()%>'" class="minBtn">修改</a>
-                        <a href="javascript:cloudDeleteDoc(<%=cloudDoc.getId()%>)" class="minBtn">删除</a>
-                    </span>
+                    <img src="images/cloud_doc/<%=BaseUtil.getFileType(cloudDoc.getRoute())%>.jpg" width="24" height="20" />
+                    <a class="title" href="cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>" target="_blank">
+                        <%=BaseUtil.displayCloudDocTitle(cloudDoc.getTitle(), doc)%>
+                    </a>
+                    <%=BaseUtil.displayCloudDocDescription(cloudDoc.getDescription(), doc)%>
+                    <div class="wikiInfo"><%=BaseUtil.displayCloudDocTags(cloudDoc.getTags(), doc)%>
+                        &nbsp;
+                        <span>
+                            贡献者
+                            <a href="user.jsp?id=<%=cloudUser.getId()%>" target="_blank"><%=cloudUser.getName()%></a>
+                            <%=cloudDoc.getCreateDate()%>
+                        </span>
+                    </div>
                 </dt>
             </dl>
             <%
-                    }
                 }
             %>
         </div>

@@ -103,9 +103,13 @@ textarea.inputArea{height:200px !important;}
 .wikiList{ float:left; width:680px;color: #888; border-left:1px solid #DDD; font-size:14px; color:#2B66B4;}
 .wikiList a{ color:#2B66B4;}
 .wikiList span a{ padding:5px;}
-.wikiList dl{border-bottom: 1px dashed #ebebeb;height: 35px;margin: 10px 0 0 10px;width:600px;}
-.wikiList dl dt{height: 25px;}
+.wikiList dl{border-bottom: 1px dashed #ebebeb;margin: 10px 0 0 10px; padding:10px;width:680px;color: #888;}
+.wikiList dl:hover{ background-color:#F6F6F6}
+.wikiList dl dt{color: #888;}
 .wikiList dl dt span.answer-num {float: right;font-size: 12px;color: #999;}
+.wikiInfo{ padding:6px 4px 2px 4px; clear:both;}
+.wikiInfo span{ float:right;}
+.wikiInfo span a{ margin-right:30px; color:#090;}
 .wikiMenu{ float:left; color:#06C;}
 .wikiMenu ul li{ margin:10px; padding:10px; border:1px solid #d9dcd7;}
 

@@ -827,8 +827,7 @@ public class BaseUtil implements SymbolInterface {
         if(description.length() > 100){
             description = description.substring(0, 100) + "...";
         }
-        description = "√Ë ˆ£∫" + description.replaceAll(doc, "<span style=\"color: red\">" + doc + "</span>");
-        description = "<span style=\"color: black\">" + description + "</span><br>";
+        description = "<div class=\"wikiInfo\">√Ë ˆ£∫" + description.replaceAll(doc, "<font color=\"red\">" + doc + "</font>") + "</div>";
         return description;
     }
 
@@ -848,10 +847,10 @@ public class BaseUtil implements SymbolInterface {
             if(StringUtils.isNotBlank(html)){
                 html += "&nbsp;" + SYMBOL_COMMA + "&nbsp;";
             }
-            html += "<span style=\"color: blue; cursor: pointer\" onclick=\"queryDoc('" + tag + "')\">" +
-                    tag.replaceAll(doc, "<span style=\"color: red\">" + doc + "</span>") + "</span>";
+            html += "<a href=\"javascript:queryDoc('" + tag + "')\">" +
+                    tag.replaceAll(doc, "<font color=\"red\">" + doc + "</font>") + "</a>";
         }
-        html = "±Í«©£∫" + html + "<br>";
+        html = "±Í«©£∫" + html;
         return html;
     }
 
