@@ -36,7 +36,7 @@
                 UserRight userRight = UserRightDao.getUserRightByUserId(user.getId());
                 request.getSession().setAttribute(BaseInterface.USER_KEY, user);
                 request.getSession().setAttribute(BaseInterface.USER_RIGHT_KEY, userRight.getUserRight());
-                resp = "{isSuccess:true,message:'登陆成功！',isRedirect:true,redirectUrl:'" + baseUrl + "userManage2.jsp'}";
+                resp = "{isSuccess:true,message:'登陆成功！',isRedirect:true,redirectUrl:'" + baseUrl + "home.jsp'}";
             }
         }
     }

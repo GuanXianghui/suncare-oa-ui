@@ -20,7 +20,7 @@
     %>
     <div class="login_loginBtn">
         <input name="dosubmit" value="您已登陆，点击直接进入主页" type="button" style="width:210px;"
-               onclick="location.href=baseUrl+'userManage2.jsp';"/>
+               onclick="location.href=baseUrl+'home.jsp';"/>
     </div>
     <%
     } else {

@@ -60,7 +60,26 @@
     <favorites_list name="suncare-oa-ui" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/01.web/web/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="51" selection-start="1082" selection-end="1086" vertical-scroll-proportion="-5.928571">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.jsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/module/01.web/web/ajax/login.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="49" selection-start="2082" selection-end="2082" vertical-scroll-proportion="0.55495495">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -70,22 +89,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/module/01.web/web/sms2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/task2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/userManage2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/user.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/writeDiary2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/writeLetter2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/chooseMultipleContact.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/error.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/example.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/cloudUploadDoc2.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/BaseUtil.java" />
+        <option value="$PROJECT_DIR$/module/01.web/web/cloudViewDoc.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/cloudDoc2.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/home.html" />
         <option value="$PROJECT_DIR$/module/01.web/web/writeTask2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/message2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/notice2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/scripts/message2.js" />
-        <option value="$PROJECT_DIR$/module/01.web/web/scripts/notice2.js" />
-        <option value="$PROJECT_DIR$/module/01.web/web/letter2.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/dev-log/20140704.html" />
+        <option value="$PROJECT_DIR$/module/01.web/web/menu.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/task2.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/TaskDao.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/RemindDao.java" />
+        <option value="$PROJECT_DIR$/module/01.web/web/diary2.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/home.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/home.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/dev-log/20140710.html" />
+        <option value="$PROJECT_DIR$/module/01.web/web/index.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/ajax/login.jsp" />
       </list>
     </option>
   </component>
@@ -99,7 +118,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1376" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -130,22 +149,22 @@
       <sortByType ProjectPane="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="suncare-oa-ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -183,10 +202,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web" />
-      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\css" />
       <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\dev-log" />
       <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\scripts" />
+      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web" />
+      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\css" />
       <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\images" />
     </key>
   </component>
@@ -572,14 +591,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2857143" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -587,16 +605,17 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.52667814" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21699545" sideWeight="0.71428573" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21417683" sideWeight="0.43201378" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.56798625" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.52667814" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2857143" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -660,114 +679,116 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/contact.html">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/header.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="1" selection-start="174" selection-end="174" vertical-scroll-proportion="-2.0357144">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/diary2.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="5" selection-start="178" selection-end="178" vertical-scroll-proportion="-2.0357144">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/error.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="69" selection-start="316" selection-end="316" vertical-scroll-proportion="-2.7142856">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/example.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="69" selection-start="329" selection-end="329" vertical-scroll-proportion="-3.392857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/writeTask2.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="72" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.54079694">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/letter2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="39" selection-start="2884" selection-end="2885" vertical-scroll-proportion="11.2">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/message2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="49" selection-start="5068" selection-end="5068" vertical-scroll-proportion="0.33207548">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/message2.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="51" selection-start="1704" selection-end="1704" vertical-scroll-proportion="0.7828685">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/notice2.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="55" selection-start="1780" selection-end="1780" vertical-scroll-proportion="0.61290324">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/notice2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="49" selection-start="4559" selection-end="4559" vertical-scroll-proportion="0.33207548">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="35" selection-start="2460" selection-end="2470" vertical-scroll-proportion="0.36715868">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/mail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="47" selection-start="3077" selection-end="3077" vertical-scroll-proportion="0.59143966">
+        <state line="2" column="32" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/01.web/web/headerWithOutCheckLogin.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="14" column="13" selection-start="644" selection-end="648" vertical-scroll-proportion="1.5357143">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/header.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/Task.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="33" selection-start="146" selection-end="146" vertical-scroll-proportion="0.06846847">
+        <state line="223" column="27" selection-start="5207" selection-end="5209" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/letter2.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/DiaryDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="26" selection-start="627" selection-end="627" vertical-scroll-proportion="0.3696498">
+        <state line="83" column="57" selection-start="2140" selection-end="2140" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/dev-log/20140704.html">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/calendar2.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="278" column="63" selection-start="6122" selection-end="6122" vertical-scroll-proportion="0.5047438">
+        <state line="15" column="76" selection-start="1089" selection-end="1089" vertical-scroll-proportion="6.107143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateRemindAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="129" selection-start="1215" selection-end="1443" vertical-scroll-proportion="0.23063064">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-transitional.dtd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="2" selection-start="3670" selection-end="3708" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/BaseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="284" column="30" selection-start="11205" selection-end="11212" vertical-scroll-proportion="0.57297295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/calendar2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="51" selection-start="2055" selection-end="2069" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/RemindDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="68" selection-start="5147" selection-end="5147" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#2812#2820#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/diary2.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="111" selection-start="3987" selection-end="4088" vertical-scroll-proportion="-5.428571">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="88" selection-start="2011" selection-end="2011" vertical-scroll-proportion="0.34234235">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/home.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="16" selection-start="5699" selection-end="5791" vertical-scroll-proportion="0.92789376">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/dev-log/20140710.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="24" selection-start="2222" selection-end="2222" vertical-scroll-proportion="0.4686907">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="51" selection-start="1082" selection-end="1086" vertical-scroll-proportion="-5.928571">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/ajax/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="49" selection-start="2082" selection-end="2082" vertical-scroll-proportion="0.55495495">
           <folding />
         </state>
       </provider>

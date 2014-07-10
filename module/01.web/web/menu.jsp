@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <ul>
-    <li id="m_home"><a href="#">主页</a></li>
+    <li id="m_home"><a href="home.jsp">主页</a></li>
     <li id="m_message"><a href="#">消息</a>
         <ul id="sub_message" class="menu_sub">
             <li><img src="images/icon_notice.png"/><a href="notice2.jsp">公告</a></li>
@@ -26,6 +26,7 @@
     </li>
     <li id="m_set"><a href="#">设置</a>
         <ul id="sub_set" class="menu_sub">
+            <li><img src="images/icon_myMsg.png"/><a href="userManage2.jsp">个人信息</a></li>
             <li><img src="images/icon_disk.png"/><a href="javascript: logOut()">退出</a></li>
         </ul>
     </li>

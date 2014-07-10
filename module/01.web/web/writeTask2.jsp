@@ -43,47 +43,47 @@
 <!-- 头部固定菜单层 结束-->
 <!-- 主显示区 开始-->
 <div id="mainArea">
-    <div id="right_Box">
-        <div class="taskBox">
-            <div class="normalTitle">分配给我的任务<span class="titleSelect">全部任务</span></div>
-            <div class="task">
-                <div class="task_status"><span>17</span>小时</div>
-                <div class="task_title"><a href="#">任务名称任务名称</a></div>
-                <div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>
-                <div class="task_time">创建时间： 2014-5-20 14:21</div>
-                <div class="task_time">结束时间： 2014-5-20 14:21</div>
-                <div class="clearBoth"></div>
-            </div>
-            <div class="task">
-                <div class="task_status task_emergency"><span>1</span>小时</div>
-                <div class="task_title"><a href="#">任务名称任务名称</a></div>
-                <div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>
-                <div class="task_time">创建时间： 2014-5-20 14:21</div>
-                <div class="task_time">结束时间： 2014-5-20 14:21</div>
-                <div class="clearBoth"></div>
-            </div>
-        </div>
-        <div class="taskBox">
-            <div class="normalTitle">我分配的任务<span class="titleSelect">全部任务</span></div>
-            <div class="task">
-                <div class="task_status task_finished"><span>完成</span></div>
-                <div class="task_title"><a href="#">任务名称任务名称</a></div>
-                <div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>
-                <div class="task_time">创建时间： 2014-5-20 14:21</div>
-                <div class="task_time">结束时间： 2014-5-20 14:21</div>
-                <div class="clearBoth"></div>
-            </div>
-            <div class="task">
-                <div class="task_status"><span>17</span>小时</div>
-                <div class="task_title"><a href="#">任务名称任务名称</a></div>
-                <div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>
-                <div class="task_time">创建时间： 2014-5-20 14:21</div>
-                <div class="task_time">结束时间： 2014-5-20 14:21</div>
-                <div class="clearBoth"></div>
-            </div>
-        </div>
-    </div>
-    <div id="left_Box">
+    <%--<div id="right_Box">--%>
+        <%--<div class="taskBox">--%>
+            <%--<div class="normalTitle">分配给我的任务<span class="titleSelect">全部任务</span></div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status"><span>17</span>小时</div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status task_emergency"><span>1</span>小时</div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="taskBox">--%>
+            <%--<div class="normalTitle">我分配的任务<span class="titleSelect">全部任务</span></div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status task_finished"><span>完成</span></div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status"><span>17</span>小时</div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <div><%-- id="left_Box"--%>
         <div class="msgBox">
             <div class="normalTitle">创建任务</div>
             <div class="create_task">

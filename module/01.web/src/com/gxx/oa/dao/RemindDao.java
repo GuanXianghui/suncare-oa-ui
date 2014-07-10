@@ -109,6 +109,51 @@ public class RemindDao {
     }
 
     /**
+     * 根据用户id和提醒日期查提醒
+     *
+     * @param userId
+     * @param remindDate
+     * @return
+     * @throws Exception
+     */
+    public static List<Remind> queryRemindsByUserIdAndRemindDate(int userId, String remindDate) throws Exception {
+        List<Remind> list = new ArrayList<Remind>();
+        String sql = "SELECT id,content,date,remind_type,remind_date_time,remind_target,create_date," +
+                "create_time,create_ip,update_date,update_time,update_ip FROM remind WHERE user_id=" +
+                userId + " AND remind_date_time like '" + remindDate + "%' ORDER BY id DESC";
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String content = rs.getString("content");
+                String date = rs.getString("date");
+                int remindType = rs.getInt("remind_type");
+                String remindDateTime = rs.getString("remind_date_time");
+                String remindTarget = rs.getString("remind_target");
+                String createDate = rs.getString("create_date");
+                String createTime = rs.getString("create_time");
+                String createIp = rs.getString("create_ip");
+                String updateDate = rs.getString("update_date");
+                String updateTime = rs.getString("update_time");
+                String updateIp = rs.getString("update_ip");
+                Remind remind = new Remind(id, userId, date, content, remindType, remindDateTime, remindTarget,
+                        createDate, createTime, createIp, updateDate, updateTime, updateIp);
+                list.add(remind);
+            }
+            return list;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
+    }
+
+    /**
      * 根据提醒id查提醒
      * @param id
      * @return

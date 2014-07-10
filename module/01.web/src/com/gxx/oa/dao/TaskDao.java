@@ -137,6 +137,57 @@ public class TaskDao {
     }
 
     /**
+     * 根据用户id查找最近的2个任务
+     *
+     * @param userId
+     * @param from
+     * @param to
+     * @return
+     * @throws Exception
+     */
+    public static List<Task> queryTasksByUserIdAndFromTo(int userId, int from, int to)
+            throws Exception {
+        List<Task> list = new ArrayList<Task>();
+        String sql = "SELECT id,from_user_id,to_user_id,title,content,state,begin_date,end_date," +
+                "create_date,create_time,create_ip,update_date,update_time,update_ip FROM task WHERE 1=1";
+        sql += " AND (from_user_id=" + userId + " OR ";
+        sql += "to_user_id=" + userId + ")";
+        sql += " ORDER BY id DESC limit " + from + "," + to;
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int fromUserId = rs.getInt("from_user_id");
+                int toUserId = rs.getInt("to_user_id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                int state = rs.getInt("state");
+                String beginDate = rs.getString("begin_date");
+                String endDate = rs.getString("end_date");
+                String createDate = rs.getString("create_date");
+                String createTime = rs.getString("create_time");
+                String createIp = rs.getString("create_ip");
+                String updateDate = rs.getString("update_date");
+                String updateTime = rs.getString("update_time");
+                String updateIp = rs.getString("update_ip");
+                Task task = new Task(id, fromUserId, toUserId, title, content, state, beginDate, endDate, createDate,
+                        createTime, createIp, updateDate, updateTime, updateIp);
+                list.add(task);
+            }
+            return list;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
+    }
+
+    /**
      * 根据id查任务
      *
      * @param id

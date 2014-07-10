@@ -78,7 +78,8 @@
             <option value="">全部用户</option>
         </select>
         <input id="date" type="text" name="date" value="<%=date%>" class="inputArea">
-        <input class="subBtn" type="button" onclick="selectDiary();" value="选择" />
+        <input class="minBtn" type="button" onclick="selectDiary();" value="选择" />
+        <input class="minBtn" type="button" onclick="location.href='writeDiary2.jsp'" value="写日志" />
     </div>
     <div id="daily">
         <div class="diarlArea">
