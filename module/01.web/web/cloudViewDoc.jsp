@@ -6,6 +6,7 @@
     <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
     <%@ page import="com.gxx.oa.interfaces.CloudDocInterface" %>
     <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <%@ page import="com.gxx.oa.utils.DateUtil" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
@@ -24,13 +25,7 @@
         User cloudUser = UserDao.getUserById(cloudDoc.getUserId());
     %>
     <title>Suncare-OA</title>
-    <link href="css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="css/main.css" rel="stylesheet" type="text/css" />
-    <link href="css/imessage.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript" src="scripts/jquery-1.10.2.min.js"></script>
-    <script language="javascript" type="text/javascript" src="scripts/menu.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
-    <script language="javascript" type="text/javascript" src="scripts/base.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/cloudDocBase.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/cloudViewDoc.js"></script>
     <script type="text/javascript">
@@ -40,7 +35,7 @@
         var initTags = '<%=cloudDoc.getTags()%>';
     </script>
 </head>
-
+<%@ include file="facebox_message.jsp" %>
 <body>
 <!-- 头部固定菜单层 开始-->
 <div id="menu">
@@ -66,8 +61,8 @@
     <div id="wikiArea">
         <div class="wikiMenu">
             <ul>
-                <li><a href="cloudUploadDoc2.jsp">上传文档</a></li>
-                <li><a href="cloudMyDoc2.jsp">我的文档</a></li>
+                <li><a href="cloudUploadDoc.jsp">上传文档</a></li>
+                <li><a href="cloudMyDoc.jsp">我的文档</a></li>
             </ul>
         </div>
 
@@ -86,7 +81,7 @@
                 <tr>
                     <td class="table_title">日期：</td>
                     <td>
-                        <%=cloudDoc.getCreateDate()%>
+                        <%=DateUtil.getLongDate(DateUtil.getDate(cloudDoc.getCreateDate()))%>
                     </td>
                 </tr>
                 <%

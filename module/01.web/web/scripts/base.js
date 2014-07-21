@@ -336,7 +336,9 @@ function showMessage(messageId, message){
  * @param message
  */
 function showAttention(message){
-    alert(message);
+    document.getElementById("facebox_message_img").src = "images/icons/exclamation.png";
+    document.getElementById("facebox_message_txt").innerHTML = message;
+    document.getElementById("facebox_message_a").click();
 //    showAttentionMessage(DEFAULT_MESSAGE_ID, message);
 }
 
@@ -355,7 +357,9 @@ function showAttentionMessage(messageId, message){
  * @param message
  */
 function showInformation(message){
-    alert(message);
+    document.getElementById("facebox_message_img").src = "images/icons/information.png";
+    document.getElementById("facebox_message_txt").innerHTML = message;
+    document.getElementById("facebox_message_a").click();
 //    showInformationMessage(DEFAULT_MESSAGE_ID, message);
 }
 
@@ -374,7 +378,9 @@ function showInformationMessage(messageId, message){
  * @param message
  */
 function showSuccess(message){
-    alert(message);
+    document.getElementById("facebox_message_img").src = "images/icons/tick_circle.png";
+    document.getElementById("facebox_message_txt").innerHTML = message;
+    document.getElementById("facebox_message_a").click();
 //    showSuccessMessage(DEFAULT_MESSAGE_ID, message);
 }
 
@@ -393,7 +399,9 @@ function showSuccessMessage(messageId, message){
  * @param message
  */
 function showError(message){
-    alert(message);
+    document.getElementById("facebox_message_img").src = "images/icons/cross_circle.png";
+    document.getElementById("facebox_message_txt").innerHTML = message;
+    document.getElementById("facebox_message_a").click();
 //    showErrorMessage(DEFAULT_MESSAGE_ID, message);
 }
 
@@ -564,4 +572,45 @@ function replaceAll(initStr, beforeStr, afterStr){
         initStr = initStr.replace(beforeStr, afterStr);
     }
     return initStr;
+}
+
+/**
+ * yyyyMMdd 返回 yyyy-MM-dd
+ * @param date
+ * @return {String}
+ */
+function getLongDate(date){
+    if(date == null || date == EMPTY || date.length != 8){
+        return EMPTY;
+    }
+    return date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
+}
+
+/**
+ * yyyyMMddHHmmss 返回 yyyy-MM-dd HH:mm:ss
+ * @param dateTime
+ * @return {String}
+ */
+function getLongDateTime1(dateTime){
+    if(dateTime == null || dateTime == EMPTY || dateTime.length != 14){
+        return EMPTY;
+    }
+    return dateTime.substring(0, 4) + "-" + dateTime.substring(4, 6) + "-" + dateTime.substring(6, 8) + " " +
+        dateTime.substring(8, 10) + ":" + dateTime.substring(10, 12) + ":" + dateTime.substring(12, 14);
+}
+
+/**
+ * yyyyMMdd,HHmmss 返回 yyyy-MM-dd HH:mm:ss
+ * @param date
+ * @return {String}
+ */
+function getLongDateTime2(date, time){
+    if(date == null || date == EMPTY || date.length != 8){
+        return EMPTY;
+    }
+    if(time == null || time == EMPTY || time.length != 6){
+        return EMPTY;
+    }
+    return date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8) + " " +
+        time.substring(0, 2) + ":" + time.substring(2, 4) + ":" + time.substring(4, 6);
 }

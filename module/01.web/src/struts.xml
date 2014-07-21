@@ -149,7 +149,7 @@
         </action>
         <action name="cloudKnowAsk" class="com.gxx.oa.CloudKnowAskAction">
             <result>
-                /cloudKnowAsk.jsp
+                /cloudKnowMyAsk.jsp
             </result>
             <result name="error">
                 /cloudKnowAsk.jsp

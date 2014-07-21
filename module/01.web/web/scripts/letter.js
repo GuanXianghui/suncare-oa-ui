@@ -1,13 +1,17 @@
 //站内信Json数组
 var letterArray = new Array();
+//当前点击对象索引
+var nowFocusIndex = -1;
 
 /**
  * 初始化
  */
 $(document).ready(function() {
     if(message != EMPTY){
-        showInformation(message);
+        showAttention(message);
     }
+    //处理所有员工json串
+    processUserWithJson();
 
     //把初始letterJsonStr转换成letterArray
     letterArray = transferInitJsonStr2Array(letterJsonStr);
@@ -15,9 +19,48 @@ $(document).ready(function() {
     //处理站内信Json串
     processWithJson();
 
-    //检查是否还有下一页
-    checkHasNextPage();
+    $("#mailDetail").css("display", "none");
 });
+
+/**
+ * 处理所有员工json串
+ */
+function processUserWithJson() {
+    //json串转json数组
+    if(userJsonStr != EMPTY) {
+        var array = userJsonStr.split(SYMBOL_BIT_AND);
+        for(var i=0;i<array.length;i++) {
+            userArray[userArray.length] = eval("(" + array[i] + ")");
+        }
+    }
+}
+
+/**
+ * 根据id查用户
+ * @param id
+ */
+function getUserById(id) {
+    for(var i=0;i<userArray.length;i++){
+        if(userArray[i]["id"] == id){
+            return userArray[i];
+        }
+    }
+    return null;
+}
+
+/**
+ * 根据id获取letter
+ * @param id
+ * @return {*}
+ */
+function getLetterById(id){
+    for(var i=0;i<letterArray.length;i++){
+        if(letterArray[i]["id"] == id){
+            return letterArray[i];
+        }
+    }
+    return null;
+}
 
 /**
  * 把初始letterJsonStr转换成letterArray
@@ -38,73 +81,48 @@ function transferInitJsonStr2Array(jsonStr){
  */
 function processWithJson(){
     //循环展示
-    var html = "<thead><tr><th><input id=\"all_check_box\" type=\"checkbox\" onchange=\"chooseAll(this)\">" +
-        "</th><th>目标用户</th><th>是否已读</th><th>标题</th><th>时间</th></tr></thead>";
+    var html = EMPTY;
     for(var i=0;i<letterArray.length;i++){
-        var isReaded = "未读";
-        if(letterArray[i]["readState"] == LETTER_READ_STATE_READED){
-            isReaded = "已读";
-        }
-        html += "<tr><td><input class=\"letter_box\" type=\"checkbox\" onchange=\"choose(this, " +
-            letterArray[i]["id"] + ")\"></td><td><img width=\"27px\" src=\"" + letterArray[i]["headPhoto"] +
-            "\"><a href=\"" + letterArray[i]["url"] + "\" target=\"_blank\">" + letterArray[i]["fromUserName"] +
-            "</a></td><td>" + isReaded + "</td><td><a href=\"" + baseUrl +
-            "showLetter.jsp?id=" + letterArray[i]["id"] + "\">" + letterArray[i]["title"] + "</a></td><td>" +
-            letterArray[i]["createDate"] + " " + letterArray[i]["createTime"] + "</td></tr>";
-    }
-    document.getElementById("letter_table").innerHTML = html;
-    $('tbody tr:even').addClass("alt-row");
-}
-
-/**
- * 全选站内信
- * @param t
- */
-function chooseAll(t){
-    var checked = t.checked;
-    var boxes = document.getElementsByClassName("letter_box");
-    for(var i=0;i<boxes.length;i++){
-        if(checked){
-            boxes[i].checked = true;
+        var isReaded = letterArray[i]["readState"] == LETTER_READ_STATE_READED;
+        html += "<li onclick='showLetter(" + i + ", " + letterArray[i]["id"] + ")'>";
+        html += "<img src=\"" + letterArray[i]["headPhoto"] + "\" alt=\"" + letterArray[i]["fromUserName"] + "\"/>";
+        html += "<a href=\"#\"";
+        if(isReaded == false){
+            html += " style='font-weight: bold;'";
         } else {
-            boxes[i].checked = false;
+            html += " style='font-weight: normal;'";
         }
+        html += ">" + letterArray[i]["title"] + "</a>";
+        html += "<span>" + getLongDate(letterArray[i]["createDate"]) + "</span>"
+            + "<p>" + getShortContent(letterArray[i]) + "</p>"
+            + "<div class=\"clearBoth\"></div>"
+            + "</li>";
     }
-    chooseLetterIds = EMPTY;
-    if(checked){
-        for(var i=0;i<letterArray.length;i++){
-            if(chooseLetterIds != EMPTY){
-                chooseLetterIds += SYMBOL_COMMA;
-            }
-            chooseLetterIds += letterArray[i]["id"];
-        }
+    //是否加载下一页
+    if(letterCount > letterArray.length){
+        html += "<li style='text-align: center; cursor: pointer;' onclick='showNextPageLetters()'>加载更多</li>";
     }
+    //判是否为空
+    if(EMPTY == html){
+        html += "<li style='text-align: center; cursor: pointer;'>暂无</li>";
+    }
+    $("#mailList").html(html);
+    //刷新后处理
+    focusNowIndex();
 }
 
 /**
- * 选择站内信
- * @param t
+ * 得到站内信的内容缩略信息
+ * @param letter
  */
-function choose(t, id){
-    if(t.checked){
-        if(chooseLetterIds != EMPTY){
-            chooseLetterIds += SYMBOL_COMMA;
-        }
-        chooseLetterIds += id;
-    } else {
-        var idArray = chooseLetterIds.split(SYMBOL_COMMA);
-        var newIds = EMPTY;
-        for(var i=0;i<idArray.length;i++){
-            if(id == idArray[i]){
-                continue;
-            }
-            if(newIds != EMPTY){
-                newIds += SYMBOL_COMMA;
-            }
-            newIds += idArray[i];
-        }
-        chooseLetterIds = newIds;
+function getShortContent(letter){
+    $("#initMailTxt").html(letter["content"]);
+    var shortContent = $("#initMailTxt").text();
+    shortContent = replaceAll(shortContent, " ", "");
+    if(shortContent.length > 30){
+        shortContent = shortContent.substring(0, 30) + "...";
     }
+    return shortContent;
 }
 
 /**
@@ -145,10 +163,10 @@ function deleteLetter(){
                     processWithJson();
                     //总共站内信的量减去删除的量
                     letterCount -= idArray.length;
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     //清空选择站内信ids
                     chooseLetterIds = EMPTY;
+
+                    $("#mailDetail").css("display", "none");
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
@@ -202,8 +220,6 @@ function ctrlDeleteLetter(){
                     processWithJson();
                     //总共站内信的量减去删除的量
                     letterCount -= idArray.length;
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     //清空选择站内信ids
                     chooseLetterIds = EMPTY;
                 }
@@ -272,8 +288,6 @@ function setReaded(){
                     }
                     //处理站内信Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     //清空选择站内信ids
                     chooseLetterIds = EMPTY;
                 }
@@ -329,8 +343,6 @@ function restore(){
                     processWithJson();
                     //总共站内信的量减去删除的量
                     letterCount -= idArray.length;
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     //清空选择站内信ids
                     chooseLetterIds = EMPTY;
                 }
@@ -346,17 +358,6 @@ function restore(){
             showAttention("服务器连接异常，请稍后再试！");
         }
     });
-}
-
-/**
- * 检查是否还有下一页
- */
-function checkHasNextPage(){
-    if(letterCount > letterArray.length){
-        document.getElementById("nextPageDiv").style.display = EMPTY;
-    } else {
-        document.getElementById("nextPageDiv").style.display = "none";
-    }
 }
 
 /**
@@ -388,10 +389,239 @@ function showNextPageLetters(){
                     }
                     //处理站内信Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     //清空选择站内信ids
                     chooseLetterIds = EMPTY;
+                }
+                //判是否有新token
+                if (data["hasNewToken"]) {
+                    token = data["token"];
+                }
+            } else {
+                showAttention("服务器连接异常，请稍后再试！");
+            }
+        },
+        error:function (data, textStatus) {
+            showAttention("服务器连接异常，请稍后再试！");
+        }
+    });
+}
+
+/**
+ * 处理当前焦点对象
+ * @param index
+ */
+function processFocusIndex(index){
+    var liObj = null;
+    if(nowFocusIndex >= 0){
+        liObj = $("#mailList li")[nowFocusIndex];
+        liObj.style.background = "";
+        liObj.style.borderBottom = "";
+    }
+    liObj = $("#mailList li")[index];
+    liObj.style.background = "#f0efef";
+    liObj.style.borderBottom = "solid 1px #e5e5e5";
+    nowFocusIndex = index;
+}
+
+/**
+ * 刷新后处理
+ */
+function focusNowIndex(){
+    if(nowFocusIndex < 0){
+        return;
+    }
+    var liObj = $("#mailList li")[nowFocusIndex];
+    liObj.style.background = "#f0efef";
+    liObj.style.borderBottom = "solid 1px #e5e5e5";
+}
+
+/**
+ * 显示信
+ * @param id
+ */
+function showLetter(index, id){
+    //处理当前焦点对象
+    processFocusIndex(index);
+    $("#mailDetail").css("display", "block");
+    letterId = id;
+    var letter = getLetterById(id);
+    //抬头
+    $("#mailTitle").html("<b>" + letter["title"] + "</b>");
+    //发件人
+    $("#mailFrom").html("发件人：<a href=\"" + baseUrl + "user.jsp?id=" + letter["fromUserId"] + "\" target=\"_blank\">" +
+        "<img src=\"" + getUserById(letter["fromUserId"])["headPhoto"] + "\">" + letter["fromUserName"] + "</a>" +
+        "<span>[" + getLongDateTime2(letter["createDate"], letter["createTime"]) + "]</span>");
+    //收件人
+    var toUserIds = letter["toUserIds"];
+    if(EMPTY == toUserIds){
+        $("#mailTo").css("display", "none");
+    } else{
+        $("#mailTo").css("display", "block");
+        var html = "收件人：";
+        var userIdArray = toUserIds.split(SYMBOL_COMMA);
+        for(var i=0;i<userIdArray.length;i++){
+            if(i > 0){
+                html += SYMBOL_COMMA;
+            }
+            var user = getUserById(userIdArray[i]);
+            html += "<a href=\"" + baseUrl + "user.jsp?id=" + user["id"] + "\" target=\"_blank\">" +
+                "<img src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>";
+        }
+        $("#mailTo").html(html);
+    }
+    //抄送人
+    var ccUserIds = letter["ccUserIds"];
+    if(EMPTY == ccUserIds){
+        $("#mailCc").css("display", "none");
+    } else{
+        $("#mailCc").css("display", "block");
+        var html = "抄送人：";
+        var userIdArray = ccUserIds.split(SYMBOL_COMMA);
+        for(var i=0;i<userIdArray.length;i++){
+            if(i > 0){
+                html += SYMBOL_COMMA;
+            }
+            var user = getUserById(userIdArray[i]);
+            html += "<a href=\"" + baseUrl + "user.jsp?id=" + user["id"] + "\" target=\"_blank\">" +
+                "<img src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>";
+        }
+        $("#mailCc").html(html);
+    }
+
+    //内容 解析
+    $("#mailTxt").html(changeNewLineBack(letter["content"]));
+    uParse("#mailTxt", {rootPath: baseUrl + '/ueditor/'});
+
+    //操作 解析
+    $("#mailOperate").css("display", "block");
+
+
+    //设置成已读
+    if(letter["readState"] == LETTER_READ_STATE_NOT_READED){
+        letter["readState"] = LETTER_READ_STATE_READED;
+        //标记成已读
+        readLetter(id);
+        //处理站内信Json串
+        processWithJson();
+    }
+}
+
+/**
+ * 标记成已读
+ */
+function readLetter(id){
+    //ajax请求
+    var SUCCESS_STR = "success";//成功编码
+    $.ajax({
+        type:"post",
+        async:false,
+        url:baseUrl + "operateLetter.do",
+        data:"type=setReaded&ids=" + id + "&token=" + token,
+        success:function (data, textStatus) {
+            if ((SUCCESS_STR == textStatus) && (null != data)) {
+                data = eval("(" + data + ")");
+                //判请求是否成功
+                if (false == data["isSuccess"]) {
+                    showError(data["message"]);
+                    return;
+                } else {
+                    //请求成功
+                    showSuccess(data["message"]);
+                }
+                //判是否有新token
+                if (data["hasNewToken"]) {
+                    token = data["token"];
+                }
+            } else {
+                showError("服务器连接异常，请稍后再试！");
+            }
+        },
+        error:function (data, textStatus) {
+            showError("服务器连接异常，请稍后再试！");
+        }
+    });
+}
+
+/**
+ * 回复
+ */
+function reply(){
+    location.href = baseUrl + "writeLetter.jsp?type=reply&id=" + letterId;
+}
+
+/**
+ * 回复全部
+ */
+function replyAll(){
+    location.href = baseUrl + "writeLetter.jsp?type=replyAll&id=" + letterId;
+}
+
+/**
+ * 转发
+ */
+function transmit(){
+    location.href = baseUrl + "writeLetter.jsp?type=transmit&id=" + letterId;
+}
+
+/**
+ * 删除
+ */
+function deleteLetter(){
+    //ajax请求
+    var SUCCESS_STR = "success";//成功编码
+    $.ajax({
+        type:"post",
+        async:false,
+        url:baseUrl + "operateLetter.do",
+        data:"type=delete&ids=" + letterId + "&token=" + token,
+        success:function (data, textStatus) {
+            if ((SUCCESS_STR == textStatus) && (null != data)) {
+                data = eval("(" + data + ")");
+                //判请求是否成功
+                if (false == data["isSuccess"]) {
+                    showError(data["message"]);
+                    return;
+                } else {
+                    //请求成功
+                    //showSuccess(data["message"]);
+                    location.href = baseUrl + "letter.jsp?message=delete success!";
+                }
+                //判是否有新token
+                if (data["hasNewToken"]) {
+                    token = data["token"];
+                }
+            } else {
+                showAttention("服务器连接异常，请稍后再试！");
+            }
+        },
+        error:function (data, textStatus) {
+            showAttention("服务器连接异常，请稍后再试！");
+        }
+    });
+}
+
+/**
+ * 彻底删除
+ */
+function ctrlDeleteLetter(){
+    //ajax请求
+    var SUCCESS_STR = "success";//成功编码
+    $.ajax({
+        type:"post",
+        async:false,
+        url:baseUrl + "operateLetter.do",
+        data:"type=ctrlDelete&ids=" + letterId + "&token=" + token,
+        success:function (data, textStatus) {
+            if ((SUCCESS_STR == textStatus) && (null != data)) {
+                data = eval("(" + data + ")");
+                //判请求是否成功
+                if (false == data["isSuccess"]) {
+                    showError(data["message"]);
+                    return;
+                } else {
+                    //请求成功
+                    //showSuccess(data["message"]);
+                    location.href = baseUrl + "letter.jsp?message=delete success!";
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {

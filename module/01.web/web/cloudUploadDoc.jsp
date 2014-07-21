@@ -1,137 +1,122 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
-    <%
-        //外层
-        outLayer = "申成云";
-        //内层
-        inLayer = "申成文库";
-    %>
-    <title>申成文库</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/cloudDocBase.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/cloudUploadDoc.js"></script>
-    <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
-    <script type="text/javascript" src="scripts/facebox.js"></script>
+    <title>Suncare-OA</title>
+    <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
+    <script language="javascript" type="text/javascript" src="scripts/cloudDocBase.js"></script>
+    <script language="javascript" type="text/javascript" src="scripts/cloudUploadDoc.js"></script>
 </head>
+<%@ include file="facebox_message.jsp" %>
 <body>
-<div id="body-wrapper">
-    <div id="sidebar">
-        <div id="sidebar-wrapper">
-            <h1 id="sidebar-title"><a href="#">申成-OA系统</a></h1>
-            <img id="logo" src="images/suncare-files-logo.png" alt="Simpla Admin logo"/>
-            <div id="profile-links">
-                Hello, [<%=user.getName()%>],
-                <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
-                <br/>
-                <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
-            </div>
-            <%@ include file="layers.jsp" %>
-        </div>
-    </div>
-
-    <div id="main-content">
-
-        <form name="cloudQueryDocForm" action="cloudDoc.jsp" method="post">
-            <input type="hidden" name="doc" id="cloudQueryDocName">
-        </form>
-
-        <form onsubmit="return false;">
-            <fieldset>
-                <p>
-                    <span>申成文库</span>&nbsp;&nbsp;
-                    <input class="text-input small-input" type="text" id="doc_name"/>&nbsp;&nbsp;
-                    <input class="button" type="button" onclick="queryDoc($('#doc_name').val());" value="查询" />&nbsp;&nbsp;
-                    <input class="button" type="button" onclick="location.href='cloudUploadDoc.jsp'" value="贡献我的文档" />&nbsp;&nbsp;
-                    <input class="button" type="button" onclick="location.href='cloudMyDoc.jsp'" value="我的文档" />
-                </p>
-                <table id="doc_list"></table>
-            </fieldset>
-            <div class="clear"></div>
-        </form>
-
-        <div class="content-box">
-            <div class="content-box-header">
-                <h3>贡献我的文档</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab" class="default-tab">文档</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab">
-                    <div id="message_id" class="notification information png_bg" style="display: none;">
-                        <a href="#" class="close">
-                            <img src="images/icons/cross_grey_small.png" title="关闭" alt="关闭"/>
-                        </a>
-
-                        <div id="message_id_content"> 提示信息！</div>
-                    </div>
-                    <form action="<%=baseUrl%>cloudUploadDoc.do?token=<%=token%>" name="cloudUploadDocFrom"
-                          method="post" autocomplete="off" enctype="multipart/form-data">
-                        <fieldset>
-                            <p>
-                                <span><span style="color:red;">*</span>标题</span>&nbsp;&nbsp;
-                                <input class="text-input medium-input" name="title" type="text" id="title"
-                                        onfocus="focusTitle(this)" onblur="blurTitle(this)" />
-                            </p>
-                            <p>
-                                <span>&nbsp;简介</span>&nbsp;&nbsp;
-                                <textarea class="text-input medium-input" name="description" id="description"
-                                          type="text" onfocus="focusDescription(this)" onblur="blurDescription(this)"></textarea>
-                            </p>
-                            <p>
-                                <span><span style="color:red;">*</span>分类</span>&nbsp;&nbsp;
-                                <span id="show_type"></span>
-                                <input name="type" type="hidden" id="type"/>
-                            </p>
-                            <p>
-                                <span>&nbsp;标签</span>&nbsp;&nbsp;
-                                <input class="text-input medium-input" name="tags" type="text" id="tags"
-                                       onfocus="focusTags(this)" onblur="blurTags(this)"/>
-                            </p>
-                            <p>
-                                <span>&nbsp;文档</span>&nbsp;&nbsp;
-                                <input type="file" name="doc" id="doc" onchange="changeDoc()">
-                                <br>
-                                &nbsp;支持文件大小<=200M，文件类型：
-                                <img src="images/cloud_doc/doc.jpg" width="19px">doc,docx
-                                <img src="images/cloud_doc/ppt.jpg" width="19px">ppt,pptx
-                                <img src="images/cloud_doc/xls.jpg" width="19px">xls,xlsx
-                                <img src="images/cloud_doc/vsd.jpg" width="19px">vsd
-                                <img src="images/cloud_doc/pot.jpg" width="19px">pot
-                                <img src="images/cloud_doc/pps.jpg" width="19px">pps
-                                <img src="images/cloud_doc/rtf.jpg" width="19px">rtf
-                                <img src="images/cloud_doc/wps.jpg" width="19px">wps
-                                <img src="images/cloud_doc/et.jpg" width="19px">et
-                                <img src="images/cloud_doc/dps.jpg" width="19px">dps
-                                <img src="images/cloud_doc/pdf.jpg" width="19px">pdf
-                                <img src="images/cloud_doc/txt.jpg" width="19px">txt
-                                <img src="images/cloud_doc/epub.jpg" width="19px">epub
-                            </p>
-                            <p>
-                                <input class="button" type="button" onclick="cloudUploadDoc()" value="上传"/>
-                            </p>
-                        </fieldset>
-                        <div class="clear"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="footer">
-            <small>
-                &#169; Copyright 2014 Suncare | Powered by 关向辉
-            </small>
-        </div>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <%@ include file="menu.jsp" %>
+    <div class="menu_info">
+        <a href="#"><img src="images/header.jpg" /></a>
     </div>
 </div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+
+    <form name="cloudQueryDocForm" action="cloudDoc.jsp" method="post">
+        <input type="hidden" name="doc" id="cloudQueryDocName">
+    </form>
+
+    <div class="normalTitle">申成文库
+        <div class="searchArea">
+            <input class="inputArea inputWidthLong" type="text" id="doc_name" value=""><input value="搜索文库" type="button" class="minBtn" onclick="queryDoc($('#doc_name').val());">
+        </div>
+    </div>
+    <div id="wikiArea">
+        <div class="wikiMenu">
+            <ul>
+                <li><a href="cloudUploadDoc.jsp">上传文档</a></li>
+                <li><a href="cloudMyDoc.jsp">我的文档</a></li>
+            </ul>
+        </div>
+        <div class="wikiList">
+            <form action="<%=baseUrl%>/cloudUploadDoc.do?token=<%=token%>" name="cloudUploadDocFrom"
+                  method="post" autocomplete="off" enctype="multipart/form-data">
+                <table cellpadding="0" cellspacing="0" width="100%" class="information">
+                    <tr>
+                        <td class="table_title">标题：</td>
+                        <td><input id="title" type="text" name="title" value=""
+                                   class="inputArea inputWidthLong" onfocus="focusTitle(this)"
+                                   onblur="blurTitle(this)"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_title">简介：</td>
+                        <td><textarea id="description" type="text" name="description" value=""
+                                      class="inputArea inputWidthLong" onfocus="focusDescription(this)"
+                                      onblur="blurDescription(this)"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td class="table_title">分类：</td>
+                        <td><span id="show_type"></span>
+                            <input name="type" type="hidden" id="type"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_title">标签：</td>
+                        <td><input id="tags" type="text" name="tags" value=""
+                                   class="inputArea inputWidthLong" onfocus="focusTags(this)"
+                                   onblur="blurTags(this)"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_title">文档：</td>
+                        <td>
+                            <input type="file" name="doc" id="doc" onchange="changeDoc()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_title">限制：</td>
+                        <td>
+                            &nbsp;支持文件大小<=200M，文件类型：
+                            <img src="images/cloud_doc/doc.jpg" width="19px">doc,docx
+                            <img src="images/cloud_doc/ppt.jpg" width="19px">ppt,pptx
+                            <img src="images/cloud_doc/xls.jpg" width="19px">xls,xlsx
+                            <img src="images/cloud_doc/vsd.jpg" width="19px">vsd
+                            <img src="images/cloud_doc/pot.jpg" width="19px">pot
+                            <img src="images/cloud_doc/pps.jpg" width="19px">pps
+                            <img src="images/cloud_doc/rtf.jpg" width="19px">rtf
+                            <img src="images/cloud_doc/wps.jpg" width="19px">wps
+                            <img src="images/cloud_doc/et.jpg" width="19px">et
+                            <img src="images/cloud_doc/dps.jpg" width="19px">dps
+                            <img src="images/cloud_doc/pdf.jpg" width="19px">pdf
+                            <img src="images/cloud_doc/txt.jpg" width="19px">txt
+                            <img src="images/cloud_doc/epub.jpg" width="19px">epub
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_title"></td>
+                        <td><input name="dosubmit" value="上传文档" type="button" class="subBtn" onclick="cloudUploadDoc()"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+</div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+    <div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+        <ul>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
 </body>
 </html>

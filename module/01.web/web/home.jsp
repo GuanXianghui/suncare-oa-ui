@@ -62,7 +62,7 @@
 <div id="mainArea">
     <div id="right_Box">
         <div class="taskBox" id="taskBoxDiv">
-            <div class="normalTitle">任务<span class="titleSelect"><a href="task2.jsp">全部任务</a></span></div>
+            <div class="normalTitle">任务<span class="titleSelect"><a href="task.jsp">全部任务</a></span></div>
             <div class="task">
                 <div class="task_status"><span>17</span>小时</div>
                 <div class="task_title"><a href="#">任务名称任务名称</a></div>
@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="noticeBox" id="noticeBoxDiv">
-            <div class="normalTitle">提醒<span class="titleSelect"><a href="calendar2.jsp">全部提醒</a></span></div>
+            <div class="normalTitle">提醒<span class="titleSelect"><a href="calendar.jsp">全部提醒</a></span></div>
             <div class="notice">
                 <div class="notice_box">
                     <div class="notice_time">今天 15：00</div>
@@ -111,9 +111,9 @@
     <div id="left_Box">
         <div class="msgBox">
             <div class="normalTitle">工作日志
-                <input class="minBtn" type="button" onclick="location.href='writeDiary2.jsp'" value="写日志" />
+                <input class="minBtn" type="button" onclick="location.href='writeDiary.jsp'" value="写日志" />
                 <span class="titleSelect">
-                    <a href="diary2.jsp">全部</a>
+                    <a href="diary.jsp">全部</a>
                 </span>
             </div>
             <!-- 用于缩略信息展示 -->

@@ -6,7 +6,7 @@ var structureArray = new Array();
 /**
  * 初始化
  */
-$(document).ready(function() {
+$(document).ready(function(){
     //处理所有员工json串
     processUserWithJson();
     //处理所有公司结构json串
@@ -48,8 +48,8 @@ function processContacts(){
     /**
      * 通讯录公司架构id数组：公司，部门，职位依次出现的id
      */
-    var contactsIdArray = new Array();
-    var layers = eval("({})");
+    //var contactsIdArray = new Array();
+    //var layers = eval("({})");
 
     /**
      * 算多少个公司
@@ -60,6 +60,7 @@ function processContacts(){
             companies[companies.length] = structureArray[i]["id"];
         }
     }
+    var html = "<ul>";
 
     /**
      * 循环每个公司
@@ -68,96 +69,99 @@ function processContacts(){
      * 3.循环每个部门，[递归查]找下面的职位 -> 如果是公司或者部门则中断
      */
     for(var i=0;i<companies.length;i++){
+        //默认只取第一个公司：目前只支持申成，而且不显示申成，直接显示部门和岗位 todo
+        if(i > 0){
+            continue;
+        }
         // 遍历公司
         var company = companies[i];
-        contactsIdArray[contactsIdArray.length] = company;//添加元素
+        var structure = getStructureById(company);
+
+        //contactsIdArray[contactsIdArray.length] = company;//添加元素
 
         // 第一步
         var posArray = new Array();
         posArray = getAllPosWithOutDeptByCompany(posArray, company);
-        contactsIdArray = contactsIdArray.concat(posArray);//添加数组
-        layers["company_" + company + "_pos"] = posArray;
+        //contactsIdArray = contactsIdArray.concat(posArray);//添加数组
+        //layers["company_" + company + "_pos"] = posArray;
+        for(var j=0;j<posArray.length;j++){
+            structure = getStructureById(posArray[j]);
+//            html += "<tr><td class='position' title='com_" + company + "_pos_" + structure["id"] + "' " +
+//                "onclick='chooseUser(this, " + structure["id"] + ")' style='display: none;'>" + structure["name"] + "</td></tr>";
+            html += "<li><p>" + structure["name"] + "</p>";
+            var users = queryUsersByPosition(structure["id"]);
+            for(var k=0;k<users.length;k++){
+//                html += "<tr><td class='user' title='com_" + company + "_pos_" + structure["id"] + "_user_" +
+//                    users[k]["id"] + "' onclick='chooseUser(this, " + users[k]["id"] + ")' style='display: none;'><img src='" + baseUrl + users[k]["headPhoto"] +
+//                    "' width='27px'>" + users[k]["name"] + "</td></tr>";
+                html += " <a href=\"user.jsp?id=" + users[k]["id"] + "\" id=\"userId" + users[k]["id"] + "\" target=\"_blank\">" + users[k]["name"] + "</a>";
+            }
+            html += "</li>";
+        }
 
         // 第二步
         var deptArray = new Array();
         deptArray = getAllDeptsByCompany(deptArray, company);
-        layers["company_" + company + "_dept"] = deptArray;
+        //layers["company_" + company + "_dept"] = deptArray;
 
         // 第三步
         for(var j=0;j<deptArray.length;j++){
-            contactsIdArray[contactsIdArray.length] = deptArray[j];//添加元素
+            //contactsIdArray[contactsIdArray.length] = deptArray[j];//添加元素
+            structure = getStructureById(deptArray[j]);
+            var dept = structure["id"];
+//            html += "<tr><td class='dept' title='com_" + company + "_dept_" + dept + "' " +
+//                "onclick='chooseUser(this, " + structure["id"] + ")' style='display: none;'>" + structure["name"] + "</td></tr>";
+            html += "<li><p>" + structure["name"] + "</p>";
             var posArray2 = new Array();
             posArray2 = getAllPosByDept(posArray2, deptArray[j]);
-            contactsIdArray = contactsIdArray.concat(posArray2);//添加数组
-            layers["company_" + company + "_dept_" + deptArray[j]] = posArray2;
-        }
-    }
-
-    /**
-     * 依次展现通讯录中的公司架构
-     */
-    var html = EMPTY;
-    var head1 = "<div><div class=\"content-box\"><div class=\"content-box-header\"><h3>";
-    var head2 = "</h3><ul class=\"content-box-tabs\"><li><a href=\"\" class=\"default-tab\">通讯录</a></li>" +
-        "</ul><div class=\"clear\"></div></div><div class=\"content-box-content\"><div class=\"tab-content default-tab\">";
-    var foot = "</div></div></div>";
-    for(var i=0;i<companies.length;i++){
-        var company = getStructureById(companies[i]);
-        html += head1 + company["name"] + head2;
-        html += "<table><thead><tr><th>部门</th><th>职位</th><th>姓名</th><th>座机</th><th>手机</th></tr></thead>";
-        var poses = layers["company_" + company["id"] + "_pos"];
-        for(var j=0;j<poses.length;j++){
-            var pos = getStructureById(poses[j]);
-            html += "<tr><td class='position' col2='1' colspan='2'><b>" + pos["name"] + "</b></td><td col3='1' colspan='3'>";
-            var users = queryUsersByPosition(pos["id"]);
-            for(var l=0;l<users.length;l++){
-                if(l==0){
-                    html += "<table width='100%'>"
-                }
-                html += "<tr><td><a href='" + baseUrl + "user.jsp?id=" + users[l]["id"] + "' target='_blank'><b>" +
-                    users[l]["name"] + "</b></a></td><td>" + users[l]["officeTel"] + "</td><td>" +
-                    users[l]["mobileTel"] + "</td></tr>";
-                if(l==users.length-1){
-                    html += "</table>"
-                }
-            }
-            html += "</td></tr>";
-        }
-        var depts = layers["company_" + company["id"] + "_dept"];
-        for(var j=0;j<depts.length;j++){
-            var dept = getStructureById(depts[j]);
-            html += "<tr><td class='dept'><b>" + dept["name"] + "</b></td><td col4='1' colspan='4'>";
-            poses = layers["company_" + company["id"] + "_dept_" + dept["id"]];
-            for(var k=0;k<poses.length;k++){
-                if(k==0){
-                    html += "<table width='100%'>"
-                }
-                var pos = getStructureById(poses[k]);
-                html += "<tr><td class='position'><b>" + pos["name"] + "</b></td><td col3='1' colspan='3'>";
-                var users = queryUsersByPosition(pos["id"]);
+            //contactsIdArray = contactsIdArray.concat(posArray2);//添加数组
+            //layers["company_" + company + "_dept_" + deptArray[j]] = posArray2;
+            for(var k=0;k<posArray2.length;k++){
+                structure = getStructureById(posArray2[k]);
+//                html += "<tr><td class='position' title='com_" + company + "_dept_" + dept + "_pos_" +
+//                    structure["id"] + "' onclick='chooseUser(this, " + structure["id"] + ")' style='display: none;'>" + structure["name"] + "</td></tr>";
+                var users = queryUsersByPosition(structure["id"]);
                 for(var l=0;l<users.length;l++){
-                    if(l==0){
-                        html += "<table width='100%'>"
-                    }
-                    html += "<tr><td><a href='" + baseUrl + "user.jsp?id=" + users[l]["id"] + "' target='_blank'><b>" +
-                        users[l]["name"] + "</b></a></td><td>" + users[l]["officeTel"] + "</td><td>" +
-                        users[l]["mobileTel"] + "</td></tr>";
-                    if(l==users.length-1){
-                        html += "</table>"
-                    }
-                }
-                html += "</td></tr>";
-                if(k==poses.length-1){
-                    html += "</table>"
+//                    html += "<tr><td class='user' title='com_" + company + "_dept_" + dept + "_pos_" +
+//                        structure["id"] + "_user_" + users[l]["id"] + "' onclick='chooseUser(this, " + users[l]["id"] + ")' style='display: none;'><img src='" +
+//                        baseUrl + users[l]["headPhoto"] + "' width='27px'>" + users[l]["name"] + "</td></tr>";
+                    html += " <a href=\"user.jsp?id=" + users[l]["id"] + "\" id=\"userId" + users[l]["id"] + "\" target=\"_blank\">" + users[l]["name"] + "<span>" + structure["name"] + "</span></a>";
                 }
             }
-            html += "</td></tr>";
+            html += "</li>";
         }
-        html += "</table>";
-        html += foot;
-        html += "<div class=\"clear\"></div>";
     }
-    $("#main-content").html(html+$("#main-content").html());
+    html += "</ul>";
+    $("#userListArea").html(html);
+}
+
+/**
+ * 格子类型
+ */
+var TYPE_COM = 1;
+var TYPE_DEPT = 2;
+var TYPE_POS = 3;
+var TYPE_USER = 4;
+
+/**
+ * 返回格子类型
+ * @param t
+ * @return {*}
+ */
+function getType(t){
+    if(t.title.indexOf("user") > -1){
+        return TYPE_USER;
+    }
+    if(t.title.indexOf("pos") > -1){
+        return TYPE_POS;
+    }
+    if(t.title.indexOf("dept") > -1){
+        return TYPE_DEPT;
+    }
+    if(t.title.indexOf("com") > -1){
+        return TYPE_COM;
+    }
+    return EMPTY;
 }
 
 /**
@@ -248,217 +252,22 @@ function queryUsersByPosition(position){
 }
 
 /**
- * 算id所占用的空间
+ * 根据id查用户
  * @param id
  */
-function calculateSize(id) {
-    var hasSon = false;//是否有子元素
-    var size = 0;
-    for(var i=0;i<structureArray.length;i++) {
-        if(structureArray[i]["pid"] == id) {
-            hasSon = true;
-            size += calculateSize(structureArray[i]["id"]);
+function getUserById(id) {
+    for(var i=0;i<userArray.length;i++){
+        if(userArray[i]["id"] == id){
+            return userArray[i];
         }
     }
-    if(hasSon == false) {
-        size = 1;
-    }
-    return size;
+    return null;
 }
 
 /**
- * 选择节点
- * @param t
- * @param id
+ * 选择员工
  */
-function chooseTd(t, id) {
-    if(chooseNode != null) {
-        chooseNode.style.border = "1px solid gray";
-    }
-    t.style.border = "2px solid red";
-    chooseNode = t;
-    chooseId = id;
-    //修改信息
-    document.getElementById("type2").value = 1;
-    document.getElementById("name2").value = EMPTY;
-    var structure = getStructureById(id);
-    if(null != structure) {
-        document.getElementById("type2").value = structure["type"];
-        document.getElementById("name2").value = structure["name"];
-    }
-}
-
-/**
- * 判节点
- */
-function checkNode(type) {
-    if(chooseNode == null) {
-        showAttention("请选择节点");
-        return false;
-    }
-    if("move2Left" == type && chooseId == 0) {
-        return false;
-    }
-    if("move2Right" == type && chooseId == 0) {
-        return false;
-    }
-    if("updateNode" == type && chooseId == 0) {
-        showAttention("该节点不能修改");
-        return false;
-    }
-    if("deleteNode" == type && chooseId == 0) {
-        showAttention("该节点不能删除");
-        return false;
-    }
-    if("addNode" == type) {
-        var name = document.getElementById("name1").value;
-        if(name == EMPTY) {
-            showAttention("请输入名称");
-            return false;
-        }
-    }
-    if("updateNode" == type) {
-        var name = document.getElementById("name2").value;
-        if(name == EMPTY) {
-            showAttention("请输入名称");
-            return false;
-        }
-    }
-    return true;
-}
-
-/**
- * 根据id取公司结构
- * @param id
- */
-function getStructureById(id) {
-    var structure = null;
-    if(id != 0) {
-        for(var i=0;i<structureArray.length;i++) {
-            if(structureArray[i]["id"] == id) {
-                structure = structureArray[i];
-            }
-        }
-    }
-    return structure;
-}
-
-/**
- * 左移
- */
-function move2Left() {
-    if(checkNode("move2Left") == false) {
-        return;
-    }
-    manageOrgStructure("move2Left", chooseId, 0, EMPTY);
-}
-
-/**
- * 右移
- */
-function move2Right() {
-    if(checkNode("move2Right") == false) {
-        return;
-    }
-    manageOrgStructure("move2Right", chooseId, 0, EMPTY);
-}
-
-/**
- * 新增
- */
-function addNode() {
-    if(checkNode("addNode") == false) {
-        return;
-    }
-    var type = document.getElementById("type1").value;
-    var name = document.getElementById("name1").value;
-    // 判断字符串是否含有非法字符
-    var result = checkStr(name, SYMBOL_ARRAY_ALL);
-    if (result["isSuccess"] == false) {
-        showAttention("节点名称包含非法字符:" + result["symbol"]);
-        return;
-    }
-    manageOrgStructure("addNode", chooseId, type, name);
-}
-
-/**
- * 修改
- */
-function updateNode() {
-    if(checkNode("updateNode") == false) {
-        return;
-    }
-    var type = document.getElementById("type2").value;
-    var name = document.getElementById("name2").value;
-    // 判断字符串是否含有非法字符
-    var result = checkStr(name, SYMBOL_ARRAY_ALL);
-    if (result["isSuccess"] == false) {
-        showAttention("节点名称包含非法字符:" + result["symbol"]);
-        return;
-    }
-    manageOrgStructure("updateNode", chooseId, type, name);
-}
-
-/**
- * 删除
- */
-function deleteNode() {
-    if(checkNode("deleteNode") == false) {
-        return;
-    }
-    manageOrgStructure("deleteNode", chooseId, 0, EMPTY);
-}
-
-/**
- * 管理组织架构
- * @param configType
- * @param id
- * @param type
- * @param name
- */
-function manageOrgStructure(configType, id, type, name) {
-    //ajax操作
-    var SUCCESS_STR = "success";//成功编码
-    $.ajax({
-        type:"post",
-        async:false,
-        url:baseUrl + "manageOrgStructure.do",
-        data:"configType=" + configType + "&id=" + id + "&type=" + type + "&name=" + name + "&token=" + token,
-        success:function (data, textStatus) {
-            if ((SUCCESS_STR == textStatus) && (null != data)) {
-                data = eval("(" + data + ")");
-                //判修改密码是否成功
-                if (false == data["isSuccess"]) {
-                    showError(data["message"]);
-                    return;
-                } else {
-                    //修改密码成功
-                    showSuccess(data["message"]);
-                    //所有公司结构json串
-                    structureJsonStr = (data["newStructureJsonStr"]);
-                    //所有公司结构Json数组
-                    structureArray = new Array();
-                    //处理所有公司结构json串
-                    processWithJson();
-                }
-                //判是否有新token
-                if (data["hasNewToken"]) {
-                    token = data["token"];
-                }
-            } else {
-                showAttention("服务器连接异常，请稍后再试！");
-            }
-        },
-        error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
-        }
-    });
-
-    //清空
-    chooseNode = null;
-    chooseId = 0;
-    document.getElementById("type1").value = 1;
-    document.getElementById("name1").value = EMPTY;
-    document.getElementById("type2").value = 1;
-    document.getElementById("name2").value = EMPTY;
+function chooseThis(t, userId){
+    window.returnValue = userId;
+    window.close();
 }

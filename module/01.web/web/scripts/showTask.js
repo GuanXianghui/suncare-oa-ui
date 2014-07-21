@@ -21,12 +21,29 @@ $(document).ready(function() {
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     editor = UE.getEditor('editor');
+    //设置编辑器宽度
+    $("#editor").css("width", "900px");
 
     //处理所有员工json串
     processUserWithJson();
 
     //初始化有权限查看的用户
     initRightUsers();
+
+    $("#beginDate").datepicker();
+    $( "#beginDate" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#beginDate" ).datepicker( "option", "showAnim", "drop" );
+    $( "#beginDate" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
+
+    $("#endDate").datepicker();
+    $( "#endDate" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#endDate" ).datepicker( "option", "showAnim", "drop" );
+    $( "#endDate" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
+
+    $("#beginDate").val(beginDate);
+    $("#endDate").val(endDate);
 });
 
 /**
@@ -140,6 +157,9 @@ function updateTask(){
  * 删除工作日志
  */
 function deleteTask(){
+    if(!confirm("你确定要删除任务吗？")){
+        return;
+    }
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
@@ -187,7 +207,7 @@ function beforeReview(){
  */
 function beforeUpdateTaskReview(taskReviewId){
     document.getElementById("review_div").style.display = EMPTY;
-    document.getElementById("review_desc").innerHTML = document.getElementById("review_desc_" + taskReviewId).innerText;
+    document.getElementById("review_desc").innerHTML = "修改评语：";
     document.getElementById("review_content").value = document.getElementById("review_content_" + taskReviewId).innerHTML;
     reviewType = "updateReview";//修改评论
     updateReviewId = taskReviewId;//修改评论id
@@ -199,7 +219,7 @@ function beforeUpdateTaskReview(taskReviewId){
  */
 function beforeReplyTaskReview(taskReviewId){
     document.getElementById("review_div").style.display = EMPTY;
-    document.getElementById("review_desc").innerHTML = "你回复" + document.getElementById("review_desc_" + taskReviewId).innerText;
+    document.getElementById("review_desc").innerHTML = "你回复" + document.getElementById("review_desc_" + taskReviewId).innerText + "：";
     document.getElementById("review_content").value = EMPTY;
     reviewType = "replyReview";//回复评论
     updateReviewId = taskReviewId;//回复评论id
@@ -267,6 +287,9 @@ function review(){
  * @param taskReviewId
  */
 function deleteTaskReview(taskReviewId){
+    if(!confirm("你确定要删除任务评论吗？")){
+        return;
+    }
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
@@ -373,4 +396,23 @@ function cui(){
             showAttention("服务器连接异常，请稍后再试！");
         }
     });
+}
+
+/**
+ * 从通讯录选择
+ */
+function choose(){
+    //设置窗口的一些状态值
+    var windowStatus = "left=380,top=200,width=260,height=200,resizable=0,scrollbars=0,menubar=no,status=0,fullscreen=1";
+    //在窗口中打开的页面
+    var url = "chooseSingleContact.jsp";
+    var userId = showModalDialog(url,"",windowStatus);
+    if(userId == EMPTY || userId == undefined){
+        return;
+    }
+    var user = getUserById(userId);
+    var html = "<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" +
+        "<img width='32' src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>"
+    $("#toUser").html(html);
+    $("#toUserId").val(userId);
 }

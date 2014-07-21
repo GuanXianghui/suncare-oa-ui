@@ -14,17 +14,29 @@ $(document).ready(function() {
     //把初始diaryJsonStr转换成diaryArray
     diaryArray = transferInitJsonStr2Array(diaryJsonStr);
 
-    //处理工作日志Json串
-    processWithJson();
-
     //检查是否还有下一页
-    checkHasNextPage();
+    //checkHasNextPage();
 
     //处理所有员工json串
     processUserWithJson();
 
     //初始化有权限查看的用户
     initRightUsers();
+
+    //处理工作日志Json串
+    processWithJson();
+
+    $("#date").datepicker();
+    $( "#date" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#date" ).datepicker( "option", "showAnim", "drop" );
+    $( "#date" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
+
+    if(date == EMPTY){
+        $("#date").val("全部时间");
+    } else {
+        $("#date").val(date);
+    }
 });
 
 /**
@@ -62,15 +74,39 @@ function transferInitJsonStr2Array(jsonStr){
  */
 function processWithJson(){
     //循环展示
-    var html = "<tr></td><td width=\"50%\">用户</td><td width=\"50%\">时间</td></tr>";
-    for(var i=0;i<diaryArray.length;i++){
-        html += "<tr><td><a href=\"" + baseUrl +"user.jsp?id=" +
-            diaryArray[i]["userId"] + "\" target=\"_blank\">" + diaryArray[i]["userName"] +
-            "</a> </td><td><a href=\"" + baseUrl + "showDiary.jsp?id=" + diaryArray[i]["id"] + "\">" +
-            diaryArray[i]["date"] + "</a></td></tr>";
+    var html = EMPTY;
+    if(diaryArray.length == 0){
+        html = "<li>无相关日志</li>";
+    } else {
+        for(var i=0;i<diaryArray.length;i++){
+            var user = getUserById(diaryArray[i]["userId"]);
+            html += "<li>" +
+                "<img src=\"" + user["headPhoto"] + "\" alt=\"" + user["name"] + "\" width=\"80\"/>" +
+                "<a href=\"" + baseUrl + "showDiary.jsp?id=" + diaryArray[i]["id"] + "\">" +
+                diaryArray[i]["date"].substr(0, 4) + "-" + diaryArray[i]["date"].substr(4, 2) + "-" +
+                diaryArray[i]["date"].substr(6, 2) + "</a><span>" + user["name"] + "</span>" +
+                "<p>" + getShortContent(diaryArray[i]["content"]) + "</p>" +
+                "<div class=\"clearBoth\"></div>" +
+                "</li>";
+        }
     }
-    document.getElementById("diary_table").innerHTML = html;
+
+    document.getElementById("diaryList").innerHTML = html;
     $('tbody tr:even').addClass("alt-row");
+}
+
+/**
+ * 得到内容缩略信息
+ * @param content
+ */
+function getShortContent(content){
+    $("#initDiaryTxt").html(content);
+    var shortContent = $("#initDiaryTxt").text();
+    shortContent = replaceAll(shortContent, " ", "");
+    if(shortContent.length > 500){
+        shortContent = shortContent.substring(0, 500) + "...";
+    }
+    return shortContent;
 }
 
 /**
@@ -90,6 +126,9 @@ function checkHasNextPage(){
 function selectDiary(){
     var userId = document.getElementById("userId").value;
     var date = document.getElementById("date").value;
+    if(date == "全部时间"){
+        date = EMPTY;
+    }
     if(date != EMPTY && (isNum(date) == false || date.length != 8)){
         showAttention("日期输入有误！");
         return;

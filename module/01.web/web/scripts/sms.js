@@ -31,6 +31,8 @@ $(document).ready(function() {
 
     //处理短信Json串
     processWithJson();
+
+    back();
 });
 
 /**
@@ -52,21 +54,19 @@ function transferInitJsonStr2Array(jsonStr){
  */
 function processWithJson(){
     //循环展示
-    var html = "<thead><tr><th width=\"20%\">电话</th><th width=\"40%\">内容</th><th width=\"10%\">状态</th>" +
-        "<th width=\"10%\">时间</th><th width=\"10%\">操作</th></tr></thead>";
+    var html = "<tr class=\"alt-row\"><th width=\"100\">手机号</th><th>内容</th><th width=\"60\">状态</th>"+
+        "<th width=\"130\">时间</th><th width=\"70\">操作</th></tr>";
     for(var i=0;i<smsArray.length;i++){
         var user = getUserByMobilePhone(smsArray[i]["phone"]);
-        var phoneDisplay = user == null ? smsArray[i]["phone"] : (smsArray[i]["phone"] + "(" + user["name"] + ")");
+        var phoneDisplay = user == null ? smsArray[i]["phone"] : (smsArray[i]["phone"] + "<br>(" + user["name"] + ")");
         html += "<tr><td>" + phoneDisplay + "</td><td>" + changeNewLineBack2(smsArray[i]["content"]) +
-            "</td><td>" + smsArray[i]["stateDesc"] + "</td><td>" + smsArray[i]["date"] + smsArray[i]["time"] + "</td><td>" +
-            "<input class=\"button\" type=\"button\" onclick=\"transmit(" + smsArray[i]["id"] + ")\" value=\"转发\"></td></tr>";
+            "</td><td>" + smsArray[i]["stateDesc"] + "</td><td>" + getLongDateTime2(smsArray[i]["date"],smsArray[i]["time"]) + "</td><td>" +
+            "<input name=\"dosubmit\" value=\"转发\" type=\"button\" class=\"minBtn\" onclick=\"transmit(" + smsArray[i]["id"] + ")\" /></td></tr>";
     }
     if(smsArray.length == 0){
-        html += "<tr><td colspan='5'>无</td></tr>";
+        html += "<tr><td colspan='5'>未发过短信</td></tr>";
     }
     document.getElementById("sms_table").innerHTML = html;
-    $('#sms_table tr:even').addClass("alt-row");
-
 }
 
 /**
@@ -96,7 +96,7 @@ function beforeSendSMS(){
 function transmit(smsId){
     var sms = getSMSById(smsId);
     document.getElementById("content").value = changeNewLineBack2(sms["content"]);
-    document.getElementById("sendSmsDiv").style.display = EMPTY;
+    beforeOperateSMS();
 }
 
 /**
@@ -112,7 +112,7 @@ function operateSMS(){
     var phoneArray = phone.split(SYMBOL_COMMA);
     for(var i=0;i<phoneArray.length;i++){
         if(!isMobilePhone(phoneArray[i])){
-            showAttention("手机号不合法");
+            showAttention("手机号[" + phoneArray[i] + "]不合法");
             return false;
         }
     }
@@ -127,6 +127,10 @@ function operateSMS(){
     }
     if(content.length > SMS_CONTENT_LENGTH) {
         showAttention("短信内容大于" + SMS_CONTENT_LENGTH + "个字符");
+        return false;
+    }
+
+    if(!confirm("预览短信：\n" + content + "【申成门窗】\n确认发送吗？")){
         return false;
     }
 
@@ -470,4 +474,48 @@ function getUserByMobilePhone(phone) {
         }
     }
     return null;
+}
+
+/**
+ * 点击发送短信按钮
+ */
+function beforeOperateSMS(){
+    $("#view_sms_div").css("display", "none");
+    $("#operate_sms_table").css("display", "block");
+}
+
+/**
+ * 返回查看短信页面
+ */
+function back(){
+    $("#view_sms_div").css("display", "block");
+    $("#operate_sms_table").css("display", "none");
+    $("#date").datepicker();
+}
+
+/**
+ * 从通讯录选择
+ */
+function choose(){
+    //设置窗口的一些状态值
+    var windowStatus = "left=380,top=200,width=260,height=200,resizable=0,scrollbars=0,menubar=no,status=0,fullscreen=1";
+    //在窗口中打开的页面
+    var url = "chooseMultiplePhoneContact.jsp";
+    var userIds = showModalDialog(url,"",windowStatus);
+    if(userIds == EMPTY || userIds == undefined){
+        return;
+    }
+    var userIdArray = userIds.split(SYMBOL_COMMA);
+    var phones = EMPTY;
+    for(var i=0;i<userIdArray.length;i++){
+        var user = getUserById(userIdArray[i]);
+        if(user["mobileTel"] == EMPTY){
+            continue;
+        }
+        if(phones != EMPTY){
+            phones += SYMBOL_COMMA;
+        }
+        phones += user["mobileTel"];
+    }
+    $("#phone").val(phones);
 }

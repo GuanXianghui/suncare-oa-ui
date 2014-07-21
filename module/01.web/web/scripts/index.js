@@ -93,10 +93,14 @@ function login() {
                     //登陆成功
                     showSuccess(data["message"]);
                 }
-                //是否跳转页面
-                if (data["isRedirect"]) {
-                    var redirectUrl = data["redirectUrl"];
-                    location.href = redirectUrl;
+                if(jumpUrl != EMPTY){
+                    setTimeout("location.href='" + jumpUrl + "'", 1000);
+                } else {
+                    //是否跳转页面
+                    if (data["isRedirect"]) {
+                        var redirectUrl = data["redirectUrl"];
+                        setTimeout("location.href='" + redirectUrl + "'", 1000);
+                    }
                 }
             } else {
                 showError("服务器连接异常，请稍后再试！");

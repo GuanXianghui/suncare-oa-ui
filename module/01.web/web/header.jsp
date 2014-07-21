@@ -1,4 +1,5 @@
 <%@ page import="com.gxx.oa.utils.BaseUtil" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="headerWithOutCheckLogin.jsp" %>
 <%
@@ -6,7 +7,7 @@
     if(!BaseUtil.isLogin(request))
     {
         //域名链接
-        response.sendRedirect(baseUrl + "index.jsp");
+        response.sendRedirect(baseUrl + "index.jsp?jumpUrl=" + URLEncoder.encode(BaseUtil.getRequestStr(request)));
         return;
     }
     //外层

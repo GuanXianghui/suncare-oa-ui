@@ -2,6 +2,8 @@
 var editor;
 //公告Json数组
 var noticeArray = new Array();
+//当前点击对象索引
+var nowFocusIndex = -1;
 
 /**
  * 初始化
@@ -14,8 +16,7 @@ $(document).ready(function() {
     //处理公告Json串
     processWithJson();
 
-    //检查是否还有下一页
-    checkHasNextPage();
+    $("#mailDetail").css("display", "none");
 });
 
 /**
@@ -37,21 +38,38 @@ function processWithJson(){
             }
         }
     }
-    var html = "<thead><tr><th>标题</th><th>是否已读</th><th>时间</th><th>操作</th></tr></thead>";
+
+    //循环展示
+    var html = EMPTY;
     for(var i=0;i<noticeArray.length;i++){
-        var isReaded = "未读";
+        var isReaded = false;
         if((SYMBOL_COMMA + readedIds + SYMBOL_COMMA).indexOf(SYMBOL_COMMA + noticeArray[i]["id"] + SYMBOL_COMMA) > -1){
-            isReaded = "已读";
+            isReaded = true;
         }
-        html += "<tr><td>" + noticeArray[i]["title"] + "</td><td>" + isReaded + "</td><td>" + noticeArray[i]["createDate"] + "</td>" +
-            "<td>" +
-            "<input class=\"button\" type=\"button\" onclick=\"showNotice(" + noticeArray[i]["id"] + ")\" value=\"查看\" />" +
-            "<input class=\"button\" type=\"button\" onclick=\"deleteNotice(" + noticeArray[i]["id"] + ")\" value=\"删除\" />" +
-            "</td>" +
-            "</tr>";
+        html += "<li onclick='showNotice(" + i + ", " + noticeArray[i]["id"] + ")'>";
+        html += "<a href=\"#\"";
+        if(isReaded == false){
+            html += " style='font-weight: bold;'";
+        } else {
+            html += " style='font-weight: normal;'";
+        }
+        html += ">" + noticeArray[i]["title"] + "</a>";
+        html += "<span>" + getLongDate(noticeArray[i]["createDate"]) + "</span>"
+            + "<p>" + getShortContent(noticeArray[i]) + "</p>"
+            + "<div class=\"clearBoth\"></div>"
+            + "</li>";
     }
-    document.getElementById("notice_table").innerHTML = html;
-    $('tbody tr:even').addClass("alt-row");
+    //是否加载下一页
+    if(notDeletedNoticeCount > noticeArray.length+deleteCount){
+        html += "<li style='text-align: center; cursor: pointer;' onclick='showNextPageNotices()'>加载更多</li>";
+    }
+    //判是否为空
+    if(EMPTY == html){
+        html += "<li style='text-align: center; cursor: pointer;'>暂无</li>";
+    }
+    $("#mailList").html(html);
+    //刷新后处理
+    focusNowIndex();
 }
 
 /**
@@ -65,6 +83,20 @@ function getNoticeById(noticeId){
         }
     }
     return null;
+}
+
+/**
+ * 得到站内信的内容缩略信息
+ * @param letter
+ */
+function getShortContent(letter){
+    $("#initMailTxt").html(letter["content"]);
+    var shortContent = $("#initMailTxt").text();
+    shortContent = replaceAll(shortContent, " ", "");
+    if(shortContent.length > 30){
+        shortContent = shortContent.substring(0, 30) + "...";
+    }
+    return shortContent;
 }
 
 /**
@@ -87,6 +119,7 @@ function deleteNotice(noticeId){
                     showError(data["message"]);
                     return;
                 } else {
+                    $("#mailDetail").css("display", "none");
                     //请求成功
                     showSuccess(data["message"]);
                     if(deletedIds != EMPTY){
@@ -95,10 +128,12 @@ function deleteNotice(noticeId){
                     deletedIds += noticeId;
                     //在本页面中删除的个数累加
                     deleteCount++;
+
+                    //当前点击对象索引置成-1
+                    nowFocusIndex = -1;
+
                     //处理公告Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
@@ -115,19 +150,53 @@ function deleteNotice(noticeId){
 }
 
 /**
+ * 处理当前焦点对象
+ * @param index
+ */
+function processFocusIndex(index){
+    var liObj = null;
+    if(nowFocusIndex >= 0){
+        liObj = $("#mailList li")[nowFocusIndex];
+        liObj.style.background = "";
+        liObj.style.borderBottom = "";
+    }
+    liObj = $("#mailList li")[index];
+    liObj.style.background = "#f0efef";
+    liObj.style.borderBottom = "solid 1px #e5e5e5";
+    nowFocusIndex = index;
+}
+
+/**
+ * 刷新后处理
+ */
+function focusNowIndex(){
+    if(nowFocusIndex < 0){
+        return;
+    }
+    var liObj = $("#mailList li")[nowFocusIndex];
+    liObj.style.background = "#f0efef";
+    liObj.style.borderBottom = "solid 1px #e5e5e5";
+}
+
+/**
  * 查看公告
  * @param noticeId
  */
-function showNotice(noticeId){
-    //显示查看框
-    document.getElementById("showNoticeDiv").style.display = EMPTY;
-    //编译html
-    document.getElementById("showNoticeTitleDiv").innerHTML = "<h2>" + getNoticeById(noticeId)["title"] + "</h2>";
-    var content = getNoticeById(noticeId)["content"];
+function showNotice(index, noticeId){
+    //处理当前焦点对象
+    processFocusIndex(index);
+    $("#mailDetail").css("display", "block");
+    var notice = getNoticeById(noticeId);
+    //抬头
+    $("#mailTitle").html("<b>" + notice["title"] + "</b>");
+    var content = notice["content"];
     //将uuid->\r\n
     content = changeNewLineBack(content);
-    document.getElementById("showNoticeContentDiv").innerHTML = content;
-    uParse("#showNoticeContentDiv", {rootPath: baseUrl + '/ueditor/'});
+    //内容 解析
+    $("#mailTxt").html(content);
+    uParse("#mailTxt", {rootPath: baseUrl + '/ueditor/'});
+    //操作 解析
+    $("#mailOperate").html("<input class=\"minBtn\" type=\"button\" onclick=\"deleteNotice(" + noticeId + ");\" value=\"删除\" />");
 
     //判是否已读
     var isReaded = false;
@@ -154,7 +223,7 @@ function showNotice(noticeId){
                 //判请求是否成功
                 if (false == data["isSuccess"]) {
                     showError(data["message"]);
-                    return;
+                    //return;
                 } else {
                     //请求成功
                     showSuccess(data["message"]);
@@ -164,32 +233,19 @@ function showNotice(noticeId){
                     readedIds += noticeId;
                     //处理公告Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
                     token = data["token"];
                 }
             } else {
-                showAttention("服务器连接异常，请稍后再试！");
+                showError("服务器连接异常，请稍后再试！");
             }
         },
         error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
+            showError("服务器连接异常，请稍后再试！");
         }
     });
-}
-
-/**
- * 检查是否还有下一页
- */
-function checkHasNextPage(){
-    if(notDeletedNoticeCount > noticeArray.length+deleteCount){
-        document.getElementById("nextPageDiv").style.display = EMPTY;
-    } else {
-        document.getElementById("nextPageDiv").style.display = "none";
-    }
 }
 
 /**
@@ -219,34 +275,17 @@ function showNextPageNotices(){
                     }
                     //处理公告Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
                     token = data["token"];
                 }
             } else {
-                showAttention("服务器连接异常，请稍后再试！");
+                showError("服务器连接异常，请稍后再试！");
             }
         },
         error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
+            showError("服务器连接异常，请稍后再试！");
         }
     });
-}
-
-/**
- * 切换模式
- */
-function changeMode(){
-    var className = $("#content-box1").attr("class");
-    if("content-box" == className){
-        $("#content-box1").attr("class", "content-box column-left");
-        $("#content-box2").attr("class", "content-box column-right");
-    } else {
-        $("#content-box1").attr("class", "content-box");
-        $("#content-box2").attr("class", "content-box");
-    }
-    return false;
 }

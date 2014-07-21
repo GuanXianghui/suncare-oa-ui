@@ -17,8 +17,8 @@ $(document).ready(function() {
     //处理任务Json串
     processWithJson();
 
-    //检查是否还有下一页
-    checkHasNextPage();
+//    //检查是否还有下一页
+//    checkHasNextPage();
 
     //初始化用户
     initUsers();
@@ -60,19 +60,34 @@ function transferInitJsonStr2Array(jsonStr){
  */
 function processWithJson(){
     //循环展示
-    var html = "<tr></td><td>任务来源用户</td><td>任务接受用户</td><td>任务名称</td>" +
-        "<td>状态</td><td>开始日期</td><td>结束日期</td></tr>";
+    var html = "<tr class=\"alt-row\"><th width=\"110\">任务来源</th><th width=\"110\">任务指派给</th>" +
+        "<th>任务名称</th><th width=\"90\">状态</th><th width=\"110\">开始日期</th><th width=\"110\">结束日期</th></tr>";
+
     for(var i=0;i<taskArray.length;i++){
-        html += "<tr><td><a href=\"" + baseUrl +"user.jsp?id=" +
-            taskArray[i]["fromUserId"] + "\" target=\"_blank\">" + taskArray[i]["fromUserName"] +
-            "</a></td>" + "<td><a href=\"" + baseUrl +"user.jsp?id=" + taskArray[i]["toUserId"] + "\" " +
-            "target=\"_blank\">" + taskArray[i]["toUserName"] + "</a></td><td><a href=\"" + baseUrl +
-            "showTask.jsp?id=" + taskArray[i]["id"] + "\">" + taskArray[i]["title"] + "</a></td><td>" +
-            taskArray[i]["stateDesc"] + "</td><td>" + taskArray[i]["beginDate"] + "</td><td>" +
-            taskArray[i]["endDate"] + "</td></tr>";
+        html += "<tr>" +
+            "<td align='center'>" +
+                "<a href=\"" + baseUrl +"user.jsp?id=" + taskArray[i]["fromUserId"] + "\" target=\"_blank\">" +
+                    taskArray[i]["fromUserName"] + "</a>" +
+            "</td>" +
+            "<td align='center'>" +
+                "<a href=\"" + baseUrl +"user.jsp?id=" + taskArray[i]["toUserId"] + "\" " +
+                    "target=\"_blank\">" + taskArray[i]["toUserName"] + "</a>" +
+            "</td>" +
+            "<td>" +
+                "<a href=\"" + baseUrl + "showTask.jsp?id=" + taskArray[i]["id"] + "\">" +
+                    taskArray[i]["title"] + "</a>" +
+            "</td>" +
+            "<td align='center'>" + taskArray[i]["stateDesc"] + "</td>" +
+            "<td align='center'>" + taskArray[i]["beginDate"] + "</td>" +
+            "<td align='center'>" + taskArray[i]["endDate"] + "</td>" +
+            "</tr>";
     }
+
+    if(0 == taskArray.length){
+        html += "<tr><td colspan='6' align='center'>暂无符合条件的任务！</td></tr>";
+    }
+
     document.getElementById("task_table").innerHTML = html;
-    $('tbody tr:even').addClass("alt-row");
 }
 
 /**

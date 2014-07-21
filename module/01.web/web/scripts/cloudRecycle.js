@@ -42,13 +42,14 @@ function getCloudById(id){
  * 展示所有文件
  */
 function displayFiles(){
-    var html = EMPTY;
+    var html = "<ul>";
     if(files.length == 0){
-        html = "无文件！ToT";
+        html = "<li>无文件！ToT</li>";
     }
     for(var i=0;i<files.length;i++){
         html += getDisplayFileByIdAndTypeAndName(files[i]["id"], files[i]["type"], files[i]["name"], files[i]["route"]);
     }
+    html += "</ul>";
     $("#files").html(html);
 }
 
@@ -58,22 +59,13 @@ function displayFiles(){
  * @param name
  */
 function getDisplayFileByIdAndTypeAndName(id, type, name, route){
-    var file = "<li>";
-    file += "<span class=\"shortcut-button\" onclick=\"chooseCloud(this)\" name=\"" + id + "\">";
-    file += "<span class=\"wrap\">";
+    var file = EMPTY;
     if(CLOUD_TYPE_FILE == type){
-        if(isImg(name)){
-            file += "<img src=\"" + route + "\" alt=\"icon\" width=\"48\" height=\"48\"/>";
-        } else {
-            file += "<img src=\"images/file.jpg\" alt=\"icon\" width=\"48\" height=\"48\"/>";
-        }
+        file += "<li onclick=\"chooseCloud(this)\" name=\"" + id + "\"><img src=\"images/ext/png.gif\"/>";
     } else if(CLOUD_TYPE_DIR == type){
-        file += "<img src=\"images/dir.jpg\" alt=\"icon\" width=\"48\" height=\"48\" ondblclick=\"openDir('" + name + "')\"/>";
+        file += "<li onclick=\"chooseCloud(this)\" name=\"" + id + "\"><img src=\"images/ext/dir.gif\"/>";
     }
-    file += "<br/>" + name;
-    file += "</span>";
-    file += "</span>";
-    file += "</li>";
+    file += name + "</li>";
     return file;
 }
 
@@ -190,6 +182,11 @@ function ctrlDelete(){
         showAttention("请选择文件或者文件夹！");
         return;
     }
+    //确认是否彻底删除
+    var result = confirm("确定彻底删除选中的" + chooseClouds.length + "个文件吗？");
+    if(result == false){
+        return;
+    }
     var ctrlDeleteIds = EMPTY;
     for(var i=0;i<chooseClouds.length;i++){
         if(ctrlDeleteIds != EMPTY){
@@ -240,6 +237,11 @@ function ctrlDelete(){
  * 清空回收站
  */
 function clearRecycle(){
+    //确认是否清空回收站
+    var result = confirm("确定清空回收站吗？");
+    if(result == false){
+        return;
+    }
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({

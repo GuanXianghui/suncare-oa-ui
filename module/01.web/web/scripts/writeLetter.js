@@ -28,12 +28,15 @@ $(document).ready(function() {
     //处理所有员工json串
     processUserWithJson();
     //处理所有公司结构json串
-    processStructureWithJson();
+//    processStructureWithJson();
     //处理通讯录
-    processContacts();
+//    processContacts();
 
     //初始化收件人和抄送人
-    initUserIds();
+//    initUserIds();
+
+    //展示接受人和抄送人
+    processDisplayUsers();
 });
 
 /**
@@ -453,4 +456,103 @@ function writeLetter(){
     document.getElementById("content").value = content;
     //提交表格
     document.forms["writeLetterForm"].submit();
+}
+
+/**
+ * 从通讯录选择
+ */
+function chooseToUsers(){
+    //设置窗口的一些状态值
+    var windowStatus = "left=380,top=200,width=260,height=200,resizable=0,scrollbars=0,menubar=no,status=0,fullscreen=1";
+    //在窗口中打开的页面
+    var url = "chooseMultipleContact.jsp?userIds=" + $("#toUserIdsValue").val();
+    var userIds = showModalDialog(url,"",windowStatus);
+    /**
+     * 注意，这里undefined是右上角打叉后退出选择框的
+     * 空是不选择员工，点击确定退出选择框的
+     * 所以返回undefined为非正规操作，无视，否则视为一个用户都不选择
+     */
+    if(userIds == undefined){
+        return;
+    }
+    $("#toUserIdsValue").val(userIds);
+
+    //展示接受人和抄送人
+    processDisplayUsers();
+//    var user = getUserById(userId);
+//    var html = "<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" +
+//        "<img width='32' src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>"
+//    $("#toUser").html(html);
+//    $("#toUserId").val(userId);
+}
+
+/**
+ * 从通讯录选择
+ */
+function chooseCcUsers(){
+    //设置窗口的一些状态值
+    var windowStatus = "left=380,top=200,width=260,height=200,resizable=0,scrollbars=0,menubar=no,status=0,fullscreen=1";
+    //在窗口中打开的页面
+    var url = "chooseMultipleContact.jsp?userIds=" + $("#ccUserIdsValue").val();
+    var userIds = showModalDialog(url,"",windowStatus);
+    /**
+     * 注意，这里undefined是右上角打叉后退出选择框的
+     * 空是不选择员工，点击确定退出选择框的
+     * 所以返回undefined为非正规操作，无视，否则视为一个用户都不选择
+     */
+    if(userIds == undefined){
+        return;
+    }
+    $("#ccUserIdsValue").val(userIds);
+
+    //展示接受人和抄送人
+    processDisplayUsers();
+//    var user = getUserById(userId);
+//    var html = "<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" +
+//        "<img width='32' src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>"
+//    $("#toUser").html(html);
+//    $("#toUserId").val(userId);
+}
+
+/**
+ * 展示接受人和抄送人
+ */
+function processDisplayUsers(){
+    /**
+     * 展示接受人
+     */
+    var userIds = $("#toUserIdsValue").val();
+    var html = EMPTY;
+    if(userIds != EMPTY){
+        var tempUserIdArray = userIds.split(SYMBOL_COMMA);
+        for(var i=0;i<tempUserIdArray.length;i++){
+            var userId = tempUserIdArray[i];
+            var user = getUserById(userId);
+            if(html != EMPTY){
+                html += SYMBOL_COMMA;
+            }
+            html += "<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" +
+                "<img width='32' src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>"
+        }
+    }
+    $("#toUsersSpan").html(html);
+
+    /**
+     * 展示抄送人
+     */
+    userIds = $("#ccUserIdsValue").val();
+    html = EMPTY;
+    if(userIds != EMPTY){
+        var tempUserIdArray = userIds.split(SYMBOL_COMMA);
+        for(var i=0;i<tempUserIdArray.length;i++){
+            var userId = tempUserIdArray[i];
+            var user = getUserById(userId);
+            if(html != EMPTY){
+                html += SYMBOL_COMMA;
+            }
+            html += "<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" +
+                "<img width='32' src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>"
+        }
+    }
+    $("#ccUsersSpan").html(html);
 }

@@ -2,6 +2,8 @@
 var editor;
 //消息Json数组
 var messageArray = new Array();
+//当前点击对象索引
+var nowFocusIndex = -1;
 
 /**
  * 初始化
@@ -11,15 +13,43 @@ $(document).ready(function() {
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     editor = UE.getEditor('editor');
 
+    //处理所有员工json串
+    processUserWithJson();
+
     //把初始messageJsonStr转换成messageArray
     messageArray = transferInitJsonStr2Array(messageJsonStr);
 
     //处理消息Json串
     processWithJson();
 
-    //检查是否还有下一页
-    checkHasNextPage();
+    $("#mailDetail").css("display", "none");
 });
+
+/**
+ * 处理所有员工json串
+ */
+function processUserWithJson() {
+    //json串转json数组
+    if(userJsonStr != EMPTY) {
+        var array = userJsonStr.split(SYMBOL_BIT_AND);
+        for(var i=0;i<array.length;i++) {
+            userArray[userArray.length] = eval("(" + array[i] + ")");
+        }
+    }
+}
+
+/**
+ * 根据id查用户
+ * @param id
+ */
+function getUserById(id) {
+    for(var i=0;i<userArray.length;i++){
+        if(userArray[i]["id"] == id){
+            return userArray[i];
+        }
+    }
+    return null;
+}
 
 /**
  * 把初始messageJsonStr转换成messageArray
@@ -39,23 +69,49 @@ function transferInitJsonStr2Array(jsonStr){
  * 处理消息Json串
  */
 function processWithJson(){
-
     //循环展示
-    var html = "<thead><tr><th>消息来源用户</th><th>是否已读</th><th>时间</th><th>操作</th></tr></thead>";
+    var html = EMPTY;
     for(var i=0;i<messageArray.length;i++){
-        var isReaded = "未读";
-        if(messageArray[i]["state"] == MESSAGE_STATE_READED){
-            isReaded = "已读";
+        var isReaded = messageArray[i]["state"] == MESSAGE_STATE_READED;
+        html += "<li onclick='showMessageDetail(" + i + ", " + messageArray[i]["id"] + ")'>";
+        html += "<img src=\"" + messageArray[i]["headPhoto"] + "\" alt=\"" + messageArray[i]["fromUserName"] + "\"/>";
+        html += "<a href=\"#\"";
+        if(isReaded == false){
+            html += " style='font-weight: bold;'";
+        } else {
+            html += " style='font-weight: normal;'";
         }
-        html += "<tr><td style='vertical-align: middle;'><img width='27px' src='" + messageArray[i]["headPhoto"] + "'><a href='" +
-            messageArray[i]["url"] + "' target='_blank'>" + messageArray[i]["fromUserName"] + "</a></td><td>" +
-            isReaded + "</td><td>" + messageArray[i]["date"] + " " + messageArray[i]["time"] + "</td>" + "<td>" +
-            "<input class=\"button\" type=\"button\" onclick=\"showMessageDetail(" + messageArray[i]["id"] + ")\" value=\"查看\" />" +
-            "<input class=\"button\" type=\"button\" onclick=\"deleteMessage(" + messageArray[i]["id"] + ")\" value=\"删除\" />" +
-            "</td>" +
-            "</tr>";
+        html += ">来自[" + messageArray[i]["fromUserName"] + "]的消息</a>";
+        html += "<span>" + getLongDate(messageArray[i]["date"]) + "</span>"
+            + "<p>" + getShortContent(messageArray[i]) + "</p>"
+            + "<div class=\"clearBoth\"></div>"
+            + "</li>";
     }
-    document.getElementById("message_table").innerHTML = html;
+    //是否加载下一页
+    if(messageCount > messageArray.length){
+        html += "<li style='text-align: center; cursor: pointer;' onclick='showNextPageMessages()'>加载更多</li>";
+    }
+    //判是否为空
+    if(EMPTY == html){
+        html += "<li style='text-align: center; cursor: pointer;'>暂无</li>";
+    }
+    $("#mailList").html(html);
+    //刷新后处理
+    focusNowIndex();
+}
+
+/**
+ * 得到站内信的内容缩略信息
+ * @param letter
+ */
+function getShortContent(letter){
+    $("#initMailTxt").html(letter["content"]);
+    var shortContent = $("#initMailTxt").text();
+    shortContent = replaceAll(shortContent, " ", "");
+    if(shortContent.length > 30){
+        shortContent = shortContent.substring(0, 30) + "...";
+    }
+    return shortContent;
 }
 
 /**
@@ -102,7 +158,6 @@ function deleteMessage(messageId){
                 //判请求是否成功
                 if (false == data["isSuccess"]) {
                     showError(data["message"]);
-                    return;
                 } else {
                     //请求成功
                     showSuccess(data["message"]);
@@ -110,45 +165,79 @@ function deleteMessage(messageId){
                     deleteMessageById(messageId);
                     //总共消息的量要减一
                     messageCount--;
+
+                    //当前点击对象索引置成-1
+                    nowFocusIndex = -1;
+
                     //处理消息Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
-                    $('tbody tr:even').addClass("alt-row");
+
+                    $("#mailDetail").css("display", "none");
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
                     token = data["token"];
                 }
             } else {
-                showAttention("服务器连接异常，请稍后再试！");
+                showError("服务器连接异常，请稍后再试！");
             }
         },
         error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
+            showError("服务器连接异常，请稍后再试！");
         }
     });
+}
+
+/**
+ * 处理当前焦点对象
+ * @param index
+ */
+function processFocusIndex(index){
+    var liObj = null;
+    if(nowFocusIndex >= 0){
+        liObj = $("#mailList li")[nowFocusIndex];
+        liObj.style.background = "";
+        liObj.style.borderBottom = "";
+    }
+    liObj = $("#mailList li")[index];
+    liObj.style.background = "#f0efef";
+    liObj.style.borderBottom = "solid 1px #e5e5e5";
+    nowFocusIndex = index;
+}
+
+/**
+ * 刷新后处理
+ */
+function focusNowIndex(){
+    if(nowFocusIndex < 0){
+        return;
+    }
+    var liObj = $("#mailList li")[nowFocusIndex];
+    liObj.style.background = "#f0efef";
+    liObj.style.borderBottom = "solid 1px #e5e5e5";
 }
 
 /**
  * 查看消息
  * @param messageId
  */
-function showMessageDetail(messageId){
-    //显示查看框
-    document.getElementById("showMessageDiv").style.display = EMPTY;
-    //编译html
-    var content = getMessageById(messageId)["content"];
-    //将uuid->\r\n
-    content = changeNewLineBack(content);
-    document.getElementById("showMessageContentDiv").innerHTML = content;
-    uParse("#showMessageContentDiv", {rootPath: baseUrl + '/ueditor/'});
+function showMessageDetail(index, messageId){
+    //处理当前焦点对象
+    processFocusIndex(index);
+    $("#mailDetail").css("display", "block");
+    var message = getMessageById(messageId);
+    //抬头
+    $("#mailTitle").html("<b>来自[" + message["fromUserName"] + "]的消息</b>");
+
+    //内容 解析
+    $("#mailTxt").html(changeNewLineBack(message["content"]));
+    uParse("#mailTxt", {rootPath: baseUrl + '/ueditor/'});
+
+    //操作 解析
+    $("#mailOperate").html("<input class=\"minBtn\" type=\"button\" onclick=\"deleteMessage(" + messageId + ");\" value=\"删除\" />");
 
     //判是否已读
-    var isReaded = false;
-    if(getMessageById(messageId)["state"] == MESSAGE_STATE_READED){
-        isReaded = true;
-    }
+    var isReaded = message["state"] == MESSAGE_STATE_READED;
 
     //如果已读返回
     if(isReaded == true){
@@ -177,8 +266,6 @@ function showMessageDetail(messageId){
                     getMessageById(messageId)["state"] = MESSAGE_STATE_READED
                     //处理消息Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     $('tbody tr:even').addClass("alt-row");
                 }
                 //判是否有新token
@@ -186,24 +273,13 @@ function showMessageDetail(messageId){
                     token = data["token"];
                 }
             } else {
-                showAttention("服务器连接异常，请稍后再试！");
+                showError("服务器连接异常，请稍后再试！");
             }
         },
         error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
+            showError("服务器连接异常，请稍后再试！");
         }
     });
-}
-
-/**
- * 检查是否还有下一页
- */
-function checkHasNextPage(){
-    if(messageCount > messageArray.length){
-        document.getElementById("nextPageDiv").style.display = EMPTY;
-    } else {
-        document.getElementById("nextPageDiv").style.display = "none";
-    }
 }
 
 /**
@@ -235,8 +311,6 @@ function showNextPageMessages(){
                     }
                     //处理消息Json串
                     processWithJson();
-                    //检查是否还有下一页
-                    checkHasNextPage();
                     $('tbody tr:even').addClass("alt-row");
                 }
                 //判是否有新token

@@ -17,6 +17,12 @@ $(document).ready(function() {
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     editor = UE.getEditor('editor');
+
+    $("#date").datepicker();
+    $( "#date" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#date" ).datepicker( "option", "showAnim", "drop" );
+    $( "#date" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
 });
 
 /**
@@ -25,6 +31,7 @@ $(document).ready(function() {
 function beforeUpdateDiary(){
     document.getElementById("showDiv").style.display = "none";
     document.getElementById("updateDiv").style.display = "";
+    $("#date").val(date);
     editor.setContent(document.getElementById("initContent").innerHTML);
 }
 
@@ -59,6 +66,9 @@ function updateDiary(){
  * 删除工作日志
  */
 function deleteDiary(){
+    if(!confirm("你真的要删除日志吗？")){
+        return;
+    }
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
@@ -173,6 +183,7 @@ function beforeReview(){
     document.getElementById("review_desc").innerHTML = "你的评语：";
     document.getElementById("review_content").value = EMPTY;
     reviewType = "createReview";//新增评论
+    //location.href="#review_a";
 }
 
 /**
@@ -180,10 +191,11 @@ function beforeReview(){
  */
 function beforeUpdateDiaryReview(diaryReviewId){
     document.getElementById("review_div").style.display = EMPTY;
-    document.getElementById("review_desc").innerHTML = document.getElementById("review_desc_" + diaryReviewId).innerText;
+    document.getElementById("review_desc").innerHTML = "修改评语：";
     document.getElementById("review_content").value = document.getElementById("review_content_" + diaryReviewId).innerHTML;
     reviewType = "updateReview";//修改评论
     updateReviewId = diaryReviewId;//修改评论id
+    //location.href="#review_a";
 }
 
 /**
@@ -192,10 +204,11 @@ function beforeUpdateDiaryReview(diaryReviewId){
  */
 function beforeReplyDiaryReview(diaryReviewId){
     document.getElementById("review_div").style.display = EMPTY;
-    document.getElementById("review_desc").innerHTML = "你回复" + document.getElementById("review_desc_" + diaryReviewId).innerText;
+    document.getElementById("review_desc").innerHTML = "你回复" + document.getElementById("review_desc_" + diaryReviewId).innerText + "：";
     document.getElementById("review_content").value = EMPTY;
     reviewType = "replyReview";//回复评论
     updateReviewId = diaryReviewId;//回复评论id
+    //location.href="#review_a";
 }
 
 /**

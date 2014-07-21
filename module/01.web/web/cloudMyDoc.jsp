@@ -1,127 +1,102 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page import="com.gxx.oa.entities.CloudDoc" %>
     <%@ page import="java.util.List" %>
     <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
+    <%@ page import="com.gxx.oa.utils.DateUtil" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
-    <%
-        //外层
-        outLayer = "申成云";
-        //内层
-        inLayer = "申成文库";
-    %>
-    <title>申成文库</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/cloudMyDoc.js"></script>
-    <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
-    <script type="text/javascript" src="scripts/facebox.js"></script>
+    <title>Suncare-OA</title>
+    <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
+    <script type="text/javascript" src="scripts/cloudMyDoc.js"></script>
 </head>
+<%@ include file="facebox_message.jsp" %>
 <body>
-<div id="body-wrapper">
-    <div id="sidebar">
-        <div id="sidebar-wrapper">
-            <h1 id="sidebar-title"><a href="#">申成-OA系统</a></h1>
-            <img id="logo" src="images/suncare-files-logo.png" alt="Simpla Admin logo"/>
-            <div id="profile-links">
-                Hello, [<%=user.getName()%>],
-                <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
-                <br/>
-                <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
-            </div>
-            <%@ include file="layers.jsp" %>
-        </div>
-    </div>
-
-    <div id="main-content">
-
-        <form name="cloudQueryDocForm" action="cloudDoc.jsp" method="post">
-            <input type="hidden" name="doc" id="cloudQueryDocName">
-        </form>
-
-        <form onsubmit="return false;">
-            <fieldset>
-                <p>
-                    <span>申成文库</span>&nbsp;&nbsp;
-                    <input class="text-input small-input" type="text" id="doc_name"/>&nbsp;&nbsp;
-                    <input class="button" type="button" onclick="queryDoc($('#doc_name').val());" value="查询" />&nbsp;&nbsp;
-                    <input class="button" type="button" onclick="location.href='cloudUploadDoc.jsp'" value="贡献我的文档" />&nbsp;&nbsp;
-                    <input class="button" type="button" onclick="location.href='cloudMyDoc.jsp'" value="我的文档" />
-                </p>
-                <table id="doc_list"></table>
-            </fieldset>
-            <div class="clear"></div>
-        </form>
-
-        <div class="clear"></div>
-
-        <div id="message_id" class="notification information png_bg" style="display: none;">
-            <a href="#" class="close">
-                <img src="images/icons/cross_grey_small.png" title="关闭" alt="关闭"/>
-            </a>
-
-            <div id="message_id_content"> 提示信息！</div>
-        </div>
-
-        <div class="clear"></div>
-
-        <div class="content-box">
-            <div class="content-box-header">
-                <h3>我的文档</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab" class="default-tab">文档</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab">
-                    <table>
-                        <thead><tr><th>文档名称</th><th>上传时间</th><th>操作</th></tr></thead>
-                        <%
-                            List<CloudDoc> cloudDocs = CloudDocDao.queryCloudDocsByUserId(user.getId());
-                            if(cloudDocs.size() == 0){
-                        %>
-                        <tr><td colspan="3">暂无文档ToT</td></tr>
-                        <%
-                            } else {
-                                for(CloudDoc cloudDoc : cloudDocs){
-                        %>
-                        <tr>
-                            <td><%=cloudDoc.getTitle()%></td>
-                            <td><%=cloudDoc.getCreateDate()%></td>
-                            <td>
-                                <input class="button" type="button" onclick="window.open('cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>')" value="查看"/>
-                                <input class="button" type="button" onclick="window.open('<%=cloudDoc.getRoute()%>')" value="下载"/>
-                                <input class="button" type="button" onclick="location.href='cloudUpdateDoc.jsp?id=<%=cloudDoc.getId()%>'" value="修改"/>
-                                <input class="button" type="button" onclick="cloudDeleteDoc(<%=cloudDoc.getId()%>)" value="删除"/>
-                            </td>
-                        </tr>
-                        <%
-                                }
-                            }
-                        %>
-                    </table>
-                    <form name="cloudDeleteDocForm" action="<%=baseUrl%>cloudDeleteDoc.do" method="post">
-                        <input type="hidden" name="token" value="<%=token%>">
-                        <input type="hidden" name="docId" id="cloudDeleteDocId">
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="footer">
-            <small>
-                &#169; Copyright 2014 Suncare | Powered by 关向辉
-            </small>
-        </div>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <%@ include file="menu.jsp" %>
+    <div class="menu_info">
+        <a href="#"><img src="images/header.jpg" /></a>
     </div>
 </div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+
+    <form name="cloudQueryDocForm" action="cloudDoc.jsp" method="post">
+        <input type="hidden" name="doc" id="cloudQueryDocName">
+    </form>
+
+    <form name="cloudDeleteDocForm" action="<%=baseUrl%>cloudDeleteDoc.do" method="post">
+        <input type="hidden" name="token" value="<%=token%>">
+        <input type="hidden" name="docId" id="cloudDeleteDocId">
+    </form>
+
+    <div class="normalTitle">申成文库
+        <div class="searchArea">
+            <input class="inputArea inputWidthLong" type="text" id="doc_name" value=""><input value="搜索文库" type="button" class="minBtn" onclick="queryDoc($('#doc_name').val());">
+        </div>
+    </div>
+    <div id="wikiArea">
+        <div class="wikiMenu">
+            <ul>
+                <li><a href="cloudUploadDoc.jsp">上传文档</a></li>
+                <li><a href="cloudMyDoc.jsp">我的文档</a></li>
+            </ul>
+        </div>
+        <div class="wikiList">
+            <%
+                List<CloudDoc> cloudDocs = CloudDocDao.queryCloudDocsByUserId(user.getId());
+                if(cloudDocs.size() == 0){
+            %>
+            <dl>
+                <dt>
+                    暂无文档ToT
+                </dt>
+            </dl>
+            <%
+            } else {
+                for(CloudDoc cloudDoc : cloudDocs){
+            %>
+            <dl>
+                <dt>
+                    <img src="images/ext/txt.gif" width="24" height="20" />
+                    <a class="title" href="javascript:window.open('cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>')"><%=cloudDoc.getTitle()%></a>
+                    <span class="answer-num">
+                        <a class="title" href="#"><%=DateUtil.getLongDate(DateUtil.getDate(cloudDoc.getCreateDate()))%></a>
+                        <a href="javascript:window.open('cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>')" class="minBtn">查看</a>
+                        <a href="javascript:window.open('<%=cloudDoc.getRoute()%>')" class="minBtn">下载</a>
+                        <a href="javascript:location.href='cloudUpdateDoc.jsp?id=<%=cloudDoc.getId()%>'" class="minBtn">修改</a>
+                        <a href="javascript:cloudDeleteDoc(<%=cloudDoc.getId()%>)" class="minBtn">删除</a>
+                    </span>
+                </dt>
+            </dl>
+            <%
+                    }
+                }
+            %>
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+</div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+    <div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+        <ul>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
 </body>
 </html>

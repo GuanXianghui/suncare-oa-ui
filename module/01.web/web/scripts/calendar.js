@@ -3,7 +3,7 @@ var chooseDate = EMPTY;
 //提醒数组
 var remindArray = new Array();
 //新增还是修改 insertRemind/updateRemind
-var insertOrUpdate = EMPTY;
+var insertOrUpdate = "insertRemind";
 //修改提醒id
 var updateRemindId = 0;
 
@@ -11,16 +11,21 @@ var updateRemindId = 0;
  * 初始化
  */
 $(document).ready(function() {
-    $("#date").datepicker();
+    $( "#date" ).datepicker();
     $( "#date" ).datepicker( "option", "dateFormat", "yymmdd" );
     $( "#date" ).datepicker( "option", "showAnim", "drop" );
     $( "#date" ).datepicker( "option", "onSelect", function(dateText, inst ){
         //对选择日期赋值
         chooseDate = dateText;
-        document.getElementById("create_date").value = chooseDate;
+        var longDate = chooseDate.substr(0,4) + "-" + chooseDate.substr(4,2) + "-" + chooseDate.substr(6,2);
+        $("#date_td").html(longDate);
+        $("#remind_table_head").html(longDate);
         //根据日期查询提醒
         query();
     });
+    $( "#remind_date" ).datepicker();
+    $( "#remind_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#remind_date" ).datepicker( "option", "showAnim", "drop" );
     //页面加载完查询当前日期
     query();
 });
@@ -61,18 +66,22 @@ function transferJsonStr2Array(jsonStr){
  */
 function processRemindArray(){
     //循环展示
-    var html = "<thead><tr><th width=\"20%\">内容</th><th width=\"20%\">是否提醒</th>" +
-        "<th width=\"20%\">提醒时间</th><th width=\"40%\">操作</th></tr></thead>";
+    var html = "<tr class=\"alt-row\"><th>内容</th><th width=\"80\">是否提醒</th><th width=\"160\">提醒时间</th><th width=\"100\">操作</th></tr>";
     for(var i=0;i<remindArray.length;i++){
-        html += "<tr><td>" + remindArray[i]["content"] + "</td>" +
-            "<td>" + remindArray[i]["remindTypeDesc"] + "</td><td>" + remindArray[i]["remindDateTime"] +
-            "</td><td><input class=\"button\" type=\"button\" onclick=\"showRemind(" + remindArray[i]["id"] + ")\" value=\"查看\" />" +
-            "<input class=\"button\" type=\"button\" onclick=\"beforeUpdateRemind(" + remindArray[i]["id"] + ")\" value=\"修改\" />" +
-            "<input class=\"button\" type=\"button\" onclick=\"deleteRemind(" + remindArray[i]["id"] + ")\" value=\"删除\" /></td></tr>";
+        html += "<tr>" +
+            "<td>" + remindArray[i]["content"] + "</td>" +
+            "<td align='center'>" + remindArray[i]["remindTypeDesc"] + "</td>" +
+            "<td>" + getLongDateTime1(remindArray[i]["remindDateTime"]) + "</td>" +
+            "<td>" +
+            "<input name=\"dosubmit\" value=\"修改\" type=\"submit\" class=\"minBtn\" onclick=\"beforeUpdateRemind(" + remindArray[i]["id"] + ")\" />" +
+            "<input name=\"dosubmit\" value=\"删除\" type=\"submit\" class=\"minBtn\" onclick=\"deleteRemind(" + remindArray[i]["id"] + ")\" />" +
+            "</td>" +
+            "</tr>";
     }
-    html += "<tr><td colspan=\"5\" align=\"center\"><input class=\"button\" type=\"button\" onclick=\"beforeCreateRemind()\" value=\"新增提醒\" /></td></tr>";
+    if(remindArray.length == 0){
+        html += "<tr><td colspan=\"4\" align=\"center\">暂无提醒</td></tr>"
+    }
     document.getElementById("remind_table").innerHTML = html;
-    $('#remind_table tr:even').addClass("alt-row");
 }
 
 /**
@@ -101,6 +110,8 @@ function query(){
                     remindArray = transferJsonStr2Array(remindsJson);
                     //处理提醒数组
                     processRemindArray();
+                    //返回查看提醒页面
+                    back();
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
@@ -117,31 +128,24 @@ function query(){
 }
 
 /**
- * 点击新增提醒按钮
- */
+* 点击新增提醒按钮
+*/
 function beforeCreateRemind(){
-    if(chooseDate == EMPTY){
-        showAttention("请选择日期");
-        return;
-    }
-    document.getElementById("create_remind_table").style.display = EMPTY;
-    document.getElementById("show_remind_table").style.display = "none";
-    document.getElementById("create_date").value = EMPTY;
     document.getElementById("create_content").value = EMPTY;
     document.getElementById("create_remind_type").value = "1";
-    document.getElementById("create_remind_date_time").value = EMPTY;
+    document.getElementById("remind_date").value = EMPTY;
+    document.getElementById("remind_date_hour").value = "00";
+    document.getElementById("remind_date_minute").value = "00";
     insertOrUpdate = "insertRemind";
+
+    $("#view_remind_div").css("display", "none");
+    $("#operate_remind_table").css("display", "block");
 }
 
 /**
  * 新增提醒
  */
 function createRemind(){
-    var date = document.getElementById("create_date").value;
-    if(date == EMPTY){
-        showAttention("请选择日期");
-        return false;
-    }
     var content = document.getElementById("create_content").value;
     if(content == EMPTY){
         showAttention("请输入内容");
@@ -150,7 +154,7 @@ function createRemind(){
     //判断字符串是否含有非法字符
     var result = checkStr(content, SYMBOL_ARRAY_1);
     if (result["isSuccess"] == false) {
-        showAttention("评语包含非法字符:" + result["symbol"]);
+        showAttention("内容包含非法字符:" + result["symbol"]);
         return;
     }
     if(content.length > REMIND_CONTENT_LENGTH) {
@@ -162,10 +166,22 @@ function createRemind(){
         showAttention("请选择提醒类型");
         return false;
     }
-    var remindDateTime = document.getElementById("create_remind_date_time").value;
-    if(remindType != REMIND_TYPE_NO_REMIND && remindDateTime == EMPTY){
+    var remindDate = document.getElementById("remind_date").value;
+    if(remindType != REMIND_TYPE_NO_REMIND && remindDate == EMPTY){
         showAttention("请输入提醒时间");
         return false;
+    }
+
+    var remindDateTime = EMPTY;
+    if(remindDate == EMPTY){
+        remindDateTime = EMPTY;
+    } else {
+        remindDateTime = remindDate.substr(0, 4) + remindDate.substr(5, 2) + remindDate.substr(8, 2) +
+            $("#remind_date_hour").val() + $("#remind_date_minute").val() + "00";
+    }
+
+    if(remindDateTime != EMPTY){
+        new Date();
     }
 
     //ajax请求
@@ -174,7 +190,7 @@ function createRemind(){
         type:"post",
         async:false,
         url:baseUrl + "operateRemind.do",
-        data:"type=" + insertOrUpdate + "&updateRemindId=" + updateRemindId + "&date=" + date + "&content=" +
+        data:"type=" + insertOrUpdate + "&updateRemindId=" + updateRemindId + "&date=" + chooseDate + "&content=" +
             content + "&remindType=" + remindType + "&remindDateTime=" + remindDateTime + "&token=" + token,
         success:function (data, textStatus) {
             if ((SUCCESS_STR == textStatus) && (null != data)) {
@@ -191,17 +207,19 @@ function createRemind(){
                     remindArray = transferJsonStr2Array(remindsJson);
                     //处理提醒数组
                     processRemindArray();
+                    //返回查看提醒页面
+                    back();
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {
                     token = data["token"];
                 }
             } else {
-                showAttention("服务器连接异常，请稍后再试！");
+                showError("服务器连接异常，请稍后再试！");
             }
         },
         error:function (data, textStatus) {
-            showAttention("服务器连接异常，请稍后再试！");
+            showError("服务器连接异常，请稍后再试！");
         }
     });
 }
@@ -228,12 +246,19 @@ function beforeUpdateRemind(remindId){
     insertOrUpdate = "updateRemind";
     updateRemindId = remindId;
     var remind = getRemindById(remindId);
-    document.getElementById("create_date").value = remind["date"];
     document.getElementById("create_content").value = remind["content"];
     document.getElementById("create_remind_type").value = remind["remindType"];
-    document.getElementById("create_remind_date_time").value = remind["remindDateTime"];
-    document.getElementById("create_remind_table").style.display = EMPTY;
-    document.getElementById("show_remind_table").style.display = "none";
+    if(remind["remindDateTime"] != EMPTY){
+        document.getElementById("remind_date").value = remind["remindDateTime"].substr(0, 4) + "-" + remind["remindDateTime"].substr(4, 2) + "-" + remind["remindDateTime"].substr(6, 2);
+        document.getElementById("remind_date_hour").value = remind["remindDateTime"].substr(8, 2);
+        document.getElementById("remind_date_minute").value = remind["remindDateTime"].substr(10, 2);
+    } else {
+        document.getElementById("remind_date").value = EMPTY;
+        document.getElementById("remind_date_hour").value = "00";
+        document.getElementById("remind_date_minute").value = "00";
+    }
+    $("#view_remind_div").css("display", "none");
+    $("#operate_remind_table").css("display", "block");
 }
 
 /**
@@ -241,6 +266,9 @@ function beforeUpdateRemind(remindId){
  * @param remindId
  */
 function deleteRemind(remindId){
+    if(!confirm("你确认删除提醒吗？")){
+        return;
+    }
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
@@ -291,4 +319,12 @@ function changeMode(){
         $("#content-box2").attr("class", "content-box");
     }
     return false;
+}
+
+/**
+ * 返回查看提醒页面
+ */
+function back(){
+    $("#view_remind_div").css("display", "block");
+    $("#operate_remind_table").css("display", "none");
 }

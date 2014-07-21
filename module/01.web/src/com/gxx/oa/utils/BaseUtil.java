@@ -895,4 +895,19 @@ public class BaseUtil implements SymbolInterface {
         question = "<span style=\"color: blue\">" + question + "</span>";
         return question;
     }
+
+    /**
+     * 根据request获取请求串
+     * @param request
+     * @return
+     */
+    public static String getRequestStr(HttpServletRequest request){
+        String url = request.getScheme() + "://";//请求协议 http 或 https
+        url += request.getHeader("host");//请求服务器
+        url += request.getRequestURI();//工程名
+        if(request.getQueryString()!=null){//判断请求参数是否为空
+            url += "?" + request.getQueryString();//参数
+        }
+        return url;
+    }
 }

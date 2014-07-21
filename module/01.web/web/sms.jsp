@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
     <%@ page import="com.gxx.oa.dao.SMSDao" %>
     <%@ page import="com.gxx.oa.utils.DateUtil" %>
@@ -8,36 +10,16 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
-        //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0013_SMS)){
-            //域名链接
-            response.sendRedirect(baseUrl + "index.jsp");
-            return;
-        }
-        //外层
-        outLayer = "工具模块";
-        //内层
-        inLayer = "短信";
         String date = request.getParameter("date");
         date = StringUtils.trimToEmpty(date);
         if(StringUtils.isBlank(date)){
             date = DateUtil.getNowDate();
         }
     %>
-    <title>短信</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/sms.js"></script>
-    <link rel="stylesheet" href="css/sms.css" type="text/css" media="screen"/>
-    <!--日期控件-->
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <script src="scripts/jquery-1.10.2.js"></script>
-    <script src="scripts/jquery-ui.js"></script>
-    <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
+    <title>Suncare-OA</title>
+    <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
+    <script language="javascript" type="text/javascript" src="scripts/sms.js"></script>
+    <%@ include file="datepicker_base.jsp" %>
     <script type="text/javascript">
         //日期
         var date = "<%=date%>";
@@ -57,106 +39,133 @@
         var structureJsonStr = "<%=BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures())%>";
     </script>
     <style type="text/css">
-        #sms_table th{
-            text-align: center;
-        }
-        #sms_table td{
+        #sms_table tr td {
             text-align: center;
         }
     </style>
 </head>
-<body>
-<div id="body-wrapper">
-    <br>
-    <br>
-    <div id="date" align="center"></div>
 
-    <div id="sidebar">
-        <div id="sidebar-wrapper">
-            <h1 id="sidebar-title"><a href="#">申成-OA系统</a></h1>
-            <img id="logo" src="images/suncare-files-logo.png" alt="Simpla Admin logo"/>
-            <div id="profile-links">
-                Hello, [<%=user.getName()%>],
-                <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
-                <br/>
-                <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
-            </div>
-            <%@ include file="layers.jsp" %>
+<body>
+<%@ include file="facebox_message.jsp" %>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <%@ include file="menu.jsp" %>
+    <div class="menu_info">
+        <a href="#"><img src="images/header.jpg" /></a>
+    </div>
+</div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+    <div id="right_Box">
+        <div class="taskBox">
+            <div id="date" type="text" name="date" class="inputArea"></div>
         </div>
     </div>
-    <div id="main-content">
-        <div id="message_id" class="notification information png_bg" style="display: none;">
-            <a href="#" class="close">
-                <img src="images/icons/cross_grey_small.png" title="关闭" alt="关闭"/>
-            </a>
-
-            <div id="message_id_content"> 提示信息！</div>
-        </div>
-
-        <div class="content-box">
-            <div class="content-box-header">
-                <h3>短信记录</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab" class="default-tab">Forms</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab">
-                    <table id="sms_table"></table>
+    <div id="left_Box">
+        <div class="msgBox">
+            <div class="normalTitle">发送短信</div>
+            <div class="create_task">
+                <div id="view_sms_div" style="display: none;">
+                    <div id="remind_table_head" align="center">
+                        <%=DateUtil.getLongDate(DateUtil.getDate(date))%>
+                    </div>
+                    <table id="sms_table" width="90%" border="1" align="center">
+                        <tr class="alt-row">
+                            <th width="80">手机号</th>
+                            <th>内容</th>
+                            <th width="80">状态</th>
+                            <th width="80">时间</th>
+                            <th width="80">操作</th>
+                        </tr>
+                        <tr>
+                            <td><a href="http://www.suncare-sys.com:10000/showTask.jsp?id=2">块来新厂</a></td>
+                            <td><a href="http://www.suncare-sys.com:10000/user.jsp?id=1" target="_blank">关向辉</a></td>
+                            <td>进行中</td><td>20140609</td><td>20140609</td>
+                        </tr>
+                    </table>
+                    <div align="center">
+                        <input name="dosubmit" value="发送短信" type="submit" class="subBtn" onclick="beforeOperateSMS()" />
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="content-box friends-column-left">
-            <div class="content-box-header">
-                <h3>发送短信</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab2" class="default-tab">Forms</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab2">
-                    <form>
-                        <table id="sendSmsDiv">
-                            <tr><td>手机号：</td><td><input class="text-input medium-input" type="text" id="phone"></td></tr>
-                            <tr><td>内容：</td><td><textarea id="content" cols="80" rows="3"></textarea></td></tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <input class="button" type="button" onclick="operateSMS();" value="发送">
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="content-box friends-column-right">
-            <div class="content-box-header">
-                <h3>联系人</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab3" class="default-tab">Forms</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab3">
-                    <table id="friends">
+                <div id="operate_sms_table">
+                    <table cellpadding="0" cellspacing="0" width="100%" class="information">
+                        <tr>
+                            <td class="table_title">注意:</td>
+                            <td>
+                                1.发送多个手机号逗号符分隔(注意不是中文逗号符)，如：13361915872,13764603603
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td>
+                                2.如果发送给公司同事，可从通讯录选择
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td>
+                                3.<span style="color: red">短信内容一定要正规，否则短信发送不成功，而且会被短信服务提供商关闭账号，这个尤为重要！</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td>
+                                4.不合法短信例子：(1)尼玛，小严走啦~吃饭去！(2)我擦，中午食堂什么菜？(3)哟哟切克闹，煎饼果子来一套
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td>
+                                5.<span style="color: red">合法短信例子</span>：您好，上海申成门窗有限公司SAP需求蓝图确认会议将于明天即13号早上10点在新厂1楼大会议室召开，请准时到场，多谢您的配合。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td>
+                                6.短信发送一般<span style="color: red">3~5分钟</span>内会收到，请耐心等待
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>手机号:</td>
+                            <td>
+                                <input class="inputArea inputWidthLong" type="text" id="phone">
+                                <input name="dosubmit" value="从通讯录选择" type="submit" class="minBtn" onclick="choose()" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title">内容：</td>
+                            <td><textarea class="inputArea inputWidthLong" id="content"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td><input name="dosubmit" value="发送" type="submit" class="subBtn" onclick="operateSMS()" />
+                            <input name="dosubmit" value="返回" type="submit" class="subBtn" onclick="back()" /></td>
+                        </tr>
                     </table>
                 </div>
             </div>
         </div>
-
-        <div class="clear"></div>
-        <div id="footer">
-            <small>
-                &#169; Copyright 2014 Suncare | Powered by 关向辉
-            </small>
-        </div>
     </div>
+    <div class="clearBoth"></div>
 </div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+    <div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+        <ul>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
 </body>
 </html>

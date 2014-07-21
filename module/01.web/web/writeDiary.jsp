@@ -1,113 +1,76 @@
-<html>
+<%@ page import="com.gxx.oa.utils.DateUtil" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
-    <%
-        //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0010_DIARY)){
-            //域名链接
-            response.sendRedirect(baseUrl + "index.jsp");
-            return;
-        }
-        //外层
-        outLayer = "工作模块";
-        //内层
-        inLayer = "工作日志";
-    %>
-    <title>写工作日志</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.all.min.js"></script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <%--<script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/lang/zh-cn/zh-cn.js"></script>--%>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.parse.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>scripts/writeDiary.js"></script>
-    <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
-    <!--日期控件-->
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <script src="scripts/jquery-1.10.2.js"></script>
-    <script src="scripts/jquery-ui.js"></script>
+    <title>Suncare-OA</title>
+    <%@ include file="ueditor_base.jsp" %>
+    <%@ include file="datepicker_base.jsp" %>
+    <script type="text/javascript" charset="utf-8" src="scripts/writeDiary.js"></script>
+    <script type="text/javascript">
+        //当前日期
+        var nowDate = "<%=DateUtil.getNowDate()%>";
+    </script>
 </head>
-<body onclick="cc()">
-<div id="body-wrapper">
-    <div id="sidebar">
-        <div id="sidebar-wrapper">
-            <h1 id="sidebar-title"><a href="#">申成-OA系统</a></h1>
-            <img id="logo" src="images/suncare-files-logo.png" alt="Simpla Admin logo"/>
-            <div id="profile-links">
-                Hello, [<%=user.getName()%>],
-                <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
-                <br/>
-                <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
-            </div>
-            <%@ include file="layers.jsp" %>
-        </div>
-    </div>
 
-    <div id="main-content">
-        <ul class="shortcut-buttons-set">
-            <li>
-                <a class="shortcut-button" href="<%=baseUrl%>writeDiary.jsp">
-                    <span>
-                        <img src="images/icons/paper_content_pencil_48.png" alt="icon"/>
-                        <br/>写日志
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a class="shortcut-button" href="<%=baseUrl%>diary.jsp">
-                    <span>
-                        <img src="images/icons/image_add_48.png" alt="icon"/>
-                        <br/>看日志
-                    </span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="clear"></div>
-
-        <div id="message_id" class="notification information png_bg" style="display: none;">
-            <a href="#" class="close">
-                <img src="images/icons/cross_grey_small.png" title="关闭" alt="关闭"/>
-            </a>
-
-            <div id="message_id_content"> 提示信息！</div>
-        </div>
-
-        <div class="content-box">
-            <div class="content-box-header">
-                <h3>写日志</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab2" class="default-tab">Forms</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab2">
-                    <form name="writeDiaryForm" action="<%=baseUrl%>writeDiary.do" method="post">
-                        <input type="hidden" id="token" name="token" value="<%=token%>">
-                        日期:<input class="text-input small-input" type="text" id="date" name="date" value="">
-                        <textarea style="display: none;" id="content" name="content"></textarea>
-                        <script id="editor" type="text/plain"></script>
-                        <input class="button" type="button" onclick="writeDiary();" value="提交" />
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-        <div id="footer">
-            <small>
-                &#169; Copyright 2014 Suncare | Powered by 关向辉
-            </small>
-        </div>
+<body>
+<%@ include file="facebox_message.jsp" %>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg"/></a></div>
+    <%@ include file="menu.jsp" %>
+    <div class="menu_info">
+        <a href="#"><img src="images/header.jpg"/></a>
     </div>
 </div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+    <div class="normalTitle">写日志</div>
+    <div id="daily">
+        <form name="writeDiaryForm" action="writeDiary.do" method="post">
+            <input type="hidden" id="token" name="token" value="<%=token%>">
+            <table cellpadding="0" cellspacing="0" width="100%" class="information">
+                <tr>
+                    <td class="table_title">日期：</td>
+                    <td colspan="3">
+                        <input class="inputArea inputWidthShort" type="text" id="date" name="date" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table_title">日志内容：</td>
+                    <td colspan="3">
+                        <textarea style="display: none;" id="content" name="content"></textarea>
+                        <span id="editor" style="width: 85%;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table_title"></td>
+                    <td colspan="3"><input name="dosubmit" value="提交" type="button" onclick="writeDiary();"
+                                           class="subBtn"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="clearBoth"></div>
+</div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+    <div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+        <ul>
+            <li><a href="#"><img src="images/header.jpg"/></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg"/></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg"/></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg"/></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg"/></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
 </body>
 </html>

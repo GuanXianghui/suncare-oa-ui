@@ -29,6 +29,10 @@ function writeDiary(){
         showAttention("日期输入有误！");
         return;
     }
+    if(date > nowDate){
+        showAttention("不能写晚于今天[" + nowDate + "]的日志！");
+        return;
+    }
     var content = editor.getContent();
     if(content==EMPTY){
         showAttention("请输入日志内容");

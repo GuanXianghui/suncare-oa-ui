@@ -5,6 +5,11 @@ $(document).ready(function() {
     if(message != EMPTY){
         showInformation(message);
     }
+    //初始化facebox
+    $('a[rel*=facebox]').facebox({
+        loadingImage : 'images/loading.gif',
+        closeImage : 'images/closelabel.png'
+    })
     //加载文件夹
     loadDir(dir);
 });
@@ -87,13 +92,14 @@ function getCloudById(id){
  * 展示所有文件
  */
 function displayFiles(){
-    var html = EMPTY;
+    var html = "<ul>";
     if(files.length == 0){
-        html = "无文件！ToT";
+        html = "<li>无文件！ToT</li>";
     }
     for(var i=0;i<files.length;i++){
         html += getDisplayFileByIdAndTypeAndName(files[i]["id"], files[i]["type"], files[i]["name"], files[i]["route"]);
     }
+    html += "</ul>";
     $("#files").html(html);
 }
 
@@ -103,22 +109,13 @@ function displayFiles(){
  * @param name
  */
 function getDisplayFileByIdAndTypeAndName(id, type, name, route){
-    var file = "<li>";
-    file += "<span class=\"shortcut-button\" onclick=\"chooseCloud(this)\" name=\"" + id + "\">";
-    file += "<span class=\"wrap\">";
+    var file = EMPTY;
     if(CLOUD_TYPE_FILE == type){
-        if(isImg(name)){
-            file += "<img src=\"" + route + "\" alt=\"icon\" width=\"48\" height=\"48\" ondblclick=\"download()\"/>";
-        } else {
-            file += "<img src=\"images/file.jpg\" alt=\"icon\" width=\"48\" height=\"48\"/>";
-        }
+        file += "<li onclick=\"chooseCloud(this)\" name=\"" + id + "\" ondblclick=\"download()\"><img src=\"images/ext/png.gif\"/>";
     } else if(CLOUD_TYPE_DIR == type){
-        file += "<img src=\"images/dir.jpg\" alt=\"icon\" width=\"48\" height=\"48\" ondblclick=\"openDir('" + name + "')\"/>";
+        file += "<li onclick=\"chooseCloud(this)\" name=\"" + id + "\" ondblclick=\"openDir('" + name + "')\"><img src=\"images/ext/dir.gif\"/>";
     }
-    file += "<br/>" + name;
-    file += "</span>";
-    file += "</span>";
-    file += "</li>";
+    file += name + "</li>";
     return file;
 }
 
@@ -170,8 +167,8 @@ function download(){
  * 点击新建文件夹按钮
  */
 function beforeNewDir(){
-    $("#new_dir_name").val("新建文件夹");
-    $("#showNewDirDiv").click();
+    $('#new_dir_a').click();
+    $("#facebox #new_dir_name").val("新建文件夹");
 }
 
 /**
@@ -180,7 +177,7 @@ function beforeNewDir(){
  */
 function newDir(t){
     //新文件夹名字
-    var newDir = trim($(t).parent().find(".text-input").val());
+    var newDir = trim($("#facebox #new_dir_name").val());
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
@@ -218,7 +215,7 @@ function newDir(t){
         }
     });
     //关闭浮层
-    $(".close_image").click();
+    //$(".close_image").click();
 }
 
 /**
@@ -229,10 +226,10 @@ function beforeRename(){
         showAttention("请选择一个对象！");
         return;
     }
-    var id = parseInt($(chooseClouds[0]).attr("name"));;
+    var id = parseInt($(chooseClouds[0]).attr("name"));
     var cloud = getCloudById(id);
-    $("#rename_name").val(cloud["name"]);
-    $("#showRenameDiv").click();
+    $("#rename_div_a").click();
+    $("#facebox #rename_name").val(cloud["name"]);
 }
 
 /**
@@ -240,12 +237,12 @@ function beforeRename(){
  */
 function rename(t){
     //新名字
-    var newName = trim($(t).parent().find(".text-input").val());
+    var newName = trim($("#facebox #rename_name").val());
     var oldName = getCloudById(parseInt($(chooseClouds[0]).attr("name")))["name"];
     if(newName == oldName){
         showInformation("名字与原始一样");
         //关闭浮层
-        $(".close_image").click();
+        //$(".close_image").click();
         return;
     }
     //名字不一致则修改
@@ -287,7 +284,7 @@ function rename(t){
         }
     });
     //关闭浮层
-    $(".close_image").click();
+    //$(".close_image").click();
 }
 
 /**

@@ -42,9 +42,9 @@ $(document).ready(function() {
  */
 function processWithRemindJson(){
     var html = "<div class=\"normalTitle\">提醒" +
-        "<input class=\"minBtn\" type=\"button\" onclick=\"location.href='calendar2.jsp'\" value=\"新增提醒\" />" +
+        "<input class=\"minBtn\" type=\"button\" onclick=\"location.href='calendar.jsp'\" value=\"新增提醒\" />" +
         "<span class=\"titleSelect\">" +
-        "<a href=\"calendar2.jsp\">全部提醒</a>" +
+        "<a href=\"calendar.jsp\">全部提醒</a>" +
         "</span>" +
         "</div>";
     for(var i=0;i<remindArray.length;i++){
@@ -71,9 +71,9 @@ function processWithRemindJson(){
  */
 function processWithTaskJson(){
     var html = "<div class=\"normalTitle\">任务" +
-        "<input class=\"minBtn\" type=\"button\" onclick=\"location.href='writeTask2.jsp'\" value=\"分配任务\" />" +
+        "<input class=\"minBtn\" type=\"button\" onclick=\"location.href='writeTask.jsp'\" value=\"分配任务\" />" +
         "<span class=\"titleSelect\">" +
-        "<a href=\"task2.jsp\">全部任务</a>" +
+        "<a href=\"task.jsp\">全部任务</a>" +
         "</span>" +
         "</div>";
 

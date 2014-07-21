@@ -22,6 +22,8 @@
     if(StringUtils.isBlank(message)){
         message = StringUtils.trimToEmpty(request.getParameter("message"));
     }
+    //跳转地址
+    String jumpUrl = StringUtils.trimToEmpty(request.getParameter("jumpUrl"));
 %>
 <script type="text/javascript">
     //域名链接
@@ -34,6 +36,29 @@
     var isLogin = <%=isLogin%>;
     //弹出消息框
     var message = '<%=message%>';
+    //跳转地址
+    var jumpUrl = '<%=jumpUrl%>';
 </script>
 <!-- 图标 -->
 <link rel="shortcut icon" type="image/x-icon" href="images/suncare-file-little-logo.png" />
+<!-- css基础依赖 -->
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/imessage.css" rel="stylesheet" type="text/css" />
+<!-- js基础依赖 -->
+<script language="javascript" type="text/javascript" src="scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="scripts/base.js"></script>
+<script language="javascript" type="text/javascript" src="scripts/menu.js"></script>
+<script language="javascript" type="text/javascript" src="scripts/mailLayout.js"></script>
+<!-- facebox控件 -->
+<script type="text/javascript" src="scripts/facebox.js"></script>
+<link href="css/facebox.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('a[rel*=facebox]').facebox({
+            loadingImage : 'images/loading.gif',
+            closeImage : 'images/closelabel.png'
+        })
+        $("#facebox").css("margin-top", "150px")
+    })
+</script>

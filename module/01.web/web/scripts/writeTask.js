@@ -7,9 +7,23 @@ var userArray = new Array();
  * 初始化
  */
 $(document).ready(function() {
+    //设置编辑器宽度
+    $("#editor").css("width", "550px");
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     editor = UE.getEditor('editor');
+
+    $("#beginDate").datepicker();
+    $( "#beginDate" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#beginDate" ).datepicker( "option", "showAnim", "drop" );
+    $( "#beginDate" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
+
+    $("#endDate").datepicker();
+    $( "#endDate" ).datepicker( "option", "dateFormat", "yymmdd" );
+    $( "#endDate" ).datepicker( "option", "showAnim", "drop" );
+    $( "#endDate" ).datepicker( "option", "onSelect", function(dateText, inst ){
+    });
 
     //处理所有员工json串
     processUserWithJson();
@@ -110,4 +124,23 @@ function getUserById(id) {
         }
     }
     return null;
+}
+
+/**
+ * 从通讯录选择
+ */
+function choose(){
+    //设置窗口的一些状态值
+    var windowStatus = "left=380,top=200,width=260,height=200,resizable=0,scrollbars=0,menubar=no,status=0,fullscreen=1";
+    //在窗口中打开的页面
+    var url = "chooseSingleContact.jsp";
+    var userId = showModalDialog(url,"",windowStatus);
+    if(userId == EMPTY || userId == undefined){
+        return;
+    }
+    var user = getUserById(userId);
+    var html = "<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" +
+        "<img width='32' src=\"" + user["headPhoto"] + "\">" + user["name"] + "</a>"
+    $("#toUser").html(html);
+    $("#toUserId").val(userId);
 }

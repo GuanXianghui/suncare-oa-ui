@@ -1,152 +1,134 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <%@ page import="com.gxx.oa.dao.UserDao" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ page import="com.gxx.oa.dao.UserDao" %>
     <%@ include file="header.jsp" %>
-    <%
-        //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0012_TASK)){
-            //域名链接
-            response.sendRedirect(baseUrl + "index.jsp");
-            return;
-        }
-        //外层
-        outLayer = "工作模块";
-        //内层
-        inLayer = "任务";
-    %>
-    <title>写任务</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.all.min.js"></script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <%--<script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/lang/zh-cn/zh-cn.js"></script>--%>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.parse.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>scripts/writeTask.js"></script>
-    <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
+    <title>Suncare-OA</title>
+    <%@ include file="ueditor_base.jsp" %>
+    <%@ include file="datepicker_base.jsp" %>
+    <script type="text/javascript" charset="utf-8" src="scripts/writeTask.js"></script>
     <script type="text/javascript">
-        <%
-            //有权限看的下级用户 用逗号隔开
-            String rightUserWithComma = BaseUtil.getLowerLevelPositionUserIdWithComma(user.getPosition());
-        %>
-        //有权限看的下级用户 用逗号隔开
-        var rightUserWithComma = "<%=rightUserWithComma%>";
         //所有员工json串
         var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";
     </script>
 </head>
-<body onclick="cc()">
-<div id="body-wrapper">
-    <div id="sidebar">
-        <div id="sidebar-wrapper">
-            <h1 id="sidebar-title"><a href="#">申成-OA系统</a></h1>
-            <img id="logo" src="images/suncare-files-logo.png" alt="Simpla Admin logo"/>
-            <div id="profile-links">
-                Hello, [<%=user.getName()%>],
-                <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
-                <br/>
-                <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
-            </div>
-            <%@ include file="layers.jsp" %>
-        </div>
-    </div>
 
-    <div id="main-content">
-
-        <ul class="shortcut-buttons-set">
-            <li>
-                <a class="shortcut-button" href="javascript: location.href='<%=baseUrl%>writeTask.jsp'">
-                    <span>
-                        <img src="images/icons/paper_content_pencil_48.png" alt="icon"/>
-                        <br/>分配任务
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a class="shortcut-button" href="javascript: location.href='<%=baseUrl%>task.jsp'">
-                    <span>
-                        <img src="images/icons/image_add_48.png" alt="icon"/>
-                        <br/>查看任务
-                    </span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="clear"></div>
-
-        <div id="message_id" class="notification information png_bg" style="display: none;">
-            <a href="#" class="close">
-                <img src="images/icons/cross_grey_small.png" title="关闭" alt="关闭"/>
-            </a>
-
-            <div id="message_id_content"> 提示信息！</div>
-        </div>
-
-        <div class="content-box">
-            <div class="content-box-header">
-                <h3>分配任务</h3>
-                <ul class="content-box-tabs">
-                    <li><a href="#tab2" class="default-tab">Forms</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div class="content-box-content">
-                <div class="tab-content default-tab" id="tab2">
-                    <form name="writeTaskForm" action="<%=baseUrl%>writeTask.do" method="post">
-                        <table>
-                            <input type="hidden" id="token" name="token" value="<%=token%>">
-                            <input type="hidden" id="fromUserId" name="fromUserId" value="<%=user.getId()%>">
-                            <tr>
-                                <td width="15%">任务接受用户:</td>
-                                <td>
-                                    <select id="toUserId" name="toUserId" class="medium-input">
-                                        <option value="">选择用户</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>任务名称:</td>
-                                <td>
-                                    <input id="title" class="text-input medium-input" type="text"
-                                       name="title" value=""/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>开始日期:</td>
-                                <td>
-                                    <input id="beginDate" class="text-input medium-input" type="text"
-                                                         name="beginDate" value=""/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>结束日期:</td>
-                                <td>
-                                    <input id="endDate" class="text-input medium-input" type="text"
-                                                         name="endDate" value=""/>
-                                </td>
-                            </tr>
-                            <textarea style="display: none;" id="content" name="content"></textarea>
-                        </table>
-                    </form>
-                    <script id="editor" type="text/plain"></script>
-                    <input class="button" type="button" onclick="writeTask()" value="提交" />
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-        <div id="footer">
-            <small>
-                &#169; Copyright 2014 Suncare | Powered by 关向辉
-            </small>
-        </div>
+<body>
+<%@ include file="facebox_message.jsp" %>
+<!-- 头部固定菜单层 开始-->
+<div id="menu">
+    <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
+    <%@ include file="menu.jsp" %>
+    <div class="menu_info">
+        <a href="#"><img src="images/header.jpg" /></a>
     </div>
 </div>
+<!-- 头部固定菜单层 结束-->
+<!-- 主显示区 开始-->
+<div id="mainArea">
+    <%--<div id="right_Box">--%>
+        <%--<div class="taskBox">--%>
+            <%--<div class="normalTitle">分配给我的任务<span class="titleSelect">全部任务</span></div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status"><span>17</span>小时</div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status task_emergency"><span>1</span>小时</div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="taskBox">--%>
+            <%--<div class="normalTitle">我分配的任务<span class="titleSelect">全部任务</span></div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status task_finished"><span>完成</span></div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+            <%--<div class="task">--%>
+                <%--<div class="task_status"><span>17</span>小时</div>--%>
+                <%--<div class="task_title"><a href="#">任务名称任务名称</a></div>--%>
+                <%--<div class="task_from"><a href="#">关向辉</a>指派给<a href="#">张飞</a></div>--%>
+                <%--<div class="task_time">创建时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="task_time">结束时间： 2014-5-20 14:21</div>--%>
+                <%--<div class="clearBoth"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <div><%-- id="left_Box"--%>
+        <div class="msgBox">
+            <div class="normalTitle">创建任务</div>
+            <div class="create_task">
+                <form name="writeTaskForm" action="writeTask.do" method="post">
+                    <table cellpadding="0" cellspacing="0" width="100%" class="information">
+                        <input type="hidden" id="token" name="token" value="<%=token%>">
+                        <input type="hidden" id="fromUserId" name="fromUserId" value="<%=user.getId()%>">
+                        <tr>
+                            <td class="table_title">指派给：</td>
+                            <td>
+                                <span id="toUser"></span>
+                                <input value="从通讯录选择" type="button" class="minBtn" onclick="choose()" />
+                                <input id="toUserId" type="hidden" name="toUserId">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title">任务名称：</td>
+                            <td><input id="title" type="text" name="title" value="" class="inputArea inputWidthLong"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_title">开始时间：</td>
+                            <td><input id="beginDate" type="text" name="beginDate" value="" class="inputArea inputWidthLong"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_title">结束时间：</td>
+                            <td><input id="endDate" type="text" name="endDate" value="" class="inputArea inputWidthLong"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_title">任务内容：</td>
+                            <td>
+                                <script id="editor" type="text/plain"></script>
+                            </td>
+                            <textarea style="display: none;" id="content" name="content"></textarea>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td><input name="dosubmit" value="提交" type="button" class="subBtn" onclick="writeTask()" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+</div>
+<!-- 主显示区 结束-->
+<!--右侧IM 开始-->
+<div id="sc_IM">
+    <div id="SCIM_search">查找</div>
+    <div id="SCIM_uList">
+        <ul>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
+            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
+        </ul>
+    </div>
+    <div id="SCIM_groupSel">分组选择</div>
+</div>
+<!--右侧IM 结束-->
 </body>
 </html>
