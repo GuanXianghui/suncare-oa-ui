@@ -105,6 +105,11 @@ function query(){
                 } else {
                     //请求成功
                     showSuccess(data["message"]);
+                    //第一次查询，如果提醒内容非空，则
+                    if(remindContent != EMPTY){
+                        showInformation("申成OA提醒系统提醒您：" + remindContent);
+                        remindContent = EMPTY;
+                    }
                     var remindsJson = data["remindsJson"];
                     //把json字符串转换object数组
                     remindArray = transferJsonStr2Array(remindsJson);

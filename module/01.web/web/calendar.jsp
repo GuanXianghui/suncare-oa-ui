@@ -3,15 +3,36 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page import="com.gxx.oa.utils.DateUtil" %>
+    <%@ page import="com.gxx.oa.entities.Remind" %>
+    <%@ page import="com.gxx.oa.dao.RemindDao" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
+    <%
+        String id = request.getParameter("id");
+        String remindContent = StringUtils.EMPTY;
+        String date = DateUtil.getNowDate();
+        if(StringUtils.isNotBlank(id)){
+            try{
+                Remind remind = RemindDao.getRemindById(Integer.parseInt(id));
+                if(remind != null && remind.getUserId() == user.getId()){
+                    remindContent = remind.getContent();
+                    date = remind.getCreateDate();
+                }
+            } catch (Exception e){
+                remindContent = StringUtils.EMPTY;
+                date = DateUtil.getNowDate();
+            }
+        }
+    %>
     <title>Suncare-OA</title>
     <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/calendar.js"></script>
     <%@ include file="datepicker_base.jsp" %>
     <script type="text/javascript">
-        //选择当前日期
-        var chooseDate = "<%=DateUtil.getNowDate()%>";
+        //弹出提醒内容
+        var remindContent = "<%=remindContent.replaceAll("\n", "").replaceAll("\"", "\\\\")%>";
+        //选择当前日期 如果提醒ID跳转过来 则 获取当天的提醒
+        var chooseDate = "<%=date%>";
         //当前时间戳
         var nowDateTime = "<%=DateUtil.getNowDate() + DateUtil.getNowTime()%>";
         //短信运营商_发送短信屏蔽词汇
@@ -51,7 +72,7 @@
             <div class="create_task">
                 <div id="view_remind_div">
                     <div id="remind_table_head" align="center">
-                        <%=DateUtil.getLongDate(DateUtil.getDate(DateUtil.getNowDate()))%>
+                        <%=DateUtil.getLongDate(DateUtil.getDate(date))%>
                     </div>
                     <table id="remind_table" width="90%" border="1" align="center">
                         <tr class="alt-row">

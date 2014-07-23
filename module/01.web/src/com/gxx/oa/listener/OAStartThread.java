@@ -66,7 +66,7 @@ public class OAStartThread extends Thread
                         //提醒时间到了，给写设置提醒的用户发送消息
                         Message message = new Message(publicUser.getId(), UserInterface.USER_TYPE_PUBLIC,
                                 user.getId(), "你的提醒时间到啦！请见<a target=\"_blank\" " +
-                                "href=\"/calendar.jsp\">链接</>", MessageInterface.STATE_NOT_READED,
+                                "href=\"/calendar.jsp?id=" + remind.getId() + "\">链接</>", MessageInterface.STATE_NOT_READED,
                                 DateUtil.getNowDate(), DateUtil.getNowTime(), StringUtils.EMPTY);
                         MessageDao.insertMessage(message);
                     } else if(remind.getRemindType() == RemindInterface.REMIND_TYPE_SMS){//短信提醒
@@ -77,7 +77,7 @@ public class OAStartThread extends Thread
                             //提醒时间到了，给写设置提醒的用户发送消息
                             Message message = new Message(publicUser.getId(), UserInterface.USER_TYPE_PUBLIC,
                                     user.getId(), "你的提醒时间到啦！请见<a target=\"_blank\" " +
-                                    "href=\"/calendar.jsp\">链接</>", MessageInterface.STATE_NOT_READED,
+                                    "href=\"/calendar.jsp?id=" + remind.getId() + "\">链接</>", MessageInterface.STATE_NOT_READED,
                                     DateUtil.getNowDate(), DateUtil.getNowTime(), StringUtils.EMPTY);
                             MessageDao.insertMessage(message);
                         } else {//短信提醒

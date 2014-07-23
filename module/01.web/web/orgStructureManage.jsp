@@ -54,7 +54,7 @@
                 <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
                 <br/>
                 <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
+                <a href="home.jsp" title="Sign Out">退出</a>
             </div>
             <%@ include file="layers.jsp" %>
         </div>

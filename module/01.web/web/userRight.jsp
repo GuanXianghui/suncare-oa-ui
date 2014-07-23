@@ -25,7 +25,7 @@
     <script type="text/javascript" src="<%=baseUrl%>scripts/userRight.js"></script>
     <link rel="stylesheet" href="css/sms.css" type="text/css" media="screen"/>
     <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/reset_back.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
@@ -39,8 +39,20 @@
         //用户名字
         var chooseUserName = EMPTY;
     </script>
+    <style type="text/css">
+        th{
+            text-align: center;
+        }
+        td{
+            text-align: center;
+        }
+        #tab2{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<%@ include file="facebox_message.jsp" %>
 <div id="body-wrapper">
     <div id="sidebar">
         <div id="sidebar-wrapper">
@@ -51,7 +63,7 @@
                 <a href="http://www.suncarechina.com" target="_blank">申成</a>欢迎您！
                 <br/>
                 <br/>
-                <a href="javascript: logOut()" title="Sign Out">退出</a>
+                <a href="home.jsp" title="Sign Out">退出</a>
             </div>
             <%@ include file="layers.jsp" %>
         </div>
