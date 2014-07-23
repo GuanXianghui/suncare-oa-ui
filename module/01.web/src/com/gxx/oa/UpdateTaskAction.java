@@ -30,8 +30,6 @@ public class UpdateTaskAction extends BaseAction {
      * @return
      */
     public String execute() throws Exception {
-        //权限校验
-        BaseUtil.checkRightWithException(getUser().getId(), RIGHT_0012_TASK);
         logger.info("taskId:" + taskId + ",toUserId:" + toUserId + ",title:" + title + ",beginDate:" +
                 beginDate + ",endDate:" + endDate + ",content:" + content);
         Task task = TaskDao.getTaskById(Integer.parseInt(taskId));

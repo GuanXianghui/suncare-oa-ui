@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page import="com.gxx.oa.dao.StructureDao" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
         //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0005_ORG_STRUCTURE_MANAGE)){
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0002_ORG_STRUCTURE_MANAGE)){
             //域名链接
             response.sendRedirect(baseUrl + "index.jsp");
             return;
@@ -16,12 +18,10 @@
         inLayer = "组织架构管理";
     %>
     <title>组织架构管理</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/orgStructureManage.js"></script>
-    <link rel="stylesheet" type="text/css" href="<%=baseUrl%>css/orgStructureManage.css"/>
+    <script type="text/javascript" src="scripts/orgStructureManage.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/orgStructureManage.css"/>
     <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/reset_back.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
@@ -43,6 +43,7 @@
     </script>
 </head>
 <body>
+<%@ include file="facebox_message.jsp" %>
 <div id="body-wrapper">
     <div id="sidebar">
         <div id="sidebar-wrapper">

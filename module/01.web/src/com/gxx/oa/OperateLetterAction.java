@@ -38,8 +38,6 @@ public class OperateLetterAction extends BaseAction {
      * @return
      */
     public String execute() throws Exception {
-        //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0009_LETTER);
         logger.info("type:" + type + ",box=" + box + ",countNow=" + countNow);
         //ajax结果
         String resp;

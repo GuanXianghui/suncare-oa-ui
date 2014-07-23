@@ -8,7 +8,6 @@ import com.gxx.oa.entities.User;
 import com.gxx.oa.entities.UserRight;
 import com.gxx.oa.interfaces.BaseInterface;
 import com.gxx.oa.interfaces.ParamInterface;
-import com.gxx.oa.interfaces.StructureInterface;
 import com.gxx.oa.interfaces.UserInterface;
 import com.gxx.oa.utils.*;
 import org.apache.commons.lang.StringUtils;
@@ -31,7 +30,7 @@ public class CreateUserAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0003_USER_OPERATE);
+        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0001_USER_OPERATE);
         logger.info("name:" + name + ",letter=" + letter + ",positionId=" + positionId);
         String resp;
 

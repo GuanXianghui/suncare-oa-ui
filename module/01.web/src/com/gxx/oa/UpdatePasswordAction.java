@@ -23,8 +23,6 @@ public class UpdatePasswordAction extends BaseAction {
      * @return
      */
     public String execute() throws Exception {
-        //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0001_USER_MANAGE);
         logger.info("password:" + password);
 
         //更新用户

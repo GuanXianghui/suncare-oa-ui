@@ -22,7 +22,7 @@ public class UpdateDefaultRightAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0014_DEFAULT_RIGHT);
+        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0004_DEFAULT_RIGHT);
         logger.info("rightCodes:" + rightCodes);
 
         //查询描述

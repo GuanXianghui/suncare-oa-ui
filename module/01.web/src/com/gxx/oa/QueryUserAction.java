@@ -23,7 +23,7 @@ public class QueryUserAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0003_USER_OPERATE);
+        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0001_USER_OPERATE);
         logger.info("name:" + name);
 
         //根据姓名或者拼音查用户

@@ -8,12 +8,6 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
-        //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0013_SMS)){
-            //域名链接
-            response.sendRedirect(baseUrl + "index.jsp");
-            return;
-        }
         //外层
         outLayer = "工具模块";
         //内层

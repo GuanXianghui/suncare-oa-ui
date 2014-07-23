@@ -7,16 +7,25 @@
     text-align: center;
 }
 .top {
-    background-color: gray;
+    border: 1px solid gray;
+    background-color: green;
+    font-size: 18px;
 }
 .company {
-    background-color: gray;
+    border: 1px solid gray;
+    background-color: #fa8072;
+    font-size: 18px;
 }
 .dept {
-    background-color: gray;
+    border: 1px solid gray;
+    background-color: #a9a9a9;
+    font-size: 18px;
 }
 .position {
     cursor: pointer;
     background-color: #6a5acd;
-    border: 2px dotted red;
+    /*border: 2px dotted red;*/
+    border: 1px solid gray;
+    font-size: 18px;
+    font-weight: bold;
 }

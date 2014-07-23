@@ -282,7 +282,7 @@ public class BaseUtil implements SymbolInterface {
                 result += SYMBOL_LOGIC_AND;
             }
             result += "{id:" + remind.getId() + ",userId:" + remind.getUserId() + ",date:'" + remind.getDate() +
-                    "',content:'" + remind.getContent() + "',remindType:" + remind.getRemindType() +
+                    "',content:'" + remind.getContent().replaceAll("\n", "") + "',remindType:" + remind.getRemindType() +
                     ",remindDateTime:'" + remind.getRemindDateTime() + "',remindTarget:'" + remind.getRemindTarget() +
                     "',createDate:'" + remind.getCreateDate() + "',createTime:'" + remind.getCreateTime() +
                     "',createIp:'" + remind.getCreateIp() + "',updateDate:'" + remind.getUpdateDate() +

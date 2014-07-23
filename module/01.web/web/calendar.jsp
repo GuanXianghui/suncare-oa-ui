@@ -10,7 +10,9 @@
     <script language="javascript" type="text/javascript" src="scripts/calendar.js"></script>
     <%@ include file="datepicker_base.jsp" %>
     <script type="text/javascript">
-        chooseDate = "<%=DateUtil.getNowDate()%>";
+        //选择当前日期
+        var chooseDate = "<%=DateUtil.getNowDate()%>";
+        var nowDateTime = "<%=DateUtil.getNowDate() + DateUtil.getNowTime()%>";
     </script>
     <style type="text/css">
         #remind_table th{
@@ -29,7 +31,7 @@
     <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
     <%@ include file="menu.jsp" %>
     <div class="menu_info">
-        <a href="#"><img src="images/header.jpg" /></a>
+        <a href="#"><img src="<%=user.getHeadPhoto()%>" /></a>
     </div>
 </div>
 <!-- 头部固定菜单层 结束-->

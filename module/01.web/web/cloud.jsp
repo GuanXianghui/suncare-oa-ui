@@ -22,6 +22,11 @@
         //ctrl键是否按下
         var isCtrlDown = false;
     </script>
+	<style>
+	#files ul li{
+		cursor: default;
+	}
+	</style>
 </head>
 <%@ include file="facebox_message.jsp" %>
 <body onkeydown="keyDown(event)" onkeyup="keyUp(event)">

@@ -32,8 +32,6 @@ public class WriteTaskAction extends BaseAction {
      * @return
      */
     public String execute() throws Exception {
-        //权限校验
-        BaseUtil.checkRightWithException(getUser().getId(), RIGHT_0012_TASK);
         logger.info("fromUserId:" + fromUserId + ",toUserId:" + toUserId + ",title:" + title +
                 ",beginDate:" + beginDate + ",endDate:" + endDate + ",content:" + content);
         Task task = new Task(Integer.parseInt(fromUserId), Integer.parseInt(toUserId), title, content,

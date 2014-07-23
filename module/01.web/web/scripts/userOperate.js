@@ -156,6 +156,7 @@ function chooseTd(t, id) {
     //判断 创建用户还是修改用户
     if(createOrUpdate == 'create'){
         document.getElementById("position_input").value = structure["name"];
+        $('#facebox .close_image')[0].click();
     } else if(createOrUpdate == 'update'){
         //修改职位
         updatePosition();

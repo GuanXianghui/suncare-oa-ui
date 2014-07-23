@@ -153,7 +153,8 @@ function download(){
         //根据id获取申成云
         var cloud = getCloudById(id);
         if(cloud["type"] == CLOUD_TYPE_FILE){
-            window.open(cloud["route"]);
+            //window.open(cloud["route"]);
+            window.open("download.jsp?fileRoute=" + cloud["route"] + "&newName=" + cloud["name"]);
             hasFile = true;
         }
     }

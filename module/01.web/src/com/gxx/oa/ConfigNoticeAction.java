@@ -35,7 +35,7 @@ public class ConfigNoticeAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithException(getUser().getId(), RIGHT_0007_CONFIG_NOTICE);
+        BaseUtil.checkRightWithException(getUser().getId(), RIGHT_0003_CONFIG_NOTICE);
         logger.info("noticeId:" + noticeId + ",type:" + type + ",title:" + title + ",content:" + content);
         //公告类型判断
         if(StringUtils.equals(TYPE_ADD, type)) {

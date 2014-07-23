@@ -26,8 +26,6 @@ public class UpdatePositionAction extends BaseAction implements StructureInterfa
      * @return
      */
     public String execute() throws Exception {
-        //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0001_USER_MANAGE);
         logger.info("id:" + id);
 
         // 查看公司，部门，职位信息

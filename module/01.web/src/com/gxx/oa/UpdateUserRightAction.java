@@ -24,7 +24,7 @@ public class UpdateUserRightAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0015_USER_RIGHT);
+        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0005_USER_RIGHT);
         logger.info("userId:" + userId + ",userRight:" + userRight);
 
         //查询权限

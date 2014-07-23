@@ -205,6 +205,8 @@ public class Remind {
             cnStr =  "不提醒";
         } else if(RemindInterface.REMIND_TYPE_MESSAGE == remindType){
             cnStr =  "消息提醒";
+        } else if(RemindInterface.REMIND_TYPE_SMS == remindType){
+            cnStr =  "短信提醒";
         }
         return cnStr;
     }

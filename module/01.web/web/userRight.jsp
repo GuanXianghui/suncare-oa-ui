@@ -7,7 +7,7 @@
     <%@ include file="header.jsp" %>
     <%
         //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0015_USER_RIGHT)){
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0005_USER_RIGHT)){
             //域名链接
             response.sendRedirect(baseUrl + "index.jsp");
             return;

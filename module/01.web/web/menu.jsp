@@ -13,7 +13,7 @@
             <li><img src="images/icon_myMsg.png"/><a href="contacts.jsp">通讯录</a></li>
             <li><img src="images/icon_task.png"/><a href="task.jsp">我的任务</a></li>
             <li><img src="images/icon_daily.png"/><a href="diary.jsp">我的日志</a></li>
-            <li><img src="images/icon_calendar.png"/><a href="calendar.jsp">我的日历</a></li>
+            <li><img src="images/icon_calendar.png"/><a href="calendar.jsp">我的提醒</a></li>
         </ul>
     </li>
     <li id="m_tool"><a href="#">工具</a>

@@ -27,8 +27,6 @@ public class UploadHeadPhotoAction extends BaseAction {
      * @return
      */
     public String execute() throws Exception {
-        //权限校验
-        BaseUtil.checkRightWithException(getUser().getId(), RIGHT_0001_USER_MANAGE);
         logger.info("headPhoto:" + headPhoto);
         //判头像为空
         if(null == headPhoto)

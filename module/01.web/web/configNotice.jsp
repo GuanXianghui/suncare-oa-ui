@@ -1,12 +1,14 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page import="com.gxx.oa.dao.NoticeDao" %>
     <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
         //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0007_CONFIG_NOTICE)){
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0003_CONFIG_NOTICE)){
             //域名链接
             response.sendRedirect(baseUrl + "index.jsp");
             return;
@@ -17,18 +19,10 @@
         inLayer = "公告管理";
     %>
     <title>公告管理</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
     <script type="text/javascript" src="<%=baseUrl%>scripts/configNotice.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.all.min.js"> </script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <!--这一行显示ie会有问题xxxxxx-->
-    <%--<script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/lang/zh-cn/zh-cn.js"></script>--%>
-    <script type="text/javascript" charset="utf-8" src="<%=baseUrl%>ueditor/ueditor.parse.min.js"></script>
+    <%@ include file="ueditor_base.jsp" %>
     <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/reset_back.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
@@ -47,7 +41,7 @@
     </script>
 </head>
 <body>
-
+<%@ include file="facebox_message.jsp" %>
 <div id="body-wrapper">
     <div id="sidebar">
         <div id="sidebar-wrapper">

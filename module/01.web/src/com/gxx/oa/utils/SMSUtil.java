@@ -26,9 +26,6 @@ public class SMSUtil implements BaseInterface {
      * @throws Exception
      */
     public static int sendSMS(String phone, String content) throws Exception {
-        if(true){
-            return 1;//–¥À¿≥…π¶ todo
-        }
         String smsUid = PropertyUtil.getInstance().getProperty(SMS_UID);
         String smsKey = PropertyUtil.getInstance().getProperty(SMS_KEY);
         String url = "http://gbk.sms.webchinese.cn/?Uid=" + URLEncoder.encode(smsUid, "GBK") + "&Key=" +

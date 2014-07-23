@@ -47,7 +47,7 @@ public class ManageOrgStructureAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0005_ORG_STRUCTURE_MANAGE);
+        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0002_ORG_STRUCTURE_MANAGE);
         logger.info("configType:" + configType + ",id:" + id + ",type:" + type + ",name:" + name);
         String resp;
         if(CONFIG_TYPE_MOVE2LEFT.equals(configType)) {//左移

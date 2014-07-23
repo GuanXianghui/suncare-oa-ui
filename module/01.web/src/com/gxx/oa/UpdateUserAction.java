@@ -8,8 +8,6 @@ import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.List;
-
 /**
  * 修改用户action
  *
@@ -38,7 +36,7 @@ public class UpdateUserAction extends BaseAction {
      */
     public String execute() throws Exception {
         //权限校验
-        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0003_USER_OPERATE);
+        BaseUtil.checkRightWithAjaxException(getUser().getId(), RIGHT_0001_USER_OPERATE);
         logger.info("updateType:" + updateType + ",userId=" + userId + ",positionId=" + positionId);
         String resp;
 

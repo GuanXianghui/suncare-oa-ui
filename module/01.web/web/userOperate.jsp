@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ page import="com.gxx.oa.dao.StructureDao" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
         //权限校验
-        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0003_USER_OPERATE)){
+        if(!BaseUtil.checkRight(user.getId(), UserRightInterface.RIGHT_0001_USER_OPERATE)){
             //域名链接
             response.sendRedirect(baseUrl + "index.jsp");
             return;
@@ -16,18 +18,15 @@
         inLayer = "后台用户管理";
     %>
     <title>后台管理用户</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/md5.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/pinyin.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/userOperate.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <link rel="stylesheet" type="text/css" href="<%=baseUrl%>css/userOperate.css"/>
+    <script type="text/javascript" src="scripts/md5.js"></script>
+    <script type="text/javascript" src="scripts/pinyin.js"></script>
+    <script type="text/javascript" src="scripts/userOperate.js"></script>
     <!-- 页面样式 -->
-    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/userOperate.css"/>
+    <link rel="stylesheet" type="text/css" href="css/reset_back.css"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="scripts/simpla.jquery.configuration.js"></script>
-    <script type="text/javascript" src="scripts/facebox.js"></script>
     <script type="text/javascript">
         //所有公司结构json串
         var structureJsonStr = "<%=BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures())%>";
@@ -38,6 +37,7 @@
     </script>
 </head>
 <body>
+<%@ include file="facebox_message.jsp" %>
 <div id="body-wrapper">
     <div id="sidebar">
         <div id="sidebar-wrapper">
@@ -54,10 +54,10 @@
         </div>
     </div>
 
-    <div id="structure_div" align="center" style="width: 100%; display: none;">
+    <div id="structure_div" align="center" style="width: 1000px; display: none;">
         <h1>组织架构</h1>
         <div>
-            <table id="structure_table" width="100%"></table>
+            <table id="structure_table" width="1000px"></table>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
                 </a>
             </li>
             <li style="display: none;">
-                <a id="showStructureDiv" class="shortcut-button" href="#structure_div" rel="modal"></a>
+                <a id="showStructureDiv" href="#structure_div" rel="facebox"></a>
             </li>
         </ul>
 
@@ -151,7 +151,7 @@
                             <p>
                                 <span>姓名</span>&nbsp;&nbsp;
                                 <input class="text-input small-input" type="text" id="user_name"/>&nbsp;&nbsp;
-                                <input class="button" type="button" onclick="queryUser();" value="查询" />(可输入缩写如：严明皓->ymh)
+                                <input class="button" type="button" onclick="queryUser();" value="查询" />(可输入缩写如：雅马哈->ymh)
                             </p>
                             <table id="user_list"></table>
                         </fieldset>

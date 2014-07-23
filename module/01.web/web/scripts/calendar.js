@@ -74,7 +74,7 @@ function processRemindArray(){
             "<td>" + getLongDateTime1(remindArray[i]["remindDateTime"]) + "</td>" +
             "<td>" +
             "<input name=\"dosubmit\" value=\"修改\" type=\"submit\" class=\"minBtn\" onclick=\"beforeUpdateRemind(" + remindArray[i]["id"] + ")\" />" +
-            "<input name=\"dosubmit\" value=\"删除\" type=\"submit\" class=\"minBtn\" onclick=\"deleteRemind(" + remindArray[i]["id"] + ")\" />" +
+            "<input name=\"dosubmit\" value=\"取消\" type=\"submit\" class=\"minBtn\" onclick=\"deleteRemind(" + remindArray[i]["id"] + ")\" />" +
             "</td>" +
             "</tr>";
     }
@@ -180,8 +180,9 @@ function createRemind(){
             $("#remind_date_hour").val() + $("#remind_date_minute").val() + "00";
     }
 
-    if(remindDateTime != EMPTY){
-        new Date();
+    if(remindDateTime != EMPTY && remindDateTime <= nowDateTime){
+        showAttention("提醒时间选择有误，请选择在之后的某个时间提醒你");
+        return false;
     }
 
     //ajax请求
@@ -262,11 +263,11 @@ function beforeUpdateRemind(remindId){
 }
 
 /**
- * 删除提醒
+ * 取消提醒
  * @param remindId
  */
 function deleteRemind(remindId){
-    if(!confirm("你确认删除提醒吗？")){
+    if(!confirm("你确认取消提醒吗？")){
         return;
     }
     //ajax请求
