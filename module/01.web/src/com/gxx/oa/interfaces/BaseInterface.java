@@ -89,4 +89,8 @@ public interface BaseInterface {
      * 申成文库支持的文件类型
      */
     public static final String CLOUD_DOC_SUPPORT_TYPES = "cloud_doc_support_types";
+    /**
+     * 短信运营商_发送短信屏蔽词汇
+     */
+    public static final String SMS_DENIED_WORDS = "sms_denied_words";
 }

@@ -130,6 +130,24 @@ function operateSMS(){
         return false;
     }
 
+    var words = smsDeniedWords.split(SYMBOL_SLASH);
+    for(var i=0;i<words.length;i++){
+        var word = words[i];
+        if(content.indexOf(word) > -1){
+            showAttention("你的内容中包括短信运营商屏蔽词汇：[" + word + "]，请修改提醒内容！");
+            return;
+        }
+        if(word.indexOf(SYMBOL_BLANK)){
+            word = replaceAll(word, SYMBOL_BLANK, EMPTY);
+            if(content.indexOf(word) > -1){
+                showAttention("你的内容中包括短信运营商屏蔽词汇：[" + word + "]，请修改提醒内容！");
+                return;
+            }
+        }
+    }
+
+    content = "短信来自申成门窗OA系统，内容：" + content;
+
     if(!confirm("预览短信：\n" + content + "【申成门窗】\n确认发送吗？")){
         return false;
     }

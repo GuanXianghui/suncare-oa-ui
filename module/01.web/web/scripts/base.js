@@ -109,7 +109,7 @@ var DIARY_REVIEW_CONTENT_LENGTH = 250;//工作日志评论内容长度
 /**
  * 字段长度
  */
-var REMIND_CONTENT_LENGTH = 250;//提醒内容长度
+var REMIND_CONTENT_LENGTH = 40;//提醒内容长度
 /**
  * 提醒类型 1:不提醒 2:消息提醒 3:短信提醒 4:邮件提醒(目前只能1或者2)
  */
@@ -132,7 +132,7 @@ var TASK_REVIEW_CONTENT_LENGTH = 250;//任务评论内容长度
 /**
  * 字段长度
  */
-var SMS_CONTENT_LENGTH = 65;//短信内容长度
+var SMS_CONTENT_LENGTH = 50;//短信内容长度
 
 /**
  * 状态 1 正常 2 删除 3 彻底删除

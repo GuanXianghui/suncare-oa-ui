@@ -37,6 +37,8 @@
         var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";
         //所有公司结构json串
         var structureJsonStr = "<%=BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures())%>";
+        //短信运营商_发送短信屏蔽词汇
+        var smsDeniedWords = "<%=PropertyUtil.getInstance().getProperty(BaseInterface.SMS_DENIED_WORDS)%>";
     </script>
     <style type="text/css">
         #sms_table tr td {
@@ -126,6 +128,15 @@
                             <td class="table_title"></td>
                             <td>
                                 6.短信发送一般<span style="color: red">3~5分钟</span>内会收到，请耐心等待
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_title"></td>
+                            <td>
+                                7.<span style="color: red">禁止发送以下信息，如果发现立刻封号：</span>
+                                1、中奖类信息 2、骂人短信 3、诽谤诈骗短信 4、赌博违法短信 5、彩票类短信 6、欺骗短信
+                                <span style="color: red">7、聊天短信</span>
+                                8、暧昧信息 9、房产广告 10、移动充值业务 11、银行类业务 12、考试作弊
                             </td>
                         </tr>
                         <tr>

@@ -12,7 +12,10 @@
     <script type="text/javascript">
         //选择当前日期
         var chooseDate = "<%=DateUtil.getNowDate()%>";
+        //当前时间戳
         var nowDateTime = "<%=DateUtil.getNowDate() + DateUtil.getNowTime()%>";
+        //短信运营商_发送短信屏蔽词汇
+        var smsDeniedWords = "<%=PropertyUtil.getInstance().getProperty(BaseInterface.SMS_DENIED_WORDS)%>";
     </script>
     <style type="text/css">
         #remind_table th{

@@ -185,6 +185,24 @@ function createRemind(){
         return false;
     }
 
+    if(remindType == REMIND_TYPE_SMS){
+        var words = smsDeniedWords.split(SYMBOL_SLASH);
+        for(var i=0;i<words.length;i++){
+            var word = words[i];
+            if(content.indexOf(word) > -1){
+                showAttention("由于你选择短信提醒，你的内容中包括短信运营商屏蔽词汇：[" + word + "]，请修改提醒内容！");
+                return;
+            }
+            if(word.indexOf(SYMBOL_BLANK)){
+                word = replaceAll(word, SYMBOL_BLANK, EMPTY);
+                if(content.indexOf(word) > -1){
+                    showAttention("由于你选择短信提醒，你的内容中包括短信运营商屏蔽词汇：[" + word + "]，请修改提醒内容！");
+                    return;
+                }
+            }
+        }
+    }
+
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
