@@ -14,12 +14,12 @@ function resetAllBox(){
 	if($("#mailList"))
 	{
 		var lbH=viewH-177;
-		$("#mailList").attr("style","width:400px; height:"+lbH+"px");
+		$("#mailList").attr("style","width:380px; height:"+lbH+"px");
 	}
 	if($("#mail_Box"))
 	{
 		var lbH=viewH-100;
-		$("#mail_Box").attr("style","width:400px; height:"+lbH+"px");
+		$("#mail_Box").attr("style","width:380px; height:"+lbH+"px");
 	}
 	if($("#right_Box"))
 	{

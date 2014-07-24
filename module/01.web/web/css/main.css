@@ -4,9 +4,9 @@
 	Designed by Duanliquan
 	2014-5-23
 */
-#menu{ height:100px; background:#1E1E1E; position: fixed;_position: absolute;top: 0;left: 0;z-index: 1000; width:100%}
+#menu{ height:100px; background:#1E1E1E; position: fixed;_position: absolute;top: 0;left: 0;z-index: 9900; width:100%}
 .logo{float:left; padding:20px; }
-.menu_info{ height:100px; width:100px; position:absolute; top:0px; right:10px; background:url(../images/header_bg.png) no-repeat center;}
+.menu_info{ height:100px; width:100px; position:absolute; top:0px; right:0px; background:url(../images/header_bg.png) no-repeat center;}
 .menu_info img{ width:80px; height:80px; margin:10px; border-radius:5em;}
 
 #menu ul{}
@@ -25,7 +25,7 @@
 #menu ul li#m_set{ background:url(../images/icon_set.png) no-repeat 0px 0px;}
 #menu ul li#m_set:hover{ background:#87A912 url(../images/icon_set.png) no-repeat -100px 0px;}
 
-#menu ul li ul.menu_sub {position:absolute; top:100px; left:0px; z-index:9999000; display:none;}
+#menu ul li ul.menu_sub {position:absolute; top:100px; left:0px; z-index:9000; display:none;}
 #menu ul li ul.menu_sub li{float:none; height:48px; width:190px; font-size:14px;  background:#C2E19F;}
 #menu ul li ul.menu_sub li:hover{background:#9ECF66;}
 #menu ul li ul.menu_sub li img{ float:left; margin:8px;}

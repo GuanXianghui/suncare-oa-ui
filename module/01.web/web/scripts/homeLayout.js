@@ -8,7 +8,7 @@ function resetAllBox(){
 	var docW=$(document).width();
 	if($("#SCIM_uList"))
 	{
-		var iListH=viewH-39;
+		var iListH=viewH-139;
 		$("#SCIM_uList").attr("style","height:"+iListH+"px;");
 	}
 	if($("#left_Box"))
