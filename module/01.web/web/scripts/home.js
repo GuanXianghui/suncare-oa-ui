@@ -4,8 +4,8 @@ var diaryArray = new Array();
 var taskArray = new Array();
 //提醒数组
 var remindArray = new Array();
-//所有员工Json数组
-var userArray = new Array();
+////所有员工Json数组
+//var userArray = new Array();
 
 /**
  * 初始化
@@ -25,7 +25,7 @@ $(document).ready(function() {
     remindArray = transferInitJsonStr2Array(remindJsonStr);
 
     //处理所有员工json串
-    processUserWithJson();
+//    processUserWithJson();
 
     //处理工作日志Json串
     processWithDiaryJson();

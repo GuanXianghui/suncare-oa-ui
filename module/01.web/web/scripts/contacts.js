@@ -1,16 +1,16 @@
-//所有员工Json数组
-var userArray = new Array();
-//所有公司结构Json数组
-var structureArray = new Array();
+////所有员工Json数组
+//var userArray = new Array();
+////所有公司结构Json数组
+//var structureArray = new Array();
 
 /**
  * 初始化
  */
 $(document).ready(function(){
-    //处理所有员工json串
-    processUserWithJson();
-    //处理所有公司结构json串
-    processStructureWithJson();
+//    //处理所有员工json串
+//    processUserWithJson();
+//    //处理所有公司结构json串
+//    processStructureWithJson();
     //处理通讯录
     processContacts();
 });

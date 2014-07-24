@@ -11,7 +11,7 @@ $(document).ready(function() {
         showAttention(message);
     }
     //处理所有员工json串
-    processUserWithJson();
+//    processUserWithJson();
 
     //把初始letterJsonStr转换成letterArray
     letterArray = transferInitJsonStr2Array(letterJsonStr);

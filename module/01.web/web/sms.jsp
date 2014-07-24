@@ -17,6 +17,7 @@
         }
     %>
     <title>Suncare-OA</title>
+    <script language="javascript" type="text/javascript" src="scripts/im.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/sms.js"></script>
     <%@ include file="datepicker_base.jsp" %>
@@ -33,10 +34,10 @@
                         PropertyUtil.getInstance().getProperty(BaseInterface.GXX_OA_NEW_LINE_UUID))%>";
         //根据用户id，状态和日期查短信量
         var smsCount = <%=SMSDao.countSMSByUserIdAndStateAndDate(user.getId(), 0, date)%>;
-        //所有员工json串
-        var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";
-        //所有公司结构json串
-        var structureJsonStr = "<%=BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures())%>";
+        <%--//所有员工json串--%>
+        <%--var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";--%>
+        <%--//所有公司结构json串--%>
+        <%--var structureJsonStr = "<%=BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures())%>";--%>
         //短信运营商_发送短信屏蔽词汇
         var smsDeniedWords = "<%=PropertyUtil.getInstance().getProperty(BaseInterface.SMS_DENIED_WORDS)%>";
     </script>
@@ -164,19 +165,7 @@
 </div>
 <!-- 主显示区 结束-->
 <!--右侧IM 开始-->
-<div id="sc_IM">
-    <div id="SCIM_search">查找</div>
-    <div id="SCIM_uList">
-        <ul>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
-        </ul>
-    </div>
-    <div id="SCIM_groupSel">分组选择</div>
-</div>
+<%@ include file="im.jsp" %>
 <!--右侧IM 结束-->
 </body>
 </html>

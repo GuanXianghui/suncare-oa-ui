@@ -35,6 +35,7 @@
     <title>Suncare-OA</title>
     <%@ include file="ueditor_base.jsp" %>
     <%@ include file="datepicker_base.jsp" %>
+    <script language="javascript" type="text/javascript" src="scripts/im.js"></script>
     <script type="text/javascript" charset="utf-8" src="scripts/showTask.js"></script>
     <script type="text/javascript">
         //任务id
@@ -48,7 +49,7 @@
         //有权限看的下级用户 用逗号隔开
         var rightUserWithComma = "<%=rightUserWithComma%>";
         //所有员工json串
-        var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";
+        <%--var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";--%>
         //起止日期
         var beginDate = "<%=task.getBeginDate()%>";
         var endDate = "<%=task.getEndDate()%>";
@@ -333,19 +334,7 @@
 </div>
 <!-- 主显示区 结束-->
 <!--右侧IM 开始-->
-<div id="sc_IM">
-    <div id="SCIM_search">查找</div>
-    <div id="SCIM_uList">
-        <ul>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
-        </ul>
-    </div>
-    <div id="SCIM_groupSel">分组选择</div>
-</div>
+<%@ include file="im.jsp" %>
 <!--右侧IM 结束-->
 </body>
 </html>

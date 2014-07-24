@@ -10,6 +10,7 @@
         String dir = (String)request.getAttribute("dir");
     %>
     <title>Suncare-OA</title>
+    <script language="javascript" type="text/javascript" src="scripts/im.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
     <script type="text/javascript" src="scripts/cloud.js"></script>
     <script type="text/javascript">
@@ -95,19 +96,7 @@
 </div>
 <!-- 主显示区 结束-->
 <!--右侧IM 开始-->
-<div id="sc_IM">
-    <div id="SCIM_search">查找</div>
-    <div id="SCIM_uList">
-        <ul>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
-        </ul>
-    </div>
-    <div id="SCIM_groupSel">分组选择</div>
-</div>
+<%@ include file="im.jsp" %>
 <!--右侧IM 结束-->
 </body>
 </html>

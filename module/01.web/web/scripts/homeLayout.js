@@ -8,13 +8,13 @@ function resetAllBox(){
 	var docW=$(document).width();
 	if($("#SCIM_uList"))
 	{
-		var iListH=viewH-180;
+		var iListH=viewH-39;
 		$("#SCIM_uList").attr("style","height:"+iListH+"px;");
 	}
 	if($("#left_Box"))
 	{
-		var lbW=viewW-502;
-		var lbH=docH-100;
+		var lbW=viewW-522;
+		var lbH=docH-120;
 		$("#left_Box").attr("style","width:"+lbW+"px; height:"+lbH+"px");
 	}
 	if($("#right_Box"))

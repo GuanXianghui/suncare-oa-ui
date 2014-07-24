@@ -14,7 +14,7 @@ $(document).ready(function() {
     editor = UE.getEditor('editor');
 
     //处理所有员工json串
-    processUserWithJson();
+//    processUserWithJson();
 
     //把初始messageJsonStr转换成messageArray
     messageArray = transferInitJsonStr2Array(messageJsonStr);

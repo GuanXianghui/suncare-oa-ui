@@ -1,9 +1,9 @@
 //ueditor编辑器
 var editor;
 //所有员工Json数组
-var userArray = new Array();
-//所有公司结构Json数组
-var structureArray = new Array();
+//var userArray = new Array();
+////所有公司结构Json数组
+//var structureArray = new Array();
 //收件人
 var USER_TYPE_RECEIVE = 1;
 //抄送人

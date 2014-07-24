@@ -45,6 +45,7 @@
 <link href="css/reset.css" rel="stylesheet" type="text/css" />
 <link href="css/main.css" rel="stylesheet" type="text/css" />
 <link href="css/imessage.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" />
 <!-- js基础依赖 -->
 <script language="javascript" type="text/javascript" src="scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="scripts/base.js"></script>

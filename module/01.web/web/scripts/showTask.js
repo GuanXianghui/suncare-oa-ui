@@ -6,7 +6,7 @@ var reviewType = EMPTY;
 var updateReviewId = 0;//修改评论id
 
 //所有员工Json数组
-var userArray = new Array();
+//var userArray = new Array();
 
 /**
  * 初始化
@@ -25,7 +25,7 @@ $(document).ready(function() {
     $("#editor").css("width", "900px");
 
     //处理所有员工json串
-    processUserWithJson();
+//    processUserWithJson();
 
     //初始化有权限查看的用户
     initRightUsers();

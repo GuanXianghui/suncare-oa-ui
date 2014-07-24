@@ -11,13 +11,8 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <title>Suncare-OA</title>
-    <link href="css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="css/main.css" rel="stylesheet" type="text/css" />
-    <link href="css/imessage.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript" src="scripts/jquery-1.10.2.min.js"></script>
-    <script language="javascript" type="text/javascript" src="scripts/menu.js"></script>
+    <script language="javascript" type="text/javascript" src="scripts/im.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/homeLayout.js"></script>
-    <script language="javascript" type="text/javascript" src="scripts/base.js"></script>
     <script language="javascript" type="text/javascript" src="scripts/home.js"></script>
     <script type="text/javascript">
         <%
@@ -44,7 +39,7 @@
         var remindJsonStr = "<%=BaseUtil.getJsonArrayFromReminds(RemindDao.queryRemindsByUserIdAndRemindDate
                     (user.getId(), DateUtil.getNowDate())).replaceAll("\\\'", "\\\\\\\'").replaceAll("\\\"", "\\\\\\\"")%>";
         //所有员工json串
-        var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";
+        <%--var userJsonStr = "<%=BaseUtil.getJsonArrayFromUsers(UserDao.queryAllUsers())%>";--%>
     </script>
 </head>
 
@@ -132,19 +127,7 @@
 </div>
 <!-- 主显示区 结束-->
 <!--右侧IM 开始-->
-<div id="sc_IM">
-    <div id="SCIM_search">查找</div>
-    <div id="SCIM_uList">
-        <ul>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关向辉</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关关</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>张飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>飞飞</span></li>
-            <li><a href="#"><img src="images/header.jpg" /></a><span>关辉</span></li>
-        </ul>
-    </div>
-    <div id="SCIM_groupSel">分组选择</div>
-</div>
+<%@ include file="im.jsp" %>
 <!--右侧IM 结束-->
 </body>
 </html>

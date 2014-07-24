@@ -1,7 +1,7 @@
 //任务Json数组
 var taskArray = new Array();
 //所有员工Json数组
-var userArray = new Array();
+//var userArray = new Array();
 
 /**
  * 初始化
@@ -29,12 +29,12 @@ $(document).ready(function() {
  */
 function initUsers(){
     //json串转json数组
-    if(userJsonStr != EMPTY) {
-        var array = userJsonStr.split(SYMBOL_BIT_AND);
-        for(var i=0;i<array.length;i++) {
-            userArray[userArray.length] = eval("(" + array[i] + ")");
-        }
-    }
+//    if(userJsonStr != EMPTY) {
+//        var array = userJsonStr.split(SYMBOL_BIT_AND);
+//        for(var i=0;i<array.length;i++) {
+//            userArray[userArray.length] = eval("(" + array[i] + ")");
+//        }
+//    }
     for(var i=0;i<userArray.length;i++){
         document.getElementById("userId").innerHTML += " <option value=\"" + userArray[i]["id"] + "\"" +
             (userId==userArray[i]["id"]?" selected":"") + ">" + userArray[i]["name"] + "</option>";

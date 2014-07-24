@@ -4,10 +4,37 @@
 	Designed by Duanliquan
 	2014-5-23
 */
-#sc_IM{ position:fixed; right:0px; top:100px; width:100px; background:#FFF; z-index:9000;border-left: solid 1px #e5e5e5;}
-#SCIM_search{ cursor: pointer;background: #F6F6F6 url(../images/searchBtn.png) no-repeat 9px 9px;height: 39px;line-height:39px;text-align: center;border-bottom: 1px solid #969696;box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
-#SCIM_uList{ overflow:hidden;}
-#SCIM_uList ul li{ height:52px; width:100px;padding: 1px 0px;}
+#sc_IM{ position:fixed; right:0px; top:100px; width:120px; background:#FFF; z-index:10000;border-left: solid 1px #e5e5e5;}
+#SCIM_search{ cursor: pointer;background: #F6F6F6 url(../images/searchBtn.png) no-repeat 9px 9px;height: 39px;line-height:39px;text-align: center;border-bottom: 1px solid #969696;box-shadow: 0 2px 2px rgba(0,0,0,0.1); position:relative;}
+#SCIM_uList{}
+#SCIM_uList ul {}
+#SCIM_uList ul li.group{
+    width:120px;
+    padding: 1px 0px;
+    position:relative;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #6a5acd;
+    color: #000000;
+    height: 100%;
+    text-align: center;
+    font-size: 15px;
+    right: 0px;
+}
+#SCIM_uList ul li{ height:52px; width:120px;padding: 1px 0px; position:relative;}
 #SCIM_uList ul li:hover{background: #f0efef;padding: 0px 0px;border-top: solid 1px #e5e5e5;border-bottom: solid 1px #e5e5e5;}
 #SCIM_uList img{ width:32px; height:32px; margin:10px; border-radius:5em;}
 #SCIM_groupSel{ cursor: pointer;background: #F6F6F6;height: 39px;line-height:39px;text-align: center;border-bottom: 1px solid #969696;box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
+
+#im_sBox{ border:solid 1px #e5e5e5; background:#FFF; height:39px; width:120px; position:absolute; top:0px; right:100px;}
+#im_sBox input{height: 16px;padding: 5px;line-height: 16px;border: 0 none; width:100px; margin-top:6px;}
+
+#user_Card{ padding:10px; background: url(../images/cardBg.png) no-repeat top left; width:260px; height:140px; z-index:9999; position:absolute; right:120px; top:0px; display:none;}
+#user_Card_Head{ float:left;}
+#user_Card_Head img{ -webkit-border-radius:5em; -moz-border-radius:5em;  border-radius:5em; border:3px solid #FFF; float:left; margin-right:20px; width: 86px; height: 86px;}
+#user_Card_Info{ float:left;}
+#user_Card_Info span{ display:block;}
+#user_Card_Info #uc_name{ color:#1E1E1E; font-size:22px;}
+#user_Card_Info #uc_post{ color:#1E1E1E; font-size:14px; padding-top:10px; padding-bottom:10px;}
+#user_Card_Info #uc_phone{ background:url(../images/icon_phone.png) no-repeat left center; padding-left:30px; line-height:34px; color:#FFF;}
+#user_Card_Info #uc_mobile{ background:url(../images/icon_mobile.png) no-repeat left center; padding-left:30px; line-height:34px; color:#FFF;}

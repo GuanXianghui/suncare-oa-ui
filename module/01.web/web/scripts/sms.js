@@ -1,9 +1,9 @@
 //短信Json数组
 var smsArray = new Array();
-//所有员工Json数组
-var userArray = new Array();
-//所有公司结构Json数组
-var structureArray = new Array();
+////所有员工Json数组
+//var userArray = new Array();
+////所有公司结构Json数组
+//var structureArray = new Array();
 
 /**
  * 初始化
@@ -23,11 +23,11 @@ $(document).ready(function() {
     smsArray = transferInitJsonStr2Array(smsJsonStr);
 
     //处理所有员工json串
-    processUserWithJson();
-    //处理所有公司结构json串
-    processStructureWithJson();
+//    processUserWithJson();
+//    //处理所有公司结构json串
+//    processStructureWithJson();
     //处理通讯录
-    processContacts();
+//    processContacts();
 
     //处理短信Json串
     processWithJson();
