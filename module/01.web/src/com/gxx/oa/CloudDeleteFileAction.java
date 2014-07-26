@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
@@ -46,7 +47,12 @@ public class CloudDeleteFileAction extends BaseAction implements CloudInterface 
             int id = Integer.parseInt(fileIds[i]);
             Cloud cloud = CloudDao.getCloudById(id);
             if(cloud == null){
+
                 message = "该目录[" + dir + "]下不存在ID为[" + id + "]的对象!";
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_DELETE_FILE, message, date, time, getIp());
+
                 String resp = "{isSuccess:false,message:'" + message + "',filesJsonStr:''," +
                         "hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
                 write(resp);
@@ -71,6 +77,9 @@ public class CloudDeleteFileAction extends BaseAction implements CloudInterface 
         List<Cloud> clouds = CloudDao.queryCloudsByPid(getUser().getId(), pid);
         String filesJsonStr = BaseUtil.getJsonArrayFromClouds(clouds).replaceAll("\\\'", "\\\\\\\'").
                 replaceAll("\\\"", "\\\\\\\"");
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_DELETE_FILE, "删除文件成功！", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'删除文件成功！',filesJsonStr:'" + filesJsonStr + "'," +

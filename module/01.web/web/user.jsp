@@ -63,6 +63,12 @@
                 <td><%=null==dept?"无":dept.getName()%></td>
             </tr>
             <tr>
+                <td class="table_title">积分：</td>
+                <td id="score_td_2" colspan="3">
+                    <%=user2.getScore()%>(积分的作用会在稍后上线的<b>积分商城</b>中体现，敬请期待~)
+                </td>
+            </tr>
+            <tr>
                 <td class="table_title">生日：</td>
                 <td id="birthday_td_2" colspan="3">
                     <%=user2.getBirthday()%>

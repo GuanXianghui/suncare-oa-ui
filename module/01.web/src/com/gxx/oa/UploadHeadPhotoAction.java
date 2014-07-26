@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.User;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.FileUtil;
 import org.apache.struts2.ServletActionContext;
@@ -49,6 +50,9 @@ public class UploadHeadPhotoAction extends BaseAction {
         User user = getUser();
         user.setHeadPhoto(headPhotoPagePath);
         UserDao.updateUserHeadPhoto(user);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(user.getId(), OperateLogInterface.TYPE_UPLOAD_HEAD_PHOTO, "上传头像成功", date, time, getIp());
 
         message = "上传头像成功！";
         return SUCCESS;

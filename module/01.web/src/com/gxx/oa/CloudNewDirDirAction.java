@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
@@ -41,6 +42,10 @@ public class CloudNewDirDirAction extends BaseAction implements CloudInterface {
         Cloud cloud = CloudDao.getCloudByUserIdAndDirAndNameAndType(getUser().getId(), dir, newDir, TYPE_DIR);
         if(cloud != null){
             message = "该目录[" + dir + "]下已存在相同名字[" + newDir + "]的文件夹!";
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_NEW_DIR, message, date, time, getIp());
+
             String resp = "{isSuccess:false,message:'" + message + "',filesJsonStr:''," +
                     "hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
             write(resp);

@@ -5,6 +5,7 @@ import com.gxx.oa.dao.UserNoticeDao;
 import com.gxx.oa.entities.Notice;
 import com.gxx.oa.entities.UserNotice;
 import com.gxx.oa.interfaces.BaseInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.interfaces.UserNoticeInterface;
 import com.gxx.oa.utils.BaseUtil;
@@ -50,7 +51,12 @@ public class OperateUserNoticeAction extends BaseAction {
                 notice = new UserNotice(getUser().getId(), Integer.parseInt(noticeId),
                         UserNoticeInterface.STATE_READED, date, time, getIp());
                 UserNoticeDao.insertUserNotice(notice);
-            }//有记录说明不是已读就是已删除，不做修改
+            }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_USER_NOTICE, "个人公告管理 阅读公告成功！", date, time, getIp());
+
+            //有记录说明不是已读就是已删除，不做修改
             resp = "{isSuccess:true,message:'阅读公告成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
         } else if(TYPE_DELETE.equals(type)){
@@ -66,6 +72,10 @@ public class OperateUserNoticeAction extends BaseAction {
                 notice.setIp(getIp());
                 UserNoticeDao.updateUserNotice(notice);
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_USER_NOTICE, "个人公告管理 删除公告成功！", date, time, getIp());
+
             resp = "{isSuccess:true,message:'删除公告成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
         } else if(TYPE_NEXT_PAGE.equals(type)) {
@@ -85,6 +95,10 @@ public class OperateUserNoticeAction extends BaseAction {
             String nextPageJson = BaseUtil.getJsonArrayFromNotices(nextPageNotices).replaceAll("\\\'", "\\\\\\\'").
                     replaceAll("\\\"", "\\\\\\\"").replaceAll(SymbolInterface.SYMBOL_NEW_LINE,
                     PropertyUtil.getInstance().getProperty(BaseInterface.GXX_OA_NEW_LINE_UUID));
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_USER_NOTICE, "个人公告管理 加载下一页公告成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'加载下一页公告成功！',nextPageJson:'" + nextPageJson +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";

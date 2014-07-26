@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.DiaryDao;
 import com.gxx.oa.entities.Diary;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 
 /**
@@ -37,6 +38,10 @@ public class UpdateDiaryAction extends BaseAction {
         diary.setUpdateTime(time);
         diary.setUpdateIp(getIp());
         DiaryDao.updateDiary(diary);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_DIARY, "修改工作日志成功！", date, time, getIp());
+
         message = "修改工作日志成功！";
         return SUCCESS;
     }

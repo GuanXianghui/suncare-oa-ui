@@ -5,10 +5,11 @@
         %><%@ page import="com.gxx.oa.utils.DateUtil"
         %><%@ page import="com.gxx.oa.utils.IPAddressUtil"
         %><%@ page import="com.gxx.oa.utils.TokenUtil"
-        %>
-<%@ page import="com.gxx.oa.entities.UserRight" %>
-<%@ page import="com.gxx.oa.dao.UserRightDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
+        %><%@ page import="com.gxx.oa.entities.UserRight"
+        %><%@ page import="com.gxx.oa.dao.UserRightDao"
+        %><%@ page import="com.gxx.oa.utils.BaseUtil"
+        %><%@ page import="com.gxx.oa.interfaces.OperateLogInterface"
+        %><%@ page contentType="text/html;charset=UTF-8" language="java"
         %><%
     String resp;
     String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
@@ -37,6 +38,8 @@
                 request.getSession().setAttribute(BaseInterface.USER_KEY, user);
                 request.getSession().setAttribute(BaseInterface.USER_RIGHT_KEY, userRight.getUserRight());
                 resp = "{isSuccess:true,message:'登陆成功！',isRedirect:true,redirectUrl:'" + baseUrl + "home.jsp'}";
+                BaseUtil.createOperateLog(user.getId(), OperateLogInterface.TYPE_LOG_IN, "登陆成功",
+                        DateUtil.getNowDate(), DateUtil.getNowTime(), IPAddressUtil.getIPAddress(request));
             }
         }
     }

@@ -4,6 +4,7 @@ import com.gxx.oa.dao.StructureDao;
 import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.Structure;
 import com.gxx.oa.entities.User;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 import org.apache.commons.lang.StringUtils;
@@ -46,6 +47,9 @@ public class UpdateUserAction extends BaseAction {
             user.setPassword(BaseUtil.generateDefaultPwd());
             UserDao.updateUserPassword(user);
 
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_USER, "修改用户 重置密码成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'重置密码成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
@@ -62,6 +66,9 @@ public class UpdateUserAction extends BaseAction {
             user.setCompany(company==null?0:company.getId());
             UserDao.updatePosition(user);
 
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_USER, "修改用户 修改职位成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'修改职位成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
@@ -71,8 +78,11 @@ public class UpdateUserAction extends BaseAction {
             user.setState(Integer.parseInt(state));
             UserDao.updateUserState(user);
 
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_USER, "修改用户 修改状态成功！", date, time, getIp());
+
             //返回结果
-            resp = "{isSuccess:true,message:'修改职位成功！',hasNewToken:true,token:'" +
+            resp = "{isSuccess:true,message:'修改状态成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
         } else {
             //返回结果

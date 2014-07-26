@@ -7,6 +7,7 @@ import com.gxx.oa.entities.Structure;
 import com.gxx.oa.entities.User;
 import com.gxx.oa.entities.UserRight;
 import com.gxx.oa.interfaces.BaseInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.ParamInterface;
 import com.gxx.oa.interfaces.UserInterface;
 import com.gxx.oa.utils.*;
@@ -37,6 +38,10 @@ public class CreateUserAction extends BaseAction {
         //根据名字查是否已有用户使用
         User user = UserDao.getUserByName(name);
         if(null != user){
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CREATE_USER, "创建用户 该用户名已被用！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:false,message:'该用户名已被用，请更换用户名！',hasNewToken:true," +
                     "token:'" + TokenUtil.createToken(request) + "'}";
@@ -51,7 +56,7 @@ public class CreateUserAction extends BaseAction {
             int positionInt = position==null?0:position.getId();
 
             String defaultPhoto = PropertyUtil.getInstance().getProperty(BaseInterface.DEFAULT_HEAD_PHOTO);
-            user = new User(name, BaseUtil.generateDefaultPwd(), letter, UserInterface.STATE_NORMAL, companyInt, deptInt,
+            user = new User(name, BaseUtil.generateDefaultPwd(), letter, UserInterface.STATE_NORMAL, 0, companyInt, deptInt,
                     positionInt, StringUtils.EMPTY, UserInterface.SEX_X, StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY,
                     StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY, defaultPhoto, StringUtils.EMPTY,
                     date, time, getIp(), StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
@@ -61,6 +66,9 @@ public class CreateUserAction extends BaseAction {
             user = UserDao.getUserByName(name);
             UserRight userRight = new UserRight(user.getId(), ParamUtil.getInstance().getValueByName(ParamInterface.DEFAULT_RIGHT));
             UserRightDao.insertUserRight(userRight);
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CREATE_USER, "创建用户 创建用户成功！", date, time, getIp());
 
             //返回结果
             resp = "{isSuccess:true,message:'创建用户成功！',hasNewToken:true,token:'" +

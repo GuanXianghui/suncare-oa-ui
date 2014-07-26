@@ -36,11 +36,15 @@ public class OperateSMSAction extends BaseAction {
         logger.info("type:" + type + ",phone=" + phone + ",content=" + content);
         //ajax结果
         String resp;
-        if(TYPE_SEND.equals(type)){//加载下一页
+        if(TYPE_SEND.equals(type)){//发送
             //短信日数量限制
             int limit = Integer.parseInt(PropertyUtil.getInstance().getProperty(BaseInterface.SMS_DAY_LIMIT));
             int countToday = SMSDao.countSMSByUserIdAndStateAndDate(getUser().getId(), SMSInterface.STATE_SUCCESS, date);
             if(limit <= countToday){
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_SMS, "短信管理 短信已达上限！", date, time, getIp());
+
                 resp = "{isSuccess:" + false + ",message:'你发送短信已达上限，请联系管理员，或者明天再试！'," +
                         "hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
             } else {
@@ -58,6 +62,10 @@ public class OperateSMSAction extends BaseAction {
                             isSuccess?SMSInterface.STATE_SUCCESS:SMSInterface.STATE_FAIL, date, time, getIp());
                     SMSDao.insertSMS(sms);
                 }
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_SMS, "短信管理 发送短信：！" + (isAllSuccess?"发送完成！":"未全部发送成功!"), date, time, getIp());
+
                 resp = "{isSuccess:" + isAllSuccess + ",message:'" + (isAllSuccess?"发送完成！":"未全部发送成功!") +
                         "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
             }

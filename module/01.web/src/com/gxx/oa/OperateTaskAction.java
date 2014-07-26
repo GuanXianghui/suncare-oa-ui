@@ -64,6 +64,10 @@ public class OperateTaskAction extends BaseAction {
                     getProperty(BaseInterface.TASK_PAGE_SIZE)))).replaceAll("\\\'", "\\\\\\\'").
                     replaceAll("\\\"", "\\\\\\\"").replaceAll(SymbolInterface.SYMBOL_NEW_LINE,
                     PropertyUtil.getInstance().getProperty(BaseInterface.GXX_OA_NEW_LINE_UUID));
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 加载下一页任务成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'加载下一页任务成功！',nextPageJson:'" + nextPageTasks +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
@@ -79,6 +83,10 @@ public class OperateTaskAction extends BaseAction {
                 task.setUpdateTime(time);
                 task.setUpdateIp(getIp());
                 TaskDao.updateTaskState(task);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 修改任务状态成功！", date, time, getIp());
+
                 //返回结果
                 resp = "{isSuccess:true,message:'修改任务状态成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -100,6 +108,10 @@ public class OperateTaskAction extends BaseAction {
                         "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message2);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 催任务进度成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'催任务进度成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -122,6 +134,10 @@ public class OperateTaskAction extends BaseAction {
                 for(TaskReview taskReview : taskReviewList){
                     TaskReviewDao.deleteTaskReview(taskReview);
                 }
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'删除任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -142,6 +158,10 @@ public class OperateTaskAction extends BaseAction {
                         "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message2);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 评论任务成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'评论任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -158,6 +178,10 @@ public class OperateTaskAction extends BaseAction {
                 taskReview.setUpdateTime(time);
                 taskReview.setUpdateIp(getIp());
                 TaskReviewDao.updateTaskReview(taskReview);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 修改任务评论成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'修改任务评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -176,6 +200,10 @@ public class OperateTaskAction extends BaseAction {
                         "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message2);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务评论成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'删除任务评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -205,6 +233,10 @@ public class OperateTaskAction extends BaseAction {
                         "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message3);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 回复评论任务成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'回复评论任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }

@@ -65,6 +65,10 @@ public class OperateDiaryAction extends BaseAction {
                     getProperty(BaseInterface.DIARY_PAGE_SIZE)), rightUserWithComma)).replaceAll("\\\'", "\\\\\\\'").
                     replaceAll("\\\"", "\\\\\\\"").replaceAll(SymbolInterface.SYMBOL_NEW_LINE,
                     PropertyUtil.getInstance().getProperty(BaseInterface.GXX_OA_NEW_LINE_UUID));
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 加载下一页工作日志成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'加载下一页工作日志成功！',nextPageJson:'" + nextPageDiaries +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
@@ -81,6 +85,10 @@ public class OperateDiaryAction extends BaseAction {
                 for(DiaryReview diaryReview : diaryReviewList){
                     DiaryReviewDao.deleteDiaryReview(diaryReview);
                 }
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 删除工作日志成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'删除工作日志成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -107,6 +115,10 @@ public class OperateDiaryAction extends BaseAction {
                             "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
                             MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                     MessageDao.insertMessage(message2);
+
+                    //创建操作日志
+                    BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 点赞成功！", date, time, getIp());
+
                     resp = "{isSuccess:true,message:'点赞成功！',hasNewToken:true,token:'" +
                             TokenUtil.createToken(request) + "'}";
                 }
@@ -132,6 +144,10 @@ public class OperateDiaryAction extends BaseAction {
                             "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
                             MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                     MessageDao.insertMessage(message2);
+
+                    //创建操作日志
+                    BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 取消赞成功！", date, time, getIp());
+
                     resp = "{isSuccess:true,message:'取消赞成功！',hasNewToken:true,token:'" +
                             TokenUtil.createToken(request) + "'}";
                 }
@@ -153,6 +169,10 @@ public class OperateDiaryAction extends BaseAction {
                         "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message2);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 评论工作日志成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'评论工作日志成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -169,6 +189,10 @@ public class OperateDiaryAction extends BaseAction {
                 diaryReview.setUpdateTime(time);
                 diaryReview.setUpdateIp(getIp());
                 DiaryReviewDao.updateDiaryReview(diaryReview);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 修改工作日志评论成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'修改工作日志评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -187,6 +211,10 @@ public class OperateDiaryAction extends BaseAction {
                         "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message2);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 删除工作日志评论成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'删除工作日志评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -214,6 +242,10 @@ public class OperateDiaryAction extends BaseAction {
                         "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
                         MessageInterface.STATE_NOT_READED, super.date, time, getIp());
                 MessageDao.insertMessage(message3);
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 回复评论工作日志成功！", date, time, getIp());
+
                 resp = "{isSuccess:true,message:'回复评论工作日志成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }

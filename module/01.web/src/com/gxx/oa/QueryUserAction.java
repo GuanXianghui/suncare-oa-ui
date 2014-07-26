@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.User;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 
@@ -30,6 +31,10 @@ public class QueryUserAction extends BaseAction {
         List<User> list = UserDao.queryUserByNameOrLetter(name);
         String json = BaseUtil.getJsonArrayFromUsers(list).replaceAll("\\\'", "\\\\\\\'").
                 replaceAll("\\\"", "\\\\\\\"");
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_QUERY_USER, "查询用户成功！", date, time, getIp());
+
         //返回结果
         String resp = "{isSuccess:true,message:'查询用户成功！',jsonStr:'" + json + "',hasNewToken:true," +
                 "token:'" + TokenUtil.createToken(request) + "'}";

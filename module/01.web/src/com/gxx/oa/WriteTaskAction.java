@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.TaskDao;
 import com.gxx.oa.entities.Task;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.TaskInterface;
 import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
@@ -38,6 +39,10 @@ public class WriteTaskAction extends BaseAction {
                 TaskInterface.STATE_NEW, beginDate, endDate, date, time, getIp(), StringUtils.EMPTY,
                 StringUtils.EMPTY, StringUtils.EMPTY);
         TaskDao.insertTask(task);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_WRITE_TASK, "写任务成功！", date, time, getIp());
+
         message = "写任务成功！";
         return SUCCESS;
     }

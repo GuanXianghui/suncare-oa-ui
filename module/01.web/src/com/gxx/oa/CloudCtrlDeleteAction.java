@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
@@ -55,6 +56,9 @@ public class CloudCtrlDeleteAction extends BaseAction implements CloudInterface 
         List<Cloud> clouds = CloudDao.queryRecycleClouds(getUser().getId());
         String filesJsonStr = BaseUtil.getJsonArrayFromClouds(clouds).replaceAll("\\\'", "\\\\\\\'").
                 replaceAll("\\\"", "\\\\\\\"");
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_CTRL_DELETE, "彻底删除文件成功！", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'彻底删除文件成功！',filesJsonStr:'" + filesJsonStr + "'," +

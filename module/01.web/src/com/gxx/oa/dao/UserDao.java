@@ -25,7 +25,7 @@ public class UserDao {
      */
     public static List<User> queryAllUsers() throws Exception {
         List<User> list = new ArrayList<User>();
-        String sql = "SELECT id,name,password,letter,state,company,dept,position,desk,sex,birthday," +
+        String sql = "SELECT id,name,password,letter,state,score,company,dept,position,desk,sex,birthday," +
                 "office_tel,mobile_tel,email,qq,msn,address,head_photo,website,register_date," +
                 "register_time,register_ip,visit_date,visit_time,visit_ip FROM user order by id";
         Connection c = DB.getConn();
@@ -41,6 +41,7 @@ public class UserDao {
                 String password = rs.getString("password");
                 String letter = rs.getString("letter");
                 int state = rs.getInt("state");
+                int score = rs.getInt("score");
                 int company = rs.getInt("company");
                 int dept = rs.getInt("dept");
                 int position = rs.getInt("position");
@@ -61,7 +62,7 @@ public class UserDao {
                 String visitDate = rs.getString("visit_date");
                 String visitTime = rs.getString("visit_time");
                 String visitIp = rs.getString("visit_ip");
-                User user = new User(id, name, password, letter, state, company, dept, position, desk, sex, birthday,
+                User user = new User(id, name, password, letter, state, score, company, dept, position, desk, sex, birthday,
                         officeTel, mobileTel, email, qq, msn, address, headPhoto, website, registerDate, registerTime,
                         registerIp, visitDate, visitTime, visitIp);
                 list.add(user);
@@ -82,7 +83,7 @@ public class UserDao {
      * @throws Exception
      */
     public static User getUserById(int id) throws Exception {
-        String sql = "SELECT name,password,letter,state,company,dept,position,desk,sex,birthday," +
+        String sql = "SELECT name,password,letter,state,score,company,dept,position,desk,sex,birthday," +
                 "office_tel,mobile_tel,email,qq,msn,address,head_photo,website,register_date," +
                 "register_time,register_ip,visit_date,visit_time,visit_ip FROM user WHERE id=" +
                 id + " order by id";
@@ -98,6 +99,7 @@ public class UserDao {
                 String password = rs.getString("password");
                 String letter = rs.getString("letter");
                 int state = rs.getInt("state");
+                int score = rs.getInt("score");
                 int company = rs.getInt("company");
                 int dept = rs.getInt("dept");
                 int position = rs.getInt("position");
@@ -118,7 +120,7 @@ public class UserDao {
                 String visitDate = rs.getString("visit_date");
                 String visitTime = rs.getString("visit_time");
                 String visitIp = rs.getString("visit_ip");
-                User user = new User(id, name, password, letter, state, company, dept, position, desk, sex, birthday,
+                User user = new User(id, name, password, letter, state, score, company, dept, position, desk, sex, birthday,
                         officeTel, mobileTel, email, qq, msn, address, headPhoto, website, registerDate, registerTime,
                         registerIp, visitDate, visitTime, visitIp);
                 return user;
@@ -139,7 +141,7 @@ public class UserDao {
      * @throws Exception
      */
     public static User getUserByName(String name) throws Exception {
-        String sql = "SELECT id,password,letter,state,company,dept,position,desk,sex,birthday," +
+        String sql = "SELECT id,password,letter,state,score,company,dept,position,desk,sex,birthday," +
                 "office_tel,mobile_tel,email,qq,msn,address,head_photo,website,register_date," +
                 "register_time,register_ip,visit_date,visit_time,visit_ip FROM user WHERE name='" +
                 name + "' order by id";
@@ -155,6 +157,7 @@ public class UserDao {
                 String password = rs.getString("password");
                 String letter = rs.getString("letter");
                 int state = rs.getInt("state");
+                int score = rs.getInt("score");
                 int company = rs.getInt("company");
                 int dept = rs.getInt("dept");
                 int position = rs.getInt("position");
@@ -175,7 +178,7 @@ public class UserDao {
                 String visitDate = rs.getString("visit_date");
                 String visitTime = rs.getString("visit_time");
                 String visitIp = rs.getString("visit_ip");
-                User user = new User(id, name, password, letter, state, company, dept, position, desk, sex, birthday,
+                User user = new User(id, name, password, letter, state, score, company, dept, position, desk, sex, birthday,
                         officeTel, mobileTel, email, qq, msn, address, headPhoto, website, registerDate, registerTime,
                         registerIp, visitDate, visitTime, visitIp);
                 return user;
@@ -208,13 +211,13 @@ public class UserDao {
      */
     public static void insertUser(User user) throws Exception {
         String sql = "insert into user" +
-                "(id,name,password,letter,state,company,dept,position,desk,sex,birthday,office_tel," +
+                "(id,name,password,letter,state,score,company,dept,position,desk,sex,birthday,office_tel," +
                 "mobile_tel,email,qq,msn,address,head_photo,website,register_date,register_time," +
                 "register_ip,visit_date,visit_time,visit_ip)" +
                 "values" +
                 "(null,'" + user.getName() + "','" + user.getPassword() + "','" + user.getLetter() + "'," +
-                user.getState() + "," + user.getCompany() + "," + user.getDept() + "," + user.getPosition() +
-                ",'" + user.getDesk() + "'," + user.getSex() + ",'" + user.getBirthday() + "','" +
+                user.getState() + "," + user.getScore() + "," + user.getCompany() + "," + user.getDept() + "," +
+                user.getPosition() + ",'" + user.getDesk() + "'," + user.getSex() + ",'" + user.getBirthday() + "','" +
                 user.getOfficeTel() + "','" + user.getMobileTel() + "','" + user.getEmail() + "','" + user.getQq() +
                 "','" + user.getMsn() + "','" + user.getAddress() + "','" + user.getHeadPhoto() + "','" +
                 user.getWebsite() + "','" + user.getRegisterDate() + "','" + user.getRegisterTime() + "','" +
@@ -254,6 +257,17 @@ public class UserDao {
      */
     public static void updateUserHeadPhoto(User user) throws Exception {
         String sql = "update user set head_photo='" + user.getHeadPhoto() + "' where id=" + user.getId();
+        DB.executeUpdate(sql);
+    }
+
+    /**
+     * 更新用户积分
+     *
+     * @param user
+     * @throws Exception
+     */
+    public static void updateUserScore(User user) throws Exception {
+        String sql = "update user set score=" + user.getScore() + " where id=" + user.getId();
         DB.executeUpdate(sql);
     }
 
@@ -306,7 +320,7 @@ public class UserDao {
      */
     public static List<User> queryUserByNameOrLetter(String name) throws Exception {
         List<User> list = new ArrayList<User>();
-        String sql = "SELECT id,name,password,letter,state,company,dept,position,desk,sex,birthday," +
+        String sql = "SELECT id,name,password,letter,state,score,company,dept,position,desk,sex,birthday," +
                 "office_tel,mobile_tel,email,qq,msn,address,head_photo,website,register_date," +
                 "register_time,register_ip,visit_date,visit_time,visit_ip FROM user WHERE name like '%" +
                 name + "%' OR letter like '%" + StringUtils.upperCase(name) + "%' order by id";
@@ -323,6 +337,7 @@ public class UserDao {
                 String password = rs.getString("password");
                 String letter = rs.getString("letter");
                 int state = rs.getInt("state");
+                int score = rs.getInt("score");
                 int company = rs.getInt("company");
                 int dept = rs.getInt("dept");
                 int position = rs.getInt("position");
@@ -343,7 +358,7 @@ public class UserDao {
                 String visitDate = rs.getString("visit_date");
                 String visitTime = rs.getString("visit_time");
                 String visitIp = rs.getString("visit_ip");
-                User user = new User(id, userName, password, letter, state, company, dept, position, desk, sex, birthday,
+                User user = new User(id, userName, password, letter, state, score, company, dept, position, desk, sex, birthday,
                         officeTel, mobileTel, email, qq, msn, address, headPhoto, website, registerDate, registerTime,
                         registerIp, visitDate, visitTime, visitIp);
                 list.add(user);
@@ -368,7 +383,7 @@ public class UserDao {
         if(StringUtils.isBlank(positionWithComma)){
             return list;
         }
-        String sql = "SELECT id,name,password,letter,state,company,dept,position,desk,sex,birthday," +
+        String sql = "SELECT id,name,password,letter,state,score,company,dept,position,desk,sex,birthday," +
                 "office_tel,mobile_tel,email,qq,msn,address,head_photo,website,register_date," +
                 "register_time,register_ip,visit_date,visit_time,visit_ip FROM user WHERE position IN " +
                 "(" + positionWithComma + ") order by id";
@@ -385,6 +400,7 @@ public class UserDao {
                 String password = rs.getString("password");
                 String letter = rs.getString("letter");
                 int state = rs.getInt("state");
+                int score = rs.getInt("score");
                 int company = rs.getInt("company");
                 int dept = rs.getInt("dept");
                 int position = rs.getInt("position");
@@ -405,7 +421,7 @@ public class UserDao {
                 String visitDate = rs.getString("visit_date");
                 String visitTime = rs.getString("visit_time");
                 String visitIp = rs.getString("visit_ip");
-                User user = new User(id, userName, password, letter, state, company, dept, position, desk, sex, birthday,
+                User user = new User(id, userName, password, letter, state, score, company, dept, position, desk, sex, birthday,
                         officeTel, mobileTel, email, qq, msn, address, headPhoto, website, registerDate, registerTime,
                         registerIp, visitDate, visitTime, visitIp);
                 list.add(user);

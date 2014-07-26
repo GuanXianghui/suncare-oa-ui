@@ -6,6 +6,8 @@ import com.gxx.oa.entities.CloudKnowAnswer;
 import com.gxx.oa.entities.CloudKnowAsk;
 import com.gxx.oa.interfaces.CloudKnowAnswerInterface;
 import com.gxx.oa.interfaces.CloudKnowAskInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
+import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -60,6 +62,10 @@ public class CloudKnowZanAnswerAction extends BaseAction implements CloudKnowAns
         CloudKnowAnswerDao.updateCloudKnowAnswer(cloudKnowAnswer);
 
         message = "赞回答成功！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ZAN_ANSWER, message, date, time, getIp());
+
         return SUCCESS;
     }
 

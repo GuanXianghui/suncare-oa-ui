@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.LetterDao;
 import com.gxx.oa.entities.Letter;
 import com.gxx.oa.interfaces.LetterInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.interfaces.UserInterface;
 import com.gxx.oa.utils.BaseUtil;
@@ -64,6 +65,9 @@ public class WriteLetterAction extends BaseAction {
                 LetterDao.insertLetter(sendLetter);
             }
         }
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_WRITE_LETTER, "写站内信成功！", date, time, getIp());
 
         message = "写信成功！";
         return SUCCESS;

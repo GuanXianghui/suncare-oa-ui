@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDocDao;
 import com.gxx.oa.entities.CloudDoc;
 import com.gxx.oa.interfaces.CloudDocInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.FileUtil;
@@ -109,6 +110,10 @@ public class CloudUploadDocAction extends BaseAction implements CloudDocInterfac
         CloudDocDao.insertCloudDoc(cloudDoc);
 
         message = "上传文档到申成文库成功！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_UPLOAD_DOC, message, date, time, getIp());
+
         return SUCCESS;
     }
 

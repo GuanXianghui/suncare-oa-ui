@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.TaskDao;
 import com.gxx.oa.entities.Task;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 
 /**
@@ -47,6 +48,10 @@ public class UpdateTaskAction extends BaseAction {
         task.setUpdateTime(time);
         task.setUpdateIp(getIp());
         TaskDao.updateTask(task);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_TASK, "修改任务成功！", date, time, getIp());
+
         message = "修改任务成功！";
         return SUCCESS;
     }

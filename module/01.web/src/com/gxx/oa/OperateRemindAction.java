@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.RemindDao;
 import com.gxx.oa.entities.Remind;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 import org.apache.commons.lang.StringUtils;
@@ -45,6 +46,10 @@ public class OperateRemindAction extends BaseAction {
             //根据用户id和日期查提醒
             String remindsJson = BaseUtil.getJsonArrayFromReminds(RemindDao.queryRemindsByUserIdAndDate
                     (getUser().getId(), date)).replaceAll("\\\'", "\\\\\\\'").replaceAll("\\\"", "\\\\\\\"");
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_REMIND, "提醒管理 查询提醒成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'查询提醒成功！',remindsJson:'" + remindsJson +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
@@ -57,6 +62,10 @@ public class OperateRemindAction extends BaseAction {
             //根据用户id和日期查提醒
             String remindsJson = BaseUtil.getJsonArrayFromReminds(RemindDao.queryRemindsByUserIdAndDate
                     (getUser().getId(), date)).replaceAll("\\\'", "\\\\\\\'").replaceAll("\\\"", "\\\\\\\"");
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_REMIND, "提醒管理 创建提醒成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'创建提醒成功！',remindsJson:'" + remindsJson +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
@@ -79,6 +88,10 @@ public class OperateRemindAction extends BaseAction {
                 //根据用户id和日期查提醒
                 String remindsJson = BaseUtil.getJsonArrayFromReminds(RemindDao.queryRemindsByUserIdAndDate
                         (getUser().getId(), date)).replaceAll("\\\'", "\\\\\\\'").replaceAll("\\\"", "\\\\\\\"");
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_REMIND, "提醒管理 修改提醒成功！", date, time, getIp());
+
                 //返回结果
                 resp = "{isSuccess:true,message:'修改提醒成功！',remindsJson:'" + remindsJson +
                         "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
@@ -95,8 +108,12 @@ public class OperateRemindAction extends BaseAction {
                 //根据用户id和日期查提醒
                 String remindsJson = BaseUtil.getJsonArrayFromReminds(RemindDao.queryRemindsByUserIdAndDate
                         (getUser().getId(), remind.getDate())).replaceAll("\\\'", "\\\\\\\'").replaceAll("\\\"", "\\\\\\\"");
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_REMIND, "提醒管理 取消提醒成功！", date, time, getIp());
+
                 //返回结果
-                resp = "{isSuccess:true,message:'删除提醒成功！',remindsJson:'" + remindsJson +
+                resp = "{isSuccess:true,message:'取消提醒成功！',remindsJson:'" + remindsJson +
                         "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
             }
         } else {

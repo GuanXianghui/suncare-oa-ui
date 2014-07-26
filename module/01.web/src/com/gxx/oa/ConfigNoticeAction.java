@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.NoticeDao;
 import com.gxx.oa.entities.Notice;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
@@ -60,6 +61,10 @@ public class ConfigNoticeAction extends BaseAction {
             message = "公共管理类型有误！";
             return ERROR;
         }
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CONFIG_NOTICE, "公告管理 " + message, date, time, getIp());
+
         return SUCCESS;
     }
 

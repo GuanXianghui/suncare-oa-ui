@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.StructureDao;
 import com.gxx.oa.entities.Structure;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 
@@ -60,6 +61,10 @@ public class ManageOrgStructureAction extends BaseAction {
                 leftOne.setIndexId(tempIndexId);
                 StructureDao.updateStructure(leftOne);
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_MANAGE_ORG_STRUCTURE, "组织架构管理 左移节点成功", date, time, getIp());
+
             resp = "{isSuccess:true,message:'左移节点成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "', newStructureJsonStr:\"" +
                     BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures()) + "\"}";
@@ -73,12 +78,20 @@ public class ManageOrgStructureAction extends BaseAction {
                 rightOne.setIndexId(tempIndexId);
                 StructureDao.updateStructure(rightOne);
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_MANAGE_ORG_STRUCTURE, "组织架构管理 右移节点成功", date, time, getIp());
+
             resp = "{isSuccess:true,message:'右移节点成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "', newStructureJsonStr:\"" +
                     BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures()) + "\"}";
         } else if(CONFIG_TYPE_ADD_NODE.equals(configType)) {//新增节点
             Structure structure = new Structure(type, name, id, StructureDao.getMaxIndexIdByPid(id) + 1);
             StructureDao.insertStructure(structure);
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_MANAGE_ORG_STRUCTURE, "组织架构管理 新增节点成功", date, time, getIp());
+
             resp = "{isSuccess:true,message:'新增节点成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "', newStructureJsonStr:\"" +
                     BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures()) + "\"}";
@@ -87,11 +100,19 @@ public class ManageOrgStructureAction extends BaseAction {
             structure.setType(type);
             structure.setName(name);
             StructureDao.updateStructure(structure);
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_MANAGE_ORG_STRUCTURE, "组织架构管理 更新节点成功", date, time, getIp());
+
             resp = "{isSuccess:true,message:'更新节点成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "', newStructureJsonStr:\"" +
                     BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures()) + "\"}";
         } else if(CONFIG_TYPE_DELETE_NODE.equals(configType)) {//删除节点
             deleteStructure(id);
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_MANAGE_ORG_STRUCTURE, "组织架构管理 删除节点成功", date, time, getIp());
+
             resp = "{isSuccess:true,message:'删除节点成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "', newStructureJsonStr:\"" +
                     BaseUtil.getJsonArrayFromStructures(StructureDao.queryAllStructures()) + "\"}";

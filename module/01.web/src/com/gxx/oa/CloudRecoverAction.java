@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
@@ -53,6 +54,10 @@ public class CloudRecoverAction extends BaseAction implements CloudInterface {
             if(existCloud != null){
                 message = "目录[" + cloud.getDir() + "]下已经存在名字为[" + cloud.getName() + "]的" +
                         BaseUtil.getCloudTypeDesc(cloud.getType()) + "!";
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_RECOVER, message, date, time, getIp());
+
                 String resp = "{isSuccess:false,message:'" + message + "',filesJsonStr:''," +
                         "hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
                 write(resp);
@@ -82,6 +87,9 @@ public class CloudRecoverAction extends BaseAction implements CloudInterface {
         List<Cloud> clouds = CloudDao.queryRecycleClouds(getUser().getId());
         String filesJsonStr = BaseUtil.getJsonArrayFromClouds(clouds).replaceAll("\\\'", "\\\\\\\'").
                 replaceAll("\\\"", "\\\\\\\"");
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_RECOVER, "还原文件成功！", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'还原文件成功！',filesJsonStr:'" + filesJsonStr + "'," +

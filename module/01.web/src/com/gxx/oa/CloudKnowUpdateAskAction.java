@@ -3,6 +3,8 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudKnowAskDao;
 import com.gxx.oa.entities.CloudKnowAsk;
 import com.gxx.oa.interfaces.CloudKnowAskInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
+import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -68,6 +70,10 @@ public class CloudKnowUpdateAskAction extends BaseAction implements CloudKnowAsk
         CloudKnowAskDao.updateCloudKnowAsk(cloudKnowAsk);
 
         message = "更新申成知道提问成功！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_UPDATE_ASK, message, date, time, getIp());
+
         return SUCCESS;
     }
 

@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.UserRightDao;
 import com.gxx.oa.entities.UserRight;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 
@@ -31,6 +32,9 @@ public class UpdateUserRightAction extends BaseAction {
         UserRight userRightEntity = UserRightDao.getUserRightByUserId(Integer.parseInt(userId));
         userRightEntity.setUserRight(userRight);
         UserRightDao.updateUserRight(userRightEntity);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_USER_RIGHT, "修改用户权限成功！", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'修改用户权限成功！',hasNewToken:true,token:'" +

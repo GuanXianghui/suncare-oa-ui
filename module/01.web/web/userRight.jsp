@@ -20,9 +20,7 @@
         String[] rightList = PropertyUtil.getInstance().getProperty(BaseInterface.RIGHT_LIST).split(SymbolInterface.SYMBOL_COMMA);
     %>
     <title>权限管理</title>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/jquery-min.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/base.js"></script>
-    <script type="text/javascript" src="<%=baseUrl%>scripts/userRight.js"></script>
+    <script type="text/javascript" src="scripts/userRight.js"></script>
     <link rel="stylesheet" href="css/sms.css" type="text/css" media="screen"/>
     <!-- 页面样式 -->
     <link rel="stylesheet" href="css/reset_back.css" type="text/css" media="screen"/>

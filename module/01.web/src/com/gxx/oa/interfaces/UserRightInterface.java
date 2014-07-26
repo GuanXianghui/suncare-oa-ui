@@ -14,10 +14,12 @@ public interface UserRightInterface extends BaseInterface {
      * 公告管理	0003
      * 默认权限	0004
      * 权限管理	0005
+     * 查看日志	0006
      */
     public static final String RIGHT_0001_USER_OPERATE = "0001";
     public static final String RIGHT_0002_ORG_STRUCTURE_MANAGE = "0002";
     public static final String RIGHT_0003_CONFIG_NOTICE = "0003";
     public static final String RIGHT_0004_DEFAULT_RIGHT = "0004";
     public static final String RIGHT_0005_USER_RIGHT = "0005";
+    public static final String RIGHT_0006_OPERATE_LOG = "0006";
 }

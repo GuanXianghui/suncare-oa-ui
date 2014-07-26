@@ -98,8 +98,8 @@ public class BaseUtil implements SymbolInterface {
             Structure company = StructureDao.getStructureById(user.getCompany());
             Structure dept = StructureDao.getStructureById(user.getDept());
             Structure position = StructureDao.getStructureById(user.getPosition());
-            result += "{id:" + user.getId() + ",name:'" + user.getName() + "',letter:'" +
-                    user.getLetter() + "',state:" + user.getState() + ",company:" + user.getCompany() +
+            result += "{id:" + user.getId() + ",name:'" + user.getName() + "',letter:'" + user.getLetter() +
+                    "',state:" + user.getState() + ",score:" + user.getScore() + ",company:" + user.getCompany() +
                     ",dept:" + user.getDept() + ",position:" + user.getPosition() + ",desk:'" + user.getDesk() +
                     "',sex:" + user.getSex() +",birthday:'" + user.getBirthday() +"',officeTel:'" + user.getOfficeTel() +
                     "',mobileTel:'" + user.getMobileTel() +"',email:'" + user.getEmail() +"',qq:'" + user.getQq() +
@@ -909,5 +909,22 @@ public class BaseUtil implements SymbolInterface {
             url += "?" + request.getQueryString();//参数
         }
         return url;
+    }
+
+    /**
+     * 创建操作日志
+     *
+     * @param userId
+     * @param type
+     * @param content
+     * @param date
+     * @param time
+     * @param ip
+     * @throws Exception
+     */
+    public static void createOperateLog(int userId, int type, String content, String date, String time,
+                                        String ip) throws Exception{
+        OperateLog operateLog = new OperateLog(userId, type, content, date, time, ip);
+        OperateLogDao.insertOperateLog(operateLog);
     }
 }

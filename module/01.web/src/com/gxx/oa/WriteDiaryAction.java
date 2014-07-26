@@ -2,6 +2,7 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.DiaryDao;
 import com.gxx.oa.entities.Diary;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
@@ -27,6 +28,10 @@ public class WriteDiaryAction extends BaseAction {
         Diary diary = new Diary(getUser().getId(), date, content, super.date, time, getIp(), StringUtils.EMPTY,
                 StringUtils.EMPTY, StringUtils.EMPTY);
         DiaryDao.insertDiary(diary);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_WRITE_DIARY, "写工作日志成功！", date, time, getIp());
+
         message = "写工作日志成功！";
         return SUCCESS;
     }

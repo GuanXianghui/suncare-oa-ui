@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.FileUtil;
@@ -69,6 +70,10 @@ public class CloudUploadAction extends BaseAction implements CloudInterface {
         Cloud cloud = CloudDao.getCloudByUserIdAndDirAndNameAndType(getUser().getId(), dir, fileFileName, TYPE_FILE);
         if(cloud != null){
             message = "该目录[" + dir + "]下已存在相同名字[" + fileFileName + "]的文件!";
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_UPLOAD, "申成网盘文件上传 " + message, date, time, getIp());
+
             return ERROR;
         }
 
@@ -102,6 +107,10 @@ public class CloudUploadAction extends BaseAction implements CloudInterface {
         CloudDao.insertCloud(cloud);
 
         message = "上传申成云文件成功！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_UPLOAD, "申成网盘文件上传 " + message, date, time, getIp());
+
         return SUCCESS;
     }
 

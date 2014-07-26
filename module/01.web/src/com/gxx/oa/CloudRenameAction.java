@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
@@ -51,7 +52,12 @@ public class CloudRenameAction extends BaseAction implements CloudInterface {
          */
         Cloud newNameCloud = CloudDao.getCloudByUserIdAndDirAndNameAndType(getUser().getId(), cloud.getDir(), newName, cloud.getType());
         if(null != newNameCloud){
+
             message = "该目录[" + cloud.getDir() + "]下已存在相同名字[" + newName + "]的" + BaseUtil.getCloudTypeDesc(cloud.getType()) + "!";
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_RENAME, message, date, time, getIp());
+
             String resp = "{isSuccess:false,message:'" + message + "',filesJsonStr:''," +
                     "hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
             write(resp);
@@ -85,6 +91,9 @@ public class CloudRenameAction extends BaseAction implements CloudInterface {
         List<Cloud> clouds = CloudDao.queryCloudsByPid(getUser().getId(), cloud.getPid());
         String filesJsonStr = BaseUtil.getJsonArrayFromClouds(clouds).replaceAll("\\\'", "\\\\\\\'").
                 replaceAll("\\\"", "\\\\\\\"");
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_RENAME, "重命名成功！", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'重命名成功！',filesJsonStr:'" + filesJsonStr + "'," +

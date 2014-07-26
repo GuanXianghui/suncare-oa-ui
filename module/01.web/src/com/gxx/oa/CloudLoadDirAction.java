@@ -3,6 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDao;
 import com.gxx.oa.entities.Cloud;
 import com.gxx.oa.interfaces.CloudInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.TokenUtil;
 import org.apache.commons.lang.StringUtils;
@@ -45,6 +46,9 @@ public class CloudLoadDirAction extends BaseAction implements CloudInterface {
         List<Cloud> clouds = CloudDao.queryCloudsByPid(getUser().getId(), pid);
         String filesJsonStr = BaseUtil.getJsonArrayFromClouds(clouds).replaceAll("\\\'", "\\\\\\\'").
                 replaceAll("\\\"", "\\\\\\\"");
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_LOAD_DIR, "加载文件夹[" + dir + "]成功", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'加载文件夹[" + dir + "]成功！',filesJsonStr:'" + filesJsonStr + "'," +

@@ -67,6 +67,10 @@ public interface BaseInterface {
      */
     public static final String TASK_PAGE_SIZE = "task_page_size";
     /**
+     * 操作日志页面大小
+     */
+    public static final String OPERATE_LOG_PAGE_SIZE = "operate_log_page_size";
+    /**
      * 短信服务相关配置
      * 短信服务用户id
      */

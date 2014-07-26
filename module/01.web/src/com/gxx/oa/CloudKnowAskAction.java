@@ -3,6 +3,8 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudKnowAskDao;
 import com.gxx.oa.entities.CloudKnowAsk;
 import com.gxx.oa.interfaces.CloudKnowAskInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
+import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -51,6 +53,10 @@ public class CloudKnowAskAction extends BaseAction implements CloudKnowAskInterf
         CloudKnowAskDao.insertCloudKnowAsk(cloudKnowAsk);
 
         message = "提问到申成知道成功，我们会找到相应的人帮你解答！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ASK, message, date, time, getIp());
+
         return SUCCESS;
     }
 

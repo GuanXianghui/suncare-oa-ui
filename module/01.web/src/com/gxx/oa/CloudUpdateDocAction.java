@@ -3,6 +3,8 @@ package com.gxx.oa;
 import com.gxx.oa.dao.CloudDocDao;
 import com.gxx.oa.entities.CloudDoc;
 import com.gxx.oa.interfaces.CloudDocInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
+import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -71,6 +73,10 @@ public class CloudUpdateDocAction extends BaseAction implements CloudDocInterfac
         CloudDocDao.updateCloudDoc(cloudDoc);
 
         message = "修改文档成功！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_UPDATE_DOC, message, date, time, getIp());
+
         return SUCCESS;
     }
 

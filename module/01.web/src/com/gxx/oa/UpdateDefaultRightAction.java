@@ -1,5 +1,6 @@
 package com.gxx.oa;
 
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.ParamInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.ParamUtil;
@@ -30,6 +31,9 @@ public class UpdateDefaultRightAction extends BaseAction {
 
         //根据name修改value和info
         ParamUtil.getInstance().updateParam(ParamInterface.DEFAULT_RIGHT, rightCodes, info);
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_DEFAULT_RIGHT, "修改默认权限成功！", date, time, getIp());
 
         //返回结果
         String resp = "{isSuccess:true,message:'修改默认权限成功！',hasNewToken:true,token:'" +

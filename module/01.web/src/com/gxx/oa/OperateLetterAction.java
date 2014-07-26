@@ -50,6 +50,9 @@ public class OperateLetterAction extends BaseAction {
                     replaceAll(SymbolInterface.SYMBOL_NEW_LINE, PropertyUtil.getInstance().
                     getProperty(BaseInterface.GXX_OA_NEW_LINE_UUID));
 
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_LETTER, "站内信管理 加载下一页消息成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'加载下一页消息成功！',nextPageJson:'" + nextPageLetters +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
@@ -70,6 +73,10 @@ public class OperateLetterAction extends BaseAction {
                     LetterDao.updateLetter(letter);
                 }
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_LETTER, "站内信管理 删除站内信成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'删除站内信成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
@@ -86,6 +93,10 @@ public class OperateLetterAction extends BaseAction {
                     LetterDao.deleteLetter(letter);
                 }
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_LETTER, "站内信管理 彻底删除站内信成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'彻底删除站内信成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
@@ -106,6 +117,10 @@ public class OperateLetterAction extends BaseAction {
                     LetterDao.updateLetter(letter);
                 }
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_LETTER, "站内信管理 标记站内信成已读成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'标记站内信成已读成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
@@ -126,6 +141,10 @@ public class OperateLetterAction extends BaseAction {
                     LetterDao.updateLetter(letter);
                 }
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_LETTER, "站内信管理 还原站内信成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'还原站内信成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";

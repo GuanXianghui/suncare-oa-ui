@@ -34,7 +34,8 @@
                         BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0002_ORG_STRUCTURE_MANAGE) ||
                         BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0003_CONFIG_NOTICE) ||
                         BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0004_DEFAULT_RIGHT) ||
-                        BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0005_USER_RIGHT)){
+                        BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0005_USER_RIGHT) ||
+                        BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0006_OPERATE_LOG)){
             %>
             <%
                 if(BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0001_USER_OPERATE)){
@@ -56,6 +57,10 @@
                 }else if(BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0005_USER_RIGHT)){
             %>
             <li><img src="images/icon_doc.png"/><a href="userRight.jsp">进入后台</a></li>
+            <%
+                }else if(BaseUtil.haveRight(userRight, UserRightInterface.RIGHT_0006_OPERATE_LOG)){
+            %>
+            <li><img src="images/icon_doc.png"/><a href="operateLog.jsp">进入后台</a></li>
             <%
                 }
                 }

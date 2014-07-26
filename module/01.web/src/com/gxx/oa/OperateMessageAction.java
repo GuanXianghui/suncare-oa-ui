@@ -4,6 +4,7 @@ import com.gxx.oa.dao.MessageDao;
 import com.gxx.oa.entities.Message;
 import com.gxx.oa.interfaces.BaseInterface;
 import com.gxx.oa.interfaces.MessageInterface;
+import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.interfaces.SymbolInterface;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.PropertyUtil;
@@ -51,6 +52,10 @@ public class OperateMessageAction extends BaseAction {
                 message.setIp(getIp());
                 MessageDao.updateMessage(message);
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_MESSAGE, "个人消息管理 阅读消息成功！", date, time, getIp());
+
             resp = "{isSuccess:true,message:'阅读消息成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
         } else if(TYPE_DELETE.equals(type)){
@@ -58,6 +63,10 @@ public class OperateMessageAction extends BaseAction {
             if(null != message){//没有记录则是已被删除
                 MessageDao.deleteMessage(message);
             }
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_MESSAGE, "个人消息管理 删除消息成功！", date, time, getIp());
+
             resp = "{isSuccess:true,message:'删除消息成功！',hasNewToken:true,token:'" +
                     TokenUtil.createToken(request) + "'}";
         } else if(TYPE_NEXT_PAGE.equals(type)) {
@@ -74,6 +83,10 @@ public class OperateMessageAction extends BaseAction {
             String nextPageJson = BaseUtil.getJsonArrayFromMessages(nextPageMessages).replaceAll("\\\'", "\\\\\\\'").
                     replaceAll("\\\"", "\\\\\\\"").replaceAll(SymbolInterface.SYMBOL_NEW_LINE,
                     PropertyUtil.getInstance().getProperty(BaseInterface.GXX_OA_NEW_LINE_UUID));
+
+            //创建操作日志
+            BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_MESSAGE, "个人消息管理 加载下一页消息成功！", date, time, getIp());
+
             //返回结果
             resp = "{isSuccess:true,message:'加载下一页消息成功！',nextPageJson:'" + nextPageJson +
                     "',hasNewToken:true,token:'" + TokenUtil.createToken(request) + "'}";
