@@ -6,6 +6,7 @@
     <%@ page import="java.util.List" %>
     <%@ page import="com.gxx.oa.dao.CloudDocDao" %>
     <%@ page import="com.gxx.oa.utils.DateUtil" %>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <title>Suncare-OA</title>
@@ -69,7 +70,17 @@
                     <span class="answer-num">
                         <a class="title" href="#"><%=DateUtil.getLongDate(DateUtil.getDate(cloudDoc.getCreateDate()))%></a>
                         <a href="javascript:window.open('cloudViewDoc.jsp?id=<%=cloudDoc.getId()%>')" class="minBtn">查看</a>
-                        <a href="javascript:window.open('<%=cloudDoc.getRoute()%>')" class="minBtn">下载</a>
+                        <%
+                            //文件类型
+                            String fileType = StringUtils.EMPTY;
+                            int dotIndex = cloudDoc.getRoute().lastIndexOf(SymbolInterface.SYMBOL_DOT);
+                            if(dotIndex > -1){
+                                fileType = cloudDoc.getRoute().substring(dotIndex);
+                            }
+                        %>
+                        <span onclick="cloudDownLoadDoc(<%=cloudDoc.getId()%>, 'download.jsp?fileRoute=<%=cloudDoc.getRoute()%>&newName=<%=cloudDoc.getTitle() + fileType%>')">
+                            <a href="#" class="minBtn">下载</a>
+                        </span>
                         <a href="javascript:location.href='cloudUpdateDoc.jsp?id=<%=cloudDoc.getId()%>'" class="minBtn">修改</a>
                         <a href="javascript:cloudDeleteDoc(<%=cloudDoc.getId()%>)" class="minBtn">删除</a>
                     </span>

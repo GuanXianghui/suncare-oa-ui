@@ -7,6 +7,7 @@
     <%@ page import="com.gxx.oa.interfaces.CloudDocInterface" %>
     <%@ page import="com.gxx.oa.dao.UserDao" %>
     <%@ page import="com.gxx.oa.utils.DateUtil" %>
+    <%@ page import="com.gxx.oa.interfaces.SymbolInterface" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ include file="header.jsp" %>
     <%
@@ -113,7 +114,16 @@
                 %>
                 <tr>
                     <td class="table_title">文档：</td>
-                    <td><input name="dosubmit" value="下载" type="button" class="subBtn" onclick="javascript:window.open('<%=cloudDoc.getRoute()%>')"/></td>
+                    <%
+                        //文件类型
+                        String fileType = StringUtils.EMPTY;
+                        int dotIndex = cloudDoc.getRoute().lastIndexOf(SymbolInterface.SYMBOL_DOT);
+                        if(dotIndex > -1){
+                            fileType = cloudDoc.getRoute().substring(dotIndex);
+                        }
+                    %>
+                    <td><input name="dosubmit" value="下载" type="button" class="subBtn"
+                               onclick="cloudDownLoadDoc(<%=cloudDoc.getId()%>, 'download.jsp?fileRoute=<%=cloudDoc.getRoute()%>&newName=<%=cloudDoc.getTitle() + fileType%>');"/></td>
                 </tr>
             </table>
         </div>

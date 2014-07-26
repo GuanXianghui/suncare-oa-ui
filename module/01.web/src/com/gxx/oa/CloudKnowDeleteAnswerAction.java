@@ -2,11 +2,11 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.CloudKnowAnswerDao;
 import com.gxx.oa.dao.CloudKnowAskDao;
+import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.CloudKnowAnswer;
 import com.gxx.oa.entities.CloudKnowAsk;
-import com.gxx.oa.interfaces.CloudKnowAnswerInterface;
-import com.gxx.oa.interfaces.CloudKnowAskInterface;
-import com.gxx.oa.interfaces.OperateLogInterface;
+import com.gxx.oa.entities.User;
+import com.gxx.oa.interfaces.*;
 import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
@@ -57,17 +57,38 @@ public class CloudKnowDeleteAnswerAction extends BaseAction implements CloudKnow
         //赋值 提问id 用于跳转
         askId = StringUtils.EMPTY + cloudKnowAsk.getId();
 
+        message = "删除回答成功！";
+
+        //创建操作日志
+        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_DELETE_ANSWER, message, date, time, getIp());
+
+        //根据 提问id+回答者id(状态为正常) 查 一个人回答一个申成知道问题的个数
+        int count = CloudKnowAnswerDao.countCloudKnowAnswersByAskIdAndUserId(cloudKnowAsk.getId(), getUser().getId());
+
+        //仍然还有回答不减申成币，没有则申成币-2
+        if(count == 1){
+            //申成知道-删除回答 仍然还有回答不减申成币，没有则申成币-2
+            UserDao.updateUserMoney(getUser().getId(), MoneyInterface.ACT_CLOUD_KNOW_DELETE_ANSWER);
+            User user = UserDao.getUserById(getUser().getId());
+
+            //创建申成币变动日志
+            BaseUtil.createOperateLog(user.getId(), OperateLogInterface.TYPE_SUNCARE_MONEY_CHANGE,
+                    "申成币变动 申成知道-删除回答" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ANSWER, date, time, getIp());
+
+            //刷新缓存
+            request.getSession().setAttribute(BaseInterface.USER_KEY, user);
+
+            //公众账号给用户发一条消息
+            BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
+                    "申成知道-删除回答成功，申成币" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ANSWER + "！", getIp());
+        }
+
         //更新申成知道提问
         cloudKnowAnswer.setState(STATE_DELETE);
         cloudKnowAnswer.setUpdateDate(date);
         cloudKnowAnswer.setUpdateTime(time);
         cloudKnowAnswer.setUpdateIp(getIp());
         CloudKnowAnswerDao.updateCloudKnowAnswer(cloudKnowAnswer);
-
-        message = "删除回答成功！";
-
-        //创建操作日志
-        BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_DELETE_ANSWER, message, date, time, getIp());
 
         return SUCCESS;
     }

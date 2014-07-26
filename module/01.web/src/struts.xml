@@ -146,6 +146,7 @@
                 /cloudMyDoc.jsp
             </result>
         </action>
+        <action name="cloudDownLoadDoc" class="com.gxx.oa.CloudDownLoadDocAction"/>
         <action name="cloudKnowAsk" class="com.gxx.oa.CloudKnowAskAction">
             <result>
                 /cloudKnowMyAsk.jsp

@@ -1,10 +1,10 @@
 package com.gxx.oa;
 
 import com.gxx.oa.dao.CloudDocDao;
+import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.CloudDoc;
-import com.gxx.oa.interfaces.CloudDocInterface;
-import com.gxx.oa.interfaces.OperateLogInterface;
-import com.gxx.oa.interfaces.SymbolInterface;
+import com.gxx.oa.entities.User;
+import com.gxx.oa.interfaces.*;
 import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.FileUtil;
 import org.apache.commons.lang.StringUtils;
@@ -113,6 +113,21 @@ public class CloudUploadDocAction extends BaseAction implements CloudDocInterfac
 
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_UPLOAD_DOC, message, date, time, getIp());
+
+        //申成文库-上传文档 申成币+3
+        UserDao.updateUserMoney(getUser().getId(), MoneyInterface.ACT_CLOUD_DOC_UPLOAD);
+        User user = UserDao.getUserById(getUser().getId());
+
+        //创建申成币变动日志
+        BaseUtil.createOperateLog(user.getId(), OperateLogInterface.TYPE_SUNCARE_MONEY_CHANGE,
+                "申成币变动 申成文库-上传文档" + MoneyInterface.ACT_CLOUD_DOC_UPLOAD, date, time, getIp());
+
+        //刷新缓存
+        request.getSession().setAttribute(BaseInterface.USER_KEY, user);
+
+        //公众账号给用户发一条消息
+        BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
+                "申成文库-上传文档成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_UPLOAD + "！", getIp());
 
         return SUCCESS;
     }

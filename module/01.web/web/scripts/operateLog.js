@@ -21,6 +21,13 @@ $(document).ready(function(){
         $("#userId").val(initUserId);
         $("#userName").val(user["name"]);
     }
+
+    //逐个用户id转换成用户姓名
+    $(".user_id_td").each(function(){
+        var id = parseInt($(this).html());
+        var user = getUserById(id);
+        $(this).html(user["name"]);
+    });
 });
 
 /**

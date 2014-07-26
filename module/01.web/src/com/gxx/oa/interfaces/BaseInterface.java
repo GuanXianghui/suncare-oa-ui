@@ -97,4 +97,9 @@ public interface BaseInterface {
      * 短信运营商_发送短信屏蔽词汇
      */
     public static final String SMS_DENIED_WORDS = "sms_denied_words";
+    /**
+     * 初始化申成币
+     * 创建用户时候，初始化送用户10个申成币
+     */
+    public static final String INIT_SUNCARE_MONEY = "init_suncare_money";
 }

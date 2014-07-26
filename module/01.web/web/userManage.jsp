@@ -74,6 +74,12 @@
                 <td><%=null==dept?"无":dept.getName()%></td>
             </tr>
             <tr>
+                <td class="table_title">申成币：</td>
+                <td colspan="3">
+                    <%=user.getMoney()%>币(申成币可以在稍后上线的<b>申成商城</b>中<b>兑换礼品</b>，敬请期待~)
+                </td>
+            </tr>
+            <tr>
                 <td class="table_title">生日：</td>
                 <td id="birthday_td_2" colspan="3">
                     <input class="inputArea inputWidthLong" type="text" id="birthday_input" value="<%=user.getBirthday()%>">

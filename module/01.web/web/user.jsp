@@ -63,9 +63,9 @@
                 <td><%=null==dept?"无":dept.getName()%></td>
             </tr>
             <tr>
-                <td class="table_title">积分：</td>
-                <td id="score_td_2" colspan="3">
-                    <%=user2.getScore()%>(积分的作用会在稍后上线的<b>积分商城</b>中体现，敬请期待~)
+                <td class="table_title">申成币：</td>
+                <td id="money_td_2" colspan="3">
+                    <%=user2.getMoney()%>币(申成币可以在稍后上线的<b>申成商城</b>中<b>兑换礼品</b>，敬请期待~)
                 </td>
             </tr>
             <tr>

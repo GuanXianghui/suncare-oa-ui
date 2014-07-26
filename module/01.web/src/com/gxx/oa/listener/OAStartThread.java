@@ -11,6 +11,7 @@ import com.gxx.oa.interfaces.MessageInterface;
 import com.gxx.oa.interfaces.PublicUserInterface;
 import com.gxx.oa.interfaces.RemindInterface;
 import com.gxx.oa.interfaces.UserInterface;
+import com.gxx.oa.utils.BaseUtil;
 import com.gxx.oa.utils.DateUtil;
 import com.gxx.oa.utils.PublicUserUtil;
 import com.gxx.oa.utils.SMSUtil;
@@ -61,25 +62,17 @@ public class OAStartThread extends Thread
                     User user = UserDao.getUserById(remind.getUserId());
                     //消息提醒
                     if(remind.getRemindType() == RemindInterface.REMIND_TYPE_MESSAGE){
-                        PublicUser publicUser = PublicUserUtil.getInstance().getPublicUserByEnglishName
-                                (PublicUserInterface.SUNCARE_OA_MESSAGE);
-                        //提醒时间到了，给写设置提醒的用户发送消息
-                        Message message = new Message(publicUser.getId(), UserInterface.USER_TYPE_PUBLIC,
-                                user.getId(), "你的提醒时间到啦！请见<a target=\"_blank\" " +
-                                "href=\"/calendar.jsp?id=" + remind.getId() + "\">链接</>", MessageInterface.STATE_NOT_READED,
-                                DateUtil.getNowDate(), DateUtil.getNowTime(), StringUtils.EMPTY);
-                        MessageDao.insertMessage(message);
+                        //公众账号给用户发一条消息
+                        BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
+                                "你的提醒时间到啦！请见<a target=\"_blank\" href=\"/calendar.jsp?id=" +
+                                        remind.getId() + "\">链接</>", StringUtils.EMPTY);
                     } else if(remind.getRemindType() == RemindInterface.REMIND_TYPE_SMS){//短信提醒
                         //没有设置手机号 则 消息提醒
                         if(StringUtils.isBlank(user.getMobileTel())){
-                            PublicUser publicUser = PublicUserUtil.getInstance().getPublicUserByEnglishName
-                                    (PublicUserInterface.SUNCARE_OA_MESSAGE);
-                            //提醒时间到了，给写设置提醒的用户发送消息
-                            Message message = new Message(publicUser.getId(), UserInterface.USER_TYPE_PUBLIC,
-                                    user.getId(), "你的提醒时间到啦！请见<a target=\"_blank\" " +
-                                    "href=\"/calendar.jsp?id=" + remind.getId() + "\">链接</>", MessageInterface.STATE_NOT_READED,
-                                    DateUtil.getNowDate(), DateUtil.getNowTime(), StringUtils.EMPTY);
-                            MessageDao.insertMessage(message);
+                            //公众账号给用户发一条消息
+                            BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
+                                    "你的提醒时间到啦，由于你未配置你的手机，所以不能成功短信提醒！请见<a target=\"_blank\" " +
+                                            "href=\"/calendar.jsp?id=" + remind.getId() + "\">链接</>", StringUtils.EMPTY);
                         } else {//短信提醒
                             String content = "来自申成门窗OA系统的提醒，提醒内容：[" + remind.getContent() + "]！祝您工作顺利！";
                             SMSUtil.sendSMS(user.getMobileTel(), content);

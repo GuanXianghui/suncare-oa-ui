@@ -61,6 +61,7 @@ public class CloudKnowAnswerDao implements CloudKnowAnswerInterface {
             DB.close(c);
         }
     }
+
     /**
      * 根据 提问id 查 申成知道回答个数
      *
@@ -84,6 +85,65 @@ public class CloudKnowAnswerDao implements CloudKnowAnswerInterface {
                 return countNum;
             }
             return 0;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
+    }
+
+    /**
+     * 根据 提问id+回答者id(状态为正常) 查 一个人回答一个申成知道问题的个数
+     * @param askId
+     * @return
+     * @throws Exception
+     */
+    public static int countCloudKnowAnswersByAskIdAndUserId(int askId, int userId) throws Exception {
+        List<CloudKnowAnswer> list = new ArrayList<CloudKnowAnswer>();
+        String sql = "SELECT count(1) count_num FROM cloud_know_answer WHERE ask_id=" +
+                askId + " AND user_id=" + userId + " AND state=" + STATE_NORMAL + " ORDER BY id DESC";
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                int countNum = rs.getInt("count_num");
+                return countNum;
+            }
+            return 0;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
+    }
+
+    /**
+     * 根据 提问id 查 申成知道所有回答者id，distinct排除相同的
+     *
+     * @param askId
+     * @return
+     * @throws Exception
+     */
+    public static List<Integer> queryCloudKnowAnswerUserIdsByAskId(int askId) throws Exception {
+        List<Integer> list = new ArrayList<Integer>();
+        String sql = "SELECT distinct user_id FROM cloud_know_answer WHERE ask_id=" +
+                askId + " AND state=" + STATE_NORMAL + " ORDER BY id DESC";
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                int userId = rs.getInt("user_id");
+                list.add(userId);
+            }
+            return list;
         } finally {
             DB.close(rs);
             DB.close(stmt);

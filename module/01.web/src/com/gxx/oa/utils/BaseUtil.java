@@ -7,7 +7,6 @@ import com.gxx.oa.interfaces.*;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +98,7 @@ public class BaseUtil implements SymbolInterface {
             Structure dept = StructureDao.getStructureById(user.getDept());
             Structure position = StructureDao.getStructureById(user.getPosition());
             result += "{id:" + user.getId() + ",name:'" + user.getName() + "',letter:'" + user.getLetter() +
-                    "',state:" + user.getState() + ",score:" + user.getScore() + ",company:" + user.getCompany() +
+                    "',state:" + user.getState() + ",money:" + user.getMoney() + ",company:" + user.getCompany() +
                     ",dept:" + user.getDept() + ",position:" + user.getPosition() + ",desk:'" + user.getDesk() +
                     "',sex:" + user.getSex() +",birthday:'" + user.getBirthday() +"',officeTel:'" + user.getOfficeTel() +
                     "',mobileTel:'" + user.getMobileTel() +"',email:'" + user.getEmail() +"',qq:'" + user.getQq() +
@@ -926,5 +925,21 @@ public class BaseUtil implements SymbolInterface {
                                         String ip) throws Exception{
         OperateLog operateLog = new OperateLog(userId, type, content, date, time, ip);
         OperateLogDao.insertOperateLog(operateLog);
+    }
+
+    /**
+     * 公众账号给用户发一条消息
+     * @param publicUserEnglishName 公众账号英文名字
+     * @param userId 用户Id
+     * @param content 内容
+     * @param ip 内容
+     */
+    public static void createPublicMessage(String publicUserEnglishName, int userId, String content, String ip) throws Exception {
+        //根据englishName获取公众账号
+        PublicUser publicUser = PublicUserUtil.getInstance().getPublicUserByEnglishName(publicUserEnglishName);
+        //给写日志的人发送消息
+        Message message = new Message(publicUser.getId(), UserInterface.USER_TYPE_PUBLIC, userId, content,
+                MessageInterface.STATE_NOT_READED, DateUtil.getNowDate(), DateUtil.getNowTime(), ip);
+        MessageDao.insertMessage(message);
     }
 }

@@ -127,7 +127,7 @@ public class OperateLog implements OperateLogInterface {
      * 26:申成网盘文件上传 27:申成网盘加载文件夹 28:申成网盘新建文件夹 29:申成网盘删除文件(夹)
      * 30:申成网盘重命名文件(夹) 31:申成网盘还原文件(夹) 32:申成网盘彻底删除文件(夹) 33:申成网盘清空回收站
      * 34:申成文库上传文档 35:申成文库修改文档 36:申成文库删除文档 37:申成知道提问 38:申成知道回答 39:申成知道修改提问
-     * 40:申成知道删除提问 41:申成知道删除回答 42:申成知道赞回答
+     * 40:申成知道删除提问 41:申成知道删除回答 42:申成知道赞回答 43:申成币变动 44:申成文库下载文档
      * @return
      */
     public String getTypeDesc(){
@@ -216,6 +216,10 @@ public class OperateLog implements OperateLogInterface {
              typeDesc = "申成知道删除回答";
          } else if(type == TYPE_CLOUD_KNOW_ZAN_ANSWER){
              typeDesc = "申成知道赞回答";
+         } else if(type == TYPE_SUNCARE_MONEY_CHANGE){
+             typeDesc = "申成币变动";
+         } else if(type == TYPE_CLOUD_DOWNLOAD_DOC){
+             typeDesc = "申成文库下载文档";
          }
         return typeDesc;
     }

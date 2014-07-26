@@ -13,7 +13,7 @@ public class User {
     String password;
     String letter;
     int state;
-    int score;
+    int money;
     int company;
     int dept;
     int position;
@@ -42,7 +42,7 @@ public class User {
      * @param password
      * @param letter
      * @param state
-     * @param score
+     * @param money
      * @param company
      * @param dept
      * @param position
@@ -64,7 +64,7 @@ public class User {
      * @param visitTime
      * @param visitIp
      */
-    public User(String name, String password, String letter, int state, int score, int company, int dept,
+    public User(String name, String password, String letter, int state, int money, int company, int dept,
                 int position, String desk, int sex, String birthday, String officeTel, String mobileTel,
                 String email, String qq, String msn, String address, String headPhoto, String website,
                 String registerDate, String registerTime, String registerIp, String visitDate, String visitTime,
@@ -73,7 +73,7 @@ public class User {
         this.password = password;
         this.letter = letter;
         this.state = state;
-        this.score = score;
+        this.money = money;
         this.company = company;
         this.dept = dept;
         this.position = position;
@@ -104,7 +104,7 @@ public class User {
      * @param password
      * @param letter
      * @param state
-     * @param score
+     * @param money
      * @param company
      * @param dept
      * @param position
@@ -126,7 +126,7 @@ public class User {
      * @param visitTime
      * @param visitIp
      */
-    public User(int id, String name, String password, String letter, int state, int score, int company, int dept,
+    public User(int id, String name, String password, String letter, int state, int money, int company, int dept,
                 int position, String desk, int sex, String birthday, String officeTel, String mobileTel,
                 String email, String qq, String msn, String address, String headPhoto, String website,
                 String registerDate, String registerTime, String registerIp, String visitDate, String visitTime,
@@ -136,7 +136,7 @@ public class User {
         this.password = password;
         this.letter = letter;
         this.state = state;
-        this.score = score;
+        this.money = money;
         this.company = company;
         this.dept = dept;
         this.position = position;
@@ -199,12 +199,12 @@ public class User {
         this.state = state;
     }
 
-    public int getScore() {
-        return score;
+    public int getMoney() {
+        return money;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     public int getCompany() {
