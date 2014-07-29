@@ -52,6 +52,10 @@ function updateDiary(){
         showAttention("请输入日期");
         return false;
     }
+    if(date > nowDate){
+        showAttention("不能写晚于今天[" + nowDate + "]的日志！");
+        return;
+    }
     var content = editor.getContent();
     if(content.length > DIARY_CONTENT_LENGTH) {
         showAttention("工作日志内容大于" + DIARY_CONTENT_LENGTH + "个字符");

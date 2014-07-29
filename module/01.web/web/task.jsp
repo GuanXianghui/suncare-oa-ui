@@ -51,7 +51,7 @@
     <script type="text/javascript" src="scripts/task.js"></script>
     <script type="text/javascript">
         //选择用户id
-        var userId = <%=userId%>;
+        var initUserId = <%=userId%>;
         //任务来源用户id
         var fromUserId = <%=fromUserId%>;
         //任务接受用户id
@@ -78,9 +78,6 @@
 <div id="menu">
     <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
     <%@ include file="menu.jsp" %>
-    <div class="menu_info">
-        <a href="#"><img src="images/header.jpg" /></a>
-    </div>
 </div>
 <!-- 头部固定菜单层 结束-->
 <!-- 主显示区 开始-->
@@ -93,9 +90,9 @@
                     <option value="<%=TaskInterface.TYPE_FROM_ME%>"<%=type == TaskInterface.TYPE_FROM_ME?" selected":""%>>我分配的</option>
                 </select>
                 用户:
-                <select name="userId" id="userId" class="inputArea">
-                    <option value="">全部用户</option>
-                </select>
+                <span id="user">&lt;全部用户&gt;</span>
+                <input value="从通讯录选择" type="button" class="minBtn" onclick="choose()" />
+                <input id="userId" type="hidden" value="">
                 状态:
                 <select id="state" class="inputArea">
                     <option value="">全部</option>

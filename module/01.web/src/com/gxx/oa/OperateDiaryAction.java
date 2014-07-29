@@ -55,7 +55,7 @@ public class OperateDiaryAction extends BaseAction {
                 ",diaryId=" + diaryId);
         //ajax结果
         String resp;
-        if(TYPE_NEXT_PAGE.equals(type)){//加载下一页
+        if(TYPE_NEXT_PAGE.equals(type)){//加载下一页 因为暂无分页 所以不会进入该分支
             int userIdInt = Integer.parseInt(userId);//没有选择人则为0
             int countNowInt = Integer.parseInt(countNow);
             String rightUserWithComma = BaseUtil.getLowerLevelPositionUserIdWithComma(getUser().getPosition());//有权限看的下级用户
@@ -109,15 +109,13 @@ public class OperateDiaryAction extends BaseAction {
                             DiaryReviewInterface.TYPE_ZAN, 0, StringUtils.EMPTY, super.date, time, getIp(),
                             StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
                     DiaryReviewDao.insertDiaryReview(diaryReview);
-                    //给写日志的人发送消息
-                    Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                            diary.getUserId(), "有个人给你的日志点赞啦！请见<a target=\"_blank\" " +
-                            "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
-                            MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                    MessageDao.insertMessage(message2);
 
                     //创建操作日志
                     BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 点赞成功！", date, time, getIp());
+
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                            getUser().getName() + "给你的日志点赞了，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
 
                     resp = "{isSuccess:true,message:'点赞成功！',hasNewToken:true,token:'" +
                             TokenUtil.createToken(request) + "'}";
@@ -138,15 +136,13 @@ public class OperateDiaryAction extends BaseAction {
                 } else {
                     DiaryReview diaryReview = DiaryReviewDao.getZan(diary.getId(), getUser().getId());
                     DiaryReviewDao.deleteDiaryReview(diaryReview);
-                    //给写日志的人发送消息
-                    Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                            diary.getUserId(), "有个人从你的日志取消赞啦！请见<a target=\"_blank\" " +
-                            "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
-                            MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                    MessageDao.insertMessage(message2);
 
                     //创建操作日志
                     BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 取消赞成功！", date, time, getIp());
+
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                            getUser().getName() + "从你的日志取消赞了，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
 
                     resp = "{isSuccess:true,message:'取消赞成功！',hasNewToken:true,token:'" +
                             TokenUtil.createToken(request) + "'}";
@@ -163,15 +159,13 @@ public class OperateDiaryAction extends BaseAction {
                         DiaryReviewInterface.TYPE_MESSAGE, 0, content, super.date, time, getIp(),
                         StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
                 DiaryReviewDao.insertDiaryReview(diaryReview);
-                //给写日志的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        diary.getUserId(), "有个人评论了你的日志啦！请见<a target=\"_blank\" " +
-                        "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 评论工作日志成功！", date, time, getIp());
+
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                        getUser().getName() + "评论了你的日志，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
 
                 resp = "{isSuccess:true,message:'评论工作日志成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -193,6 +187,10 @@ public class OperateDiaryAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 修改工作日志评论成功！", date, time, getIp());
 
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                        getUser().getName() + "修改了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
                 resp = "{isSuccess:true,message:'修改工作日志评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -205,15 +203,13 @@ public class OperateDiaryAction extends BaseAction {
                         TokenUtil.createToken(request) + "'}";
             } else {
                 DiaryReviewDao.deleteDiaryReview(diaryReview);
-                //给写日志的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        diary.getUserId(), "有个人从你的日志删除评论啦！请见<a target=\"_blank\" " +
-                        "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 删除工作日志评论成功！", date, time, getIp());
+
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                        getUser().getName() + "删除了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
 
                 resp = "{isSuccess:true,message:'删除工作日志评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -230,21 +226,19 @@ public class OperateDiaryAction extends BaseAction {
                         DiaryReviewInterface.TYPE_REPLY, diaryReview.getUserId(), content, super.date, time,
                         getIp(), StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
                 DiaryReviewDao.insertDiaryReview(diaryReview2);
-                //给写日志的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        diary.getUserId(), "有个人评论了你的日志啦！请见<a target=\"_blank\" " +
-                        "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
-                //给发原始日志评论的人发送消息
-                Message message3 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        diaryReview.getUserId(), "有个人回复了你的日志评论啦！请见<a target=\"_blank\" " +
-                        "href=\"/showDiary.jsp?id=" + diary.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message3);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 回复评论工作日志成功！", date, time, getIp());
+
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                        getUser().getName() + "在你的日志中回复了评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                if(diary.getUserId() != diaryReview.getUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diaryReview.getUserId(),
+                            getUser().getName() + "回复了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                }
 
                 resp = "{isSuccess:true,message:'回复评论工作日志成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";

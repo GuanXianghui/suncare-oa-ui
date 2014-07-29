@@ -66,6 +66,10 @@ public class CloudKnowZanAnswerAction extends BaseAction implements CloudKnowAns
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ZAN_ANSWER, message, date, time, getIp());
 
+        //普通用户触发给用户发一条消息
+        BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAnswer.getUserId(),
+                getUser().getName() + "赞了你申成知道提问的回答" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+
         return SUCCESS;
     }
 

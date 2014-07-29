@@ -35,16 +35,15 @@
 <div id="menu">
     <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
     <%@ include file="menu.jsp" %>
-    <div class="menu_info">
-        <a href="#"><img src="images/header.jpg" /></a>
-    </div>
 </div>
 <!-- 头部固定菜单层 结束-->
 <!-- 主显示区 开始-->
 <div id="mainArea">
     <div class="normalTitle">个人信息</div>
     <div id="user_head">
-        <div id="head_thumb"><img src="<%=baseUrl + user2.getHeadPhoto()%>" /></div>
+        <div id="head_thumb" style="background-image:url('<%=baseUrl + user2.getHeadPhoto()%>');">
+            <%--<img src="<%=baseUrl + user2.getHeadPhoto()%>" />--%>
+        </div>
     </div>
     <div id="user_info">
         <table  cellpadding="0" cellspacing="0" width="100%" class="information">

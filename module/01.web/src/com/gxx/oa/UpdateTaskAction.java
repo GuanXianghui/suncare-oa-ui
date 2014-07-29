@@ -52,6 +52,16 @@ public class UpdateTaskAction extends BaseAction {
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_TASK, "修改任务成功！", date, time, getIp());
 
+        if(getUser().getId() != task.getFromUserId()){
+            //普通用户触发给用户发一条消息
+            BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
+                    getUser().getName() + "修改了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+        } else {
+            //普通用户触发给用户发一条消息
+            BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                    getUser().getName() + "修改了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+        }
+
         message = "修改任务成功！";
         return SUCCESS;
     }

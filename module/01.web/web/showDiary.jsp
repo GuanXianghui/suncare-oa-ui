@@ -41,6 +41,8 @@
         var diaryId = <%=id%>;
         //日志日期
         var date = "<%=diary.getDate()%>";
+        //当前日期
+        var nowDate = "<%=DateUtil.getNowDate()%>";
     </script>
 </head>
 
@@ -50,9 +52,6 @@
 <div id="menu">
     <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
     <%@ include file="menu.jsp" %>
-    <div class="menu_info">
-        <a href="#"><img src="images/header.jpg" /></a>
-    </div>
 </div>
 <!-- 头部固定菜单层 结束-->
 <!-- 主显示区 开始-->

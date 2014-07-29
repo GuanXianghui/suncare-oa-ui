@@ -1,7 +1,7 @@
 //任务Json数组
 var taskArray = new Array();
 //所有员工Json数组
-//var userArray = new Array();
+var userArray = new Array();
 
 /**
  * 初始化
@@ -35,9 +35,16 @@ function initUsers(){
 //            userArray[userArray.length] = eval("(" + array[i] + ")");
 //        }
 //    }
-    for(var i=0;i<userArray.length;i++){
-        document.getElementById("userId").innerHTML += " <option value=\"" + userArray[i]["id"] + "\"" +
-            (userId==userArray[i]["id"]?" selected":"") + ">" + userArray[i]["name"] + "</option>";
+
+//    for(var i=0;i<userArray.length;i++){
+//        document.getElementById("userId").innerHTML += " <option value=\"" + userArray[i]["id"] + "\"" +
+//            (userId==userArray[i]["id"]?" selected":"") + ">" + userArray[i]["name"] + "</option>";
+//    }
+    if(initUserId > 0){
+        var user = getUserById(initUserId);
+        var html = "&lt;<a href=\"" + baseUrl + "user.jsp?id=" + initUserId + "\" target=\"_blank\">" + user["name"] + "</a>&gt;"
+        $("#user").html(html);
+        $("#userId").val(initUserId);
     }
 }
 
@@ -78,8 +85,8 @@ function processWithJson(){
                     taskArray[i]["title"] + "</a>" +
             "</td>" +
             "<td align='center'>" + taskArray[i]["stateDesc"] + "</td>" +
-            "<td align='center'>" + taskArray[i]["beginDate"] + "</td>" +
-            "<td align='center'>" + taskArray[i]["endDate"] + "</td>" +
+            "<td align='center'>" + getLongDate(taskArray[i]["beginDate"]) + "</td>" +
+            "<td align='center'>" + getLongDate(taskArray[i]["endDate"]) + "</td>" +
             "</tr>";
     }
 
@@ -181,4 +188,36 @@ function showNextPageTasks(){
             showAttention("服务器连接异常，请稍后再试！");
         }
     });
+}
+
+/**
+ * 从通讯录选择
+ */
+function choose(){
+    //设置窗口的一些状态值
+    var windowStatus = "left=380,top=200,width=260,height=200,resizable=0,scrollbars=0,menubar=no,status=0,fullscreen=1";
+    //在窗口中打开的页面
+    var url = "chooseSingleContact.jsp";
+    var userId = showModalDialog(url,"",windowStatus);
+    if(userId == EMPTY || userId == undefined){
+        return;
+    }
+    var user = getUserById(userId);
+    var html = "&lt;<a href=\"" + baseUrl + "user.jsp?id=" + userId + "\" target=\"_blank\">" + user["name"] + "</a>&gt;"
+    $("#user").html(html);
+    $("#userId").val(userId);
+
+}
+
+/**
+ * 根据id查用户
+ * @param id
+ */
+function getUserById(id) {
+    for(var i=0;i<userArray.length;i++){
+        if(userArray[i]["id"] == id){
+            return userArray[i];
+        }
+    }
+    return null;
 }

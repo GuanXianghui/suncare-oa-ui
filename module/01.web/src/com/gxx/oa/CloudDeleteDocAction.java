@@ -65,7 +65,7 @@ public class CloudDeleteDocAction extends BaseAction implements CloudDocInterfac
 
         //公众账号给用户发一条消息
         BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
-                "申成文库-删除文档成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_DELETE + "！", getIp());
+                "申成文库-删除文档[" + cloudDoc.getTitle() + "]成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_DELETE + "！", getIp());
 
         return SUCCESS;
     }

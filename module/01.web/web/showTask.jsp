@@ -25,6 +25,13 @@
             response.sendRedirect(baseUrl + "task.jsp");
             return;
         }
+        /**
+         * 不能查看与你无关的任务
+         */
+        if(user.getId() != task.getFromUserId() && user.getId() != task.getToUserId()){
+            response.sendRedirect(baseUrl + "task.jsp?message=not your task");
+            return;
+        }
         //任务来源和接受用户
         User fromUser = UserDao.getUserById(task.getFromUserId());
         User toUser = UserDao.getUserById(task.getToUserId());
@@ -62,9 +69,6 @@
 <div id="menu">
     <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
     <%@ include file="menu.jsp" %>
-    <div class="menu_info">
-        <a href="#"><img src="images/header.jpg" /></a>
-    </div>
 </div>
 <!-- 头部固定菜单层 结束-->
 <!-- 主显示区 开始-->

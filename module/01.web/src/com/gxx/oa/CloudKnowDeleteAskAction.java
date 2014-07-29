@@ -69,7 +69,7 @@ public class CloudKnowDeleteAskAction extends BaseAction implements CloudKnowAsk
 
         //公众账号给用户发一条消息
         BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
-                "申成知道-删除提问成功，提问者申成币" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ASK_TO_ASK + "！", getIp());
+                "申成知道-删除提问[" + cloudKnowAsk.getQuestion() + "]成功，提问者申成币" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ASK_TO_ASK + "！", getIp());
 
         //根据 提问id 查 申成知道所有回答者id，distinct排除相同的
         List<Integer> integerList = CloudKnowAnswerDao.queryCloudKnowAnswerUserIdsByAskId(askIdInt);
@@ -83,7 +83,11 @@ public class CloudKnowDeleteAskAction extends BaseAction implements CloudKnowAsk
 
             //公众账号给用户发一条消息
             BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, userInteger.intValue(),
-                    "申成知道-删除提问成功，回答者申成币" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ASK_TO_ANSWER + "！", getIp());
+                    getUser().getName() + "申成知道-删除提问[" + cloudKnowAsk.getQuestion() + "]成功，回答者申成币" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ASK_TO_ANSWER + "！", getIp());
+
+            //普通用户触发给用户发一条消息
+            BaseUtil.createNormalMessage(getUser().getId(), userInteger,
+                    getUser().getName() + "删除了申成知道的提问[" + cloudKnowAsk.getQuestion() + "]", getIp());
         }
 
         return SUCCESS;

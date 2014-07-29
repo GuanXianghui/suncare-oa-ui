@@ -53,7 +53,7 @@ public class OperateTaskAction extends BaseAction {
                 toUserId + ",state=" + state + ",taskId=" + taskId + ",newState=" + newState);
         //ajax结果
         String resp;
-        if(TYPE_NEXT_PAGE.equals(type)){//加载下一页
+        if(TYPE_NEXT_PAGE.equals(type)){//加载下一页 因为没有分页 暂时没有该分支
             int countNowInt = Integer.parseInt(countNow);
             int fromUserIdInt = Integer.parseInt(fromUserId);//没有则为0
             int toUserIdInt = Integer.parseInt(toUserId);//没有则为0
@@ -87,6 +87,16 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 修改任务状态成功！", date, time, getIp());
 
+                if(getUser().getId() != task.getFromUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
+                            getUser().getName() + "修改了任务状态，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                } else {
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "修改了任务状态，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                }
+
                 //返回结果
                 resp = "{isSuccess:true,message:'修改任务状态成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -102,15 +112,13 @@ public class OperateTaskAction extends BaseAction {
                         TaskReviewInterface.TYPE_CUI, 0, StringUtils.EMPTY, date, time, getIp(), StringUtils.EMPTY,
                         StringUtils.EMPTY, StringUtils.EMPTY);
                 TaskReviewDao.insertTaskReview(taskReview);
-                //给任务接受的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        task.getToUserId(), "有个人催你的任务进度啦！请见<a target=\"_blank\" " +
-                        "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 催任务进度成功！", date, time, getIp());
+
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                        getUser().getName() + "催了你的任务进度，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
 
                 resp = "{isSuccess:true,message:'催任务进度成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -138,6 +146,10 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务成功！", date, time, getIp());
 
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                        getUser().getName() + "删除了分配给你的任务[" + task.getTitle() + "]", getIp());
+
                 resp = "{isSuccess:true,message:'删除任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -152,15 +164,19 @@ public class OperateTaskAction extends BaseAction {
                         TaskReviewInterface.TYPE_MESSAGE, 0, content, super.date, time, getIp(),
                         StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
                 TaskReviewDao.insertTaskReview(taskReview);
-                //给任务接受的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        task.getToUserId(), "有个人评论了你的任务啦！请见<a target=\"_blank\" " +
-                        "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 评论任务成功！", date, time, getIp());
+
+                if(getUser().getId() != task.getFromUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
+                            getUser().getName() + "评论了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                } else {
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "评论了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                }
 
                 resp = "{isSuccess:true,message:'评论任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -182,6 +198,16 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 修改任务评论成功！", date, time, getIp());
 
+                if(getUser().getId() != task.getFromUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
+                            getUser().getName() + "修改了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                } else {
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "修改了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                }
+
                 resp = "{isSuccess:true,message:'修改任务评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
             }
@@ -194,15 +220,19 @@ public class OperateTaskAction extends BaseAction {
                         TokenUtil.createToken(request) + "'}";
             } else {
                 TaskReviewDao.deleteTaskReview(taskReview);
-                //给任务接受的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        task.getToUserId(), "有个人删除了你的任务评论啦！请见<a target=\"_blank\" " +
-                        "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务评论成功！", date, time, getIp());
+
+                if(getUser().getId() != task.getFromUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
+                            getUser().getName() + "删除了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                } else {
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "删除了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                }
 
                 resp = "{isSuccess:true,message:'删除任务评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -219,23 +249,22 @@ public class OperateTaskAction extends BaseAction {
                         TaskReviewInterface.TYPE_REPLY, taskReview.getUserId(), content, super.date, time,
                         getIp(), StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
                 TaskReviewDao.insertTaskReview(taskReview2);
-                //给任务接受的人发送消息
-                Message message2 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        task.getToUserId(), "有个人回复了你的任务评论啦！请见<a target=\"_blank\" " +
-                        "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message2);
-                resp = "{isSuccess:true,message:'回复评论任务成功！',hasNewToken:true,token:'" +
-                        TokenUtil.createToken(request) + "'}";
-                //给发原始任务评论的人发送消息
-                Message message3 = new Message(getUser().getId(), UserInterface.USER_TYPE_NORMAL,
-                        taskReview.getUserId(), "有个人回复了你的任务评论啦！请见<a target=\"_blank\" " +
-                        "href=\"/showTask.jsp?id=" + task.getId() + "\">链接</>",
-                        MessageInterface.STATE_NOT_READED, super.date, time, getIp());
-                MessageDao.insertMessage(message3);
 
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 回复评论任务成功！", date, time, getIp());
+
+                //创建操作日志
+                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务评论成功！", date, time, getIp());
+
+                if(getUser().getId() != task.getFromUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
+                            getUser().getName() + "回复了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                } else {
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "回复了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                }
 
                 resp = "{isSuccess:true,message:'回复评论任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";

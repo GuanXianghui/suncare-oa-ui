@@ -9,7 +9,7 @@ import com.gxx.oa.utils.BaseUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 申成文库上传文档action
+ * 申成知道提问action
  *
  * @author Gxx
  * @module oa
@@ -71,7 +71,7 @@ public class CloudKnowAskAction extends BaseAction implements CloudKnowAskInterf
 
         //公众账号给用户发一条消息
         BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
-                "申成知道-提问成功，申成币" + MoneyInterface.ACT_CLOUD_KNOW_ASK + "！", getIp());
+                "申成知道-提问成功，申成币" + MoneyInterface.ACT_CLOUD_KNOW_ASK + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
 
         return SUCCESS;
     }

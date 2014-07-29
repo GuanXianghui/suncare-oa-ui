@@ -69,3 +69,6 @@
         </ul>
     </li>
 </ul>
+<div class="menu_info">
+    <a href="user.jsp?id=<%=user.getId()%>"><img src="<%=user.getHeadPhoto()%>" /></a>
+</div>

@@ -80,7 +80,10 @@ textarea.inputArea{height:200px !important;}
 .inputWidthLong{ width:450px;}
 
 #user_head{ float:left; padding:20px;}
-#head_thumb{ margin:10px; }
+/*by段利泉*/
+/*#head_thumb{ margin:10px; }*/
+/*by关向辉修改于2014-07-29 17:16:00*/
+#head_thumb{ margin:10px; width: 128px;height: 128px;background-repeat:no-repeat;background-position:center center;background-size: contain;text-align: center;border: 1px solid gray;}
 #head_thumb img{ width:128px; height:128px; }
 #head_modify{margin:10px; }
 #user_info{ float:left; padding:20px;}

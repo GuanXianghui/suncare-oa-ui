@@ -127,7 +127,7 @@ public class CloudUploadDocAction extends BaseAction implements CloudDocInterfac
 
         //公众账号给用户发一条消息
         BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
-                "申成文库-上传文档成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_UPLOAD + "！", getIp());
+                "申成文库-上传文档成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_UPLOAD + "，见<a href=\"cloudViewDoc.jsp?id=" + cloudDoc.getId() + "\" target=\"_blank\">文档</a>", getIp());
 
         return SUCCESS;
     }

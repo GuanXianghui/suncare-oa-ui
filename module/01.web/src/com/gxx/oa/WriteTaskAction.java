@@ -43,6 +43,10 @@ public class WriteTaskAction extends BaseAction {
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_WRITE_TASK, "写任务成功！", date, time, getIp());
 
+        //普通用户触发给用户发一条消息
+        BaseUtil.createNormalMessage(task.getFromUserId(), task.getToUserId(),
+                getUser().getName() + "给你分配了任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
         message = "写任务成功！";
         return SUCCESS;
     }

@@ -131,6 +131,34 @@ public class CloudDocDao implements CloudDocInterface {
                 "','" + cloudDoc.getCreateIp() + "','" + cloudDoc.getUpdateDate() + "','" +
                 cloudDoc.getUpdateTime() + "','" + cloudDoc.getUpdateIp() + "')";
         DB.executeUpdate(sql);
+
+        cloudDoc.setId(getMaxIdByUserId(cloudDoc.getUserId()));
+    }
+
+    /**
+     * 根据用户id查最大的申成文库Id
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public static int getMaxIdByUserId(int userId) throws Exception{
+        String sql = "SELECT MAX(id) max_id FROM cloud_doc WHERE user_id=" + userId;
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                return rs.getInt("max_id");
+            }
+            return 0;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
     }
 
     /**

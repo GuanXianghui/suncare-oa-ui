@@ -942,4 +942,18 @@ public class BaseUtil implements SymbolInterface {
                 MessageInterface.STATE_NOT_READED, DateUtil.getNowDate(), DateUtil.getNowTime(), ip);
         MessageDao.insertMessage(message);
     }
+
+    /**
+     * 普通用户触发给用户发一条消息
+     * @param fromUserId 触发普通用户Id
+     * @param toUserId 接受普通用户Id
+     * @param content 内容
+     * @param ip 内容
+     */
+    public static void createNormalMessage(int fromUserId, int toUserId, String content, String ip) throws Exception {
+        //给写日志的人发送消息
+        Message message = new Message(fromUserId, UserInterface.USER_TYPE_NORMAL, toUserId, content,
+                MessageInterface.STATE_NOT_READED, DateUtil.getNowDate(), DateUtil.getNowTime(), ip);
+        MessageDao.insertMessage(message);
+    }
 }

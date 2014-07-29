@@ -30,16 +30,15 @@
 <div id="menu">
     <div class="logo"><a href="#"><img src="images/logo.jpg" /></a></div>
     <%@ include file="menu.jsp" %>
-    <div class="menu_info">
-        <a href="#"><img src="images/header.jpg" /></a>
-    </div>
 </div>
 <!-- 头部固定菜单层 结束-->
 <!-- 主显示区 开始-->
 <div id="mainArea">
     <div class="normalTitle">个人信息</div>
     <div id="user_head">
-        <div id="head_thumb"><img src="<%=baseUrl + user.getHeadPhoto()%>" /></div>
+        <div id="head_thumb" style="background-image:url('<%=baseUrl + user.getHeadPhoto()%>');">
+            <%--<img src="<%=baseUrl + user.getHeadPhoto()%>" />--%>
+        </div>
         <div><input value="修改头像"  class="subBtn" onclick="$('#headPhoto').click()" /></div>
         <div><input value="修改密码"  class="subBtn" onclick="$('#updatePasswordA').click()" /></div>
         <form style="display: none;" name="uploadHeadPhotoForm" method="post" autocomplete="off"

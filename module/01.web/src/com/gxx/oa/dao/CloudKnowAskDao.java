@@ -119,6 +119,34 @@ public class CloudKnowAskDao implements CloudKnowAskInterface {
                 cloudKnowAsk.getCreateIp() + "','" + cloudKnowAsk.getUpdateDate() + "','" +
                 cloudKnowAsk.getUpdateTime() + "','" + cloudKnowAsk.getUpdateIp() + "')";
         DB.executeUpdate(sql);
+
+        cloudKnowAsk.setId(getMaxIdByUserId(cloudKnowAsk.getUserId()));
+    }
+
+    /**
+     * 根据用户id查最大的申成知道提问Id
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public static int getMaxIdByUserId(int userId) throws Exception{
+        String sql = "SELECT MAX(id) max_id FROM cloud_know_ask WHERE user_id=" + userId;
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                return rs.getInt("max_id");
+            }
+            return 0;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
     }
 
     /**

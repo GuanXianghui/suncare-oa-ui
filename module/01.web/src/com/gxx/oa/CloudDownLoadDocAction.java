@@ -54,7 +54,7 @@ public class CloudDownLoadDocAction extends BaseAction {
 
             //公众账号给用户发一条消息
             BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
-                    "申成文库-下载文档成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_DOWNLOAD + "！", getIp());
+                    "申成文库-下载文档成功，申成币" + MoneyInterface.ACT_CLOUD_DOC_DOWNLOAD + "，见<a href=\"cloudViewDoc.jsp?id=" + docId + "\" target=\"_blank\">文档</a>", getIp());
         }
 
         //返回结果

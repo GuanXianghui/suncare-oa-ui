@@ -245,6 +245,37 @@ public class TaskDao {
                 "','" + task.getCreateDate() + "','" + task.getCreateTime() + "','" + task.getCreateIp() + "','" +
                 task.getUpdateDate() + "','" + task.getUpdateTime() + "','" + task.getUpdateIp() + "')";
         DB.executeUpdate(sql);
+
+        //根据来源用户id和接受用户id查最大的任务Id
+        task.setId(getMaxIdByFromAndToUserId(task.getFromUserId(), task.getToUserId()));
+    }
+
+    /**
+     * 根据来源用户id和接受用户id查最大的任务Id
+     * @param fromUserId
+     * @param toUserId
+     * @return
+     * @throws Exception
+     */
+    public static int getMaxIdByFromAndToUserId(int fromUserId, int toUserId) throws Exception{
+        String sql = "SELECT MAX(id) max_id FROM task WHERE from_user_id=" + fromUserId +
+                " AND to_user_id=" + toUserId;
+        Connection c = DB.getConn();
+        Statement stmt = DB.createStatement(c);
+        ResultSet rs = DB.executeQuery(c, stmt, sql);
+        try {
+            if (rs == null) {
+                throw new RuntimeException("数据库操作出错，请重试！");
+            }
+            while (rs.next()) {
+                return rs.getInt("max_id");
+            }
+            return 0;
+        } finally {
+            DB.close(rs);
+            DB.close(stmt);
+            DB.close(c);
+        }
     }
 
     /**

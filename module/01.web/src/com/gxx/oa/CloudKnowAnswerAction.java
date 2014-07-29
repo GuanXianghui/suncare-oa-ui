@@ -75,6 +75,10 @@ public class CloudKnowAnswerAction extends BaseAction implements CloudKnowAnswer
             //创建操作日志
             BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ANSWER, message, date, time, getIp());
 
+            //普通用户给用户发一条消息
+            BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAsk.getUserId(),
+                    getUser().getName() + "修改了你申成知道提问的回答" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+
             return SUCCESS;
         }
         //以下类型为新增回答
@@ -89,6 +93,10 @@ public class CloudKnowAnswerAction extends BaseAction implements CloudKnowAnswer
 
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ANSWER, message, date, time, getIp());
+
+        //普通用户给用户发一条消息
+        BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAsk.getUserId(),
+                getUser().getName() + "回答了你申成知道提问" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
 
         //根据 提问id+回答者id(状态为正常) 查 一个人回答一个申成知道问题的个数
         int count = CloudKnowAnswerDao.countCloudKnowAnswersByAskIdAndUserId(cloudKnowAsk.getId(), getUser().getId());
@@ -108,7 +116,7 @@ public class CloudKnowAnswerAction extends BaseAction implements CloudKnowAnswer
 
             //公众账号给用户发一条消息
             BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, user.getId(),
-                    "申成知道-回答成功，申成币" + MoneyInterface.ACT_CLOUD_KNOW_ANSWER + "！", getIp());
+                    "申成知道-回答成功，申成币" + MoneyInterface.ACT_CLOUD_KNOW_ANSWER + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
         }
 
         //新增申成知道回答
