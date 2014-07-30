@@ -50,15 +50,26 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="suncare-oa-ui" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SMSUtil.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/SMSUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.54373926" vertical-offset="158" max-vertical-offset="969">
+              <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -68,57 +79,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudNewDirDirAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDeleteFileAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudRenameAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudRecoverAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudCtrlDeleteAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudClearRecycleAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudUpdateDocAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowUpdateAskAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowZanAnswerAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/web/userRight.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/UserRightInterface.java" />
-        <option value="$PROJECT_DIR$/module/01.web/web/layers.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/DateUtil.java" />
-        <option value="$PROJECT_DIR$/module/01.web/web/menu.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CreateUserAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/daily/备注.txt" />
-        <option value="$PROJECT_DIR$/module/01.web/web/scripts/operateLog.js" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/BaseInterface.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/config.properties" />
-        <option value="$PROJECT_DIR$/module/01.web/web/user.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/userManage.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/User.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/UserDao.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudKnowAnswerDao.java" />
+        <option value="$PROJECT_DIR$/module/01.web/web/showTask.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudDocDao.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDeleteDocAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudKnowAskDao.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDownLoadDocAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowAskAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudUploadDocAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/web/showDiary.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/home.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/message.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/letter.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/notice.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/message.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/chooseSingleContact.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/notice.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/letter.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/diary.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/showDiary.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/task.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/showTask.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/sms.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/defaultRight.js" />
+        <option value="$PROJECT_DIR$/module/01.web/web/cloud.jsp" />
+        <option value="$PROJECT_DIR$/module/01.web/src/struts.xml" />
         <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/OperateLogInterface.java" />
         <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/OperateLog.java" />
         <option value="$PROJECT_DIR$/module/01.web/web/operateLog.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/src/struts.xml" />
-        <option value="$PROJECT_DIR$/module/01.web/daily/20140726.txt" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/MoneyInterface.java" />
-        <option value="$PROJECT_DIR$/module/01.web/web/scripts/cloudMyDoc.js" />
-        <option value="$PROJECT_DIR$/module/01.web/web/cloudMyDoc.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/cloudViewDoc.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/scripts/cloudViewDoc.js" />
         <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/BaseUtil.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudRenameAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudMoveToDirAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/web/scripts/cloud.js" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudNewDirDirAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudNewDirAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudDao.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/javamail/MailSenderInfo.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/javamail/SimpleMailSender.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/config.properties" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/BaseInterface.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/EmailUtils.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/UpdateTaskAction.java" />
         <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/listener/OAStartThread.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudUploadDocAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ajax/login.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDownLoadDocAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDeleteDocAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowAskAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowAnswerAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/ConfigNoticeAction.java" />
         <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowDeleteAskAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowUpdateAskAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowZanAnswerAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateDiaryAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/WriteTaskAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateTaskAction.java" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowAnswerAction.java" />
         <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowDeleteAnswerAction.java" />
-        <option value="$PROJECT_DIR$/module/01.web/web/im.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ueditor/jsp/config.properties" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ueditor/jsp/imageUp.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ueditor/jsp/fileUp.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ueditor/jsp/imageManager.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ueditor/jsp/scrawlUp.jsp" />
-        <option value="$PROJECT_DIR$/module/01.web/web/ueditor/ueditor.config.js" />
+        <option value="$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/SMSUtil.java" />
       </list>
     </option>
   </component>
@@ -185,6 +196,16 @@
       <sortByType ProjectPane="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -203,60 +224,6 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="suncare-oa-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="01.web" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="suncare-oa-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="01.web" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ueditor" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="suncare-oa-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="01.web" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ueditor" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jsp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane">
@@ -269,16 +236,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="01.web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -306,22 +263,22 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/suncare-oa-ui.ipr" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../suncare-oa/suncare-oa.ipr" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gxx.oa.utils" />
       <recent name="com.gxx.oa" />
       <recent name="com.gxx.oa.interfaces" />
       <recent name="com.gxx.oa.dao" />
       <recent name="com.gxx.oa.entities" />
-      <recent name="com.gxx.oa.sap_data" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\images\head" />
+      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\src\com\gxx\oa\utils\javamail" />
       <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\daily" />
       <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\scripts" />
       <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web" />
-      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\images" />
-      <recent name="D:\04.my_projects\suncare-oa-ui\module\01.web\web\css" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.operateLog.jsp">
@@ -658,12 +615,15 @@
       <workItem from="1406383851324" duration="13144000" />
       <workItem from="1406397231715" duration="3000" />
       <workItem from="1406508272267" duration="849000" />
-      <workItem from="1406514853046" duration="5607000" />
+      <workItem from="1406514853046" duration="9570000" />
+      <workItem from="1406598692660" duration="22816000" />
+      <workItem from="1406683030299" duration="39345000" />
+      <workItem from="1406730494584" duration="52000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117447000" />
+    <option name="totallyTimeSpent" value="183623000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -710,16 +670,48 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21623673" sideWeight="0.52459013" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44590163" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23823975" sideWeight="0.52459013" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5704918" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3147541" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33442622" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21623673" sideWeight="0.52459013" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44590163" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.54754096" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5262295" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20409712" sideWeight="0.47540984" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -746,376 +738,367 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/cloudViewKnow.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/showTask.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4158607" vertical-offset="3381" max-vertical-offset="4313">
-          <caret line="85" column="28" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.39849624" vertical-offset="536" max-vertical-offset="6631">
+          <caret line="31" column="75" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="75" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudKnowAnswerDao.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/diary.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16295026" vertical-offset="2090" max-vertical-offset="4864">
-          <caret line="124" column="42" selection-start-line="124" selection-start-column="7" selection-end-line="124" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.16295026" vertical-offset="114" max-vertical-offset="4465">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/CloudKnowAnswer.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/letter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2603">
+        <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="12331">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/showLetter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="848" max-vertical-offset="2375">
+          <caret line="49" column="58" selection-start-line="49" selection-start-column="58" selection-end-line="49" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/showLetter.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3438914" vertical-offset="57" max-vertical-offset="3762">
+          <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/showDiary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="6213">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/task.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="130" max-vertical-offset="4446">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/showTask.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="8265">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/sms.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10393">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/defaultRight.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16295026" vertical-offset="0" max-vertical-offset="1235">
+          <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/facebox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4014337" vertical-offset="2189" max-vertical-offset="5985">
+          <caret line="127" column="91" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/Cloud.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1715267" vertical-offset="2020" max-vertical-offset="2603">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/cloud.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/CloudInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3207548" vertical-offset="1192" max-vertical-offset="2033">
-          <caret line="72" column="73" selection-start-line="72" selection-start-column="73" selection-end-line="72" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/OperateLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1798" max-vertical-offset="3838">
-          <caret line="129" column="62" selection-start-line="129" selection-start-column="62" selection-end-line="129" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/operateLog.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.107143" vertical-offset="2554" max-vertical-offset="5016">
-          <caret line="139" column="40" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudClearRecycleAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="798">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/struts.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5214408" vertical-offset="2508" max-vertical-offset="4313">
-          <caret line="148" column="38" selection-start-line="148" selection-start-column="22" selection-end-line="148" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/cloud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36535162" vertical-offset="3226" max-vertical-offset="8417">
-          <caret line="181" column="4" selection-start-line="181" selection-start-column="4" selection-end-line="216" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudUpdateDocAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13722126" vertical-offset="15" max-vertical-offset="1957">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudDocDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1364" max-vertical-offset="4731">
-          <caret line="76" column="27" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.022298457" vertical-offset="158" max-vertical-offset="741">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/OperateLogInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0102916" vertical-offset="6" max-vertical-offset="1330">
-          <caret line="62" column="28" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1349">
+          <caret line="17" column="74" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="74" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/cloudMyDoc.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/OperateLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.178572" vertical-offset="1235" max-vertical-offset="2033">
-          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="82" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3573" max-vertical-offset="3876">
+          <caret line="221" column="25" selection-start-line="221" selection-start-column="25" selection-end-line="221" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/cloudMyDoc.js">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudLoadDirAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="842" max-vertical-offset="1425">
-          <caret line="69" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="69" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.25614035" vertical-offset="367" max-vertical-offset="1178">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/cloudViewDoc.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDeleteFileAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.821428" vertical-offset="342" max-vertical-offset="2717">
-          <caret line="31" column="77" selection-start-line="31" selection-start-column="77" selection-end-line="31" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="984" max-vertical-offset="1805">
+          <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/cloudViewDoc.js">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/operateLog.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1368">
-          <caret line="66" column="1" selection-start-line="66" selection-start-column="1" selection-end-line="66" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.36346865" vertical-offset="1114" max-vertical-offset="5016">
+          <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowZanAnswerAction.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/SymbolInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9382504" vertical-offset="756" max-vertical-offset="1463">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1083">
+          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateDiaryAction.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/cloud.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26758146" vertical-offset="1725" max-vertical-offset="5415">
-          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="116" selection-end-column="55" />
+        <state vertical-scroll-proportion="-7.464286" vertical-offset="228" max-vertical-offset="2470">
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/UserInterface.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudUploadAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21783876" vertical-offset="44" max-vertical-offset="627">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1269" max-vertical-offset="2413">
+          <caret line="104" column="97" selection-start-line="104" selection-start-column="97" selection-end-line="104" selection-end-column="97" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/BaseInterface.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudRenameAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3241851" vertical-offset="1526" max-vertical-offset="2109">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1081" max-vertical-offset="2090">
+          <caret line="74" column="15" selection-start-line="74" selection-start-column="15" selection-end-line="74" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/entities/Message.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/web/scripts/cloud.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327616" vertical-offset="395" max-vertical-offset="2090">
-          <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4506" max-vertical-offset="11913">
+          <caret line="247" column="24" selection-start-line="247" selection-start-column="24" selection-end-line="247" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/PublicUserInterface.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/struts.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42367068" vertical-offset="0" max-vertical-offset="583">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="2056" max-vertical-offset="4332">
+          <caret line="118" column="63" selection-start-line="118" selection-start-column="63" selection-end-line="118" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ajax/logOut.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudNewDirAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53710246" vertical-offset="0" max-vertical-offset="437">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1596">
+          <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/PublicUserUtil.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/CloudDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6237942" vertical-offset="699" max-vertical-offset="1463">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.3327616" vertical-offset="3302" max-vertical-offset="4940">
+          <caret line="191" column="83" selection-start-line="191" selection-start-column="83" selection-end-line="191" selection-end-column="83" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/BaseUtil.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudMoveToDirAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6415094" vertical-offset="17296" max-vertical-offset="17879">
-          <caret line="940" column="79" selection-start-line="940" selection-start-column="79" selection-end-line="940" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.50085765" vertical-offset="601" max-vertical-offset="2261">
+          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/listener/OAStartThread.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateSMSAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31560892" vertical-offset="785" max-vertical-offset="1368">
-          <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="886" max-vertical-offset="1729">
+          <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ajax/login.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/WriteDiaryAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56749314" vertical-offset="630" max-vertical-offset="1254">
-          <caret line="44" column="111" selection-start-line="44" selection-start-column="111" selection-end-line="47" selection-end-column="117" />
+        <state vertical-scroll-proportion="0.44596913" vertical-offset="272" max-vertical-offset="912">
+          <caret line="32" column="124" selection-start-line="32" selection-start-column="124" selection-end-line="32" selection-end-column="124" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudUploadDocAction.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/UpdateDiaryAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37221268" vertical-offset="1949" max-vertical-offset="2983">
-          <caret line="125" column="72" selection-start-line="125" selection-start-column="72" selection-end-line="129" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDownLoadDocAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6240409" vertical-offset="744" max-vertical-offset="1463">
-          <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="56" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudDeleteDocAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.380789" vertical-offset="861" max-vertical-offset="1444">
-          <caret line="63" column="72" selection-start-line="63" selection-start-column="72" selection-end-line="67" selection-end-column="88" />
+        <state vertical-scroll-proportion="-0.025728988" vertical-offset="15" max-vertical-offset="1197">
+          <caret line="0" column="19" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowAskAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47512865" vertical-offset="920" max-vertical-offset="1786">
-          <caret line="69" column="72" selection-start-line="69" selection-start-column="72" selection-end-line="73" selection-end-column="84" />
+        <state vertical-scroll-proportion="-0.26381463" vertical-offset="357" max-vertical-offset="1786">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/javamail/MailSenderInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29331046" vertical-offset="114" max-vertical-offset="1501">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/javamail/SimpleMailSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.4219553" vertical-offset="0" max-vertical-offset="3116">
+          <caret line="105" column="64" selection-start-line="105" selection-start-column="64" selection-end-line="105" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/BaseInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6740995" vertical-offset="1868" max-vertical-offset="2565">
+          <caret line="119" column="35" selection-start-line="119" selection-start-column="35" selection-end-line="119" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5" vertical-offset="1064" max-vertical-offset="1634">
+          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="31.32" vertical-offset="1125" max-vertical-offset="8284">
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/dao/MessageDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1938" max-vertical-offset="2945">
+          <caret line="127" column="33" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/BaseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="18043" max-vertical-offset="18734">
+          <caret line="983" column="31" selection-start-line="983" selection-start-column="31" selection-end-line="983" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/EmailUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3344">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3578#3586#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowAnswerAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47826087" vertical-offset="1675" max-vertical-offset="2565">
-          <caret line="106" column="76" selection-start-line="106" selection-start-column="76" selection-end-line="110" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowDeleteAskAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33248082" vertical-offset="1162" max-vertical-offset="1748">
-          <caret line="77" column="75" selection-start-line="77" selection-start-column="75" selection-end-line="77" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1892" max-vertical-offset="3401">
+          <caret line="115" column="8" selection-start-line="115" selection-start-column="8" selection-end-line="116" selection-end-column="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowDeleteAnswerAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1143" max-vertical-offset="1919">
-          <caret line="82" column="83" selection-start-line="82" selection-start-column="83" selection-end-line="82" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="869" max-vertical-offset="2337">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/interfaces/MoneyInterface.java">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowDeleteAskAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6415094" vertical-offset="405" max-vertical-offset="988">
-          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="2166">
+          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/daily/20140726.txt">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowUpdateAskAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="583">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1520" max-vertical-offset="2394">
+          <caret line="88" column="49" selection-start-line="88" selection-start-column="49" selection-end-line="88" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/im.jsp">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/CloudKnowZanAnswerAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.5" vertical-offset="19" max-vertical-offset="855">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1254" max-vertical-offset="1881">
+          <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/ConfigNoticeAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1007" max-vertical-offset="2071">
+          <caret line="72" column="12" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateDiaryAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5985" max-vertical-offset="7391">
+          <caret line="351" column="24" selection-start-line="351" selection-start-column="24" selection-end-line="351" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/OperateTaskAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8538" max-vertical-offset="9785">
+          <caret line="461" column="20" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/UpdateTaskAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="2527">
+          <caret line="105" column="12" selection-start-line="105" selection-start-column="12" selection-end-line="105" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/WriteTaskAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1166" max-vertical-offset="1938">
+          <caret line="74" column="16" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/listener/OAStartThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46666667" vertical-offset="1102" max-vertical-offset="1672">
+          <caret line="90" column="28" selection-start-line="90" selection-start-column="28" selection-end-line="90" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/ueditor.all.min.js">
+    <entry file="file://$PROJECT_DIR$/module/01.web/src/com/gxx/oa/utils/SMSUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12730">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/ueditor.parse.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor_base.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="266">
-          <caret line="2" column="68" selection-start-line="2" selection-start-column="68" selection-end-line="2" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/headerWithOutCheckLogin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.392857" vertical-offset="171" max-vertical-offset="1330">
-          <caret line="14" column="80" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/ueditor/ueditor.jar!/ueditor/Uploader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3488806" vertical-offset="288" max-vertical-offset="1330">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/config.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.097770154" vertical-offset="0" max-vertical-offset="583">
-          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/ueditor.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.92" vertical-offset="1425" max-vertical-offset="8702">
-          <caret line="92" column="30" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="30" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/scrawlUp.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5" vertical-offset="186" max-vertical-offset="741">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="17" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/imageUp.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75" vertical-offset="541" max-vertical-offset="1995">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="39" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/imageManager.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.071429" vertical-offset="57" max-vertical-offset="1330">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="14" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/getRemoteImage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="28.357143" vertical-offset="794" max-vertical-offset="1634">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/getMovie.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.892857" vertical-offset="221" max-vertical-offset="741">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/getContent.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/01.web/web/ueditor/jsp/fileUp.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.105166055" vertical-offset="0" max-vertical-offset="950">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.54373926" vertical-offset="158" max-vertical-offset="969">
+          <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
           <folding />
         </state>
       </provider>

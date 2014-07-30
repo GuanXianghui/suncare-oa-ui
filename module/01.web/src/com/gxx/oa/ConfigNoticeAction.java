@@ -1,10 +1,16 @@
 package com.gxx.oa;
 
 import com.gxx.oa.dao.NoticeDao;
+import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.Notice;
+import com.gxx.oa.entities.User;
 import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
+import com.gxx.oa.utils.EmailUtils;
 import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 公告管理action
@@ -44,6 +50,27 @@ public class ConfigNoticeAction extends BaseAction {
                     StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
             NoticeDao.insertNotice(notice);
             message = "新增公告成功！";
+
+            //新增公告后，群发邮件通知所有人
+            List<User> userList = UserDao.queryAllUsers();
+            List<String> emailList = new ArrayList<String>();
+            for(User user : userList){
+                if(StringUtils.isNotBlank(user.getEmail())){
+                    emailList.add(user.getEmail());
+                }
+            }
+            /**
+             * 群发邮件
+             */
+            //邮件title
+            String title = "申成门窗OA系统-公司公告";
+            //邮件内容
+            String content = "你好：<br><br>" +
+                    "申成门窗OA系统发布公司公告：[" + notice.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/notice.jsp\" target=\"_blank\">链接</a>！<br><br>" +
+                    "祝您工作顺利！<br><br>" +
+                    "申成门窗OA系统";
+            //发送邮件 群发
+            EmailUtils.sendEmailFetch(title, content, emailList);
         } else if(StringUtils.equals(TYPE_UPDATE, type)) {
             Notice notice = NoticeDao.getNoticeById(Integer.parseInt(noticeId));
             notice.setTitle(title);

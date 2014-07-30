@@ -76,15 +76,14 @@ public class CloudRenameAction extends BaseAction implements CloudInterface {
         }
         CloudDao.updateCloud(cloud);
 
-        /**
-         * 修改文件夹名字时，该文件夹的下级所有对象的dir都做修改
-         */
-        if(cloud.getType() == TYPE_DIR){
-            List<Cloud> clouds = CloudDao.queryCloudsByPid(getUser().getId(), cloud.getId());
-            for(Cloud tempCloud : clouds){
-                tempCloud.setDir(cloud.getRoute());
-                CloudDao.updateCloud(tempCloud);
-            }
+        //如果是文件夹
+        if(cloud.getType()==CloudInterface.TYPE_DIR){
+            /**
+             * 当[重命名文件夹]或者[移动文件夹至其他目录]时，除了要改变自己的pid，dir和route，还需要递归查询该文件夹下所有文件或者文件夹，将dir和route字段刷新
+             * 如果是[文件][重命名]或者[移动至其他目录]，只需改变自己的pid，dir和route即可
+             * 注意：对于route，如果是文件夹存 相对路径 要做修改，如果是文件 存 服务器上的绝对路径 不做修改
+             */
+            BaseUtil.refreshAllCloudsBelow(getUser().getId(), cloud);
         }
 
         //从申成云集合得到Json数组

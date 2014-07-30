@@ -22,11 +22,21 @@
         var chooseClouds = new Array();
         //ctrl键是否按下
         var isCtrlDown = false;
+        //移动的当前目录
+        var moveDir = EMPTY;
+        //移动对象Id
+        var moveId = 0;
     </script>
 	<style>
-	#files ul li{
-		cursor: default;
-	}
+        #files ul li{
+            cursor: default;
+        }
+        #move_files ul li{
+            cursor: pointer;
+        }
+        #move_route span{
+            cursor: pointer;
+        }
 	</style>
 </head>
 <%@ include file="facebox_message.jsp" %>
@@ -48,6 +58,20 @@
     <div id="rename_div" align="center" style="width: 100%; display: none;">
         重命名：<input class="inputArea inputWidthShort" type="text" id="rename_name">
         <input class="minBtn" type="button" onclick="rename(this);" value="修改">
+    </div>
+
+    <div id="move_div" align="center" style="width: 100%; display: none;">
+        <div class="diskPath" id="move_route">
+            <%--我的网盘/新建文件夹/--%>
+        </div>
+        <div class="diskList" id="move_files">
+            <%--<ul>--%>
+                <%--<li><img src="images/ext/dir.gif" /><a href="#">我的文件夹我的文件夹我的</a></li>--%>
+            <%--</ul>--%>
+        </div>
+        <div align="right">
+            <input class="minBtn" type="button" onclick="moveToDir()" value="移动到当前目录">
+        </div>
     </div>
 
     <div align="center" style="width: 100%; display: none;">
@@ -72,6 +96,8 @@
             <input value="新建文件夹" type="button" class="minBtn" onclick="beforeNewDir();">
             <a href="#rename_div" rel="facebox" id="rename_div_a"></a>
             <input value="重命名"  type="button" class="minBtn" onclick="beforeRename();">
+            <a href="#move_div" rel="facebox" id="move_div_a"></a>
+            <input value="移动"  type="button" class="minBtn" onclick="beforeMove();">
             <input value="删除"  type="button" class="minBtn" onclick="deleteFile();">
             <input value="返回上一层"  type="button" class="minBtn" onclick="lastDir();">
             <input value="回收站"  type="button" class="minBtn" onclick="location.href='cloudRecycle.jsp'">

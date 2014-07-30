@@ -18,7 +18,7 @@ import java.util.List;
  * @module oa
  * @datetime 14-5-12 14:10
  */
-public class CloudNewDirDirAction extends BaseAction implements CloudInterface {
+public class CloudNewDirAction extends BaseAction implements CloudInterface {
     //所处目录
     String dir;
     //新建目录

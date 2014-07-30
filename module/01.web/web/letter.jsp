@@ -61,7 +61,7 @@
 <div id="mainArea">
     <div id="mailDetail">
         <div id="mailTitle" class="normalTitle"></div>
-        <div id="mailOperate" style="display: none;">
+        <div id="mailOperate" style="display: none; border-bottom: 1px solid #DDD;">
             <input class="minBtn" type="button" onclick="reply();" value="回复" />
             <input class="minBtn" type="button" onclick="replyAll();" value="回复全部" />
             <input class="minBtn" type="button" onclick="transmit();" value="转发" />

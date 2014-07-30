@@ -3,9 +3,7 @@ package com.gxx.oa;
 import com.gxx.oa.dao.*;
 import com.gxx.oa.entities.*;
 import com.gxx.oa.interfaces.*;
-import com.gxx.oa.utils.BaseUtil;
-import com.gxx.oa.utils.PropertyUtil;
-import com.gxx.oa.utils.TokenUtil;
+import com.gxx.oa.utils.*;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -87,14 +85,53 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 修改任务状态成功！", date, time, getIp());
 
+                //邮件相关信息
+                String email;//邮件
+                String userName;//用户名
+
                 if(getUser().getId() != task.getFromUserId()){
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
                             getUser().getName() + "修改了任务状态，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User fromUser = UserDao.getUserById(task.getFromUserId());
+                    //发送短信
+                    if(StringUtils.isNotBlank(fromUser.getMobileTel())){
+                        String content = getUser().getName() + "在申成门窗OA系统修改了任务状态：[" + task.getTitle() + "]，赶紧去查看吧！祝您工作顺利！";
+                        SMSUtil.sendSMS(fromUser.getMobileTel(), content);
+                    }
+
+                    //邮件相关信息
+                    email = fromUser.getEmail();
+                    userName = fromUser.getName();
                 } else {
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
                             getUser().getName() + "修改了任务状态，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+                    //发送短信
+                    if(StringUtils.isNotBlank(toUser.getMobileTel())){
+                        String content = getUser().getName() + "在申成门窗OA系统修改了任务状态：[" + task.getTitle() + "]，赶紧去查看吧！祝您工作顺利！";
+                        SMSUtil.sendSMS(toUser.getMobileTel(), content);
+                    }
+
+                    //邮件相关信息
+                    email = toUser.getEmail();
+                    userName = toUser.getName();
+                }
+
+                //发邮件
+                if(StringUtils.isNotBlank(email)){
+                    //邮件title
+                    String title = "申成门窗OA系统-修改任务状态";
+                    //邮件内容
+                    String content = userName + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统修改了任务状态：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, email);
                 }
 
                 //返回结果
@@ -116,9 +153,32 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 催任务进度成功！", date, time, getIp());
 
-                //普通用户触发给用户发一条消息
-                BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
-                        getUser().getName() + "催了你的任务进度，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                //不是同一个人则通知
+                if(getUser().getId() != task.getToUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "催了你的任务进度，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+                    //发送短信
+                    if(StringUtils.isNotBlank(toUser.getMobileTel())){
+                        String content = getUser().getName() + "在申成门窗OA系统催了你的任务进度：[" + task.getTitle() + "]，赶紧去查看吧！祝您工作顺利！";
+                        SMSUtil.sendSMS(toUser.getMobileTel(), content);
+                    }
+
+                    //发邮件
+                    if(StringUtils.isNotBlank(toUser.getEmail())){
+                        //邮件title
+                        String title = "申成门窗OA系统-催任务";
+                        //邮件内容
+                        String content = toUser.getName() + "你好：<br><br>" +
+                                getUser().getName() + "在申成门窗OA系统催了你的任务进度：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                "祝您工作顺利！<br><br>" +
+                                "申成门窗OA系统";
+                        //发送邮件
+                        EmailUtils.sendEmail(title, content, toUser.getEmail());
+                    }
+                }
 
                 resp = "{isSuccess:true,message:'催任务进度成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -146,9 +206,32 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务成功！", date, time, getIp());
 
-                //普通用户触发给用户发一条消息
-                BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
-                        getUser().getName() + "删除了分配给你的任务[" + task.getTitle() + "]", getIp());
+                //不是同一个人则通知
+                if(getUser().getId() != task.getToUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
+                            getUser().getName() + "删除了分配给你的任务[" + task.getTitle() + "]", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+                    //发送短信
+                    if(StringUtils.isNotBlank(toUser.getMobileTel())){
+                        String content = getUser().getName() + "在申成门窗OA系统删除了分配给你的任务：[" + task.getTitle() + "]，赶紧去查看吧！祝您工作顺利！";
+                        SMSUtil.sendSMS(toUser.getMobileTel(), content);
+                    }
+
+                    //发邮件
+                    if(StringUtils.isNotBlank(toUser.getEmail())){
+                        //邮件title
+                        String title = "申成门窗OA系统-删除任务";
+                        //邮件内容
+                        String content = toUser.getName() + "你好：<br><br>" +
+                                getUser().getName() + "在申成门窗OA系统删除了分配给你的任务：[" + task.getTitle() + "]，赶紧去查看吧！<br><br>" +
+                                "祝您工作顺利！<br><br>" +
+                                "申成门窗OA系统";
+                        //发送邮件
+                        EmailUtils.sendEmail(title, content, toUser.getEmail());
+                    }
+                }
 
                 resp = "{isSuccess:true,message:'删除任务成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -168,14 +251,43 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 评论任务成功！", date, time, getIp());
 
+                //邮件相关信息
+                String email;//邮件
+                String userName;//用户名
+
                 if(getUser().getId() != task.getFromUserId()){
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
                             getUser().getName() + "评论了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User fromUser = UserDao.getUserById(task.getFromUserId());
+
+                    //邮件相关信息
+                    email = fromUser.getEmail();
+                    userName = fromUser.getName();
                 } else {
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
                             getUser().getName() + "评论了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+
+                    //邮件相关信息
+                    email = toUser.getEmail();
+                    userName = toUser.getName();
+                }
+
+                //发邮件
+                if(StringUtils.isNotBlank(email)){
+                    //邮件title
+                    String title = "申成门窗OA系统-评论任务";
+                    //邮件内容
+                    String content = userName + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统评论了你的任务：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, email);
                 }
 
                 resp = "{isSuccess:true,message:'评论任务成功！',hasNewToken:true,token:'" +
@@ -198,14 +310,43 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 修改任务评论成功！", date, time, getIp());
 
+                //邮件相关信息
+                String email;//邮件
+                String userName;//用户名
+
                 if(getUser().getId() != task.getFromUserId()){
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
                             getUser().getName() + "修改了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User fromUser = UserDao.getUserById(task.getFromUserId());
+
+                    //邮件相关信息
+                    email = fromUser.getEmail();
+                    userName = fromUser.getName();
                 } else {
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
                             getUser().getName() + "修改了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+
+                    //邮件相关信息
+                    email = toUser.getEmail();
+                    userName = toUser.getName();
+                }
+
+                //发邮件
+                if(StringUtils.isNotBlank(email)){
+                    //邮件title
+                    String title = "申成门窗OA系统-修改任务评论";
+                    //邮件内容
+                    String content = userName + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统修改了你的任务评论：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, email);
                 }
 
                 resp = "{isSuccess:true,message:'修改任务评论成功！',hasNewToken:true,token:'" +
@@ -224,14 +365,43 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务评论成功！", date, time, getIp());
 
+                //邮件相关信息
+                String email;//邮件
+                String userName;//用户名
+
                 if(getUser().getId() != task.getFromUserId()){
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
                             getUser().getName() + "删除了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User fromUser = UserDao.getUserById(task.getFromUserId());
+
+                    //邮件相关信息
+                    email = fromUser.getEmail();
+                    userName = fromUser.getName();
                 } else {
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
                             getUser().getName() + "删除了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+
+                    //邮件相关信息
+                    email = toUser.getEmail();
+                    userName = toUser.getName();
+                }
+
+                //发邮件
+                if(StringUtils.isNotBlank(email)){
+                    //邮件title
+                    String title = "申成门窗OA系统-删除任务评论";
+                    //邮件内容
+                    String content = userName + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统删除了你的任务评论：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, email);
                 }
 
                 resp = "{isSuccess:true,message:'删除任务评论成功！',hasNewToken:true,token:'" +
@@ -253,17 +423,43 @@ public class OperateTaskAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 回复评论任务成功！", date, time, getIp());
 
-                //创建操作日志
-                BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_TASK, "任务管理 删除任务评论成功！", date, time, getIp());
+                //邮件相关信息
+                String email;//邮件
+                String userName;//用户名
 
                 if(getUser().getId() != task.getFromUserId()){
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
                             getUser().getName() + "回复了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User fromUser = UserDao.getUserById(task.getFromUserId());
+
+                    //邮件相关信息
+                    email = fromUser.getEmail();
+                    userName = fromUser.getName();
                 } else {
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
                             getUser().getName() + "回复了你的任务评论，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User toUser = UserDao.getUserById(task.getToUserId());
+
+                    //邮件相关信息
+                    email = toUser.getEmail();
+                    userName = toUser.getName();
+                }
+
+                //发邮件
+                if(StringUtils.isNotBlank(email)){
+                    //邮件title
+                    String title = "申成门窗OA系统-回复任务评论";
+                    //邮件内容
+                    String content = userName + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统回复了你的任务评论：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, email);
                 }
 
                 resp = "{isSuccess:true,message:'回复评论任务成功！',hasNewToken:true,token:'" +

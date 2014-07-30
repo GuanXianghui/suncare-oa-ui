@@ -280,5 +280,5 @@ function getUserById(id) {
  */
 function chooseThis(t, userId){
     window.returnValue = userId;
-    window.close();
+    self.close()
 }

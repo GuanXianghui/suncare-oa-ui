@@ -3,11 +3,14 @@ package com.gxx.oa;
 import com.gxx.oa.dao.DiaryDao;
 import com.gxx.oa.dao.DiaryReviewDao;
 import com.gxx.oa.dao.MessageDao;
+import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.Diary;
 import com.gxx.oa.entities.DiaryReview;
 import com.gxx.oa.entities.Message;
+import com.gxx.oa.entities.User;
 import com.gxx.oa.interfaces.*;
 import com.gxx.oa.utils.BaseUtil;
+import com.gxx.oa.utils.EmailUtils;
 import com.gxx.oa.utils.PropertyUtil;
 import com.gxx.oa.utils.TokenUtil;
 import org.apache.commons.lang.StringUtils;
@@ -113,9 +116,27 @@ public class OperateDiaryAction extends BaseAction {
                     //创建操作日志
                     BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 点赞成功！", date, time, getIp());
 
-                    //普通用户触发给用户发一条消息
-                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
-                            getUser().getName() + "给你的日志点赞了，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                    //不是同一个人则通知
+                    if(getUser().getId() != diary.getUserId()){
+                        //普通用户触发给用户发一条消息
+                        BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                                getUser().getName() + "给你的日志点赞了，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                        User diaryUser = UserDao.getUserById(diary.getUserId());
+
+                        //发邮件
+                        if(StringUtils.isNotBlank(diaryUser.getEmail())){
+                            //邮件title
+                            String title = "申成门窗OA系统-日志点赞";
+                            //邮件内容
+                            String content = diaryUser.getName() + "你好：<br><br>" +
+                                    getUser().getName() + "在申成门窗OA系统给你的日志点赞了，见<a href=\"http://www.suncare-sys.com:10000/showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                    "祝您工作顺利！<br><br>" +
+                                    "申成门窗OA系统";
+                            //发送邮件
+                            EmailUtils.sendEmail(title, content, diaryUser.getEmail());
+                        }
+                    }
 
                     resp = "{isSuccess:true,message:'点赞成功！',hasNewToken:true,token:'" +
                             TokenUtil.createToken(request) + "'}";
@@ -140,9 +161,27 @@ public class OperateDiaryAction extends BaseAction {
                     //创建操作日志
                     BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 取消赞成功！", date, time, getIp());
 
-                    //普通用户触发给用户发一条消息
-                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
-                            getUser().getName() + "从你的日志取消赞了，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                    //不是同一个人则通知
+                    if(getUser().getId() != diary.getUserId()){
+                        //普通用户触发给用户发一条消息
+                        BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                                getUser().getName() + "从你的日志取消赞了，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                        User diaryUser = UserDao.getUserById(diary.getUserId());
+
+                        //发邮件
+                        if(StringUtils.isNotBlank(diaryUser.getEmail())){
+                            //邮件title
+                            String title = "申成门窗OA系统-日志取消赞";
+                            //邮件内容
+                            String content = diaryUser.getName() + "你好：<br><br>" +
+                                    getUser().getName() + "在申成门窗OA系统从你的日志取消赞了，见<a href=\"http://www.suncare-sys.com:10000/showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                    "祝您工作顺利！<br><br>" +
+                                    "申成门窗OA系统";
+                            //发送邮件
+                            EmailUtils.sendEmail(title, content, diaryUser.getEmail());
+                        }
+                    }
 
                     resp = "{isSuccess:true,message:'取消赞成功！',hasNewToken:true,token:'" +
                             TokenUtil.createToken(request) + "'}";
@@ -163,9 +202,27 @@ public class OperateDiaryAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 评论工作日志成功！", date, time, getIp());
 
-                //普通用户触发给用户发一条消息
-                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
-                        getUser().getName() + "评论了你的日志，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                //不是同一个人则通知
+                if(getUser().getId() != diary.getUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                            getUser().getName() + "评论了你的日志，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User diaryUser = UserDao.getUserById(diary.getUserId());
+
+                    //发邮件
+                    if(StringUtils.isNotBlank(diaryUser.getEmail())){
+                        //邮件title
+                        String title = "申成门窗OA系统-评论日志";
+                        //邮件内容
+                        String content = diaryUser.getName() + "你好：<br><br>" +
+                                getUser().getName() + "在申成门窗OA系统评论了你的日志，见<a href=\"http://www.suncare-sys.com:10000/showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                "祝您工作顺利！<br><br>" +
+                                "申成门窗OA系统";
+                        //发送邮件
+                        EmailUtils.sendEmail(title, content, diaryUser.getEmail());
+                    }
+                }
 
                 resp = "{isSuccess:true,message:'评论工作日志成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -187,9 +244,27 @@ public class OperateDiaryAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 修改工作日志评论成功！", date, time, getIp());
 
-                //普通用户触发给用户发一条消息
-                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
-                        getUser().getName() + "修改了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                //不是同一个人则通知
+                if(getUser().getId() != diary.getUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                            getUser().getName() + "修改了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User diaryUser = UserDao.getUserById(diary.getUserId());
+
+                    //发邮件
+                    if(StringUtils.isNotBlank(diaryUser.getEmail())){
+                        //邮件title
+                        String title = "申成门窗OA系统-修改日志评论";
+                        //邮件内容
+                        String content = diaryUser.getName() + "你好：<br><br>" +
+                                getUser().getName() + "在申成门窗OA系统修改了你的日志评论，见<a href=\"http://www.suncare-sys.com:10000/showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                "祝您工作顺利！<br><br>" +
+                                "申成门窗OA系统";
+                        //发送邮件
+                        EmailUtils.sendEmail(title, content, diaryUser.getEmail());
+                    }
+                }
 
                 resp = "{isSuccess:true,message:'修改工作日志评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -207,9 +282,27 @@ public class OperateDiaryAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 删除工作日志评论成功！", date, time, getIp());
 
-                //普通用户触发给用户发一条消息
-                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
-                        getUser().getName() + "删除了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                //不是同一个人则通知
+                if(getUser().getId() != diary.getUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                            getUser().getName() + "删除了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User diaryUser = UserDao.getUserById(diary.getUserId());
+
+                    //发邮件
+                    if(StringUtils.isNotBlank(diaryUser.getEmail())){
+                        //邮件title
+                        String title = "申成门窗OA系统-删除日志评论";
+                        //邮件内容
+                        String content = diaryUser.getName() + "你好：<br><br>" +
+                                getUser().getName() + "在申成门窗OA系统删除了你的日志评论，见<a href=\"http://www.suncare-sys.com:10000/showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                "祝您工作顺利！<br><br>" +
+                                "申成门窗OA系统";
+                        //发送邮件
+                        EmailUtils.sendEmail(title, content, diaryUser.getEmail());
+                    }
+                }
 
                 resp = "{isSuccess:true,message:'删除工作日志评论成功！',hasNewToken:true,token:'" +
                         TokenUtil.createToken(request) + "'}";
@@ -230,14 +323,34 @@ public class OperateDiaryAction extends BaseAction {
                 //创建操作日志
                 BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_OPERATE_DIARY, "工作日志管理 回复评论工作日志成功！", date, time, getIp());
 
-                //普通用户触发给用户发一条消息
-                BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
-                        getUser().getName() + "在你的日志中回复了评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+                //不是同一个人则通知
+                if(getUser().getId() != diary.getUserId()){
+                    //普通用户触发给用户发一条消息
+                    BaseUtil.createNormalMessage(getUser().getId(), diary.getUserId(),
+                            getUser().getName() + "在你的日志中回复了评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
 
-                if(diary.getUserId() != diaryReview.getUserId()){
+                }
+
+                //不是同一个人则通知
+                if(diary.getUserId() != diaryReview.getUserId() && getUser().getId() != diaryReview.getUserId()){
                     //普通用户触发给用户发一条消息
                     BaseUtil.createNormalMessage(getUser().getId(), diaryReview.getUserId(),
                             getUser().getName() + "回复了你的日志评论，见<a href=\"showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+                    User diaryReviewUser = UserDao.getUserById(diaryReview.getUserId());
+
+                    //发邮件
+                    if(StringUtils.isNotBlank(diaryReviewUser.getEmail())){
+                        //邮件title
+                        String title = "申成门窗OA系统-回复日志评论";
+                        //邮件内容
+                        String content = diaryReviewUser.getName() + "你好：<br><br>" +
+                                getUser().getName() + "在申成门窗OA系统回复了你的日志评论，见<a href=\"http://www.suncare-sys.com:10000/showDiary.jsp?id=" + diary.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                "祝您工作顺利！<br><br>" +
+                                "申成门窗OA系统";
+                        //发送邮件
+                        EmailUtils.sendEmail(title, content, diaryReviewUser.getEmail());
+                    }
                 }
 
                 resp = "{isSuccess:true,message:'回复评论工作日志成功！',hasNewToken:true,token:'" +

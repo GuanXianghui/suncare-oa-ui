@@ -3,6 +3,9 @@
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "update default right success!"){
+            message = "修改默认权限成功！";
+        }
         showInformation(message);
     }
 });

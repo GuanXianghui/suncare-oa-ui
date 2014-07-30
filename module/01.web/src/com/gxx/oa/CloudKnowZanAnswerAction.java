@@ -2,12 +2,15 @@ package com.gxx.oa;
 
 import com.gxx.oa.dao.CloudKnowAnswerDao;
 import com.gxx.oa.dao.CloudKnowAskDao;
+import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.CloudKnowAnswer;
 import com.gxx.oa.entities.CloudKnowAsk;
+import com.gxx.oa.entities.User;
 import com.gxx.oa.interfaces.CloudKnowAnswerInterface;
 import com.gxx.oa.interfaces.CloudKnowAskInterface;
 import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
+import com.gxx.oa.utils.EmailUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -66,9 +69,27 @@ public class CloudKnowZanAnswerAction extends BaseAction implements CloudKnowAns
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ZAN_ANSWER, message, date, time, getIp());
 
-        //普通用户触发给用户发一条消息
-        BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAnswer.getUserId(),
-                getUser().getName() + "赞了你申成知道提问的回答" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+        //不是同一个人则通知
+        if(getUser().getId() != cloudKnowAnswer.getUserId()){
+            //普通用户触发给用户发一条消息
+            BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAnswer.getUserId(),
+                    getUser().getName() + "赞了你申成知道提问的回答" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+
+            //回答用户
+            User cloudKnowAnswerUser = UserDao.getUserById(cloudKnowAnswer.getUserId());
+            //发邮件
+            if(StringUtils.isNotBlank(cloudKnowAnswerUser.getEmail())){
+                //邮件title
+                String title = "申成门窗OA系统-申成知道赞回答";
+                //邮件内容
+                String content = cloudKnowAnswerUser.getName() + "你好：<br><br>" +
+                        getUser().getName() + "在申成门窗OA系统赞了你申成知道提问的回答：[" + cloudKnowAsk.getQuestion() + "]，见<a href=\"http://www.suncare-sys.com:10000/cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                        "祝您工作顺利！<br><br>" +
+                        "申成门窗OA系统";
+                //发送邮件
+                EmailUtils.sendEmail(title, content, cloudKnowAnswerUser.getEmail());
+            }
+        }
 
         return SUCCESS;
     }

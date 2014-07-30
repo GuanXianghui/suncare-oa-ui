@@ -41,7 +41,7 @@
 <div id="mainArea">
     <div id="mailDetail">
         <div id="mailTitle" class="normalTitle"></div>
-        <div id="mailOperate">
+        <div id="mailOperate" style="border-bottom: 1px solid #DDD;">
             <%--<input class="minBtn" type="button" onclick="deleteLetter();" value="删除" />--%>
         </div>
         <!-- 用于站内信缩略信息展示 -->

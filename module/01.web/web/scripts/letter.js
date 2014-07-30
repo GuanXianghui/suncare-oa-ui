@@ -8,6 +8,12 @@ var nowFocusIndex = -1;
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "delete success!"){
+            message = "删除站内信成功！";
+        }
+        if(message == "ctrl delete success!"){
+            message = "彻底删除站内信成功！";
+        }
         showAttention(message);
     }
     //处理所有员工json串
@@ -621,7 +627,7 @@ function ctrlDeleteLetter(){
                 } else {
                     //请求成功
                     //showSuccess(data["message"]);
-                    location.href = baseUrl + "letter.jsp?message=delete success!";
+                    location.href = baseUrl + "letter.jsp?message=ctrl delete success!";
                 }
                 //判是否有新token
                 if (data["hasNewToken"]) {

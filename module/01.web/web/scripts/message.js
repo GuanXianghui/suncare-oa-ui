@@ -227,7 +227,8 @@ function showMessageDetail(index, messageId){
     $("#mailDetail").css("display", "block");
     var message = getMessageById(messageId);
     //抬头
-    $("#mailTitle").html("<b>来自[" + message["fromUserName"] + "]的消息</b>");
+    $("#mailTitle").html("<b>来自[" + message["fromUserName"] + "]的消息</b>" +
+        "<br><span style='float: right; font-size: 12px;'>[" + getLongDateTime2(message["date"], message["time"]) + "]</span>");
 
     //内容 解析
     $("#mailTxt").html(changeNewLineBack(message["content"]));

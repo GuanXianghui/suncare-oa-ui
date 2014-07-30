@@ -7,6 +7,7 @@ import com.gxx.oa.entities.CloudKnowAsk;
 import com.gxx.oa.entities.User;
 import com.gxx.oa.interfaces.*;
 import com.gxx.oa.utils.BaseUtil;
+import com.gxx.oa.utils.EmailUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -85,9 +86,27 @@ public class CloudKnowDeleteAskAction extends BaseAction implements CloudKnowAsk
             BaseUtil.createPublicMessage(PublicUserInterface.SUNCARE_OA_MESSAGE, userInteger.intValue(),
                     getUser().getName() + "申成知道-删除提问[" + cloudKnowAsk.getQuestion() + "]成功，回答者申成币" + MoneyInterface.ACT_CLOUD_KNOW_DELETE_ASK_TO_ANSWER + "！", getIp());
 
-            //普通用户触发给用户发一条消息
-            BaseUtil.createNormalMessage(getUser().getId(), userInteger,
-                    getUser().getName() + "删除了申成知道的提问[" + cloudKnowAsk.getQuestion() + "]", getIp());
+            //不是同一个人则通知
+            if(getUser().getId() != userInteger){
+                //普通用户触发给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), userInteger,
+                        getUser().getName() + "删除了申成知道的提问[" + cloudKnowAsk.getQuestion() + "]", getIp());
+
+                //回答用户
+                User cloudKnowAnswerUser = UserDao.getUserById(userInteger.intValue());
+                //发邮件
+                if(StringUtils.isNotBlank(cloudKnowAnswerUser.getEmail())){
+                    //邮件title
+                    String title = "申成门窗OA系统-删除了申成知道的提问";
+                    //邮件内容
+                    String content = cloudKnowAnswerUser.getName() + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统删除了申成知道的提问：[" + cloudKnowAsk.getQuestion() + "]<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, cloudKnowAnswerUser.getEmail());
+                }
+            }
         }
 
         return SUCCESS;

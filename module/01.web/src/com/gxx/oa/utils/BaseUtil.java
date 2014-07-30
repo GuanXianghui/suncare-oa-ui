@@ -719,6 +719,37 @@ public class BaseUtil implements SymbolInterface {
     }
 
     /**
+     * 当[重命名文件夹]或者[移动文件夹至其他目录]时，除了要改变自己的pid，dir和route，还需要递归查询该文件夹下所有文件或者文件夹，将dir和route字段刷新
+     * 如果是[文件][重命名]或者[移动至其他目录]，只需改变自己的pid，dir和route即可
+     * 注意：对于route，如果是文件夹存 相对路径 要做修改，如果是文件 存 服务器上的绝对路径 不做修改
+     * @param userId
+     * @param cloud
+     * @throws Exception
+     */
+    public static void refreshAllCloudsBelow(int userId, Cloud cloud) throws Exception {
+        if(cloud == null || cloud.getType() != CloudInterface.TYPE_DIR){
+            return;
+        }
+        List<Cloud> cloudList = CloudDao.queryCloudsByPid(userId, cloud.getId());
+        for(Cloud cloud1 : cloudList){
+            cloud1.setDir(cloud.getRoute());
+            /**
+             * 对于route
+             * 如果是文件夹存 相对路径 要做修改
+             * 如果是文件 存 服务器上的绝对路径 不做修改
+             */
+            if(cloud1.getType() == CloudInterface.TYPE_DIR){
+                cloud1.setRoute(cloud1.getDir() + cloud1.getName() + SYMBOL_SLASH);
+            }
+            CloudDao.updateCloud(cloud1);
+            //如果是目录，则递归
+            if(cloud1.getType() == CloudInterface.TYPE_DIR){
+                refreshAllCloudsBelow(userId, cloud1);
+            }
+        }
+    }
+
+    /**
      * 是否是支持的文件类型
      * @param type
      * @return

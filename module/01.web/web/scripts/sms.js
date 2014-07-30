@@ -10,6 +10,9 @@ var smsArray = new Array();
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "send sms success!"){
+            message = "发送短信成功！";
+        }
         showInformation(message);
     }
     $("#date").datepicker();

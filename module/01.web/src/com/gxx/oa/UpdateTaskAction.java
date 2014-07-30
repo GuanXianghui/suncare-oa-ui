@@ -1,9 +1,14 @@
 package com.gxx.oa;
 
 import com.gxx.oa.dao.TaskDao;
+import com.gxx.oa.dao.UserDao;
 import com.gxx.oa.entities.Task;
+import com.gxx.oa.entities.User;
 import com.gxx.oa.interfaces.OperateLogInterface;
 import com.gxx.oa.utils.BaseUtil;
+import com.gxx.oa.utils.EmailUtils;
+import com.gxx.oa.utils.SMSUtil;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 修改任务action
@@ -52,14 +57,53 @@ public class UpdateTaskAction extends BaseAction {
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_UPDATE_TASK, "修改任务成功！", date, time, getIp());
 
+        //邮件相关信息
+        String email;//邮件
+        String userName;//用户名
+
         if(getUser().getId() != task.getFromUserId()){
             //普通用户触发给用户发一条消息
             BaseUtil.createNormalMessage(getUser().getId(), task.getFromUserId(),
                     getUser().getName() + "修改了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+            User fromUser = UserDao.getUserById(task.getFromUserId());
+            //发送短信
+            if(StringUtils.isNotBlank(fromUser.getMobileTel())){
+                String content = getUser().getName() + "在申成门窗OA系统修改了任务：[" + task.getTitle() + "]，赶紧去查看吧！祝您工作顺利！";
+                SMSUtil.sendSMS(fromUser.getMobileTel(), content);
+            }
+
+            //邮件相关信息
+            email = fromUser.getEmail();
+            userName = fromUser.getName();
         } else {
             //普通用户触发给用户发一条消息
             BaseUtil.createNormalMessage(getUser().getId(), task.getToUserId(),
                     getUser().getName() + "修改了你的任务，见<a href=\"showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>", getIp());
+
+            User toUser = UserDao.getUserById(task.getToUserId());
+            //发送短信
+            if(StringUtils.isNotBlank(toUser.getMobileTel())){
+                String content = getUser().getName() + "在申成门窗OA系统修改了任务：[" + task.getTitle() + "]，赶紧去查看吧！祝您工作顺利！";
+                SMSUtil.sendSMS(toUser.getMobileTel(), content);
+            }
+
+            //邮件相关信息
+            email = toUser.getEmail();
+            userName = toUser.getName();
+        }
+
+        //发邮件
+        if(StringUtils.isNotBlank(email)){
+            //邮件title
+            String title = "申成门窗OA系统-修改任务";
+            //邮件内容
+            String content = userName + "你好：<br><br>" +
+                    getUser().getName() + "在申成门窗OA系统修改了任务：[" + task.getTitle() + "]，见<a href=\"http://www.suncare-sys.com:10000/showTask.jsp?id=" + task.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                    "祝您工作顺利！<br><br>" +
+                    "申成门窗OA系统";
+            //发送邮件
+            EmailUtils.sendEmail(title, content, email);
         }
 
         message = "修改任务成功！";

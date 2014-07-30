@@ -8,6 +8,12 @@ var userArray = new Array();
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "not your task"){
+            message = "该任务不是你的，你不能查看！";
+        }
+        if(message == "delete task success!"){
+            message = "删除任务成功！";
+        }
         showInformation(message);
     }
 

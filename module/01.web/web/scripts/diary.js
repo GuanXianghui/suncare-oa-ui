@@ -8,6 +8,9 @@ var diaryArray = new Array();
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "delete diray success!"){
+            message = "删除日志成功！";
+        }
         showInformation(message);
     }
 

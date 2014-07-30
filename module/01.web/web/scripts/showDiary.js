@@ -10,6 +10,18 @@ var updateReviewId = 0;//修改评论id
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "click zan success!"){
+            message = "点赞成功！";
+        }
+        if(message == "cancel zan success!"){
+            message = "取消赞成功！";
+        }
+        if(message == "review success!"){
+            message = "评论成功！";
+        }
+        if(message == "delete diary review success!"){
+            message = "删除评论成功！";
+        }
         showInformation(message);
     }
     uParse("#showContent", {rootPath: baseUrl + '/ueditor/'});

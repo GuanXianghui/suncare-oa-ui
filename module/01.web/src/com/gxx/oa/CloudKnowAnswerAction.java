@@ -8,6 +8,7 @@ import com.gxx.oa.entities.CloudKnowAsk;
 import com.gxx.oa.entities.User;
 import com.gxx.oa.interfaces.*;
 import com.gxx.oa.utils.BaseUtil;
+import com.gxx.oa.utils.EmailUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -75,9 +76,27 @@ public class CloudKnowAnswerAction extends BaseAction implements CloudKnowAnswer
             //创建操作日志
             BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ANSWER, message, date, time, getIp());
 
-            //普通用户给用户发一条消息
-            BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAsk.getUserId(),
-                    getUser().getName() + "修改了你申成知道提问的回答" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+            //不是同一个人则通知
+            if(getUser().getId() != cloudKnowAsk.getUserId()){
+                //普通用户给用户发一条消息
+                BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAsk.getUserId(),
+                        getUser().getName() + "修改了你申成知道提问的回答" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+
+                //提问用户
+                User cloudKnowAskUser = UserDao.getUserById(cloudKnowAsk.getUserId());
+                //发邮件
+                if(StringUtils.isNotBlank(cloudKnowAskUser.getEmail())){
+                    //邮件title
+                    String title = "申成门窗OA系统-申成知道修改回答";
+                    //邮件内容
+                    String content = cloudKnowAskUser.getName() + "你好：<br><br>" +
+                            getUser().getName() + "在申成门窗OA系统修改了你申成知道提问的回答：[" + cloudKnowAsk.getQuestion() + "]，见<a href=\"http://www.suncare-sys.com:10000/cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                            "祝您工作顺利！<br><br>" +
+                            "申成门窗OA系统";
+                    //发送邮件
+                    EmailUtils.sendEmail(title, content, cloudKnowAskUser.getEmail());
+                }
+            }
 
             return SUCCESS;
         }
@@ -94,9 +113,27 @@ public class CloudKnowAnswerAction extends BaseAction implements CloudKnowAnswer
         //创建操作日志
         BaseUtil.createOperateLog(getUser().getId(), OperateLogInterface.TYPE_CLOUD_KNOW_ANSWER, message, date, time, getIp());
 
-        //普通用户给用户发一条消息
-        BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAsk.getUserId(),
-                getUser().getName() + "回答了你申成知道提问" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+        //不是同一个人则通知
+        if(getUser().getId() != cloudKnowAsk.getUserId()){
+            //普通用户给用户发一条消息
+            BaseUtil.createNormalMessage(getUser().getId(), cloudKnowAsk.getUserId(),
+                    getUser().getName() + "回答了你申成知道提问" + "，见<a target=\"_blank\" href=\"cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\">提问</a>", getIp());
+
+            //提问用户
+            User cloudKnowAskUser = UserDao.getUserById(cloudKnowAsk.getUserId());
+            //发邮件
+            if(StringUtils.isNotBlank(cloudKnowAskUser.getEmail())){
+                //邮件title
+                String title = "申成门窗OA系统-申成知道回答";
+                //邮件内容
+                String content = cloudKnowAskUser.getName() + "你好：<br><br>" +
+                        getUser().getName() + "在申成门窗OA系统回答了你申成知道提问：[" + cloudKnowAsk.getQuestion() + "]，见<a href=\"http://www.suncare-sys.com:10000/cloudViewKnow.jsp?id=" + cloudKnowAsk.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                        "祝您工作顺利！<br><br>" +
+                        "申成门窗OA系统";
+                //发送邮件
+                EmailUtils.sendEmail(title, content, cloudKnowAskUser.getEmail());
+            }
+        }
 
         //根据 提问id+回答者id(状态为正常) 查 一个人回答一个申成知道问题的个数
         int count = CloudKnowAnswerDao.countCloudKnowAnswersByAskIdAndUserId(cloudKnowAsk.getId(), getUser().getId());

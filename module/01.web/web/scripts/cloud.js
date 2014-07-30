@@ -62,6 +62,52 @@ function loadDir(dirRoute){
 }
 
 /**
+ * 加载文件夹
+ * @param dirRoute
+ */
+function loadMoveDir(dirRoute){
+    //ajax请求
+    var SUCCESS_STR = "success";//成功编码
+    $.ajax({
+        type:"post",
+        async:false,
+        url:baseUrl + "cloudLoadDir.do",
+        data:"dir=" + dirRoute + "&token=" + token,
+        success:function (data, textStatus) {
+            if ((SUCCESS_STR == textStatus) && (null != data)) {
+                data = eval("(" + data + ")");
+                //判请求是否成功
+                if (false == data["isSuccess"]) {
+                    showError(data["message"]);
+                } else {
+                    //请求成功
+                    //showSuccess(data["message"]);
+
+                    //把初始taskJsonStr转换成taskArray
+                    var moveFiles = transferJsonStr2Array(data["filesJsonStr"]);
+                    //展示所有文件夹
+                    displayMoveDirs(moveFiles);
+                    //展示文件成功后，更新移动的当前目录
+                    moveDir = dirRoute;
+                    //展示文件夹路径
+                    showMoveDirRoute();
+                    $('#facebox').css('left', $(window).width() / 2 - ($('#facebox .popup').width() / 2));
+                }
+                //判是否有新token
+                if (data["hasNewToken"]) {
+                    token = data["token"];
+                }
+            } else {
+                showAttention("服务器连接异常，请稍后再试！");
+            }
+        },
+        error:function (data, textStatus) {
+            showAttention("服务器连接异常，请稍后再试！");
+        }
+    });
+}
+
+/**
  * 把初始jsonStr转换成array
  */
 function transferJsonStr2Array(jsonStr){
@@ -104,6 +150,33 @@ function displayFiles(){
 }
 
 /**
+ * 展示所有文件夹
+ */
+function displayMoveDirs(moveFiles){
+    var html = "<ul>";
+    //没有文件，没有文件夹
+    if(moveFiles.length == 0){
+        html = "<li>无文件！ToT</li>";
+        $("#facebox #move_files").html(html);
+        return;
+    }
+    //循环处理 过滤文件 保留文件夹
+    for(var i=0;i<moveFiles.length;i++){
+        html += getDisplayMoveDirByIdAndTypeAndName(moveFiles[i]["id"], moveFiles[i]["type"], moveFiles[i]["name"], moveFiles[i]["route"]);
+    }
+    //有文件，但是没有文件夹
+    if(html == "<ul>"){
+        html = "<li>无文件！ToT</li>";
+        $("#facebox #move_files").html(html);
+        return;
+    }
+    //有文件夹
+    html += "</ul>";
+    $("#facebox #move_files").html(html);
+    return;
+}
+
+/**
  * 展示文件
  * @param type
  * @param name
@@ -114,6 +187,25 @@ function getDisplayFileByIdAndTypeAndName(id, type, name, route){
         file += "<li onclick=\"chooseCloud(this)\" name=\"" + id + "\" ondblclick=\"download()\"><img src=\"images/ext/png.gif\"/>";
     } else if(CLOUD_TYPE_DIR == type){
         file += "<li onclick=\"chooseCloud(this)\" name=\"" + id + "\" ondblclick=\"openDir('" + name + "')\"><img src=\"images/ext/dir.gif\"/>";
+    }
+    file += name + "</li>";
+    return file;
+}
+
+/**
+ * 展示移动文件夹
+ * @param type
+ * @param name
+ */
+function getDisplayMoveDirByIdAndTypeAndName(id, type, name, route){
+    var file = EMPTY;
+    if(CLOUD_TYPE_FILE == type){//不展示文件
+        return file;
+    } else if(CLOUD_TYPE_DIR == type){//展示文件夹
+        if(id == moveId){//如果移动文件夹，则不能移动到自己下面
+            return file;
+        }
+        file += "<li name=\"" + id + "\" onclick=\"openMoveDir('" + name + "')\"><img src=\"images/ext/dir.gif\"/>";
     }
     file += name + "</li>";
     return file;
@@ -179,6 +271,10 @@ function beforeNewDir(){
 function newDir(t){
     //新文件夹名字
     var newDir = trim($("#facebox #new_dir_name").val());
+    if(newDir == EMPTY){
+        showAttention("文件夹名字不能为空");
+        return;
+    }
     //ajax请求
     var SUCCESS_STR = "success";//成功编码
     $.ajax({
@@ -234,11 +330,32 @@ function beforeRename(){
 }
 
 /**
+ * 点击移动按钮
+ */
+function beforeMove(){
+    if(chooseClouds.length != 1){
+        showAttention("请选择一个对象！");
+        return;
+    }
+    var id = parseInt($(chooseClouds[0]).attr("name"));
+    var cloud = getCloudById(id);
+    //移动对象Id
+    moveId = id;
+    $("#move_div_a").click();
+    //加载文件夹
+    loadMoveDir(dir);
+}
+
+/**
  * 重命名
  */
 function rename(t){
     //新名字
     var newName = trim($("#facebox #rename_name").val());
+    if(newName == EMPTY){
+        showAttention("名字不能为空");
+        return;
+    }
     var oldName = getCloudById(parseInt($(chooseClouds[0]).attr("name")))["name"];
     if(newName == oldName){
         showInformation("名字与原始一样");
@@ -286,6 +403,47 @@ function rename(t){
     });
     //关闭浮层
     //$(".close_image").click();
+}
+
+/**
+ * 移动到当前目录
+ */
+function moveToDir(){
+    //ajax请求
+    var SUCCESS_STR = "success";//成功编码
+    $.ajax({
+        type:"post",
+        async:false,
+        url:baseUrl + "cloudMoveToDir.do",
+        data:"id=" + moveId + "&moveDir=" + moveDir + "&token=" + token,
+        success:function (data, textStatus) {
+            if ((SUCCESS_STR == textStatus) && (null != data)) {
+                data = eval("(" + data + ")");
+                //判请求是否成功
+                if (false == data["isSuccess"]) {
+                    showError(data["message"]);
+                    //判是否有新token
+                    if (data["hasNewToken"]) {
+                        token = data["token"];
+                    }
+                } else {
+                    //请求成功
+                    showSuccess(data["message"]);
+                    //判是否有新token
+                    if (data["hasNewToken"]) {
+                        token = data["token"];
+                    }
+                    //加载文件夹
+                    loadDir(moveDir);
+                }
+            } else {
+                showAttention("服务器连接异常，请稍后再试！");
+            }
+        },
+        error:function (data, textStatus) {
+            showAttention("服务器连接异常，请稍后再试！");
+        }
+    });
 }
 
 /**
@@ -356,6 +514,14 @@ function openDir(dirName){
 }
 
 /**
+ * 打开移动目录
+ * @param dirName
+ */
+function openMoveDir(dirName){
+    loadMoveDir(moveDir + dirName + SYMBOL_SLASH);
+}
+
+/**
  * 展示文件夹路径
  */
 function showDirRoute(){
@@ -371,6 +537,24 @@ function showDirRoute(){
         html += "<span class=\"dir\" onclick=\"loadDir('" + dirRoute + "')\">" + dirParts[i] + "/</span>";
     }
     $("#dir_route").html(html);
+}
+
+/**
+ * 展示移动文件夹路径
+ */
+function showMoveDirRoute(){
+    //<span class="dir">我的网盘/</span>
+    var html = "移动：<span class=\"dir\" onclick=\"loadMoveDir('" + SYMBOL_SLASH + "')\">我的网盘/</span>";
+    var dirRoute = SYMBOL_SLASH;
+    var dirParts = moveDir.split(SYMBOL_SLASH);
+    for(var i=0;i<dirParts.length;i++){
+        if(EMPTY == dirParts[i]){
+            continue;
+        }
+        dirRoute += dirParts[i] + SYMBOL_SLASH;
+        html += "<span class=\"dir\" onclick=\"loadMoveDir('" + dirRoute + "')\">" + dirParts[i] + "/</span>";
+    }
+    $("#facebox #move_route").html(html);
 }
 
 /**

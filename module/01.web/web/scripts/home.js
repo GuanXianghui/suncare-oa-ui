@@ -88,8 +88,8 @@ function processWithTaskJson(){
             "指派给" +
             "<a href=\"" + baseUrl +"user.jsp?id=" + taskArray[i]["toUserId"] + "\" " + "target=\"_blank\">" + taskArray[i]["toUserName"] + "</a>" +
             "</div>" +
-            "<div class=\"task_time\">开始日期： " + taskArray[i]["beginDate"] + "</div>" +
-            "<div class=\"task_time\">结束日期： " + taskArray[i]["endDate"] + "</div>" +
+            "<div class=\"task_time\">开始日期： " + getLongDate(taskArray[i]["beginDate"]) + "</div>" +
+            "<div class=\"task_time\">结束日期： " + getLongDate(taskArray[i]["endDate"]) + "</div>" +
             "<div class=\"clearBoth\"></div>" +
             "</div>";
     }

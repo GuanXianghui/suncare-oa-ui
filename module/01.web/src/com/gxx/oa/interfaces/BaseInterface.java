@@ -102,4 +102,28 @@ public interface BaseInterface {
      * 创建用户时候，初始化送用户10个申成币
      */
     public static final String INIT_SUNCARE_MONEY = "init_suncare_money";
+    /**
+     * 对外通讯 邮件服务地址
+     */
+    public static final String EMAIL_HOST = "email_host";
+    /**
+     * 对外通讯 邮件服务端口
+     */
+    public static final String EMAIL_PORT = "email_port";
+    /**
+     * 对外通讯 邮件名
+     */
+    public static final String EMAIL_NAME = "email_name";
+    /**
+     * 对外通讯 邮件密码
+     */
+    public static final String EMAIL_PASSWORD = "email_password";
+    /**
+     * 群发邮件批次大小 即一批可以群发多少个邮件
+     */
+    public static final String EMAIL_FETCH_SIZE = "email_fetch_size";
+    /**
+     * 管理员邮箱，用途：群发邮件时带上管理员邮箱，查看管理员邮箱是否收到邮件，用于检测该批次是否被邮件服务器屏蔽
+     */
+    public static final String EMAIL_ADMINISTRATOR = "email_administrator";
 }

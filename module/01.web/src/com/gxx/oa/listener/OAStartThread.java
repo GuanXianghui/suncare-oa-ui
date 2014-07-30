@@ -11,10 +11,7 @@ import com.gxx.oa.interfaces.MessageInterface;
 import com.gxx.oa.interfaces.PublicUserInterface;
 import com.gxx.oa.interfaces.RemindInterface;
 import com.gxx.oa.interfaces.UserInterface;
-import com.gxx.oa.utils.BaseUtil;
-import com.gxx.oa.utils.DateUtil;
-import com.gxx.oa.utils.PublicUserUtil;
-import com.gxx.oa.utils.SMSUtil;
+import com.gxx.oa.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
@@ -76,6 +73,22 @@ public class OAStartThread extends Thread
                         } else {//短信提醒
                             String content = "来自申成门窗OA系统的提醒，提醒内容：[" + remind.getContent() + "]！祝您工作顺利！";
                             SMSUtil.sendSMS(user.getMobileTel(), content);
+                        }
+                    }
+
+                    //需要提醒
+                    if(remind.getRemindType() != RemindInterface.REMIND_TYPE_NO_REMIND){
+                        //发邮件
+                        if(StringUtils.isNotBlank(user.getEmail())){
+                            //邮件title
+                            String title = "申成门窗OA系统-提醒";
+                            //邮件内容
+                            String content = user.getName() + "你好：<br><br>" +
+                                    "申成门窗OA系统提醒你[" + remind.getContent() + "]，见<a href=\"http://www.suncare-sys.com:10000/calendar.jsp?id=" + remind.getId() + "\" target=\"_blank\">链接</a>！<br><br>" +
+                                    "祝您工作顺利！<br><br>" +
+                                    "申成门窗OA系统";
+                            //发送邮件
+                            EmailUtils.sendEmail(title, content, user.getEmail());
                         }
                     }
                 }

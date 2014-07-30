@@ -188,7 +188,8 @@ function showNotice(index, noticeId){
     $("#mailDetail").css("display", "block");
     var notice = getNoticeById(noticeId);
     //抬头
-    $("#mailTitle").html("<b>" + notice["title"] + "</b>");
+    $("#mailTitle").html("<b>" + notice["title"] + "</b>" +
+        "<br><span style='float: right; font-size: 12px;'>[" + getLongDate(notice["createDate"]) + "]</span>");
     var content = notice["content"];
     //将uuid->\r\n
     content = changeNewLineBack(content);

@@ -13,6 +13,18 @@ var updateReviewId = 0;//修改评论id
  */
 $(document).ready(function() {
     if(message != EMPTY){
+        if(message == "review success!"){
+            message = "评论成功！";
+        }
+        if(message == "delete task review success!"){
+            message = "删除评论成功！";
+        }
+        if(message == "update task state success!"){
+            message = "修改任务状态成功！";
+        }
+        if(message == "cui success!"){
+            message = "催任务成功！";
+        }
         showInformation(message);
     }
 
